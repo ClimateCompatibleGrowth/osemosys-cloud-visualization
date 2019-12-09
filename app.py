@@ -1,36 +1,24 @@
+from IPython.display import HTML
+from collections import defaultdict
+from dash.dependencies import Input, Output
+from plotly.offline import plot, iplot, init_notebook_mode
+from tkinter import *
+from tkinter import filedialog
+from zipfile import ZipFile
+import IPython.core.display as di
+import cufflinks
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-
-from dash.dependencies import Input, Output
-
+import os, sys
 import pandas as pd
-#import numpy as np
-from IPython.display import HTML
-import IPython.core.display as di
-#import ipywidgets as widgets
-#from ipywidgets import interact, interact_manual
-
-#importing plotly and cufflinks in offline mode
 import plotly as py
-#import plotly.graph_objs as go
-import cufflinks
 import plotly.offline as pyo
-from plotly.offline import plot, iplot, init_notebook_mode
+import subprocess
+import wget
 pyo.init_notebook_mode(connected=False)
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
-import os, sys
-import subprocess
-from tkinter import filedialog
-from tkinter import *
-from collections import defaultdict
-
-import wget
-from zipfile import ZipFile
-
-
-# In[10]:
 
 # url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
 all_figures = {}
@@ -41,7 +29,6 @@ def setup_app(url):
         zipObj.extractall('myCsv')
 
     results_path = os.path.join(os.getcwd(), 'myCsv/csv/')
-    # results_path = os.path.join(os.getcwd(), 'res/csv/')
 
     all_params = {}
     df_y_min = 9999
@@ -100,29 +87,6 @@ def setup_app(url):
                 title=p_title,
                 showlegend=True)
 
-
-        """ def df_filter(df,lb,ub,t_exclude):
-        df['t'] = df['t'].str[lb:ub]
-        df['value'] = df['value'].astype('float64')
-        df = df[~df['t'].isin(t_exclude)].pivot_table(index='y',
-                                              columns='t',
-                                              values='value',
-                                              aggfunc='sum').reset_index().fillna(0)
-        df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
-        df['y'] = years
-        return df
-
-    def df_plot(df,y_title,p_title):
-       return df.iplot(asFigure=True,
-                       x='y',
-                       kind='bar',
-                       barmode='stack',
-                       xTitle='Year',
-                       yTitle=y_title,
-                       color=[color_dict[x] for x in df.columns if x != 'y'],
-                       title=p_title) """
-
-
     # ## Energy figures
     # This section contains figures related to specifically to the energy sector. The list of figures in this section are as follows:
     # 1. Power generation capacity (detailed)
@@ -131,10 +95,6 @@ def setup_app(url):
     # 4. Power generation (aggregated)
 
     # ### Power generation capacity
-
-    # In[15]:
-
-
     # Power generation capacity (detailed)
     cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith('PWR')].drop('r', axis=1)
     cap_df = df_filter(cap_df,3,6,['CNT','TRN','CST','CEN','SOU','NOR'])
@@ -161,10 +121,6 @@ def setup_app(url):
     gen_df = df_filter(gen_df,3,6,['TRN'])
     all_figures['fig3'] = df_plot(gen_df,'Petajoules (PJ)','Power Generation (Detail)')
 
-
-    # In[18]:
-
-
     # Power generation (Aggregated)
     gen_agg_df = pd.DataFrame(columns=agg_col)
     gen_agg_df.insert(0,'y',gen_df['y'])
@@ -178,18 +134,10 @@ def setup_app(url):
 
     all_figures['fig4'] = df_plot(gen_agg_df,'Petajoules (PJ)','Power Generation (Aggregate)')
 
-
-    # In[19]:
-
-
     # Fuel use for power generation
     gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('DEMPWR')].drop('r', axis=1)
     gen_use_df = df_filter(gen_use_df,6,9,[])
     all_figures['fig5'] = df_plot(gen_use_df,'Petajoules (PJ)','Power Generation (Fuel use)')
-
-
-    # In[20]:
-
 
     #Domestic fuel production
     fuels = ['OHC', 'GSL','DSL','LPG', 'JFL','HFO','NGS']
@@ -203,19 +151,11 @@ def setup_app(url):
             dom_prd_df = dom_prd_df.drop(each, axis=1)
     all_figures['fig6']  = df_plot(dom_prd_df,'Petajoules (PJ)','Domestic energy production')
 
-
-    # In[21]:
-
-
     #Energy imports
     ene_imp_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')].drop('r', axis=1)
     ene_imp_df = df_filter(ene_imp_df,3,6,[])
     if len(ene_imp_df.columns) > 1:
         df_plot(ene_imp_df,'Petajoules (PJ)','Energy imports')
-
-
-    # In[22]:
-
 
     #Energy exports
     ene_exp_df = all_params['TotalTechnologyAnnualActivity'][all_params['TotalTechnologyAnnualActivity'].t.str.startswith('EXP')].drop('r', axis=1)
@@ -246,7 +186,6 @@ def setup_app(url):
 
     ele_cos_df.drop('Total capital investment', axis=1, inplace=True)
 
-    # In[25]:
     cap_exist_values = {}
 
     start_year = min(years)
@@ -344,13 +283,8 @@ def setup_app(url):
 
 
     for df in [fue_val_df, fue_prd_df]:
-        #df['Diesel'] = df['Crude oil'].mul(0.3755) + df['Diesel']
-        #df['HFO'] = df['Crude oil'].mul(0.0171) + df['HFO']
-        #df.drop('Crude oil', axis=1, inplace=True)
-
         df['Diesel'] = df['Diesel']
         df['HFO'] = df['HFO']
-        #df.drop('Crude oil', axis=1, inplace=True)
 
     fue_cos_df = pd.DataFrame(columns=list(set(temp_col_list)))
     fue_cos_df['y'] = years
@@ -366,22 +300,14 @@ def setup_app(url):
     ele_cos_df['Variable costs'] = var_cos_df.iloc[:,1:].sum(axis=1)/ele_cos_df['Electricity generation']
     ele_cos_df['Fuel distribution costs'] = dis_cos_df.iloc[:,1:].sum(axis=1)/ele_cos_df['Electricity generation']
     ele_cos_df['Fuel costs'] = fue_cos_df.iloc[:,1:].sum(axis=1)/ele_cos_df['Electricity generation']
-    # In[30]:
     ele_cos_df.drop('Electricity generation',axis=1,inplace=True)
 
-    # In[31]:
     all_figures['fig10'] = ele_cos_df.iplot(asFigure=True, kind='bar',barmode='stack',x='y',title='Cost of electricity generation ($/MWh)')
 
 setup_app(sys.argv[1])
 ##################################################################################################
-#colors = {'background': '#111111', 'text': '#7FDBFF'}
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-#app.css.config.serve_locally = True
-#app.scripts.config.serve_locally = True
-
 app.layout = html.Div(children=[
     html.Div('Data-*', **{'id': 'abc', 'data-run-id': 12}),
     html.H1(
@@ -430,6 +356,7 @@ app.layout = html.Div(children=[
     [Input(component_id='abc', component_property='data-run-id')]
 )
 def my_callback(input_value):
+    import pdb; pdb.set_trace()
     print(input_value)
 
 if __name__ == '__main__':
