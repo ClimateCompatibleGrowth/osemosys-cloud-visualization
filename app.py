@@ -16,13 +16,14 @@ import plotly as py
 import plotly.offline as pyo
 import subprocess
 import wget
+import json
 pyo.init_notebook_mode(connected=False)
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
 # url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
-all_figures = {}
 def setup_app(url):
+    all_figures = {}
     wget.download(url, 'myCsv.zip')
     zip_path = os.path.join(os.getcwd(), 'myCsv.zip')
     with ZipFile(zip_path, 'r') as zipObj:
@@ -303,9 +304,10 @@ def setup_app(url):
     ele_cos_df.drop('Electricity generation',axis=1,inplace=True)
 
     all_figures['fig10'] = ele_cos_df.iplot(asFigure=True, kind='bar',barmode='stack',x='y',title='Cost of electricity generation ($/MWh)')
+    return all_figures
 
-setup_app(sys.argv[1])
 ##################################################################################################
+all_figures = setup_app(sys.argv[1])
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div(children=[
@@ -352,12 +354,14 @@ app.layout = html.Div(children=[
 ])
 
 @app.callback(
-    Output(component_id='abc', component_property='data-output'),
+    Output(component_id='abc', component_property='data-figures'),
     [Input(component_id='abc', component_property='data-run-id')]
 )
 def my_callback(input_value):
-    import pdb; pdb.set_trace()
+    all_figures = setup_app(sys.argv[1])
+    # import pdb; pdb.set_trace()
     print(input_value)
+    return json.dumps(all_figures, cls=py.utils.PlotlyJSONEncoder)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
