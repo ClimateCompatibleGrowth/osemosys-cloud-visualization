@@ -2,6 +2,8 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
+from dash.dependencies import Input, Output
+
 import pandas as pd
 #import numpy as np
 from IPython.display import HTML
@@ -369,6 +371,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 #app.scripts.config.serve_locally = True
 
 app.layout = html.Div(children=[
+    html.Div('Data-*', **{'id': 'abc', 'data-run-id': 12}),
     html.H1(
         'CLEWS Dashboard',
         style={
@@ -414,6 +417,12 @@ app.layout = html.Div(children=[
     ), style={'width':'50%','display':'inline-block'}),
 ])
 
+@app.callback(
+    Output(component_id='abc', component_property='data-output'),
+    [Input(component_id='abc', component_property='data-run-id')]
+)
+def my_callback(input_value):
+    print(input_value)
 
 if __name__ == '__main__':
-    app.run_server(debug=True, use_reloader=False)
+    app.run_server(debug=True)
