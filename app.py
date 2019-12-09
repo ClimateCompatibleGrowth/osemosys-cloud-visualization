@@ -26,11 +26,20 @@ from tkinter import filedialog
 from tkinter import *
 from collections import defaultdict
 
+import wget
+from zipfile import ZipFile
 
 
 # In[10]:
 
-results_path = os.path.join(os.getcwd(), 'res/csv/')
+url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
+wget.download(url, 'myCsv.zip')
+zip_path = os.path.join(os.getcwd(), 'myCsv.zip')
+with ZipFile(zip_path, 'r') as zipObj:
+    zipObj.extractall('myCsv')
+
+results_path = os.path.join(os.getcwd(), 'myCsv/csv/')
+# results_path = os.path.join(os.getcwd(), 'res/csv/')
 
 all_params = {}
 df_y_min = 9999
