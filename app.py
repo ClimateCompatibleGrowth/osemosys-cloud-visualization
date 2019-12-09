@@ -32,9 +32,9 @@ from zipfile import ZipFile
 
 # In[10]:
 
+# url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
 all_figures = {}
-def setup_app():
-    url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
+def setup_app(url):
     wget.download(url, 'myCsv.zip')
     zip_path = os.path.join(os.getcwd(), 'myCsv.zip')
     with ZipFile(zip_path, 'r') as zipObj:
@@ -372,7 +372,7 @@ def setup_app():
     # In[31]:
     all_figures['fig10'] = ele_cos_df.iplot(asFigure=True, kind='bar',barmode='stack',x='y',title='Cost of electricity generation ($/MWh)')
 
-setup_app()
+setup_app(sys.argv[1])
 ##################################################################################################
 #colors = {'background': '#111111', 'text': '#7FDBFF'}
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
