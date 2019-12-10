@@ -307,20 +307,8 @@ def setup_app(url):
     return all_figures
 
 ##################################################################################################
-# all_figures = setup_app(sys.argv[1])
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-def div_from_figure(figure, number):
-    return html.Div(
-            children=dcc.Graph(
-                id=f'example-graph-{number}',
-                figure=figure
-                ), 
-            style={'width':'50%','display':'inline-block'}
-            )
-
-# figure_divs = []
 
 url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
 app.layout = html.Div(children=[
@@ -339,15 +327,14 @@ app.layout = html.Div(children=[
     html.Div(children=[], id='figures-container'),
 ])
 
-# @app.callback(
-#     Output(component_id='figures-component', component_property='data-figures'),
-#     [Input(component_id='figures-component', component_property='data-url')]
-# )
-# def my_callback(input_value):
-#     all_figures = setup_app(sys.argv[1])
-#     # import pdb; pdb.set_trace()
-#     print(input_value)
-#     return json.dumps(all_figures, cls=py.utils.PlotlyJSONEncoder)
+def div_from_figure(figure, number):
+    return html.Div(
+            children=dcc.Graph(
+                id=f'example-graph-{number}',
+                figure=figure
+                ), 
+            style={'width':'50%','display':'inline-block'}
+            )
 
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
