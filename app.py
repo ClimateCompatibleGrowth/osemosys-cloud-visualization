@@ -17,6 +17,7 @@ import plotly.offline as pyo
 import subprocess
 import wget
 import json
+import random
 pyo.init_notebook_mode(connected=False)
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
@@ -24,12 +25,15 @@ cufflinks.set_config_file(world_readable=True, theme='white')
 # url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
 def setup_app(url):
     all_figures = {}
-    wget.download(url, 'myCsv.zip')
-    zip_path = os.path.join(os.getcwd(), 'myCsv.zip')
+    random_number = random.randint(1,99999)
+    zip_file_name = f'csv_{random_number}.zip'
+    folder_name = f'csv_{random_number}'
+    wget.download(url, zip_file_name)
+    zip_path = os.path.join(os.getcwd(), zip_file_name)
     with ZipFile(zip_path, 'r') as zipObj:
-        zipObj.extractall('myCsv')
+        zipObj.extractall(folder_name)
 
-    results_path = os.path.join(os.getcwd(), 'myCsv/csv/')
+    results_path = os.path.join(os.getcwd(), f'{folder_name}/csv/')
 
     all_params = {}
     df_y_min = 9999
