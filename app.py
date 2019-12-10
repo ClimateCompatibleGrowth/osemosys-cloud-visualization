@@ -312,6 +312,7 @@ def setup_app(url):
 ##################################################################################################
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 app.layout = html.Div(children=[
     html.Div('Data-*', **{'id': 'figures-component', 'data-url': ''}),
