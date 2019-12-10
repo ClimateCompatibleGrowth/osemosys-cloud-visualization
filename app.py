@@ -2,8 +2,6 @@ from IPython.display import HTML
 from collections import defaultdict
 from dash.dependencies import Input, Output
 from plotly.offline import plot, iplot, init_notebook_mode
-from tkinter import *
-from tkinter import filedialog
 from zipfile import ZipFile
 import IPython.core.display as di
 import cufflinks
