@@ -310,6 +310,16 @@ def setup_app(url):
 all_figures = setup_app(sys.argv[1])
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+def div_from_figure(figure, number):
+    return html.Div(
+            children=dcc.Graph(
+                id=f'example-graph-{number}',
+                figure=figure
+                ), 
+            style={'width':'50%','display':'inline-block'}
+            )
+
 app.layout = html.Div(children=[
     html.Div('Data-*', **{'id': 'abc', 'data-run-id': 12}),
     html.H1(
@@ -323,34 +333,13 @@ app.layout = html.Div(children=[
         'textAlign':'center'
     }
     ),
-    html.Div(children=dcc.Graph(
-                id='example-graph-1',
-                figure=all_figures['fig1']
-    ), style={'width':'50%','display':'inline-block'}),
-    html.Div(children=dcc.Graph(
-                id='example-graph-2',
-                figure=all_figures['fig2']
-    ), style={'width':'50%','display':'inline-block'}),
-    html.Div(children=dcc.Graph(
-                id='example-graph-3',
-                figure=all_figures['fig3']
-    ), style={'width':'50%','display':'inline-block'}),
-    html.Div(children=dcc.Graph(
-                id='example-graph-4',
-                figure=all_figures['fig4']
-    ), style={'width':'50%','display':'inline-block'}),
-    html.Div(children=dcc.Graph(
-                id='example-graph-5',
-                figure=all_figures['fig5']
-    ), style={'width':'50%','display':'inline-block'}),
-    html.Div(children=dcc.Graph(
-                id='example-graph-6',
-                figure=all_figures['fig6']
-    ), style={'width':'50%','display':'inline-block'}),
-    html.Div(children=dcc.Graph(
-                id='example-graph-10',
-                figure=all_figures['fig10']
-    ), style={'width':'50%','display':'inline-block'}),
+    div_from_figure(all_figures['fig1'], 1),
+    div_from_figure(all_figures['fig2'], 2),
+    div_from_figure(all_figures['fig3'], 3),
+    div_from_figure(all_figures['fig4'], 4),
+    div_from_figure(all_figures['fig5'], 5),
+    div_from_figure(all_figures['fig6'], 6),
+    div_from_figure(all_figures['fig10'], 10),
 ])
 
 @app.callback(
