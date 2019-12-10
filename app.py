@@ -307,7 +307,7 @@ def setup_app(url):
     return all_figures
 
 ##################################################################################################
-all_figures = setup_app(sys.argv[1])
+# all_figures = setup_app(sys.argv[1])
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
@@ -320,12 +320,11 @@ def div_from_figure(figure, number):
             style={'width':'50%','display':'inline-block'}
             )
 
-figure_divs = []
-for number, figure in all_figures.items():
-    figure_divs = figure_divs + [div_from_figure(figure, number)]
+# figure_divs = []
 
+url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
 app.layout = html.Div(children=[
-    html.Div('Data-*', **{'id': 'abc', 'data-run-id': 12}),
+    html.Div('Data-*', **{'id': 'figures-component', 'data-url': url}),
     html.H1(
         'CLEWS Dashboard',
         style={
@@ -337,17 +336,29 @@ app.layout = html.Div(children=[
         'textAlign':'center'
     }
     ),
-] + figure_divs)
+    html.Div(children=[], id='figures-container'),
+])
+
+# @app.callback(
+#     Output(component_id='figures-component', component_property='data-figures'),
+#     [Input(component_id='figures-component', component_property='data-url')]
+# )
+# def my_callback(input_value):
+#     all_figures = setup_app(sys.argv[1])
+#     # import pdb; pdb.set_trace()
+#     print(input_value)
+#     return json.dumps(all_figures, cls=py.utils.PlotlyJSONEncoder)
 
 @app.callback(
-    Output(component_id='abc', component_property='data-figures'),
-    [Input(component_id='abc', component_property='data-run-id')]
-)
-def my_callback(input_value):
-    all_figures = setup_app(sys.argv[1])
-    # import pdb; pdb.set_trace()
-    print(input_value)
-    return json.dumps(all_figures, cls=py.utils.PlotlyJSONEncoder)
+    Output(component_id='figures-container', component_property='children'),
+    [Input(component_id='figures-component', component_property='data-url')]
+    )
+def generate_figures(url):
+    all_figures = setup_app(url)
+    figure_divs = []
+    for number, figure in all_figures.items():
+        figure_divs = figure_divs + [div_from_figure(figure, number)]
+    return figure_divs
 
 if __name__ == '__main__':
     app.run_server(debug=False)
