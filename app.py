@@ -18,6 +18,7 @@ import subprocess
 import wget
 import json
 import random
+import urllib
 pyo.init_notebook_mode(connected=False)
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
@@ -314,9 +315,9 @@ def setup_app(url):
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
 app.layout = html.Div(children=[
-    html.Div('Data-*', **{'id': 'figures-component', 'data-url': url}),
+    html.Div('Data-*', **{'id': 'figures-component', 'data-url': ''}),
+    dcc.Location(id='url', refresh=False),
     html.H1(
         'CLEWS Dashboard',
         style={
@@ -339,6 +340,13 @@ def div_from_figure(figure, number):
                 ), 
             style={'width':'50%','display':'inline-block'}
             )
+
+@app.callback(
+    Output(component_id='figures-component', component_property='data-url'),
+    [Input(component_id='url', component_property='search')]
+    )
+def setup_url(query_string):
+    return urllib.parse.unquote(query_string).split('=')[-2]
 
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
