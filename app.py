@@ -320,6 +320,16 @@ def div_from_figure(figure, number):
             style={'width':'50%','display':'inline-block'}
             )
 
+figure_divs = [
+    div_from_figure(all_figures['fig1'], 1),
+    div_from_figure(all_figures['fig2'], 2),
+    div_from_figure(all_figures['fig3'], 3),
+    div_from_figure(all_figures['fig4'], 4),
+    div_from_figure(all_figures['fig5'], 5),
+    div_from_figure(all_figures['fig6'], 6),
+    div_from_figure(all_figures['fig10'], 10),
+    ]
+
 app.layout = html.Div(children=[
     html.Div('Data-*', **{'id': 'abc', 'data-run-id': 12}),
     html.H1(
@@ -333,14 +343,7 @@ app.layout = html.Div(children=[
         'textAlign':'center'
     }
     ),
-    div_from_figure(all_figures['fig1'], 1),
-    div_from_figure(all_figures['fig2'], 2),
-    div_from_figure(all_figures['fig3'], 3),
-    div_from_figure(all_figures['fig4'], 4),
-    div_from_figure(all_figures['fig5'], 5),
-    div_from_figure(all_figures['fig6'], 6),
-    div_from_figure(all_figures['fig10'], 10),
-])
+] + figure_divs)
 
 @app.callback(
     Output(component_id='abc', component_property='data-figures'),
