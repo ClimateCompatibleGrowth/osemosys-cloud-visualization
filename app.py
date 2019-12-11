@@ -345,7 +345,7 @@ def div_from_figure(figure, number):
     [Input(component_id='url', component_property='search')]
     )
 def setup_url(query_string):
-    return urllib.parse.unquote(query_string).split('=')[-2]
+    return urllib.parse.unquote(query_string).split('=')[-1]
 
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
