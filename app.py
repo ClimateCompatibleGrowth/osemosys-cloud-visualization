@@ -97,6 +97,11 @@ def calculate_cap_cos_df(all_params, years):
     cap_cos_df = all_params['CapitalInvestment'][all_params['CapitalInvestment'].t.str.startswith('PWR')].drop('r', axis=1)
     return df_filter(cap_cos_df,3,6,['TRN'],years)
 
+def calculate_ene_imp_df(all_params, years):
+    #Energy imports
+    ene_imp_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')].drop('r', axis=1)
+    return df_filter(ene_imp_df,3,6,[], years)
+
 def fig1(all_params,years):
     # ### Power generation capacity
     # Power generation capacity (detailed)
@@ -155,7 +160,9 @@ def fig7(all_params, years):
     cap_cos_df = calculate_cap_cos_df(all_params, years)
     return df_plot(cap_cos_df,'Million $','Capital Investment')
 
- 
+def fig8(all_params, years):
+    ene_imp_df = calculate_ene_imp_df(all_params, years)
+    return df_plot(ene_imp_df,'Petajoules (PJ)','Energy imports')
 
 def setup_app(url):
     all_figures = {}
@@ -193,12 +200,9 @@ def setup_app(url):
     all_figures['fig5'] = fig5(all_params,years)
     all_figures['fig6'] = fig6(all_params,years)
     all_figures['fig7'] = fig7(all_params,years)
+    all_figures['fig8'] = fig8(all_params,years)
 
-    #Energy imports
-    ene_imp_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')].drop('r', axis=1)
-    ene_imp_df = df_filter(ene_imp_df,3,6,[], years)
-    if len(ene_imp_df.columns) > 1:
-        df_plot(ene_imp_df,'Petajoules (PJ)','Energy imports')
+    ene_imp_df = calculate_ene_imp_df(all_params, years)
 
     #Energy exports
     ene_exp_df = all_params['TotalTechnologyAnnualActivity'][all_params['TotalTechnologyAnnualActivity'].t.str.startswith('EXP')].drop('r', axis=1)
