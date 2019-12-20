@@ -1,6 +1,6 @@
 import pandas as pd
 from utilities import df_plot
-from calculations import calculate_cap_df, calculate_gen_df, calculate_gen_use_df, calculate_cap_cos_df, calculate_ene_imp_df, calculate_ene_exp_df, calculate_dom_prd_df
+from calculations import calculate_cap_df, calculate_gen_df, calculate_gen_use_df, calculate_cap_cos_df, calculate_ene_imp_df, calculate_ene_exp_df, calculate_dom_prd_df, calculate_ele_cos_df
 
 # List of columns for aggregated energy tables and figures
 agg_col = {'Coal':['Coal'],
@@ -11,6 +11,13 @@ agg_col = {'Coal':['Coal'],
         'Other renewables': ['Biomass','Geothermal','Solar','MSW','Wind'],
         'Net electricity imports': ['Net electricity imports']
         }
+
+# ## Energy figures
+# This section contains figures related to specifically to the energy sector. The list of figures in this section are as follows:
+# 1. Power generation capacity (detailed)
+# 2. Power generation capacity (aggregated)
+# 3. Power generation (detailed)
+# 4. Power generation (aggregated)
 
 def fig1(all_params,years):
     # ### Power generation capacity
@@ -78,3 +85,7 @@ def fig9(all_params, years):
     ene_exp_df = calculate_ene_exp_df(all_params, years)
     return df_plot(ene_exp_df,'Petajoules (PJ)','Energy exports')
 
+def fig10(all_params, years):
+    ele_cos_df = calculate_ele_cos_df(all_params, years)
+
+    return ele_cos_df.iplot(asFigure=True, kind='bar',barmode='stack',x='y',title='Cost of electricity generation ($/MWh)')
