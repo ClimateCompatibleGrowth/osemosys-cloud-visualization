@@ -1,8 +1,7 @@
-from collections import defaultdict
 from dash.dependencies import Input, Output
 from plotly.offline import plot, iplot, init_notebook_mode
 from zipfile import ZipFile
-import IPython.core.display as di
+# import IPython.core.display as di
 import cufflinks
 import dash
 import dash_core_components as dcc
@@ -11,9 +10,7 @@ import os, sys
 import pandas as pd
 import plotly as py
 import plotly.offline as pyo
-import subprocess
 import wget
-import json
 import random
 import urllib
 pyo.init_notebook_mode(connected=False)
@@ -214,9 +211,8 @@ def setup_app(url):
 
     ene_imp_df = calculate_ene_imp_df(all_params, years)
     ene_exp_df = calculate_ene_exp_df(all_params, years)
-
-
     cap_cos_df = calculate_cap_cos_df(all_params, years)
+
     ele_cos_df = pd.DataFrame(columns=['Total capital investment', 'Capital costs'])
     ele_cos_df.insert(0,'y',years)
     ele_cos_df['Total capital investment'] = cap_cos_df.iloc[:,1:].sum(axis=1)
@@ -226,7 +222,6 @@ def setup_app(url):
     R = 0.1 # Discount rate
     n = 30 # Amortization period
     cap_exist_total = 500 # Payments on existing capacity (legacy costs)
-
 
     for i in ele_cos_df['y']:
         for j in ele_cos_df['y']:
