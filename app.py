@@ -102,6 +102,11 @@ def calculate_ene_imp_df(all_params, years):
     ene_imp_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')].drop('r', axis=1)
     return df_filter(ene_imp_df,3,6,[], years)
 
+def calculate_ene_exp_df(all_params, years):
+    #Energy exports
+    ene_exp_df = all_params['TotalTechnologyAnnualActivity'][all_params['TotalTechnologyAnnualActivity'].t.str.startswith('EXP')].drop('r', axis=1)
+    return df_filter(ene_exp_df,3,6,[],years)
+
 def fig1(all_params,years):
     # ### Power generation capacity
     # Power generation capacity (detailed)
@@ -164,6 +169,10 @@ def fig8(all_params, years):
     ene_imp_df = calculate_ene_imp_df(all_params, years)
     return df_plot(ene_imp_df,'Petajoules (PJ)','Energy imports')
 
+def fig9(all_params, years):
+    ene_exp_df = calculate_ene_exp_df(all_params, years)
+    return df_plot(ene_exp_df,'Petajoules (PJ)','Energy exports')
+
 def setup_app(url):
     all_figures = {}
 
@@ -201,14 +210,11 @@ def setup_app(url):
     all_figures['fig6'] = fig6(all_params,years)
     all_figures['fig7'] = fig7(all_params,years)
     all_figures['fig8'] = fig8(all_params,years)
+    all_figures['fig9'] = fig9(all_params,years)
 
     ene_imp_df = calculate_ene_imp_df(all_params, years)
+    ene_exp_df = calculate_ene_exp_df(all_params, years)
 
-    #Energy exports
-    ene_exp_df = all_params['TotalTechnologyAnnualActivity'][all_params['TotalTechnologyAnnualActivity'].t.str.startswith('EXP')].drop('r', axis=1)
-    ene_exp_df = df_filter(ene_exp_df,3,6,[],years)
-    if len(ene_exp_df.columns) > 1:
-        df_plot(ene_exp_df,'Petajoules (PJ)','Energy exports')
 
     cap_cos_df = calculate_cap_cos_df(all_params, years)
     ele_cos_df = pd.DataFrame(columns=['Total capital investment', 'Capital costs'])
