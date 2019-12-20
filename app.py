@@ -83,6 +83,16 @@ def calculate_gen_df(all_params, years):
     gen_df = df_filter(gen_df,3,6,['TRN'],years)
     return gen_df
 
+def calculate_gen_use_df(all_params, years):
+    gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('DEMPWR')].drop('r', axis=1)
+    gen_use_df = df_filter(gen_use_df,6,9,[], years)
+    return gen_use_df
+
+def calculate_dom_prd_df(all_params, years):
+    dom_prd_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('MIN')|
+                                                           all_params['ProductionByTechnologyAnnual'].t.str.startswith('RNW')].drop('r', axis=1)
+    return df_filter(dom_prd_df,3,6,[], years)
+
 def fig1(all_params,years):
     # ### Power generation capacity
     # Power generation capacity (detailed)
@@ -123,6 +133,21 @@ def fig4(all_params, years):
                 gen_agg_df[each] = gen_agg_df[each].round(2)
     return df_plot(gen_agg_df,'Petajoules (PJ)','Power Generation (Aggregate)')
 
+def fig5(all_params, years):
+    gen_use_df = calculate_gen_use_df(all_params, years)
+    # Fuel use for power generation
+    return df_plot(gen_use_df,'Petajoules (PJ)','Power Generation (Fuel use)')
+
+def fig6(all_params, years):
+    #Domestic fuel production
+
+    dom_prd_df = calculate_dom_prd_df(all_params, years)
+    for each in dom_prd_df.columns:
+        if each in ['Land','Water','Geothermal','Hydro','Solar','Wind']:
+            dom_prd_df = dom_prd_df.drop(each, axis=1)
+    return df_plot(dom_prd_df,'Petajoules (PJ)','Domestic energy production')
+ 
+
 def setup_app(url):
     all_figures = {}
 
@@ -156,25 +181,10 @@ def setup_app(url):
     all_figures['fig2'] = fig2(all_params,years)
     all_figures['fig3'] = fig3(all_params,years)
     all_figures['fig4'] = fig4(all_params,years)
+    all_figures['fig5'] = fig5(all_params,years)
+    all_figures['fig6'] = fig6(all_params,years)
 
-    gen_df = calculate_gen_df(all_params, years)
 
-    # Fuel use for power generation
-    gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('DEMPWR')].drop('r', axis=1)
-    gen_use_df = df_filter(gen_use_df,6,9,[], years)
-    all_figures['fig5'] = df_plot(gen_use_df,'Petajoules (PJ)','Power Generation (Fuel use)')
-
-    #Domestic fuel production
-    fuels = ['OHC', 'GSL','DSL','LPG', 'JFL','HFO','NGS']
-
-    dom_prd_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('MIN')|
-                                                           all_params['ProductionByTechnologyAnnual'].t.str.startswith('RNW')].drop('r', axis=1)
-    dom_prd_df = df_filter(dom_prd_df,3,6,[], years)
-
-    for each in dom_prd_df.columns:
-        if each in ['Land','Water','Geothermal','Hydro','Solar','Wind']:
-            dom_prd_df = dom_prd_df.drop(each, axis=1)
-    all_figures['fig6']  = df_plot(dom_prd_df,'Petajoules (PJ)','Domestic energy production')
 
     #Energy imports
     ene_imp_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')].drop('r', axis=1)
@@ -279,6 +289,7 @@ def setup_app(url):
 
 
     temp_col_list = []
+    dom_prd_df = calculate_dom_prd_df(all_params, years)
     temp_col_list = dom_prd_df.columns
     if len(ene_imp_df.columns) > 1:
         temp_col_list = temp_col_list.append(ene_imp_df.columns)
@@ -314,11 +325,13 @@ def setup_app(url):
     fue_cos_df = pd.DataFrame(columns=list(set(temp_col_list)))
     fue_cos_df['y'] = years
 
+    gen_use_df = calculate_gen_use_df(all_params, years)
     fue_cos_df = (fue_val_df/fue_prd_df)*gen_use_df
     fue_cos_df = fue_cos_df.fillna(0)
     fue_cos_df = fue_cos_df.reindex(sorted(fue_cos_df.columns),axis=1).set_index('y').reset_index()
     fue_cos_df['y'] = years
 
+    gen_df = calculate_gen_df(all_params, years)
     ele_cos_df['Electricity generation'] = gen_df.iloc[:,1:].sum(axis=1)/3.6
     ele_cos_df['Capital costs'] = ele_cos_df['Capital costs']/ele_cos_df['Electricity generation']
     ele_cos_df['Fixed costs'] = fix_cos_df.iloc[:,1:].sum(axis=1)/ele_cos_df['Electricity generation']
