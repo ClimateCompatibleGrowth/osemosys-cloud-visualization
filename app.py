@@ -109,6 +109,20 @@ def fig3(all_params, years):
     gen_df = calculate_gen_df(all_params, years)
     return df_plot(gen_df,'Petajoules (PJ)','Power Generation (Detail)')
 
+def fig4(all_params, years):
+    gen_df = calculate_gen_df(all_params, years)
+    # Power generation (Aggregated)
+    gen_agg_df = pd.DataFrame(columns=agg_col)
+    gen_agg_df.insert(0,'y',gen_df['y'])
+    gen_agg_df  = gen_agg_df.fillna(0.00)
+
+    for each in agg_col:
+        for tech_exists in agg_col[each]:
+            if tech_exists in gen_df.columns:
+                gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
+                gen_agg_df[each] = gen_agg_df[each].round(2)
+    return df_plot(gen_agg_df,'Petajoules (PJ)','Power Generation (Aggregate)')
+
 def setup_app(url):
     all_figures = {}
 
@@ -141,21 +155,9 @@ def setup_app(url):
     all_figures['fig1'] = fig1(all_params,years)
     all_figures['fig2'] = fig2(all_params,years)
     all_figures['fig3'] = fig3(all_params,years)
+    all_figures['fig4'] = fig4(all_params,years)
 
     gen_df = calculate_gen_df(all_params, years)
-
-    # Power generation (Aggregated)
-    gen_agg_df = pd.DataFrame(columns=agg_col)
-    gen_agg_df.insert(0,'y',gen_df['y'])
-    gen_agg_df  = gen_agg_df.fillna(0.00)
-
-    for each in agg_col:
-        for tech_exists in agg_col[each]:
-            if tech_exists in gen_df.columns:
-                gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
-                gen_agg_df[each] = gen_agg_df[each].round(2)
-
-    all_figures['fig4'] = df_plot(gen_agg_df,'Petajoules (PJ)','Power Generation (Aggregate)')
 
     # Fuel use for power generation
     gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('DEMPWR')].drop('r', axis=1)
