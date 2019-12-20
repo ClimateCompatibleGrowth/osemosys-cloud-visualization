@@ -10,14 +10,13 @@ import os, sys
 import pandas as pd
 import plotly as py
 import plotly.offline as pyo
-import wget
-import random
 import urllib
 pyo.init_notebook_mode(connected=False)
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
-# url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
+sys.path.append('app/')
+from setup import download_files
 
 name_color_codes = pd.read_csv(os.path.join(os.getcwd(),'name_color_codes.csv'), encoding='latin-1')
 det_col = dict([(c,n) for c,n in zip(name_color_codes.code, name_color_codes.name_english)])
@@ -43,16 +42,6 @@ def df_plot(df,y_title,p_title):
             color=[color_dict[x] for x in df.columns if x != 'y'],
             title=p_title,
             showlegend=True)
-
-def download_files(url):
-    random_number = random.randint(1,99999)
-    zip_file_name = f'csv_{random_number}.zip'
-    folder_name = f'csv_{random_number}'
-    wget.download(url, zip_file_name)
-    zip_path = os.path.join(os.getcwd(), zip_file_name)
-    with ZipFile(zip_path, 'r') as zipObj:
-        zipObj.extractall(folder_name)
-    return os.path.join(os.getcwd(), f'{folder_name}/csv/')
 
 def df_filter(df,lb,ub,t_exclude,years):
     df['t'] = df['t'].str[lb:ub]
