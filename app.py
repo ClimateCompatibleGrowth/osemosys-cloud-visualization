@@ -76,6 +76,13 @@ def calculate_cap_df(all_params, years):
     cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith('PWR')].drop('r', axis=1)
     return df_filter(cap_df,3,6,['CNT','TRN','CST','CEN','SOU','NOR'],years)
 
+def calculate_gen_df(all_params, years):
+    #Power generation (Detailed)
+    gen_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') &
+                                                       all_params['ProductionByTechnologyAnnual'].f.str.startswith('ELC001')].drop('r', axis=1)
+    gen_df = df_filter(gen_df,3,6,['TRN'],years)
+    return gen_df
+
 def fig1(all_params,years):
     # ### Power generation capacity
     # Power generation capacity (detailed)
@@ -96,7 +103,11 @@ def fig2(all_params, years):
                 cap_agg_df[each] = cap_agg_df[each].round(2)
 
     cap_agg_df = cap_agg_df.loc[:,(cap_agg_df != 0).any(axis=0)]
-    df_plot(cap_agg_df,'Gigawatts (GW)','Power Generation Capacity (Aggregate)')
+    return df_plot(cap_agg_df,'Gigawatts (GW)','Power Generation Capacity (Aggregate)')
+
+def fig3(all_params, years):
+    gen_df = calculate_gen_df(all_params, years)
+    return df_plot(gen_df,'Petajoules (PJ)','Power Generation (Detail)')
 
 def setup_app(url):
     all_figures = {}
@@ -129,14 +140,9 @@ def setup_app(url):
 
     all_figures['fig1'] = fig1(all_params,years)
     all_figures['fig2'] = fig2(all_params,years)
+    all_figures['fig3'] = fig3(all_params,years)
 
-
-
-    #Power generation (Detailed)
-    gen_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') &
-                                                       all_params['ProductionByTechnologyAnnual'].f.str.startswith('ELC001')].drop('r', axis=1)
-    gen_df = df_filter(gen_df,3,6,['TRN'],years)
-    all_figures['fig3'] = df_plot(gen_df,'Petajoules (PJ)','Power Generation (Detail)')
+    gen_df = calculate_gen_df(all_params, years)
 
     # Power generation (Aggregated)
     gen_agg_df = pd.DataFrame(columns=agg_col)
