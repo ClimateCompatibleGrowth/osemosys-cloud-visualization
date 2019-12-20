@@ -72,6 +72,32 @@ def df_filter(df,lb,ub,t_exclude,years):
     new_df = pd.merge(new_df,df, how='outer', on='y').fillna(0)
     return new_df
 
+def calculate_cap_df(all_params, years):
+    cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith('PWR')].drop('r', axis=1)
+    return df_filter(cap_df,3,6,['CNT','TRN','CST','CEN','SOU','NOR'],years)
+
+def fig1(all_params,years):
+    # ### Power generation capacity
+    # Power generation capacity (detailed)
+    cap_df = calculate_cap_df(all_params, years)
+    return df_plot(cap_df,'Gigawatts (GW)','Power Generation Capacity (Detail)')
+
+def fig2(all_params, years):
+    cap_df = calculate_cap_df(all_params, years)
+    # Power generation capacity (Aggregated)
+    cap_agg_df = pd.DataFrame(columns=agg_col)
+    cap_agg_df.insert(0,'y',cap_df['y'])
+    cap_agg_df  = cap_agg_df.fillna(0.00)
+
+    for each in agg_col:
+        for tech_exists in agg_col[each]:
+            if tech_exists in cap_df.columns:
+                cap_agg_df[each] = cap_agg_df[each] + cap_df[tech_exists]
+                cap_agg_df[each] = cap_agg_df[each].round(2)
+
+    cap_agg_df = cap_agg_df.loc[:,(cap_agg_df != 0).any(axis=0)]
+    df_plot(cap_agg_df,'Gigawatts (GW)','Power Generation Capacity (Aggregate)')
+
 def setup_app(url):
     all_figures = {}
 
@@ -101,26 +127,10 @@ def setup_app(url):
     # 3. Power generation (detailed)
     # 4. Power generation (aggregated)
 
-    # ### Power generation capacity
-    # Power generation capacity (detailed)
-    cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith('PWR')].drop('r', axis=1)
-    cap_df = df_filter(cap_df,3,6,['CNT','TRN','CST','CEN','SOU','NOR'],years)
-    all_figures['fig1'] = df_plot(cap_df,'Gigawatts (GW)','Power Generation Capacity (Detail)')
+    all_figures['fig1'] = fig1(all_params,years)
+    all_figures['fig2'] = fig2(all_params,years)
 
 
-    # Power generation capacity (Aggregated)
-    cap_agg_df = pd.DataFrame(columns=agg_col)
-    cap_agg_df.insert(0,'y',cap_df['y'])
-    cap_agg_df  = cap_agg_df.fillna(0.00)
-
-    for each in agg_col:
-        for tech_exists in agg_col[each]:
-            if tech_exists in cap_df.columns:
-                cap_agg_df[each] = cap_agg_df[each] + cap_df[tech_exists]
-                cap_agg_df[each] = cap_agg_df[each].round(2)
-
-    cap_agg_df = cap_agg_df.loc[:,(cap_agg_df != 0).any(axis=0)]
-    all_figures['fig2']= df_plot(cap_agg_df,'Gigawatts (GW)','Power Generation Capacity (Aggregate)')
 
     #Power generation (Detailed)
     gen_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') &
