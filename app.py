@@ -1,4 +1,3 @@
-from IPython.display import HTML
 from collections import defaultdict
 from dash.dependencies import Input, Output
 from plotly.offline import plot, iplot, init_notebook_mode
@@ -22,8 +21,33 @@ cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
 # url = 'http://osemosys-cloud.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbXNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--39b1f7c7ec068e24ea2346626293cc4ab41629d8/csv_160.zip?disposition=attachment'
-def setup_app(url):
-    all_figures = {}
+
+name_color_codes = pd.read_csv(os.path.join(os.getcwd(),'name_color_codes.csv'), encoding='latin-1')
+det_col = dict([(c,n) for c,n in zip(name_color_codes.code, name_color_codes.name_english)])
+
+# List of columns for aggregated energy tables and figures
+agg_col = {'Coal':['Coal'],
+        'Oil': ['Diesel','HFO','JFL','Crude oil','Petroleum coke'],
+        'Gas': ['Natural gas','LNG','LPG'],
+        'Hydro': ['Hydro'],
+        'Nuclear': ['Nuclear'],
+        'Other renewables': ['Biomass','Geothermal','Solar','MSW','Wind'],
+        'Net electricity imports': ['Net electricity imports']
+        }
+
+def df_plot(df,y_title,p_title):
+    color_dict = dict([(n,c) for n,c in zip(name_color_codes.name_english, name_color_codes.colour)])
+    return df.iplot(asFigure=True,
+            x='y',
+            kind='bar',
+            barmode='stack',
+            xTitle='Year',
+            yTitle=y_title,
+            color=[color_dict[x] for x in df.columns if x != 'y'],
+            title=p_title,
+            showlegend=True)
+
+def download_files(url):
     random_number = random.randint(1,99999)
     zip_file_name = f'csv_{random_number}.zip'
     folder_name = f'csv_{random_number}'
@@ -31,8 +55,27 @@ def setup_app(url):
     zip_path = os.path.join(os.getcwd(), zip_file_name)
     with ZipFile(zip_path, 'r') as zipObj:
         zipObj.extractall(folder_name)
+    return os.path.join(os.getcwd(), f'{folder_name}/csv/')
 
-    results_path = os.path.join(os.getcwd(), f'{folder_name}/csv/')
+def df_filter(df,lb,ub,t_exclude,years):
+    df['t'] = df['t'].str[lb:ub]
+    df['value'] = df['value'].astype('float64')
+    df = df[~df['t'].isin(t_exclude)].pivot_table(index='y',
+            columns='t',
+            values='value',
+            aggfunc='sum').reset_index().fillna(0)
+    df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
+    new_df = pd.DataFrame()
+    new_df['y'] = years
+    new_df['y'] = new_df['y'].astype(int)
+    df['y'] = df['y'].astype(int)
+    new_df = pd.merge(new_df,df, how='outer', on='y').fillna(0)
+    return new_df
+
+def setup_app(url):
+    all_figures = {}
+
+    results_path = download_files(url)
 
     all_params = {}
     df_y_min = 9999
@@ -51,46 +94,6 @@ def setup_app(url):
 
     years = pd.Series(list(range(df_y_min,df_y_max)))
 
-    name_color_codes = pd.read_csv(os.path.join(os.getcwd(),'name_color_codes.csv'), encoding='latin-1')
-    det_col = dict([(c,n) for c,n in zip(name_color_codes.code, name_color_codes.name_english)])
-    color_dict = dict([(n,c) for n,c in zip(name_color_codes.name_english, name_color_codes.colour)])
-
-    # List of columns for aggregated energy tables and figures
-    agg_col = {'Coal':['Coal'],
-            'Oil': ['Diesel','HFO','JFL','Crude oil','Petroleum coke'],
-            'Gas': ['Natural gas','LNG','LPG'],
-            'Hydro': ['Hydro'],
-            'Nuclear': ['Nuclear'],
-            'Other renewables': ['Biomass','Geothermal','Solar','MSW','Wind'],
-            'Net electricity imports': ['Net electricity imports']
-            }
-
-    def df_filter(df,lb,ub,t_exclude):
-        df['t'] = df['t'].str[lb:ub]
-        df['value'] = df['value'].astype('float64')
-        df = df[~df['t'].isin(t_exclude)].pivot_table(index='y',
-                columns='t',
-                values='value',
-                aggfunc='sum').reset_index().fillna(0)
-        df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
-        new_df = pd.DataFrame()
-        new_df['y'] = years
-        new_df['y'] = new_df['y'].astype(int)
-        df['y'] = df['y'].astype(int)
-        new_df = pd.merge(new_df,df, how='outer', on='y').fillna(0)
-        return new_df
-
-    def df_plot(df,y_title,p_title):
-        return df.iplot(asFigure=True,
-                x='y',
-                kind='bar',
-                barmode='stack',
-                xTitle='Year',
-                yTitle=y_title,
-                color=[color_dict[x] for x in df.columns if x != 'y'],
-                title=p_title,
-                showlegend=True)
-
     # ## Energy figures
     # This section contains figures related to specifically to the energy sector. The list of figures in this section are as follows:
     # 1. Power generation capacity (detailed)
@@ -101,7 +104,7 @@ def setup_app(url):
     # ### Power generation capacity
     # Power generation capacity (detailed)
     cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith('PWR')].drop('r', axis=1)
-    cap_df = df_filter(cap_df,3,6,['CNT','TRN','CST','CEN','SOU','NOR'])
+    cap_df = df_filter(cap_df,3,6,['CNT','TRN','CST','CEN','SOU','NOR'],years)
     all_figures['fig1'] = df_plot(cap_df,'Gigawatts (GW)','Power Generation Capacity (Detail)')
 
 
@@ -122,7 +125,7 @@ def setup_app(url):
     #Power generation (Detailed)
     gen_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') &
                                                        all_params['ProductionByTechnologyAnnual'].f.str.startswith('ELC001')].drop('r', axis=1)
-    gen_df = df_filter(gen_df,3,6,['TRN'])
+    gen_df = df_filter(gen_df,3,6,['TRN'],years)
     all_figures['fig3'] = df_plot(gen_df,'Petajoules (PJ)','Power Generation (Detail)')
 
     # Power generation (Aggregated)
@@ -140,7 +143,7 @@ def setup_app(url):
 
     # Fuel use for power generation
     gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('DEMPWR')].drop('r', axis=1)
-    gen_use_df = df_filter(gen_use_df,6,9,[])
+    gen_use_df = df_filter(gen_use_df,6,9,[], years)
     all_figures['fig5'] = df_plot(gen_use_df,'Petajoules (PJ)','Power Generation (Fuel use)')
 
     #Domestic fuel production
@@ -148,7 +151,7 @@ def setup_app(url):
 
     dom_prd_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('MIN')|
                                                            all_params['ProductionByTechnologyAnnual'].t.str.startswith('RNW')].drop('r', axis=1)
-    dom_prd_df = df_filter(dom_prd_df,3,6,[])
+    dom_prd_df = df_filter(dom_prd_df,3,6,[], years)
 
     for each in dom_prd_df.columns:
         if each in ['Land','Water','Geothermal','Hydro','Solar','Wind']:
@@ -157,19 +160,19 @@ def setup_app(url):
 
     #Energy imports
     ene_imp_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')].drop('r', axis=1)
-    ene_imp_df = df_filter(ene_imp_df,3,6,[])
+    ene_imp_df = df_filter(ene_imp_df,3,6,[], years)
     if len(ene_imp_df.columns) > 1:
         df_plot(ene_imp_df,'Petajoules (PJ)','Energy imports')
 
     #Energy exports
     ene_exp_df = all_params['TotalTechnologyAnnualActivity'][all_params['TotalTechnologyAnnualActivity'].t.str.startswith('EXP')].drop('r', axis=1)
-    ene_exp_df = df_filter(ene_exp_df,3,6,[])
+    ene_exp_df = df_filter(ene_exp_df,3,6,[],years)
     if len(ene_exp_df.columns) > 1:
         df_plot(ene_exp_df,'Petajoules (PJ)','Energy exports')
 
     # In[23]:
     cap_cos_df = all_params['CapitalInvestment'][all_params['CapitalInvestment'].t.str.startswith('PWR')].drop('r', axis=1)
-    cap_cos_df = df_filter(cap_cos_df,3,6,['TRN'])
+    cap_cos_df = df_filter(cap_cos_df,3,6,['TRN'],years)
     all_figures['fig7'] = df_plot(cap_cos_df,'Million $','Capital Investment')
 
     ele_cos_df = pd.DataFrame(columns=['Total capital investment', 'Capital costs'])
@@ -205,26 +208,26 @@ def setup_app(url):
     ele_cos_df = ele_cos_df.drop('Legacy costs', axis=1)
 
     fix_cos_df = all_params['AnnualFixedOperatingCost'][all_params['AnnualFixedOperatingCost'].t.str.startswith('PWR')].drop('r', axis=1)
-    fix_cos_df = df_filter(fix_cos_df,3,6,['TRN'])
+    fix_cos_df = df_filter(fix_cos_df,3,6,['TRN'],years)
 
     var_cos_df = all_params['AnnualVariableOperatingCost'][all_params['AnnualVariableOperatingCost'].t.str.startswith('PWR')].drop('r', axis=1)
-    var_cos_df = df_filter(var_cos_df,3,6,['TRN'])
+    var_cos_df = df_filter(var_cos_df,3,6,['TRN'],years)
 
     dis_cos_df = all_params['AnnualVariableOperatingCost'][all_params['AnnualVariableOperatingCost'].t.str.startswith('DEMPWR')].drop('r', axis=1)
-    dis_cos_df = df_filter(dis_cos_df,6,9,[])
+    dis_cos_df = df_filter(dis_cos_df,6,9,[],years)
 
     dom_val_df = all_params['AnnualVariableOperatingCost'][all_params['AnnualVariableOperatingCost'].t.str.startswith('MIN')|
                                                            all_params['AnnualVariableOperatingCost'].t.str.startswith('RNW')].drop('r', axis=1)
-    dom_val_df = df_filter(dom_val_df,3,6,[])
+    dom_val_df = df_filter(dom_val_df,3,6,[],years)
     for each in dom_val_df.columns:
         if each in ['Land','Water','Geothermal','Hydro','Solar','Wind']:
             dom_val_df = dom_val_df.drop(each, axis=1)
 
     imp_val_df = all_params['AnnualVariableOperatingCost'][all_params['AnnualVariableOperatingCost'].t.str.startswith('IMP')].drop('r', axis=1)
-    imp_val_df = df_filter(imp_val_df,3,6,[])
+    imp_val_df = df_filter(imp_val_df,3,6,[],years)
 
     exp_val_df = all_params['AnnualVariableOperatingCost'][all_params['AnnualVariableOperatingCost'].t.str.startswith('EXP')].drop('r', axis=1)
-    exp_val_df = df_filter(exp_val_df,3,6,[])
+    exp_val_df = df_filter(exp_val_df,3,6,[],years)
 
     temp_col_list = []
     temp_col_list = dom_val_df.columns
