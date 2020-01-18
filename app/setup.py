@@ -14,13 +14,13 @@ def input_path(url):
         return download_files(url)
 
 def ethiopia_files():
-    return os.path.join(os.getcwd(), 'data/ethiopia/csv/')
+    return os.path.join(os.getcwd(), 'data', 'ethiopia', 'csv')
 
 def bolivia_files():
-    return os.path.join(os.getcwd(), 'data/bolivia/csv/')
+    return os.path.join(os.getcwd(), 'data', 'bolivia', 'csv')
 
 def vietnam_files():
-    return os.path.join(os.getcwd(), 'data/vietnam/csv/')
+    return os.path.join(os.getcwd(), 'data', 'vietnam', 'csv')
 
 def download_files(url):
     random_number = random.randint(1,99999)
