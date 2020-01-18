@@ -12,3 +12,6 @@ def download_files(url):
     with ZipFile(zip_path, 'r') as zipObj:
         zipObj.extractall(folder_name)
     return os.path.join(os.getcwd(), f'{folder_name}/csv/')
+
+def vietnam_files():
+    return os.path.join(os.getcwd(), 'data/vietnam/csv/')
