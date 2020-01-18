@@ -12,8 +12,6 @@ cufflinks.set_config_file(world_readable=True, theme='white')
 
 sys.path.append('app/')
 from setup import input_path
-from utilities import df_plot, df_filter
-from calculations import calculate_cap_df, calculate_gen_df, calculate_gen_use_df, calculate_cap_cos_df, calculate_ene_imp_df, calculate_ene_exp_df, calculate_dom_prd_df
 from figures import fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10
 
 def setup_app(url):
