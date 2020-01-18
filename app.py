@@ -12,7 +12,6 @@ cufflinks.set_config_file(world_readable=True, theme='white')
 sys.path.append('app/')
 from generate_figures import generate_figures
 
-##################################################################################################
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
@@ -34,10 +33,9 @@ app.layout = html.Div(children=[
     html.Div(children=[], id='figures-container'),
 ])
 
-def div_from_figure(figure, number):
+def div_from_figure(figure):
     return html.Div(
             children=dcc.Graph(
-                id=f'example-graph-{number}',
                 figure=figure
                 ), 
             style={'width':'50%','display':'inline-block'}
@@ -56,10 +54,7 @@ def setup_url(query_string):
     )
 def generate_figure_divs(url):
     all_figures = generate_figures(url)
-    figure_divs = []
-    for number, figure in enumerate(all_figures):
-        figure_divs = figure_divs + [div_from_figure(figure, number)]
-    return figure_divs
+    return [div_from_figure(figure) for figure in all_figures] 
 
 if __name__ == '__main__':
     app.run_server(debug=False)
