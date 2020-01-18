@@ -17,8 +17,6 @@ from calculations import calculate_cap_df, calculate_gen_df, calculate_gen_use_d
 from figures import fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10
 
 def setup_app(url):
-    all_figures = {}
-
     results_path = input_path(url)
 
     all_params = {}
@@ -38,18 +36,18 @@ def setup_app(url):
 
     years = pd.Series(list(range(df_y_min,df_y_max)))
 
-    all_figures['fig1'] = fig1(all_params,years)
-    all_figures['fig2'] = fig2(all_params,years)
-    all_figures['fig3'] = fig3(all_params,years)
-    all_figures['fig4'] = fig4(all_params,years)
-    all_figures['fig5'] = fig5(all_params,years)
-    all_figures['fig6'] = fig6(all_params,years)
-    all_figures['fig7'] = fig7(all_params,years)
-    all_figures['fig8'] = fig8(all_params,years)
-    all_figures['fig9'] = fig9(all_params,years)
-    all_figures['fig10'] = fig10(all_params,years)
-
-    return all_figures
+    return [
+        fig1(all_params,years),
+        fig2(all_params,years),
+        fig3(all_params,years),
+        fig4(all_params,years),
+        fig5(all_params,years),
+        fig6(all_params,years),
+        fig7(all_params,years),
+        fig8(all_params,years),
+        fig9(all_params,years),
+        fig10(all_params,years),
+    ]
 
 ##################################################################################################
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -96,7 +94,7 @@ def setup_url(query_string):
 def generate_figures(url):
     all_figures = setup_app(url)
     figure_divs = []
-    for number, figure in all_figures.items():
+    for number, figure in enumerate(all_figures):
         figure_divs = figure_divs + [div_from_figure(figure, number)]
     return figure_divs
 
