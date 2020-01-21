@@ -1,64 +1,65 @@
 code,name_english,name_spanish,colour
-BIO,Biomass,Biomasa,darkgreen
-CHC,Charcoal,Charcoal,darkslategrey
+BIO,Biomass,Biomasa,forestgreen
 COA,Coal,Carbón,black
 CRU,Crude oil,Petróleo crudo,red
-DSL,Diesel,Diésel,crimson
+DSL,Diesel,Diésel,orange
 ELC,Electricity,Electricidad,grey
-GEO,Geothermal,Geotérmica,mediumorchid
-GSL,Gasoline,Gasolina,darkred
-HFO,HFO,HFO,orangered
+GEO,Geothermal,Geotérmica,purple
+GSL,Gasoline,Gasolina,orange
+HFO,HFO,HFO,brown
 HYD,Hydro,Hidro,blue
 JFL,Jet fuel,Jet fuel,firebrick
-LNG,LNG,LNG,hotpink
-LPG,LPG,GLP,deeppink
-PCK,Petroleum coke,Coque de petróleo,indianred
-NGS,Natural gas,Gas natural,mediumvioletred
-OHC,Oil products,Otros hidrocarburos,darksalmon
-PET,Petroleum products,Petroleum products,salmon
+LNG,LNG,LNG,purple
+LPG,LPG,GLP,gold
+PCK,Petroleum coke,Coque de petróleo,red
+NGS,Natural gas,Gas natural,purple
+OHC,Oil products,Otros hidrocarburos,grey
+PET,Petroleum products,Petroleum products,red
 SOL,Solar,Solar,gold
-URN,Nuclear,Nuclear,rosybrown
-WAS,MSW,Residuos,greenyellow
+URN,Nuclear,Nuclear,grey
+WAS,MSW,Residuos,green
 WAT,Water,Agua,blue
 LND,Land,Suelo,green
 WND,Wind,Eólica,violet
-CP01,Beans,Beans,black
-CP02,Cocoa,Cacao,chocolate
-CP03,Coffee,Café,brown
-CP04,Groundnuts,Cacahuetes,goldenrod
-CP05,Maize,Maíz,gold
-CP06,Others,Otras,orangered
-CP07,Rice,Arroz,springgreen
-CP08,Sorghum,Sorgo,red
-CP09,Sugarcane,Caña de azúcar,darkgreen
-CP10,Dairy,Dairy,dimgrey
-CP11,Beef,Beef,firebrick
-CP12,Combined,Combined,pink
-CP13,Other livestock products,Other livestock products,orangered
-CP14,Pork,Pork,mediumvioletred
+CP01,Barley,Barley,red
+CP02,Maize,Maize,brown
+CP03,Sorghum,Sorghum,grey
+CP04,Sugarcane,Sugarcane,pink
+CP05,Sweet potato,Sweet potato,red
+CP06,Teff,Teff,magenta
+CP07,Wheat,Wheat,purple
+CP08,Other,Other,grey
 AGR,Agriculture,Tierras agrícolas,brown
 BAR,Barren land,Tierra estéril,grey
 FOR,Forests,Bosques,forestgreen
 GRS,Grassland & woodland,Praderas y zonas boscosas,orange
 BLT,Built-up land,Asentamientos,black
-OTH,Other,Otras,gold
+OTH,Other,Otras tierras agrícolas,gold
 PWR,Power sector,Centrales eléctricas,red
 PUB,Public supply,Abastecimiento público,grey
 EVT,Evapotranspiration,Evapotranspiración,green
 PRC,Precipitation,Precipitación,blue
-GRC,Groundwater recharge,Recarga de agua subterránea,darkblue
-SUR,Surface water run-off,Agua superficial,darkturquoise
-IRR,Irrigation,Irrigación,midnightblue
+GRC,Groundwater recharge,Recarga de agua subterránea,orange
+GWT,Groundwater,,purple
+SUR,Surface water run-off,Agua superficial,red
+IRR,Irrigation,Irrigación,brown
 REN,Other renewables,Otras fuentes renovables,green
 OIL,Oil,Petróleo,firebrick
 GAS,Gas,Gas,purple
-KER,Kerosene,Queroseno,orangered
-RES,Residential,Residencial,blue
-TRA,Transport,Transporte,black
-IND,Industry,Industria,grey
-COM,Commercial & services,Servicios comerciales,green
-ELC_IMP,Electricity imports,Importaciones de electricidad,pink
-PWR_WAT,Power sector (consumptive use),Power sector (consumptive use),lightblue
-PWR_WITH,Power sector (withdrawal),Power sector (withdrawal),darkblue
-ELC_EXP,Electricity exports,Exportaciones de electricidad,hotpink
-ELC_NET,Net electricity imports,Importaciones netas de electricidad,deeppink
+MAZ,Maize,Maíz,gold
+SOR,Sorghum,Sorgo,purple
+SOY,Soybean,Soya,firebrick
+CDA,Sugarcane,Caña de azúcar,green
+PAP,Potatoes,Papa,orange
+TLD,Other crops,Otros cultivos,grey
+LPG,LPG,LPG,pink
+KER,Kerosene,Kerosene,violet
+RES,Residential,Residential,blue
+TRA,Transport,Transport,black
+IND,Industry,Industry,grey
+COM,Commercial & services,Commercial & services,green
+ELC_IMP,Electricity imports,,pink
+PWR_WAT,Power sector (consumptive use),,lightblue
+PWR_WITH,Power sector (withdrawal),,darkblue
+ELC_EXP,Electricity exports,,pink
+ELC_NET,Net electricity imports,,pink
