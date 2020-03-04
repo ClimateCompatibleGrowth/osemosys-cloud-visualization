@@ -1,4 +1,7 @@
-from utilities import df_plot, df_filter
+from utilities import df_plot, df_filter, landuse
+
+regions, mode_crop_combo, crops, water_supply, input_level = landuse()
+
 
 def calculate_cap_df(all_params, years):
     cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith('PWR')].drop('r', axis=1)
@@ -6,14 +9,15 @@ def calculate_cap_df(all_params, years):
 
 def calculate_gen_df(all_params, years):
     #Power generation (Detailed)
-    gen_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') &
-                                                       all_params['ProductionByTechnologyAnnual'].f.str.startswith('ELC001')].drop('r', axis=1)
+    gen_df = all_params['ProductionByTechnologyAnnual'][(all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') |
+                                                     all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')) &
+                                                       all_params['ProductionByTechnologyAnnual'].f.str.startswith('ELC')].drop('r', axis=1)
     gen_df = df_filter(gen_df,3,6,['TRN'],years)
     return gen_df
 
 def calculate_gen_use_df(all_params, years):
     gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith('DEMPWR')].drop('r', axis=1)
-    gen_use_df = df_filter(gen_use_df,6,9,[], years)
+    gen_use_df = df_filter(gen_use_df,6,9,['SUR'], years)
     return gen_use_df
 
 def calculate_dom_prd_df(all_params, years):
@@ -154,9 +158,9 @@ def calculate_ele_cos_df(all_params, years):
             fue_prd_df = fue_prd_df.fillna(0)
 
 
-    for df in [fue_val_df, fue_prd_df]:
-        df['Diesel'] = df['Diesel']
-        df['HFO'] = df['HFO']
+    #for df in [fue_val_df, fue_prd_df]:
+    #    df['Diesel'] = df['Diesel']
+    #    df['HFO'] = df['HFO']
 
     fue_cos_df = pd.DataFrame(columns=list(set(temp_col_list)))
     fue_cos_df['y'] = years
@@ -176,3 +180,42 @@ def calculate_ele_cos_df(all_params, years):
     ele_cos_df['Fuel costs'] = fue_cos_df.iloc[:,1:].sum(axis=1)/ele_cos_df['Electricity generation']
     ele_cos_df.drop('Electricity generation',axis=1,inplace=True)
     return ele_cos_df
+
+def calculate_crops_total_df(all_params, years):
+    crops_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith('LNDAGR')].drop('r', axis=1)
+    return crops_total_df
+
+def calculate_land_total_df(all_params, years):
+    land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith('LNDAGR')].drop('r', axis=1)
+    return land_total_df
+
+def calculate_crops_prod_df(all_params,years):
+    crops_prod_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].f.str.startswith('CRP')].drop('r', axis=1)
+    crops_prod_df['f'] = crops_prod_df['f'].str[3:7]
+    crops_prod_df['value'] = crops_prod_df['value'].astype('float64')
+
+    crops_prod_df = crops_prod_df.pivot_table(index='y', 
+                                            columns='f',
+                                            values='value',
+                                            aggfunc='sum').reset_index().fillna(0)
+    crops_prod_df = crops_prod_df.reindex(sorted(crops_prod_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
+    crops_prod_df['y'] = years
+    return crops_prod_df
+
+def calculate_yield_df(all_params,years):
+    crops_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith('LNDAGR')].drop('r', axis=1)
+    crops_total_df['m'] = crops_total_df['m'].astype(int)
+    crops_total_df['crop_combo'] = crops_total_df['m'].map(mode_crop_combo)
+    crops_total_df['land_use'] = crops_total_df['crop_combo'].str[0:4]
+    crops_total_df.drop(['m','crop_combo'], axis=1, inplace=True)
+
+
+    crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP')]
+    crops_total_df = crops_total_df.pivot_table(index='y', 
+                                                columns='land_use',
+                                                values='value', 
+                                                aggfunc='sum').reset_index().fillna(0)
+    crops_total_df = crops_total_df.reindex(sorted(crops_total_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col).astype('float64')
+
+    crops_yield_df = calculate_crops_prod_df(all_params,years)/crops_total_df
+    return crops_yield_df
