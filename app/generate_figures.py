@@ -41,10 +41,10 @@ def generate_figures(url):
                 fig13(all_params,years),
                 fig14(all_params,years),
                 ]
-    
-    for region in regions:
+
+    for region in regions.keys():
         figure_list.append(fig11b(all_params,years,region))
         figure_list.append(fig12b(all_params,years,region))
-        figure_list.append(fig11c(all_params,years,region))
-    
+        # figure_list.append(fig11c(all_params,years,region))
+
     return figure_list

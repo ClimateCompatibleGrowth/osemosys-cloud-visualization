@@ -170,20 +170,21 @@ def fig12b(all_params,years,each_region):
     land_cluster_df = land_cluster_df.reindex(sorted(land_cluster_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     return df_plot(land_cluster_df,'Land area (1000 sq.km.)','Area by land cover type (' + regions[each_region] + ' region)')
 
-def fig11c(all_params,years,each_ws):
-    crops_ws_df = calculate_crops_total_df(all_params,years)
-    crops_ws_df['m'] = crops_ws_df['m'].astype(int)
-    crops_ws_df['crop_combo'] = crops_ws_df['m'].map(mode_crop_combo)
-    crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str.startswith('CP')) & (crops_ws_df.crop_combo.str[5:6] == each_ws)]
-    crops_ws_df['land_use'] = crops_ws_df['crop_combo'].str[0:4]
-    crops_ws_df.drop(['m','crop_combo'], axis=1, inplace=True)
+# def fig11c(all_params,years,each_ws):
+#     crops_ws_df = calculate_crops_total_df(all_params,years)
+#     crops_ws_df['m'] = crops_ws_df['m'].astype(int)
+#     crops_ws_df['crop_combo'] = crops_ws_df['m'].map(mode_crop_combo)
+#     crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str.startswith('CP')) & (crops_ws_df.crop_combo.str[5:6] == each_ws)]
+#     crops_ws_df['land_use'] = crops_ws_df['crop_combo'].str[0:4]
+#     crops_ws_df.drop(['m','crop_combo'], axis=1, inplace=True)
 
-    crops_ws_df = crops_ws_df.pivot_table(index='y',
-                                          columns='land_use',
-                                          values='value',
-                                          aggfunc='sum').reset_index().fillna(0)
-    crops_ws_df = crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
-    return df_plot(crops_ws_df,'Land area (1000 sq.km.)','Area by crop (' + water_supply[each_ws] + ')')
+#     crops_ws_df = crops_ws_df.pivot_table(index='y',
+#                                           columns='land_use',
+#                                           values='value',
+#                                           aggfunc='sum').reset_index().fillna(0)
+#     crops_ws_df = crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
+#     __import__('pdb').set_trace()
+#     return df_plot(crops_ws_df,'Land area (1000 sq.km.)','Area by crop (' + water_supply[each_ws] + ')')
 
 def fig13(all_params,years):
     crops_prod_df = calculate_crops_prod_df(all_params,years)
