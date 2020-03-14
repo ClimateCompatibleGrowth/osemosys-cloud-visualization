@@ -54,7 +54,7 @@ def setup_url(query_string):
     )
 def generate_figure_divs(url):
     all_figures = generate_figures(url)
-    return [div_from_figure(figure) for figure in all_figures] 
+    return [div_from_figure(figure) for figure in all_figures]
 
 if __name__ == '__main__':
     app.run_server(debug=False)

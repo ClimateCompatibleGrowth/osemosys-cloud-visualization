@@ -1,7 +1,10 @@
 from input import input_path
-from figures import fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10
+from utilities import landuse
+from figures import *
 import os
 import pandas as pd
+pd.set_option('mode.chained_assignment', None)
+
 
 def generate_figures(url):
     results_path = input_path(url)
@@ -23,15 +26,25 @@ def generate_figures(url):
 
     years = pd.Series(list(range(df_y_min,df_y_max)))
 
-    return [
-        fig1(all_params,years),
-        fig2(all_params,years),
-        fig3(all_params,years),
-        fig4(all_params,years),
-        fig5(all_params,years),
-        fig6(all_params,years),
-        fig7(all_params,years),
-        fig8(all_params,years),
-        fig9(all_params,years),
-        fig10(all_params,years),
-    ]
+    figure_list = [fig1(all_params,years),
+                fig2(all_params,years),
+                fig3(all_params,years),
+                fig4(all_params,years),
+                fig5(all_params,years),
+                fig6(all_params,years),
+                fig7(all_params,years),
+                fig8(all_params,years),
+                fig9(all_params,years),
+                fig10(all_params,years),
+                fig11a(all_params,years),
+                fig12a(all_params,years),
+                fig13(all_params,years),
+                fig14(all_params,years),
+                ]
+
+    for region in regions.keys():
+        figure_list.append(fig11b(all_params,years,region))
+        figure_list.append(fig12b(all_params,years,region))
+        # figure_list.append(fig11c(all_params,years,region))
+
+    return figure_list
