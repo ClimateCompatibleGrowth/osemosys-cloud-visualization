@@ -1,4 +1,4 @@
-from utilities import df_plot, df_filter, landuse
+from utilities import df_plot, df_filter, landuse, det_col
 
 regions, mode_crop_combo, crops, water_supply, input_level = landuse()
 
@@ -194,7 +194,7 @@ def calculate_crops_prod_df(all_params,years):
     crops_prod_df['f'] = crops_prod_df['f'].str[3:7]
     crops_prod_df['value'] = crops_prod_df['value'].astype('float64')
 
-    crops_prod_df = crops_prod_df.pivot_table(index='y', 
+    crops_prod_df = crops_prod_df.pivot_table(index='y',
                                             columns='f',
                                             values='value',
                                             aggfunc='sum').reset_index().fillna(0)
@@ -211,9 +211,9 @@ def calculate_yield_df(all_params,years):
 
 
     crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP')]
-    crops_total_df = crops_total_df.pivot_table(index='y', 
+    crops_total_df = crops_total_df.pivot_table(index='y',
                                                 columns='land_use',
-                                                values='value', 
+                                                values='value',
                                                 aggfunc='sum').reset_index().fillna(0)
     crops_total_df = crops_total_df.reindex(sorted(crops_total_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col).astype('float64')
 

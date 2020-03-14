@@ -102,9 +102,9 @@ def fig11a(all_params, years):
 
 
     crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP')]
-    crops_total_df = crops_total_df.pivot_table(index='y', 
+    crops_total_df = crops_total_df.pivot_table(index='y',
                                                 columns='land_use',
-                                                values='value', 
+                                                values='value',
                                                 aggfunc='sum').reset_index().fillna(0)
     crops_total_df = crops_total_df.reindex(sorted(crops_total_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col).astype('float64')
     return df_plot(crops_total_df,'Land area (1000 sq.km.)','Area by crop')
@@ -116,9 +116,9 @@ def fig12a(all_params, years):
     land_total_df['land_use'] = land_total_df['crop_combo'].str[0:4]
     land_total_df.drop(['m','crop_combo'], axis=1, inplace=True)
 
-    land_total_df = land_total_df.pivot_table(index='y', 
+    land_total_df = land_total_df.pivot_table(index='y',
                                             columns='land_use',
-                                            values='value', 
+                                            values='value',
                                             aggfunc='sum').reset_index().fillna(0)
     land_total_df['AGR'] = 0
 
@@ -132,16 +132,16 @@ def fig12a(all_params, years):
 def fig11b(all_params,years,each_region):
     crops_region_df = calculate_crops_total_df(all_params,years)
     crops_region_df = crops_region_df[crops_region_df.t.str[6:9] == each_region]
-    
+
     crops_region_df['m'] = crops_region_df['m'].astype(int)
     crops_region_df['crop_combo'] = crops_region_df['m'].map(mode_crop_combo)
     crops_region_df['land_use'] = crops_region_df['crop_combo'].str[0:4]
     crops_region_df.drop(['m','crop_combo'], axis=1, inplace=True)
-    
+
     crops_region_df = crops_region_df[crops_region_df['land_use'].str.startswith('CP')]
-    crops_region_df = crops_region_df.pivot_table(index='y', 
+    crops_region_df = crops_region_df.pivot_table(index='y',
                                             columns='land_use',
-                                            values='value', 
+                                            values='value',
                                             aggfunc='sum').reset_index().fillna(0)
     crops_region_df = crops_region_df.reindex(sorted(crops_region_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col).astype('float64')
     return df_plot(crops_region_df,'Land area (1000 sq.km.)','Area by crop (' + regions[each_region] + ' region)')
@@ -156,17 +156,17 @@ def fig12b(all_params,years,each_region):
     land_cluster_df.drop(['m','crop_combo'], axis=1, inplace=True)
 
     land_cluster_df['value'] = land_cluster_df['value'].astype('float64')
-    land_cluster_df = land_cluster_df.pivot_table(index='y', 
+    land_cluster_df = land_cluster_df.pivot_table(index='y',
                                           columns='land_use',
-                                          values='value', 
+                                          values='value',
                                           aggfunc='sum').reset_index().fillna(0)
     land_cluster_df['AGR'] = 0
-    
+
     for crop in crops:
         if crop in land_cluster_df.columns:
             land_cluster_df['AGR'] += land_cluster_df[crop]
             land_cluster_df.drop(crop, axis=1, inplace=True)
-    
+
     land_cluster_df = land_cluster_df.reindex(sorted(land_cluster_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     return df_plot(land_cluster_df,'Land area (1000 sq.km.)','Area by land cover type (' + regions[each_region] + ' region)')
 
@@ -177,10 +177,10 @@ def fig11c(all_params,years,each_ws):
     crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str.startswith('CP')) & (crops_ws_df.crop_combo.str[5:6] == each_ws)]
     crops_ws_df['land_use'] = crops_ws_df['crop_combo'].str[0:4]
     crops_ws_df.drop(['m','crop_combo'], axis=1, inplace=True)
-    
-    crops_ws_df = crops_ws_df.pivot_table(index='y', 
+
+    crops_ws_df = crops_ws_df.pivot_table(index='y',
                                           columns='land_use',
-                                          values='value', 
+                                          values='value',
                                           aggfunc='sum').reset_index().fillna(0)
     crops_ws_df = crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     return df_plot(crops_ws_df,'Land area (1000 sq.km.)','Area by crop (' + water_supply[each_ws] + ')')
@@ -189,13 +189,16 @@ def fig13(all_params,years):
     crops_prod_df = calculate_crops_prod_df(all_params,years)
     return df_plot(crops_prod_df,'Production (Million tonnes)','Crop production')
 
+import os
 def fig14(all_params,years):
     crops_yield_df = calculate_yield_df(all_params,years)
     crops_yield_df['y'] = years
     crops_yield_df = crops_yield_df.mul(10)
-    return crops_yield_df.iplot(asFigure=True, 
+    name_color_codes = pd.read_csv(os.path.join(os.getcwd(),'name_color_codes.csv'), encoding='latin-1')
+    color_dict = dict([(n,c) for n,c in zip(name_color_codes.name_english, name_color_codes.colour)])
+    return crops_yield_df.iplot(asFigure=True,
                                 x='y',
-                                mode='lines+markers', 
+                                mode='lines+markers',
                                 xTitle='Year',
                                 yTitle='Yield (t/ha)',
                                 size=10,
