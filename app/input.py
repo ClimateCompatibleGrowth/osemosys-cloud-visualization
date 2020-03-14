@@ -10,6 +10,8 @@ def input_path(url):
         return ethiopia_files()
     elif url == 'vietnam':
         return vietnam_files()
+    elif url == 'indonesia':
+        return indonesia_files()
     else:
         return download_files(url)
 
@@ -21,6 +23,9 @@ def bolivia_files():
 
 def vietnam_files():
     return os.path.join(os.getcwd(), 'data', 'vietnam', 'csv')
+
+def indonesia_files():
+    return os.path.join(os.getcwd(), 'data', 'indonesia', 'csv')
 
 def download_files(url):
     random_number = random.randint(1,99999)
