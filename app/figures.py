@@ -183,7 +183,6 @@ def fig12b(all_params,years,each_region):
 #                                           values='value',
 #                                           aggfunc='sum').reset_index().fillna(0)
 #     crops_ws_df = crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
-#     __import__('pdb').set_trace()
 #     return df_plot(crops_ws_df,'Land area (1000 sq.km.)','Area by crop (' + water_supply[each_ws] + ')')
 
 def fig13(all_params,years):
