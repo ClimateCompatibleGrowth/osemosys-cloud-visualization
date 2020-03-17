@@ -1,4 +1,4 @@
-from utilities import df_plot, df_filter, landuse, det_col
+from utilities import df_plot, df_filter, landuse, det_col, df_years
 
 regions, mode_crop_combo, crops, water_supply, input_level = landuse()
 

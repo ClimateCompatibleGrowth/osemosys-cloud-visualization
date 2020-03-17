@@ -65,14 +65,14 @@ def df_plot(df,y_title,p_title):
             title=p_title,
             showlegend=True)
 
-def df_years(df):
+def df_years(df,years):
     new_df = pd.DataFrame()
     new_df['y'] = years
     new_df['y'] = new_df['y'].astype(int)
     df['y'] = df['y'].astype(int)
     new_df = pd.merge(new_df,df, how='outer', on='y').fillna(0)
     return new_df      
-
+ 
 def df_filter(df,lb,ub,t_exclude,years):
     df['t'] = df['t'].str[lb:ub]
     df['value'] = df['value'].astype('float64')
@@ -81,5 +81,5 @@ def df_filter(df,lb,ub,t_exclude,years):
             values='value',
             aggfunc='sum').reset_index().fillna(0)
     df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
-    new_df = df_years(df)
+    new_df = df_years(df,years)
     return new_df
