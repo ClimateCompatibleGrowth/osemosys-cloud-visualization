@@ -6,11 +6,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 import sys
 import urllib
-from generate_figures import generate_figures
+sys.path.append('app/')
+from generate_figures import generate_figures  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
-sys.path.append('app/')
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
