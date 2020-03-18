@@ -1,11 +1,15 @@
 name: Linter
 
 on: [push]
-
+name: Python Style Check
 jobs:
-  build:
-    name: Lint
+  pycodestyle:
+    name: pycodestyle
     runs-on: ubuntu-latest
     steps:
-      - name: Python Style Checker
-        uses: andymckay/pycodestyle-action@0.1.3
+    - uses: actions/checkout@master
+    - name: pycodestyle
+      uses: ankitvgupta/pycodestyle-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PRECOMMAND_MESSAGE: You have style errors. See them below.
