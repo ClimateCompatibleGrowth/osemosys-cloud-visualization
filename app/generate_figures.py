@@ -1,13 +1,14 @@
-from utilities import landuse
 from figures import *
 import os
 import pandas as pd
 from config import Config
+from land_use import LandUse
 pd.set_option('mode.chained_assignment', None)
 
 
 def generate_figures(url):
     config = Config(url)
+    land_use = LandUse(config)
     results_path = config.csv_folder_path()
 
     all_params = {}
@@ -41,7 +42,7 @@ def generate_figures(url):
             fig11a(all_params, years),
             fig12a(all_params, years),
             fig13(all_params, years),
-            fig14(all_params, years),
+            fig14(all_params, years, land_use),
         ]
 
     for region in regions.keys():

@@ -226,8 +226,8 @@ def fig13(all_params, years):
     return df_plot(crops_prod_df, 'Production (Million tonnes)', 'Crop production')
 
 
-def fig14(all_params, years):
-    crops_yield_df = calculate_yield_df(all_params, years)
+def fig14(all_params, years, land_use):
+    crops_yield_df = calculate_yield_df(all_params, years, land_use)
     crops_yield_df['y'] = years
     crops_yield_df = crops_yield_df.mul(10)
     name_color_codes = pd.read_csv(
