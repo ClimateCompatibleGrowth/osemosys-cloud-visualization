@@ -16,28 +16,13 @@ class Config:
         return os.path.join(os.getcwd(), 'data', self.url, 'data.txt')
 
     def __input_path(self):
-        if self.url == 'bolivia':
-            return self.__bolivia_files()
-        elif self.url == 'ethiopia':
-            return self.__ethiopia_files()
-        elif self.url == 'vietnam':
-            return self.__vietnam_files()
-        elif self.url == 'indonesia':
-            return self.__indonesia_files()
+        if self.url in ['bolivia', 'ethiopia', 'vietnam', 'indonesia']:
+            return self.__local_csv_folder_for(self.url)
         else:
             return __download_files(self.url)
 
-    def __ethiopia_files(self):
-        return os.path.join(os.getcwd(), 'data', 'ethiopia', 'csv')
-
-    def __bolivia_files(self):
-        return os.path.join(os.getcwd(), 'data', 'bolivia', 'csv')
-
-    def __vietnam_files(self):
-        return os.path.join(os.getcwd(), 'data', 'vietnam', 'csv')
-
-    def __indonesia_files(self):
-        return os.path.join(os.getcwd(), 'data', 'indonesia', 'csv')
+    def __local_csv_folder_for(self, model_name):
+        return os.path.join(os.getcwd(), 'data', model_name, 'csv')
 
     def __download_files(self, url):
         random_number = random.randint(1, 99999)
