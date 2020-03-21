@@ -1,13 +1,14 @@
-from input import input_path
 from utilities import landuse
 from figures import *
 import os
 import pandas as pd
+from config import Config
 pd.set_option('mode.chained_assignment', None)
 
 
 def generate_figures(url):
-    results_path = input_path(url)
+    config = Config(url)
+    results_path = config.csv_folder_path()
 
     all_params = {}
     df_y_min = 9999
