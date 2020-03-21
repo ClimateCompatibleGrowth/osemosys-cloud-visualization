@@ -1,10 +1,10 @@
 import os
 from calculations import *
-from utilities import df_plot, det_col, landuse
+from utilities import df_plot, det_col
 import pandas as pd
+from land_use import LandUse
 pd.set_option('mode.chained_assignment', None)
 
-regions, mode_crop_combo, crops, water_supply, input_level = landuse()
 
 # List of columns for aggregated energy tables and figures
 agg_col = {'Coal': ['Coal'],
@@ -107,7 +107,8 @@ def fig10(all_params, years):
                             x='y', title='Cost of electricity generation ($/MWh)')
 
 
-def fig11a(all_params, years):
+def fig11a(all_params, years, land_use):
+    mode_crop_combo = land_use.mode_crop_combo()
     crops_total_df = calculate_crops_total_df(all_params, years)
     crops_total_df['m'] = crops_total_df['m'].astype(int)
     crops_total_df['crop_combo'] = crops_total_df['m'].map(mode_crop_combo)
@@ -127,7 +128,9 @@ def fig11a(all_params, years):
     return df_plot(crops_total_df, 'Land area (1000 sq.km.)', 'Area by crop')
 
 
-def fig12a(all_params, years):
+def fig12a(all_params, years, land_use):
+    mode_crop_combo = land_use.mode_crop_combo()
+    crops = land_use.crops()
     land_total_df = calculate_land_total_df(all_params, years)
     land_total_df['m'] = land_total_df['m'].astype(int)
     land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
@@ -152,7 +155,9 @@ def fig12a(all_params, years):
     return df_plot(land_total_df, 'Land area (1000 sq.km.)', 'Area by land cover type')
 
 
-def fig11b(all_params, years, each_region):
+def fig11b(all_params, years, land_use, each_region):
+    regions = land_use.regions()
+    mode_crop_combo = land_use.mode_crop_combo()
     crops_region_df = calculate_crops_total_df(all_params, years)
     crops_region_df = crops_region_df[crops_region_df.t.str[6:9] == each_region]
 
@@ -175,7 +180,10 @@ def fig11b(all_params, years, each_region):
                    'Area by crop (' + regions[each_region] + ' region)')
 
 
-def fig12b(all_params, years, each_region):
+def fig12b(all_params, years, land_use, each_region):
+    regions = land_use.regions()
+    mode_crop_combo = land_use.mode_crop_combo()
+    crops = land_use.crops()
     land_cluster_df = calculate_land_total_df(all_params, years)
     land_cluster_df = land_cluster_df[land_cluster_df.t.str[6:9] == each_region]
 

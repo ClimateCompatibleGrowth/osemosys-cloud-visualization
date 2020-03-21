@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 
 
 class LandUse:
@@ -17,6 +18,8 @@ class LandUse:
 
         for each in regions_list:
             regions[each] = each
+
+        return regions
 
     def mode_crop_combo(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
@@ -37,9 +40,11 @@ class LandUse:
         # Construct dictionary of crops {crop_code:crop_name}.
         # Crop codes and names are extracted from the 'name_color_codes.csv' file
         crops = {}
-        for each in __det_col().keys():
+        for each in self.__det_col().keys():
             if each.startswith('CP'):
-                crops[each] = __det_col()[each]
+                crops[each] = self.__det_col()[each]
+
+        return crops
 
     def water_supply(self):
         return {'I': 'Irrigated', 'R': 'Rain-fed'}
