@@ -53,7 +53,7 @@ class LandUse:
         return {'L': 'Low', 'I': 'Intermediate', 'H': 'High'}
 
     def __parse_file(self):
-        with open(os.path.join(os.getcwd(), 'data', 'indonesia', 'data.txt'), 'r') as f:
+        with open(self.config.data_file_path(), 'r') as f:
             for line in f:
                 if line.startswith(('set TECHNOLOGY')):
                     self.technologies = line.split(' ')[3:]

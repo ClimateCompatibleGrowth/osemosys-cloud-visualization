@@ -12,7 +12,8 @@ class Config:
         return self.__input_path()
 
     def data_file_path(self):
-        return os.path.join(os.getcwd(), 'data', offline_model_name, 'data.txt')
+        # self.url only works locally for now
+        return os.path.join(os.getcwd(), 'data', self.url, 'data.txt')
 
     def __input_path(self):
         if self.url == 'bolivia':
