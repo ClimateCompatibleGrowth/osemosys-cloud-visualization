@@ -1,13 +1,15 @@
-from input import input_path
-from utilities import landuse
 from figures import *
 import os
 import pandas as pd
+from config import Config
+from land_use import LandUse
 pd.set_option('mode.chained_assignment', None)
 
 
 def generate_figures(url):
-    results_path = input_path(url)
+    config = Config(url)
+    land_use = LandUse(config)
+    results_path = config.csv_folder_path()
 
     all_params = {}
     df_y_min = 9999
@@ -37,15 +39,15 @@ def generate_figures(url):
             fig8(all_params, years),
             fig9(all_params, years),
             fig10(all_params, years),
-            fig11a(all_params, years),
-            fig12a(all_params, years),
+            fig11a(all_params, years, land_use),
+            fig12a(all_params, years, land_use),
             fig13(all_params, years),
-            fig14(all_params, years),
+            fig14(all_params, years, land_use),
         ]
 
-    for region in regions.keys():
-        figure_list.append(fig11b(all_params, years, region))
-        figure_list.append(fig12b(all_params, years, region))
+    for region in land_use.regions().keys():
+        figure_list.append(fig11b(all_params, years, land_use, region))
+        figure_list.append(fig12b(all_params, years, land_use, region))
         # figure_list.append(fig11c(all_params,years,region))
 
     return figure_list

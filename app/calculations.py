@@ -1,6 +1,4 @@
-from utilities import df_plot, df_filter, landuse, det_col, df_years
-
-regions, mode_crop_combo, crops, water_supply, input_level = landuse()
+from utilities import df_plot, df_filter, det_col
 
 
 def calculate_cap_df(all_params, years):
@@ -231,7 +229,8 @@ def calculate_crops_prod_df(all_params, years):
     return crops_prod_df
 
 
-def calculate_yield_df(all_params, years):
+def calculate_yield_df(all_params, years, land_use):
+    mode_crop_combo = land_use.mode_crop_combo()
     crops_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(
         'LNDAGR')].drop('r', axis=1)
     crops_total_df['m'] = crops_total_df['m'].astype(int)
