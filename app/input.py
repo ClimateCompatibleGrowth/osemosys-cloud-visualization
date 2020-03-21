@@ -3,6 +3,7 @@ import wget
 import os
 from zipfile import ZipFile
 
+
 def input_path(url):
     if url == 'bolivia':
         return bolivia_files()
@@ -15,20 +16,25 @@ def input_path(url):
     else:
         return download_files(url)
 
+
 def ethiopia_files():
     return os.path.join(os.getcwd(), 'data', 'ethiopia', 'csv')
+
 
 def bolivia_files():
     return os.path.join(os.getcwd(), 'data', 'bolivia', 'csv')
 
+
 def vietnam_files():
     return os.path.join(os.getcwd(), 'data', 'vietnam', 'csv')
+
 
 def indonesia_files():
     return os.path.join(os.getcwd(), 'data', 'indonesia', 'csv')
 
+
 def download_files(url):
-    random_number = random.randint(1,99999)
+    random_number = random.randint(1, 99999)
     zip_file_name = f'csv_{random_number}.zip'
     folder_name = f'csv_{random_number}'
 

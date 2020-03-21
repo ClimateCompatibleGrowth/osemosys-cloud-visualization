@@ -6,11 +6,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 import sys
 import urllib
+sys.path.append('app/')
+from generate_figures import generate_figures  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
-sys.path.append('app/')
-from generate_figures import generate_figures
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -22,24 +22,26 @@ app.layout = html.Div(children=[
     html.H1(
         'CLEWS Dashboard',
         style={
-            'textAlign':'center'
+            'textAlign': 'center'
         }
     ),
 
     html.Div(children='An interactive tool to visualise CLEWS model results', style={
-        'textAlign':'center'
+        'textAlign': 'center'
     }
     ),
     html.Div(children=[], id='figures-container'),
 ])
 
+
 def div_from_figure(figure):
     return html.Div(
             children=dcc.Graph(
                 figure=figure
-                ), 
-            style={'width':'50%','display':'inline-block'}
+                ),
+            style={'width': '50%', 'display': 'inline-block'}
             )
+
 
 @app.callback(
     Output(component_id='figures-component', component_property='data-url'),
@@ -48,6 +50,7 @@ def div_from_figure(figure):
 def setup_url(query_string):
     return urllib.parse.unquote(query_string).split('=')[-1]
 
+
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
     [Input(component_id='figures-component', component_property='data-url')]
@@ -55,6 +58,7 @@ def setup_url(query_string):
 def generate_figure_divs(url):
     all_figures = generate_figures(url)
     return [div_from_figure(figure) for figure in all_figures]
+
 
 if __name__ == '__main__':
     app.run_server(debug=False)
