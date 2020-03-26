@@ -1,6 +1,6 @@
 import os
 from calculations import *
-from utilities import df_plot, det_col
+from utilities import df_plot, det_col, df_years
 import pandas as pd
 from land_use import LandUse
 pd.set_option('mode.chained_assignment', None)
@@ -176,6 +176,7 @@ def fig11b(all_params, years, land_use, each_region):
             crops_region_df.columns),
         axis=1).set_index('y').reset_index().rename(
             columns=det_col).astype('float64')
+    crops_region_df = df_years(crops_region_df, years)
     return df_plot(crops_region_df, 'Land area (1000 sq.km.)',
                    'Area by crop (' + regions[each_region] + ' region)')
 

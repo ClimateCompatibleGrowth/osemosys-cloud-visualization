@@ -32,6 +32,11 @@ def df_filter(df, lb, ub, t_exclude, years):
                                                   values='value',
                                                   aggfunc='sum').reset_index().fillna(0)
     df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
+    df = df_years(df, years)
+    return df
+
+
+def df_years(df, years):
     new_df = pd.DataFrame()
     new_df['y'] = years
     new_df['y'] = new_df['y'].astype(int)
