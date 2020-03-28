@@ -1,4 +1,4 @@
-from utilities import df_plot, df_filter, det_col
+from app.utilities import df_plot, df_filter, det_col
 
 
 def calculate_cap_df(all_params, years):
