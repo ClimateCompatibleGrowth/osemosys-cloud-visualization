@@ -3,6 +3,7 @@ import os
 import pandas as pd
 from app.config import Config
 from app.land_use import LandUse
+from app.result_parser import ResultParser
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -10,23 +11,10 @@ def generate_figures(url):
     config = Config(url)
     land_use = LandUse(config)
     results_path = config.csv_folder_path()
+    result_parser = ResultParser(results_path)
 
-    all_params = {}
-    df_y_min = 9999
-    df_y_max = 0
-
-    for each_file in os.listdir(results_path):
-        df_param = pd.read_csv(os.path.join(results_path, each_file))
-        param_name = df_param.columns[-1]
-        df_param.rename(columns={param_name: 'value'}, inplace=True)
-        all_params[param_name] = pd.DataFrame(df_param)
-        if 'y' in df_param.columns:
-            if df_y_min > df_param.y.min():
-                df_y_min = df_param.y.min()
-            if df_y_max < df_param.y.max():
-                df_y_max = df_param.y.max()
-
-    years = pd.Series(list(range(df_y_min, df_y_max)))
+    all_params = result_parser.all_params
+    years = result_parser.years
 
     figure_list = [
             fig1(all_params, years),
