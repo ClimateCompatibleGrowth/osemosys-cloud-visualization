@@ -3,50 +3,8 @@ from app.calculations import *
 from app.utilities import df_plot, det_col, df_years
 import pandas as pd
 from app.land_use import LandUse
+from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
-
-
-# List of columns for aggregated energy tables and figures
-agg_col = {'Coal': ['Coal'],
-           'Oil': ['Diesel', 'HFO', 'JFL', 'Crude oil', 'Petroleum coke'],
-           'Gas': ['Natural gas', 'LNG', 'LPG'],
-           'Hydro': ['Hydro'],
-           'Nuclear': ['Nuclear'],
-           'Other renewables': ['Biomass', 'Geothermal', 'Solar', 'MSW', 'Wind'],
-           'Net electricity imports': ['Net electricity imports']
-           }
-
-# ## Energy figures
-# This section contains figures related to specifically to the energy sector.
-# The list of figures in this section are as follows:
-# 1. Power generation capacity (detailed)
-# 2. Power generation capacity (aggregated)
-# 3. Power generation (detailed)
-# 4. Power generation (aggregated)
-
-
-def fig1(all_params, years):
-    # ### Power generation capacity
-    # Power generation capacity (detailed)
-    cap_df = calculate_cap_df(all_params, years)
-    return df_plot(cap_df, 'Gigawatts (GW)', 'Power Generation Capacity (Detail)')
-
-
-def fig2(all_params, years):
-    cap_df = calculate_cap_df(all_params, years)
-    # Power generation capacity (Aggregated)
-    cap_agg_df = pd.DataFrame(columns=agg_col)
-    cap_agg_df.insert(0, 'y', cap_df['y'])
-    cap_agg_df = cap_agg_df.fillna(0.00)
-
-    for each in agg_col:
-        for tech_exists in agg_col[each]:
-            if tech_exists in cap_df.columns:
-                cap_agg_df[each] = cap_agg_df[each] + cap_df[tech_exists]
-                cap_agg_df[each] = cap_agg_df[each].round(2)
-
-    cap_agg_df = cap_agg_df.loc[:, (cap_agg_df != 0).any(axis=0)]
-    return df_plot(cap_agg_df, 'Gigawatts (GW)', 'Power Generation Capacity (Aggregate)')
 
 
 def fig3(all_params, years):

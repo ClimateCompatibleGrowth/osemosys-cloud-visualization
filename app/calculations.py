@@ -1,12 +1,6 @@
 from app.utilities import df_plot, df_filter, det_col
 
 
-def calculate_cap_df(all_params, years):
-    cap_df = all_params['TotalCapacityAnnual'][all_params['TotalCapacityAnnual'].t.str.startswith(
-        'PWR')].drop('r', axis=1)
-    return df_filter(cap_df, 3, 6, ['CNT', 'TRN', 'CST', 'CEN', 'SOU', 'NOR'], years)
-
-
 def calculate_gen_df(all_params, years):
     # Power generation (Detailed)
     gen_df = all_params['ProductionByTechnologyAnnual'][(all_params['ProductionByTechnologyAnnual'].t.str.startswith('PWR') |
