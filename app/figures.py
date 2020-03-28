@@ -1,8 +1,8 @@
 import os
-from calculations import *
-from utilities import df_plot, det_col, df_years
+from app.calculations import *
+from app.utilities import df_plot, det_col, df_years
 import pandas as pd
-from land_use import LandUse
+from app.land_use import LandUse
 pd.set_option('mode.chained_assignment', None)
 
 

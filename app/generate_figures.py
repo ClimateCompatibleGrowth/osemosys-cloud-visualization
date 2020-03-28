@@ -1,8 +1,8 @@
-from figures import *
+from app.figures import *
 import os
 import pandas as pd
-from config import Config
-from land_use import LandUse
+from app.config import Config
+from app.land_use import LandUse
 pd.set_option('mode.chained_assignment', None)
 
 
