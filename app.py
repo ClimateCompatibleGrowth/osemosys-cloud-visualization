@@ -6,7 +6,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 import sys
 import urllib
-# sys.path.append('app/')
 from app.generate_figures import generate_figures  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
