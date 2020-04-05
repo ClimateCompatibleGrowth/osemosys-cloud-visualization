@@ -7,27 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig11a(all_params, years, land_use):
-    mode_crop_combo = land_use.mode_crop_combo()
-    crops_total_df = calculate_crops_total_df(all_params, years)
-    crops_total_df['m'] = crops_total_df['m'].astype(int)
-    crops_total_df['crop_combo'] = crops_total_df['m'].map(mode_crop_combo)
-    crops_total_df['land_use'] = crops_total_df['crop_combo'].str[0:4]
-    crops_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
-
-    crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP')]
-    crops_total_df = crops_total_df.pivot_table(index='y',
-                                                columns='land_use',
-                                                values='value',
-                                                aggfunc='sum').reset_index().fillna(0)
-    crops_total_df = crops_total_df.reindex(
-        sorted(
-            crops_total_df.columns),
-        axis=1).set_index('y').reset_index().rename(
-            columns=det_col).astype('float64')
-    return df_plot(crops_total_df, 'Land area (1000 sq.km.)', 'Area by crop')
-
-
 def fig12a(all_params, years, land_use):
     mode_crop_combo = land_use.mode_crop_combo()
     crops = land_use.crops()
