@@ -7,33 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig12a(all_params, years, land_use):
-    mode_crop_combo = land_use.mode_crop_combo()
-    crops = land_use.crops()
-    land_total_df = calculate_land_total_df(all_params, years)
-    land_total_df['m'] = land_total_df['m'].astype(int)
-    land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
-    land_total_df['land_use'] = land_total_df['crop_combo'].str[0:4]
-    land_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
-
-    land_total_df = land_total_df.pivot_table(index='y',
-                                              columns='land_use',
-                                              values='value',
-                                              aggfunc='sum').reset_index().fillna(0)
-    land_total_df['AGR'] = 0
-
-    for crop in crops:
-        if crop in land_total_df.columns:
-            land_total_df['AGR'] += land_total_df[crop]
-            land_total_df.drop(crop, axis=1, inplace=True)
-    land_total_df = land_total_df.reindex(
-        sorted(
-            land_total_df.columns),
-        axis=1).set_index('y').reset_index().rename(
-            columns=det_col).astype('float64')
-    return df_plot(land_total_df, 'Land area (1000 sq.km.)', 'Area by land cover type')
-
-
 def fig11b(all_params, years, land_use, each_region):
     regions = land_use.regions()
     mode_crop_combo = land_use.mode_crop_combo()
@@ -107,11 +80,6 @@ def fig12b(all_params, years, land_use, each_region):
 #     crops_ws_df = crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
 # return df_plot(crops_ws_df,'Land area (1000 sq.km.)','Area by crop (' +
 # water_supply[each_ws] + ')')
-
-
-def fig13(all_params, years):
-    crops_prod_df = calculate_crops_prod_df(all_params, years)
-    return df_plot(crops_prod_df, 'Production (Million tonnes)', 'Crop production')
 
 
 def fig14(all_params, years, land_use):
