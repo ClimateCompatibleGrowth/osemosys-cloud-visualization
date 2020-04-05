@@ -6,6 +6,7 @@ from app.land_use import LandUse
 from app.result_parser import ResultParser
 from app.figures.power_generation_capacity import PowerGenerationCapacity
 from app.figures.power_generation_capacity_aggregate import PowerGenerationCapacityAggregate
+from app.figures.power_generation_detail import PowerGenerationDetail
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -21,7 +22,7 @@ def generate_figures(url):
     figure_list = [
             PowerGenerationCapacity(all_params, years).figure(),
             PowerGenerationCapacityAggregate(all_params, years).figure(),
-            fig3(all_params, years),
+            PowerGenerationDetail(all_params, years).figure(),
             fig4(all_params, years),
             fig5(all_params, years),
             fig6(all_params, years),

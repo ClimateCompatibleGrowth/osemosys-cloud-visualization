@@ -7,11 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig3(all_params, years):
-    gen_df = calculate_gen_df(all_params, years)
-    return df_plot(gen_df, 'Petajoules (PJ)', 'Power Generation (Detail)')
-
-
 def fig4(all_params, years):
     gen_df = calculate_gen_df(all_params, years)
     # Power generation (Aggregated)
