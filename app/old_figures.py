@@ -7,11 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig9(all_params, years):
-    ene_exp_df = calculate_ene_exp_df(all_params, years)
-    return df_plot(ene_exp_df, 'Petajoules (PJ)', 'Energy exports')
-
-
 def fig10(all_params, years):
     ele_cos_df = calculate_ele_cos_df(all_params, years)
 
