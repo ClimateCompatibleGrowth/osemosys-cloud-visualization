@@ -49,6 +49,7 @@ def generate_figures(url):
         ]
 
     for region in land_use.regions().keys():
+        figure_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
         figure_list.append(AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure())
 
     return figure_list
