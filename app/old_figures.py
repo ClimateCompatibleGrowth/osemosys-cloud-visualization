@@ -7,16 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig6(all_params, years):
-    # Domestic fuel production
-
-    dom_prd_df = calculate_dom_prd_df(all_params, years)
-    for each in dom_prd_df.columns:
-        if each in ['Land', 'Water', 'Precipitation']:
-            dom_prd_df = dom_prd_df.drop(each, axis=1)
-    return df_plot(dom_prd_df, 'Petajoules (PJ)', 'Domestic energy production')
-
-
 def fig7(all_params, years):
     cap_cos_df = calculate_cap_cos_df(all_params, years)
     return df_plot(cap_cos_df, 'Million $', 'Capital Investment')
