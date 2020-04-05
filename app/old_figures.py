@@ -7,32 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig11b(all_params, years, land_use, each_region):
-    regions = land_use.regions()
-    mode_crop_combo = land_use.mode_crop_combo()
-    crops_region_df = calculate_crops_total_df(all_params, years)
-    crops_region_df = crops_region_df[crops_region_df.t.str[6:9] == each_region]
-
-    crops_region_df['m'] = crops_region_df['m'].astype(int)
-    crops_region_df['crop_combo'] = crops_region_df['m'].map(mode_crop_combo)
-    crops_region_df['land_use'] = crops_region_df['crop_combo'].str[0:4]
-    crops_region_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
-
-    crops_region_df = crops_region_df[crops_region_df['land_use'].str.startswith('CP')]
-    crops_region_df = crops_region_df.pivot_table(index='y',
-                                                  columns='land_use',
-                                                  values='value',
-                                                  aggfunc='sum').reset_index().fillna(0)
-    crops_region_df = crops_region_df.reindex(
-        sorted(
-            crops_region_df.columns),
-        axis=1).set_index('y').reset_index().rename(
-            columns=det_col).astype('float64')
-    crops_region_df = df_years(crops_region_df, years)
-    return df_plot(crops_region_df, 'Land area (1000 sq.km.)',
-                   'Area by crop (' + regions[each_region] + ' region)')
-
-
 def fig12b(all_params, years, land_use, each_region):
     regions = land_use.regions()
     mode_crop_combo = land_use.mode_crop_combo()
