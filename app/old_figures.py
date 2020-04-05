@@ -80,25 +80,3 @@ def fig12b(all_params, years, land_use, each_region):
 #     crops_ws_df = crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
 # return df_plot(crops_ws_df,'Land area (1000 sq.km.)','Area by crop (' +
 # water_supply[each_ws] + ')')
-
-
-def fig14(all_params, years, land_use):
-    crops_yield_df = calculate_yield_df(all_params, years, land_use)
-    crops_yield_df['y'] = years
-    crops_yield_df = crops_yield_df.mul(10)
-    name_color_codes = pd.read_csv(
-        os.path.join(
-            os.getcwd(),
-            'name_color_codes.csv'),
-        encoding='latin-1')
-    color_dict = dict([(n, c)
-                       for n, c in zip(name_color_codes.name_english, name_color_codes.colour)])
-    return crops_yield_df.iplot(asFigure=True,
-                                x='y',
-                                mode='lines+markers',
-                                xTitle='Year',
-                                yTitle='Yield (t/ha)',
-                                size=10,
-                                color=[color_dict[x] for x in crops_yield_df.columns if x != 'y'],
-                                title='Yield (tonnes/hectare)',
-                                showlegend=True)
