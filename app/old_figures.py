@@ -7,11 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig7(all_params, years):
-    cap_cos_df = calculate_cap_cos_df(all_params, years)
-    return df_plot(cap_cos_df, 'Million $', 'Capital Investment')
-
-
 def fig8(all_params, years):
     ene_imp_df = calculate_ene_imp_df(all_params, years)
     return df_plot(ene_imp_df, 'Petajoules (PJ)', 'Energy imports')
