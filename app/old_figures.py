@@ -7,21 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig4(all_params, years):
-    gen_df = calculate_gen_df(all_params, years)
-    # Power generation (Aggregated)
-    gen_agg_df = pd.DataFrame(columns=agg_col)
-    gen_agg_df.insert(0, 'y', gen_df['y'])
-    gen_agg_df = gen_agg_df.fillna(0.00)
-
-    for each in agg_col:
-        for tech_exists in agg_col[each]:
-            if tech_exists in gen_df.columns:
-                gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
-                gen_agg_df[each] = gen_agg_df[each].round(2)
-    return df_plot(gen_agg_df, 'Petajoules (PJ)', 'Power Generation (Aggregate)')
-
-
 def fig5(all_params, years):
     gen_use_df = calculate_gen_use_df(all_params, years)
     # Fuel use for power generation
