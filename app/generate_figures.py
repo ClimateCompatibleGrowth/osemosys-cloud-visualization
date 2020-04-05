@@ -1,4 +1,3 @@
-from app.old_figures import *
 import os
 import pandas as pd
 from app.config import Config
@@ -18,6 +17,8 @@ from app.figures.area_by_crop import AreaByCrop
 from app.figures.area_by_land_cover import AreaByLandCover
 from app.figures.crop_production import CropProduction
 from app.figures.crop_yield import CropYield
+from app.figures.area_by_crop_for_region import AreaByCropForRegion
+from app.figures.area_by_land_cover_type_for_region import AreaByLandCoverTypeForRegion
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -48,8 +49,6 @@ def generate_figures(url):
         ]
 
     for region in land_use.regions().keys():
-        figure_list.append(fig12b(all_params, years, land_use, region))
-        figure_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
-        # figure_list.append(fig11c(all_params,years,region))
+        figure_list.append(AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure())
 
     return figure_list
