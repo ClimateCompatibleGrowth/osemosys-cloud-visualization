@@ -1,13 +1,8 @@
 import os
 import sys
 import pandas as pd
+from app.constants import det_col, name_color_codes
 pd.set_option('mode.chained_assignment', None)
-name_color_codes = pd.read_csv(
-    os.path.join(
-        os.getcwd(),
-        'name_color_codes.csv'),
-    encoding='latin-1')
-det_col = dict([(c, n) for c, n in zip(name_color_codes.code, name_color_codes.name_english)])
 
 
 def df_plot(df, y_title, p_title):

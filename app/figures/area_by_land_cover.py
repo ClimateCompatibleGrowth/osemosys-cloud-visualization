@@ -1,4 +1,5 @@
-from app.utilities import df_plot, df_filter, det_col
+from app.utilities import df_plot, df_filter
+from app.constants import det_col
 
 
 class AreaByLandCover:

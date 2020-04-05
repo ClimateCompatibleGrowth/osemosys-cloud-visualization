@@ -1,4 +1,5 @@
-from app.utilities import df_plot, df_filter, det_col, name_color_codes
+from app.utilities import df_plot, df_filter
+from app.constants import det_col, name_color_codes
 import pandas as pd
 
 
