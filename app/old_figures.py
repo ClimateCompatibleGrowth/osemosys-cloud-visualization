@@ -7,12 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig5(all_params, years):
-    gen_use_df = calculate_gen_use_df(all_params, years)
-    # Fuel use for power generation
-    return df_plot(gen_use_df, 'Petajoules (PJ)', 'Power Generation (Fuel use)')
-
-
 def fig6(all_params, years):
     # Domestic fuel production
 
