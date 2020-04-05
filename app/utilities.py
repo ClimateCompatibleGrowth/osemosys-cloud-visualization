@@ -1,13 +1,11 @@
 import os
 import sys
 import pandas as pd
-from app.constants import det_col, name_color_codes
+from app.constants import det_col, name_color_codes, color_dict
 pd.set_option('mode.chained_assignment', None)
 
 
 def df_plot(df, y_title, p_title):
-    color_dict = dict([(n, c)
-                       for n, c in zip(name_color_codes.name_english, name_color_codes.colour)])
     return df.iplot(asFigure=True,
                     x='y',
                     kind='bar',
