@@ -7,13 +7,6 @@ from app.constants import agg_col
 pd.set_option('mode.chained_assignment', None)
 
 
-def fig10(all_params, years):
-    ele_cos_df = calculate_ele_cos_df(all_params, years)
-
-    return ele_cos_df.iplot(asFigure=True, kind='bar', barmode='stack',
-                            x='y', title='Cost of electricity generation ($/MWh)')
-
-
 def fig11a(all_params, years, land_use):
     mode_crop_combo = land_use.mode_crop_combo()
     crops_total_df = calculate_crops_total_df(all_params, years)
