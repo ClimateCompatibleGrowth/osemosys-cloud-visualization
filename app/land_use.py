@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from app.constants import det_col
 
 
 class LandUse:
@@ -40,9 +41,9 @@ class LandUse:
         # Construct dictionary of crops {crop_code:crop_name}.
         # Crop codes and names are extracted from the 'name_color_codes.csv' file
         crops = {}
-        for each in self.__det_col().keys():
+        for each in det_col.keys():
             if each.startswith('CP'):
-                crops[each] = self.__det_col()[each]
+                crops[each] = det_col[each]
 
         return crops
 
@@ -59,11 +60,3 @@ class LandUse:
                     self.technologies = line.split(' ')[3:]
                 if line.startswith(('set COMMODITY', 'set FUEL')):
                     self.commodities = line.split(' ')[3:]
-
-    def __det_col(self):
-        name_color_codes = pd.read_csv(
-            os.path.join(
-                os.getcwd(),
-                'name_color_codes.csv'),
-            encoding='latin-1')
-        return dict([(c, n) for c, n in zip(name_color_codes.code, name_color_codes.name_english)])

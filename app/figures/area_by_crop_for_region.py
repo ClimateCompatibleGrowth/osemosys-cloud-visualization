@@ -1,4 +1,5 @@
-from app.utilities import df_plot, df_filter, det_col, df_years
+from app.utilities import df_plot, df_filter, df_years
+from app.constants import det_col
 
 
 class AreaByCropForRegion:

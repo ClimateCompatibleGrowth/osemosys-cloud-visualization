@@ -1,4 +1,5 @@
-from app.utilities import df_plot, df_filter, det_col, name_color_codes
+from app.utilities import df_plot, df_filter
+from app.constants import det_col, name_color_codes, color_dict
 import pandas as pd
 
 
@@ -13,8 +14,6 @@ class CropYield:
         crops_yield_df = self.calculate_yield_df(self.all_params, self.years, self.land_use)
         crops_yield_df['y'] = self.years
         crops_yield_df = crops_yield_df.mul(10)
-        color_dict = dict([(n, c)
-                           for n, c in zip(name_color_codes.name_english, name_color_codes.colour)])
         return crops_yield_df.iplot(asFigure=True,
                                     x='y',
                                     mode='lines+markers',
