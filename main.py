@@ -29,7 +29,10 @@ app.layout = html.Div(children=[
         'textAlign': 'center'
     }
     ),
-    html.Div(children=[], id='figures-container'),
+    dcc.Loading(
+        type='default',
+        children=html.Div(id='figures-container'),
+    ),
 ])
 
 
