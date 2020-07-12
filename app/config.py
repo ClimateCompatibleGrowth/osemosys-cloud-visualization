@@ -17,14 +17,15 @@ class Config:
     def __base_folder_path(self):
         if self.input_string in ['bolivia', 'ethiopia', 'vietnam', 'indonesia']:
             return os.path.join(os.getcwd(), 'data', self.input_string)
+        elif self.input_string.startswith('http'):
+            return self.__download_files(self.input_string)
         else:
             raise NameError('NoFolderFound')
-            # return __download_files(self.input_string)
 
     def __download_files(self, input_string):
         random_number = random.randint(1, 99999)
-        zip_file_name = f'csv_{random_number}.zip'
-        folder_name = f'csv_{random_number}'
+        zip_file_name = f'osemosys_result_{random_number}.zip'
+        folder_name = f'osemosys_result_{random_number}'
 
         zip_path = os.path.join(os.getcwd(), 'tmp', zip_file_name)
         wget.download(input_string, zip_path)
@@ -33,4 +34,4 @@ class Config:
         with ZipFile(zip_path, 'r') as zipObj:
             zipObj.extractall(folder_path)
 
-        return os.path.join(os.getcwd(), 'tmp', folder_name, 'csv')
+        return os.path.join(os.getcwd(), 'tmp', folder_name)

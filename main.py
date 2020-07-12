@@ -36,7 +36,9 @@ def div_from_figure(figure):
     [Input(component_id='url', component_property='search')]
     )
 def populate_input_string_from_query_string(query_string):
-    return urllib.parse.unquote(query_string).split('=')[-1]
+    return urllib.parse.parse_qs(
+            urllib.parse.unquote(query_string)
+           )['?model'][0]
 
 
 @app.callback(
@@ -47,8 +49,7 @@ def populate_input_string_from_query_string(query_string):
 def generate_figure_divs(n_clicks, query_string):
     if query_string is None:
         return []
-    model_name = urllib.parse.unquote(query_string).split('=')[-1]
-    config = Config(model_name)
+    config = Config(query_string)
     all_figures = generate_figures(config)  # We lost the `url` capability
     return [div_from_figure(figure) for figure in all_figures]
 
