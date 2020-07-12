@@ -10,9 +10,7 @@ from app.generate_figures import generate_figures  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
-
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 server = app.server
 
 app.layout = html.Div(children=[
