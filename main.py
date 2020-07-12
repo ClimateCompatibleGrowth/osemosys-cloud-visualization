@@ -5,6 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import sys
 import urllib
+from app.config import Config
 from app.generate_figures import generate_figures  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
@@ -30,7 +31,8 @@ def div_from_figure(figure):
     )
 def generate_figure_divs(query_string):
     model_name = urllib.parse.unquote(query_string).split('=')[-1]
-    all_figures = generate_figures(model_name)  # We lost the `url` capability
+    config = Config(model_name)
+    all_figures = generate_figures(config)  # We lost the `url` capability
     return [div_from_figure(figure) for figure in all_figures]
 
 

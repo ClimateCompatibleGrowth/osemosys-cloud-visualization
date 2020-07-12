@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-from app.config import Config
 from app.land_use import LandUse
 from app.result_parser import ResultParser
 from app.figures.power_generation_capacity import PowerGenerationCapacity
@@ -22,8 +21,7 @@ from app.figures.area_by_land_cover_type_for_region import AreaByLandCoverTypeFo
 pd.set_option('mode.chained_assignment', None)
 
 
-def generate_figures(url):
-    config = Config(url)
+def generate_figures(config):
     land_use = LandUse(config)
     results_path = config.csv_folder_path()
     result_parser = ResultParser(results_path)
