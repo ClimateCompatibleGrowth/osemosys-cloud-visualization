@@ -19,8 +19,8 @@ app.layout = html.Div([
     html.H1('CLEWS Dashboard'),
     html.Div('An interactive tool to visualise CLEWS model results', className='subtitle'),
     html.Div([
-        dcc.Input(id='input-string', type='text', className='input-field'),
-        html.Button(id='submit-button', n_clicks=0, children='Submit'),
+            dcc.Input(id='input-string', type='text', className='input-field'),
+            html.Button(id='submit-button', n_clicks=0, children='Submit'),
         ],
         className='source-form'
     ),
@@ -44,10 +44,13 @@ def populate_input_string_from_query_string(query_string):
 
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
-    [Input(component_id='submit-button', component_property='n_clicks')],
+    [
+        Input(component_id='submit-button', component_property='n_clicks'),
+        Input(component_id='input-string', component_property='n_submit')
+    ],
     [State('input-string', 'value')]
     )
-def generate_figure_divs(n_clicks, query_string):
+def generate_figure_divs(n_clicks, n_submit, query_string):
     if query_string is None:
         return []
     config = Config(query_string)
