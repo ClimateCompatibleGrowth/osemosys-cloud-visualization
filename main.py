@@ -3,6 +3,7 @@ import cufflinks
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import os
 import sys
 import urllib
 from app.config import Config
@@ -55,4 +56,7 @@ def generate_figure_divs(n_clicks, query_string):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    if 'DASH_DEBUG' in os.environ:
+        app.run_server(debug=True)
+    else:
+        app.run_server(debug=False)
