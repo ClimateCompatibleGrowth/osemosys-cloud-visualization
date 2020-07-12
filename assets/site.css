@@ -6,3 +6,8 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.figure {
+  width: 50%;
+  display: inline-block;
+}

@@ -1,5 +1,4 @@
 from dash.dependencies import Input, Output
-from plotly.offline import plot, iplot, init_notebook_mode
 import cufflinks
 import dash
 import dash_core_components as dcc
@@ -13,21 +12,17 @@ cufflinks.set_config_file(world_readable=True, theme='white')
 app = dash.Dash(__name__)
 server = app.server
 
-app.layout = html.Div(children=[
+app.layout = html.Div([
     dcc.Location(id='url'),
     html.H1('CLEWS Dashboard'),
-    html.Div('An interactive tool to visualise CLEWS model results', className = 'subtitle'),
+    html.Div('An interactive tool to visualise CLEWS model results', className='subtitle'),
     dcc.Loading(html.Div(id='figures-container')),
 ])
 
 
 def div_from_figure(figure):
-    return html.Div(
-            children=dcc.Graph(
-                figure=figure
-                ),
-            style={'width': '50%', 'display': 'inline-block'}
-            )
+    return html.Div(dcc.Graph(figure=figure), className='figure')
+
 
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
@@ -35,7 +30,7 @@ def div_from_figure(figure):
     )
 def generate_figure_divs(query_string):
     model_name = urllib.parse.unquote(query_string).split('=')[-1]
-    all_figures = generate_figures(model_name) # We lost the `url` capability
+    all_figures = generate_figures(model_name)  # We lost the `url` capability
     return [div_from_figure(figure) for figure in all_figures]
 
 
