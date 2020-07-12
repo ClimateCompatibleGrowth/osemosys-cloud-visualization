@@ -11,3 +11,12 @@ h1 {
   width: 50%;
   display: inline-block;
 }
+
+.source-form {
+  width: 80%;
+  margin: auto;
+}
+
+.input-field {
+  width: 80%;
+}

@@ -17,8 +17,12 @@ app.layout = html.Div([
     dcc.Location(id='url'),
     html.H1('CLEWS Dashboard'),
     html.Div('An interactive tool to visualise CLEWS model results', className='subtitle'),
-    dcc.Input(id='input-string', type='text'),
-    html.Button(id='submit-button', n_clicks=0, children='Submit'),
+    html.Div([
+        dcc.Input(id='input-string', type='text', className='input-field'),
+        html.Button(id='submit-button', n_clicks=0, children='Submit'),
+        ],
+        className='source-form'
+    ),
     dcc.Loading(html.Div(id='figures-container')),
 ])
 
