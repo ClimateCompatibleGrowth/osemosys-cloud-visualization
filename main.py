@@ -16,7 +16,6 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
 app.layout = html.Div(children=[
-    html.Div('', **{'id': 'figures-component', 'data-url': ''}),
     dcc.Location(id='url', refresh=False),
     html.H1(
         'CLEWS Dashboard',
@@ -44,21 +43,13 @@ def div_from_figure(figure):
             style={'width': '50%', 'display': 'inline-block'}
             )
 
-
-@app.callback(
-    Output(component_id='figures-component', component_property='data-url'),
-    [Input(component_id='url', component_property='search')]
-    )
-def setup_url(query_string):
-    return urllib.parse.unquote(query_string).split('=')[-1]
-
-
 @app.callback(
     Output(component_id='figures-container', component_property='children'),
-    [Input(component_id='figures-component', component_property='data-url')]
+    [Input(component_id='url', component_property='search')]
     )
-def generate_figure_divs(url):
-    all_figures = generate_figures(url)
+def generate_figure_divs(query_string):
+    model_name = urllib.parse.unquote(query_string).split('=')[-1]
+    all_figures = generate_figures(model_name) # We lost the `url` capability
     return [div_from_figure(figure) for figure in all_figures]
 
 
