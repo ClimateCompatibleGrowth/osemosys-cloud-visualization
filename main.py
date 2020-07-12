@@ -14,22 +14,10 @@ app = dash.Dash(__name__)
 server = app.server
 
 app.layout = html.Div(children=[
-    dcc.Location(id='url', refresh=False),
-    html.H1(
-        'CLEWS Dashboard',
-        style={
-            'textAlign': 'center'
-        }
-    ),
-
-    html.Div(children='An interactive tool to visualise CLEWS model results', style={
-        'textAlign': 'center'
-    }
-    ),
-    dcc.Loading(
-        type='default',
-        children=html.Div(id='figures-container'),
-    ),
+    dcc.Location(id='url'),
+    html.H1('CLEWS Dashboard'),
+    html.Div('An interactive tool to visualise CLEWS model results', className = 'subtitle'),
+    dcc.Loading(html.Div(id='figures-container')),
 ])
 
 
