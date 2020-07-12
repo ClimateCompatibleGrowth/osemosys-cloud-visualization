@@ -24,7 +24,7 @@ app.layout = html.Div([
         ],
         className='source-form'
     ),
-    dcc.Loading(html.Div(id='figures-container')),
+    dcc.Loading(html.Div(id='figures-container'), fullscreen=True),
 ])
 
 
