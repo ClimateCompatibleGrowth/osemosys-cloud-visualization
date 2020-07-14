@@ -3,6 +3,7 @@ import wget
 import os
 from zipfile import ZipFile
 from app.generate_csv_files import generate_csv_files
+import functools
 
 
 class Config:
@@ -33,6 +34,7 @@ class Config:
         else:
             raise NameError('NoFolderFound')
 
+    @functools.lru_cache(maxsize=128)
     def __download_files(self, input_string):
         random_number = random.randint(1, 99999)
         zip_file_name = f'osemosys_result_{random_number}.zip'
