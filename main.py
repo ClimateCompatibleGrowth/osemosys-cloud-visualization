@@ -45,8 +45,14 @@ app.layout = html.Div([
         # Allow multiple files to be uploaded
         multiple=True
     ),
-    html.Div(id='output-data-upload'),
-    dcc.Loading(html.Div(id='figures-container'), fullscreen=True),
+
+    dcc.Loading(
+        [
+            html.Div(id='figures-container'),
+            html.Div(id='output-data-upload'),
+        ],
+        fullscreen=True
+    ),
 ])
 
 
@@ -101,6 +107,9 @@ def update_output(list_of_contents):
         content_type, content_string = list_of_contents[0].split(',')
         base_path = os.path.join(os.getcwd(), 'tmp', 'uploaded')
         zip_file_path = os.path.join(base_path, 'test.zip')
+        if not os.path.exists(base_path):
+            os.makedirs(base_path)
+
         with open(zip_file_path, 'wb') as fh:
             fh.write(base64.b64decode(content_string))
 
