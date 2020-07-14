@@ -1,11 +1,13 @@
 from dash.dependencies import Input, Output, State
 import cufflinks
+import base64
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import os
 import sys
 import urllib
+import zipfile
 from app.config import Config
 from app.generate_figures import generate_figures  # noqa
 cufflinks.go_offline()
@@ -24,6 +26,26 @@ app.layout = html.Div([
         ],
         className='source-form'
     ),
+    dcc.Upload(
+        id='upload-data',
+        children=html.Div([
+            'Drag and Drop or ',
+            html.A('Select Files')
+        ]),
+        style={
+            'width': '100%',
+            'height': '60px',
+            'lineHeight': '60px',
+            'borderWidth': '1px',
+            'borderStyle': 'dashed',
+            'borderRadius': '5px',
+            'textAlign': 'center',
+            'margin': '10px'
+        },
+        # Allow multiple files to be uploaded
+        multiple=True
+    ),
+    html.Div(id='output-data-upload'),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True),
 ])
 
@@ -63,6 +85,31 @@ def parse_query_string(query_string):
     return urllib.parse.parse_qs(
             urllib.parse.unquote(query_string)
            )['?model'][0]
+
+
+@app.callback(
+    Output('output-data-upload', 'children'),
+    [Input('upload-data', 'contents')],
+    )
+def update_output(list_of_contents):
+    if list_of_contents is not None:
+        try:
+            os.makedirs(os.path.join(os.getcwd(), 'uploaded'))
+        except FileExistsError:
+            pass
+
+        content_type, content_string = list_of_contents[0].split(',')
+        base_path = os.path.join(os.getcwd(), 'tmp', 'uploaded')
+        zip_file_path = os.path.join(base_path, 'test.zip')
+        with open(zip_file_path, 'wb') as fh:
+            fh.write(base64.b64decode(content_string))
+
+        with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+            zip_ref.extractall(base_path)
+
+        config = Config(base_path)
+        all_figures = generate_figures(config)
+        return [div_from_figure(figure) for figure in all_figures]
 
 
 if __name__ == '__main__':

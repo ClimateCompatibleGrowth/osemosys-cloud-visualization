@@ -28,6 +28,8 @@ class Config:
             return os.path.join(os.getcwd(), 'data', self.input_string)
         elif self.input_string.startswith('http'):
             return self.__download_files(self.input_string)
+        elif 'uploaded' in self.input_string:
+            return self.input_string
         else:
             raise NameError('NoFolderFound')
 
