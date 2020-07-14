@@ -2,6 +2,7 @@ import random
 import wget
 import os
 from zipfile import ZipFile
+from app.generate_csv_files import generate_csv_files
 
 
 class Config:
@@ -9,10 +10,18 @@ class Config:
         self.input_string = input_string
 
     def csv_folder_path(self):
+        generate_csv_files(
+            self.data_file_path(),
+            self.__results_file_path(),
+            self.__base_folder_path()
+        )
         return os.path.join(self.__base_folder_path(), 'csv')
 
     def data_file_path(self):
         return os.path.join(self.__base_folder_path(), 'data.txt')
+
+    def __results_file_path(self):
+        return os.path.join(self.__base_folder_path(), 'result.txt')
 
     def __base_folder_path(self):
         if self.input_string in ['bolivia', 'ethiopia', 'vietnam', 'indonesia']:
