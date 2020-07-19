@@ -87,25 +87,26 @@ def parse_query_string(query_string):
     [Input('upload-data', 'contents')],
     )
 def update_output(list_of_contents):
+    uploaded_folder_path = os.path.join(os.getcwd(), 'tmp', 'uploaded')
     if list_of_contents is not None:
         try:
-            os.makedirs(os.path.join(os.getcwd(), 'uploaded'))
+            os.makedirs(uploaded_folder_path)
         except FileExistsError:
             pass
 
         content_type, content_string = list_of_contents[0].split(',')
         base_path = os.path.join(os.getcwd(), 'tmp', 'uploaded')
-        zip_file_path = os.path.join(base_path, 'test.zip')
-        if not os.path.exists(base_path):
-            os.makedirs(base_path)
+        zip_file_path = os.path.join(uploaded_folder_path, 'test.zip')
+        if not os.path.exists(uploaded_folder_path):
+            os.makedirs(uploaded_folder_path)
 
         with open(zip_file_path, 'wb') as fh:
             fh.write(base64.b64decode(content_string))
 
         with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-            zip_ref.extractall(base_path)
+            zip_ref.extractall(uploaded_folder_path)
 
-        config = Config(base_path)
+        config = Config(uploaded_folder_path)
         all_figures = generate_figures(config)
         return [div_from_figure(figure) for figure in all_figures]
 
