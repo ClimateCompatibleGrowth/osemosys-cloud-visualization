@@ -20,3 +20,13 @@ h1 {
 .input-field {
   width: 80%;
 }
+
+.upload-zone {
+    width: 100%;
+    height: 60px;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+}
