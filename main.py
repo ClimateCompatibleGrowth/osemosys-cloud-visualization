@@ -62,16 +62,25 @@ def populate_input_string_from_query_string(query_string):
     [
         Input(component_id='submit-button', component_property='n_clicks'),
         Input(component_id='input-string', component_property='n_submit'),
-        Input(component_id='url', component_property='search')
+        Input(component_id='url', component_property='search'),
+        Input(component_id='upload-data', component_property='contents'),
     ],
     [State('input-string', 'value')]
     )
-def generate_figure_divs(n_clicks, n_submit, raw_query_string, query_string):
-    if query_string is None and raw_query_string is None:
+def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, input_string):
+    config_input = input_string
+
+    if input_string is None and raw_query_string is None:
         return []
-    if query_string is None and raw_query_string is not None:  # First initialization
-        query_string = parse_query_string(raw_query_string)
-    config = Config(query_string)
+
+    if input_string is None and raw_query_string is not None:  # First initialization
+        config_input = parse_query_string(raw_query_string)
+
+    triggered_element = dash.callback_context.triggered[0]['prop_id']
+    if triggered_element in ['upload-data.contents']:
+        config_input = process_uploaded_file(upload_data)
+
+    config = Config(input_string)
     all_figures = generate_figures(config)
     return [div_from_figure(figure) for figure in all_figures]
 
@@ -80,15 +89,6 @@ def parse_query_string(query_string):
     return urllib.parse.parse_qs(
             urllib.parse.unquote(query_string)
            )['?model'][0]
-
-
-@app.callback(
-    Output('output-data-upload', 'children'),
-    [Input('upload-data', 'contents')],
-    )
-def update_output(uploaded_file):
-    if uploaded_file is not None:
-        return process_uploaded_file(uploaded_file)
 
 
 def process_uploaded_file(raw_contents):
@@ -102,9 +102,7 @@ def process_uploaded_file(raw_contents):
 
     write_and_extract_zip_file(content_string, uploaded_folder_path)
 
-    config = Config(uploaded_folder_path)
-    all_figures = generate_figures(config)
-    return [div_from_figure(figure) for figure in all_figures]
+    return uploaded_folder_path
 
 
 def write_and_extract_zip_file(base64_encoded_zip, work_path):
