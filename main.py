@@ -87,29 +87,31 @@ def parse_query_string(query_string):
     [Input('upload-data', 'contents')],
     )
 def update_output(uploaded_file):
+    if uploaded_file is not None:
+        return process_uploaded_file(uploaded_file)
+
+
+def process_uploaded_file(raw_contents):
     random_number = random.randint(1, 99999)
     uploaded_folder_path = os.path.join(os.getcwd(), 'tmp', 'uploaded', str(random_number))
-    # import pdb; pdb.set_trace()
-    if uploaded_file is not None:
-        try:
-            os.makedirs(uploaded_folder_path)
-        except FileExistsError:
-            pass
+    try:
+        os.makedirs(uploaded_folder_path)
+    except FileExistsError:
+        pass
+    content_type, content_string = raw_contents.split(',')
 
-        content_type, content_string = uploaded_file.split(',')
+    write_and_extract_zip_file(content_string, uploaded_folder_path)
 
-        write_and_extract_zip_file(content_string, uploaded_folder_path)
-
-        config = Config(uploaded_folder_path)
-        all_figures = generate_figures(config)
-        return [div_from_figure(figure) for figure in all_figures]
+    config = Config(uploaded_folder_path)
+    all_figures = generate_figures(config)
+    return [div_from_figure(figure) for figure in all_figures]
 
 
-def write_and_extract_zip_file(raw_contents, work_path):
+def write_and_extract_zip_file(base64_encoded_zip, work_path):
     zip_file_path = os.path.join(work_path, 'uploaded.zip')
 
     with open(zip_file_path, 'wb') as fh:
-        fh.write(base64.b64decode(raw_contents))
+        fh.write(base64.b64decode(base64_encoded_zip))
 
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extractall(work_path)
