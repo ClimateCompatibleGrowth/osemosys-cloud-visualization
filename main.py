@@ -5,6 +5,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import os
+import random
 import sys
 import urllib
 import zipfile
@@ -32,7 +33,6 @@ app.layout = html.Div([
             html.Button(children='Upload files'),
         ]),
         className='upload-zone',
-        multiple=True
     ),
 
     dcc.Loading(
@@ -86,29 +86,33 @@ def parse_query_string(query_string):
     Output('output-data-upload', 'children'),
     [Input('upload-data', 'contents')],
     )
-def update_output(list_of_contents):
-    uploaded_folder_path = os.path.join(os.getcwd(), 'tmp', 'uploaded')
-    if list_of_contents is not None:
+def update_output(uploaded_file):
+    random_number = random.randint(1, 99999)
+    uploaded_folder_path = os.path.join(os.getcwd(), 'tmp', 'uploaded', str(random_number))
+    # import pdb; pdb.set_trace()
+    if uploaded_file is not None:
         try:
             os.makedirs(uploaded_folder_path)
         except FileExistsError:
             pass
 
-        content_type, content_string = list_of_contents[0].split(',')
-        base_path = os.path.join(os.getcwd(), 'tmp', 'uploaded')
-        zip_file_path = os.path.join(uploaded_folder_path, 'test.zip')
-        if not os.path.exists(uploaded_folder_path):
-            os.makedirs(uploaded_folder_path)
+        content_type, content_string = uploaded_file.split(',')
 
-        with open(zip_file_path, 'wb') as fh:
-            fh.write(base64.b64decode(content_string))
-
-        with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-            zip_ref.extractall(uploaded_folder_path)
+        write_and_extract_zip_file(content_string, uploaded_folder_path)
 
         config = Config(uploaded_folder_path)
         all_figures = generate_figures(config)
         return [div_from_figure(figure) for figure in all_figures]
+
+
+def write_and_extract_zip_file(raw_contents, work_path):
+    zip_file_path = os.path.join(work_path, 'uploaded.zip')
+
+    with open(zip_file_path, 'wb') as fh:
+        fh.write(base64.b64decode(raw_contents))
+
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(work_path)
 
 
 if __name__ == '__main__':
