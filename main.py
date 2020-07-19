@@ -29,19 +29,10 @@ app.layout = html.Div([
     ),
     dcc.Upload(
         id='upload-data',
-        children=html.Div([
-            html.Button(children='Upload files'),
-        ]),
+        children=html.Div(html.Button('Upload zip file')),
         className='upload-zone',
     ),
-
-    dcc.Loading(
-        [
-            html.Div(id='figures-container'),
-            html.Div(id='output-data-upload'),
-        ],
-        fullscreen=True
-    ),
+    dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
 
 
