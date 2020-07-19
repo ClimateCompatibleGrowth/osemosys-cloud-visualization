@@ -11,12 +11,11 @@ class Config:
         self.input_string = input_string
 
     def csv_folder_path(self):
-        generate_csv_files(
-            self.data_file_path(),
-            self.__results_file_path(),
-            self.__base_folder_path()
-        )
-        return os.path.join(self.__base_folder_path(), 'csv')
+        csv_path = os.path.join(self.__base_folder_path(), 'csv')
+        if not os.path.exists(csv_path):
+            self.__generate_csv()
+
+        return csv_path
 
     def data_file_path(self):
         return os.path.join(self.__base_folder_path(), 'data.txt')
@@ -48,3 +47,10 @@ class Config:
             zipObj.extractall(folder_path)
 
         return os.path.join(os.getcwd(), 'tmp', folder_name)
+
+    def __generate_csv(self):
+        generate_csv_files(
+            self.data_file_path(),
+            self.__results_file_path(),
+            self.__base_folder_path()
+        )
