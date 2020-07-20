@@ -10,7 +10,7 @@ import sys
 import urllib
 import zipfile
 from app.config import Config
-from app.generate_figures import generate_figures  # noqa
+from app.generate_divs import GenerateDivs  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
@@ -66,10 +66,6 @@ app.layout = html.Div([
 ])
 
 
-def div_from_figure(figure):
-    return html.Div(dcc.Graph(figure=figure), className='figure')
-
-
 @app.callback(
     Output(component_id='input-string', component_property='value'),
     [Input(component_id='url', component_property='search')]
@@ -104,8 +100,7 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
 
     config = Config(config_input)
     if config.is_valid():
-        all_figures = generate_figures(config)
-        return [div_from_figure(figure) for figure in all_figures]
+        return GenerateDivs(config).generate_divs()
     else:
         return [f'Invalid model: {config_input}']
 
