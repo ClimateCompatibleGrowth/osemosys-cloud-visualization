@@ -45,6 +45,7 @@ def div_from_figure(figure):
     [Input(component_id='url', component_property='search')]
     )
 def populate_input_string_from_query_string(query_string):
+    print(f'populating query_string {query_string}')
     return parse_query_string(query_string)
 
 
@@ -72,8 +73,11 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
         config_input = process_uploaded_file(upload_data)
 
     config = Config(input_string)
-    all_figures = generate_figures(config)
-    return [div_from_figure(figure) for figure in all_figures]
+    if config.is_valid():
+        all_figures = generate_figures(config)
+        return [div_from_figure(figure) for figure in all_figures]
+    else:
+        return []
 
 
 def parse_query_string(query_string):

@@ -21,11 +21,16 @@ class Config:
     def data_file_path(self):
         return os.path.join(self.__base_folder_path(), 'data.txt')
 
+    def is_valid(self):
+        return self.__base_folder_path() is not None
+
     def __results_file_path(self):
         return os.path.join(self.__base_folder_path(), 'result.txt')
 
     def __base_folder_path(self):
-        if self.input_string in [
+        if self.input_string is None:
+            return None
+        elif self.input_string in [
                     'bolivia',
                     'ethiopia',
                     'vietnam',
@@ -39,7 +44,7 @@ class Config:
         elif 'uploaded' in self.input_string:
             return self.input_string
         else:
-            raise NameError('NoFolderFound')
+            return None
 
     @functools.lru_cache(maxsize=128)
     def __download_files(self, input_string):
