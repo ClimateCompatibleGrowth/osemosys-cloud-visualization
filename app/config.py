@@ -24,7 +24,14 @@ class Config:
         return os.path.join(self.__base_folder_path(), 'result.txt')
 
     def __base_folder_path(self):
-        if self.input_string in ['bolivia', 'ethiopia', 'vietnam', 'indonesia', 'mexico']:
+        if self.input_string in [
+                    'bolivia',
+                    'ethiopia',
+                    'vietnam',
+                    'indonesia',
+                    'mexico',
+                    'workshop'
+                ]:
             return os.path.join(os.getcwd(), 'data', self.input_string)
         elif self.input_string.startswith('http'):
             return self.__download_files(self.input_string)
