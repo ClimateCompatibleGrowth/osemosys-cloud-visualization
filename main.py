@@ -62,6 +62,67 @@ app.layout = html.Div([
         children=html.Div(html.Button('Upload zip file')),
         className='upload-zone',
     ),
+    html.Nav(
+        html.Div([
+            html.A(
+                    'Climate',
+                    className='nav-item nav-link',
+                    id='nav-climate-tab',
+                    href='#nav-climate',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                ),
+            html.A(
+                    'Land',
+                    className='nav-item nav-link',
+                    id='nav-land-tab',
+                    href='#nav-land',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+            html.A(
+                    'Energy',
+                    className='nav-item nav-link',
+                    id='nav-energy-tab',
+                    href='#nav-energy',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+            html.A(
+                    'Water',
+                    className='nav-item nav-link',
+                    id='nav-water-tab',
+                    href='#nav-water',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+        ], className='nav nav-tabs', id='categoryTab', role='tablist')),
+    html.Div([
+        html.Div(
+                'Climate content',
+                className='tab-pane show active',
+                id='nav-climate',
+                role='tabpanel',
+            ),
+        html.Div(
+                'land content',
+                className='tab-pane',
+                id='nav-land',
+                role='tabpanel',
+                ),
+        html.Div(
+                'energy content',
+                className='tab-pane',
+                id='nav-energy',
+                role='tabpanel',
+                ),
+        html.Div(
+                'water content',
+                className='tab-pane',
+                id='nav-water',
+                role='tabpanel',
+                ),
+        ], className='tab-content', id='categoryTabContent'),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
 
