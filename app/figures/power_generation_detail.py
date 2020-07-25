@@ -8,6 +8,7 @@ class PowerGenerationDetail:
         self.years = years
 
     def figure(self):
+        print('Generating PowerGenerationDetail')
         return df_plot(self.__calculate_gen_df(), 'Petajoules (PJ)', 'Power Generation (Detail)')
 
     def __calculate_gen_df(self):

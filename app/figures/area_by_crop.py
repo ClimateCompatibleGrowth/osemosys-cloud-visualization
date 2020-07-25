@@ -10,6 +10,7 @@ class AreaByCrop:
         self.land_use = land_use
 
     def figure(self):
+        print('Generating AreaByCrop')
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops_total_df = self.__calculate_crops_total_df()
         crops_total_df['m'] = crops_total_df['m'].astype(int)

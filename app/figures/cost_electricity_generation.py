@@ -9,6 +9,7 @@ class CostElectrictyGeneration:
         self.years = years
 
     def figure(self):
+        print('Generating CostElectrictyGeneration')
         ele_cos_df = self.__calculate_ele_cos_df()
         return ele_cos_df.iplot(asFigure=True, kind='bar', barmode='stack',
                                 x='y', title='Cost of electricity generation ($/MWh)')

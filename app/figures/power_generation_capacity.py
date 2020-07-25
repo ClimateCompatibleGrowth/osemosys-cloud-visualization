@@ -8,6 +8,7 @@ class PowerGenerationCapacity:
         self.years = years
 
     def figure(self):
+        print('Generating PowerGenerationCapacity')
         return df_plot(self.__cap_df(), 'Gigawatts (GW)', 'Power Generation Capacity (Detail)')
 
     def __cap_df(self):

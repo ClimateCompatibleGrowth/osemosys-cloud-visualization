@@ -8,6 +8,7 @@ class CapitalInvestment:
         self.years = years
 
     def figure(self):
+        print('Generating CapitalInvestment')
         return df_plot(self.__calculate_cap_cos_df(), 'Million $', 'Capital Investment')
 
     def __calculate_cap_cos_df(self):

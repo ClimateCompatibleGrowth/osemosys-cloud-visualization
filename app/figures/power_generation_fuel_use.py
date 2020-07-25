@@ -8,6 +8,7 @@ class PowerGenerationFuelUse:
         self.years = years
 
     def figure(self):
+        print('Generating PowerGenerationFuelUse')
         return df_plot(
                     self.__calculate_gen_use_df(),
                     'Petajoules (PJ)',

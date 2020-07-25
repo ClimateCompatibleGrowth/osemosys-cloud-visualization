@@ -8,6 +8,7 @@ class EnergyExports:
         self.years = years
 
     def figure(self):
+        print('Generating EnergyExports')
         return df_plot(self.__calculate_ene_exp_df(), 'Petajoules (PJ)', 'Energy exports')
 
     def __calculate_ene_exp_df(self):

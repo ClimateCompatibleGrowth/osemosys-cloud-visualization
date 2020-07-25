@@ -10,6 +10,7 @@ class AreaByLandCover:
         self.land_use = land_use
 
     def figure(self):
+        print('Generating AreaByLandCover')
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crops()
         land_total_df = self.__calculate_land_total_df()

@@ -11,6 +11,7 @@ class CropYield:
         self.land_use = land_use
 
     def figure(self):
+        print('Generating CropYield')
         crops_yield_df = self.calculate_yield_df(self.all_params, self.years, self.land_use)
         crops_yield_df['y'] = self.years
         crops_yield_df = crops_yield_df.mul(10)

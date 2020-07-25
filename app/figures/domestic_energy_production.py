@@ -8,6 +8,7 @@ class DomesticEnergyProduction:
         self.years = years
 
     def figure(self):
+        print('Generating DomesticEnergyProduction')
         dom_prd_df = self.__calculate_dom_prd_df()
         for each in dom_prd_df.columns:
             if each in ['Land', 'Water', 'Precipitation']:

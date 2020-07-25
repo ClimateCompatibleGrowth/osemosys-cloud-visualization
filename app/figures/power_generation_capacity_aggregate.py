@@ -10,6 +10,7 @@ class PowerGenerationCapacityAggregate:
         self.years = years
 
     def figure(self):
+        print('Generating PowerGenerationCapacityAggregate')
         cap_agg_df = pd.DataFrame(columns=agg_col)
         cap_agg_df.insert(0, 'y', self.__cap_df()['y'])
         cap_agg_df = cap_agg_df.fillna(0.00)

@@ -10,6 +10,7 @@ class PowerGenerationAggregate:
         self.years = years
 
     def figure(self):
+        print('Generating PowerGenerationAggregate')
         gen_df = self.__calculate_gen_df()
         gen_agg_df = pd.DataFrame(columns=agg_col)
         gen_agg_df.insert(0, 'y', gen_df['y'])

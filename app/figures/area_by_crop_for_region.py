@@ -11,6 +11,7 @@ class AreaByCropForRegion:
         self.region = region
 
     def figure(self):
+        print('Generating AreaByCrop by region')
         regions = self.land_use.regions()
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops_region_df = self.__calculate_crops_total_df()
