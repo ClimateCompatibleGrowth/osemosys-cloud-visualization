@@ -8,6 +8,7 @@ import functools
 
 class Config:
     def __init__(self, input_string):
+        print(f'Config input: {input_string}')
         self.input_string = input_string
 
     def csv_folder_path(self):
