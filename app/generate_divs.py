@@ -27,9 +27,9 @@ class GenerateDivs:
         self.config = config
 
     def generate_divs(self):
-        return [DashFigure(dataframe).to_div() for dataframe in self.__generate_figures()]
+        return [DashFigure(iplot).to_div() for iplot in self.__generate_iplots()]
 
-    def __generate_figures(self):
+    def __generate_iplots(self):
         land_use = LandUse(self.config)
         results_path = self.config.csv_folder_path()
         result_parser = ResultParser(results_path)
@@ -37,7 +37,7 @@ class GenerateDivs:
         all_params = result_parser.all_params
         years = result_parser.years
 
-        figure_list = [
+        iplots_list = [
                 PowerGenerationCapacity(all_params, years).figure(),
                 PowerGenerationCapacityAggregate(all_params, years).figure(),
                 PowerGenerationDetail(all_params, years).figure(),
@@ -55,7 +55,9 @@ class GenerateDivs:
             ]
 
         for region in land_use.regions().keys():
-            figure_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
-            figure_list.append(AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure())
+            iplots_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
+            iplots_list.append(
+                    AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure()
+                    )
 
-        return figure_list
+        return iplots_list

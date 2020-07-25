@@ -3,8 +3,8 @@ import dash_html_components as html
 
 
 class DashFigure:
-    def __init__(self, dataframe):
-        self.dataframe = dataframe
+    def __init__(self, iplot):
+        self.iplot = iplot
 
     def to_div(self):
-        return html.Div(dcc.Graph(figure=self.dataframe), className='figure')
+        return html.Div(dcc.Graph(figure=self.iplot), className='figure')
