@@ -72,12 +72,12 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
     if triggered_element in ['upload-data.contents']:
         config_input = process_uploaded_file(upload_data)
 
-    config = Config(input_string)
+    config = Config(config_input)
     if config.is_valid():
         all_figures = generate_figures(config)
         return [div_from_figure(figure) for figure in all_figures]
     else:
-        return []
+        return [f'Invalid model: {config_input}']
 
 
 def parse_query_string(query_string):
