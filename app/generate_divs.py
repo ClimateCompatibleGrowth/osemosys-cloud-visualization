@@ -27,7 +27,7 @@ pd.set_option('mode.chained_assignment', None)
 class GenerateDivs:
     def __init__(self, config):
         self.config = config
-        self.all_divs = self.__generate_iplots()
+        self.all_divs = self.__iplots_grouped_by_category()
 
     def generate_divs(self):
         return html.Div([
@@ -69,7 +69,10 @@ class GenerateDivs:
     def water_divs(self):
         return self.all_divs['Water']
 
-    def __generate_iplots(self):
+    def figure_ids(self):
+        pass
+
+    def __all_iplots(self):
         land_use = LandUse(self.config)
         results_path = self.config.csv_folder_path()
         result_parser = ResultParser(results_path)
@@ -150,8 +153,11 @@ class GenerateDivs:
                     }
                 )
 
+        return iplots_list
+
+    def __iplots_grouped_by_category(self):
         grouped = defaultdict(lambda: [])
-        for figure_and_category in iplots_list:
+        for figure_and_category in self.__all_iplots():
             grouped[figure_and_category['category']].append(
                         DashFigure(figure_and_category['figure']).to_div()
                     )
