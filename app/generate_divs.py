@@ -1,3 +1,4 @@
+from collections import defaultdict
 import os
 import pandas as pd
 from app.land_use import LandUse
@@ -25,9 +26,22 @@ pd.set_option('mode.chained_assignment', None)
 class GenerateDivs:
     def __init__(self, config):
         self.config = config
+        self.all_divs = self.__generate_iplots()
 
     def generate_divs(self):
-        return [DashFigure(iplot).to_div() for iplot in self.__generate_iplots()]
+        return self.__generate_iplots()
+
+    def climate_divs(self):
+        return self.all_divs['Climate']
+
+    def land_divs(self):
+        return self.all_divs['Land']
+
+    def energy_divs(self):
+        return self.all_divs['Energy']
+
+    def water_divs(self):
+        return self.all_divs['Water']
 
     def __generate_iplots(self):
         land_use = LandUse(self.config)
@@ -38,26 +52,42 @@ class GenerateDivs:
         years = result_parser.years
 
         iplots_list = [
-                PowerGenerationCapacity(all_params, years).figure(),
-                PowerGenerationCapacityAggregate(all_params, years).figure(),
-                PowerGenerationDetail(all_params, years).figure(),
-                PowerGenerationAggregate(all_params, years).figure(),
-                PowerGenerationFuelUse(all_params, years).figure(),
-                DomesticEnergyProduction(all_params, years).figure(),
-                CapitalInvestment(all_params, years).figure(),
-                EnergyImports(all_params, years).figure(),
-                EnergyExports(all_params, years).figure(),
-                CostElectrictyGeneration(all_params, years).figure(),
-                AreaByCrop(all_params, years, land_use).figure(),
-                AreaByLandCover(all_params, years, land_use).figure(),
-                CropProduction(all_params, years).figure(),
-                CropYield(all_params, years, land_use).figure(),
+                {
+                    'figure': DashFigure(PowerGenerationCapacity(all_params, years).figure()).to_div(),
+                    'category': 'Climate',
+                },
+
+                {
+                    'figure': DashFigure(PowerGenerationCapacityAggregate(all_params, years).figure()).to_div(),
+                    'category': 'Land',
+                },
+                {
+                    'figure': DashFigure(PowerGenerationDetail(all_params, years).figure()).to_div(),
+                    'category': 'Energy',
+                },
+                {
+                    'figure': DashFigure(PowerGenerationAggregate(all_params, years).figure()).to_div(),
+                    'category': 'Water',
+                },
+                # PowerGenerationFuelUse(all_params, years).figure(),
+                # DomesticEnergyProduction(all_params, years).figure(),
+                # CapitalInvestment(all_params, years).figure(),
+                # EnergyImports(all_params, years).figure(),
+                # EnergyExports(all_params, years).figure(),
+                # CostElectrictyGeneration(all_params, years).figure(),
+                # AreaByCrop(all_params, years, land_use).figure(),
+                # AreaByLandCover(all_params, years, land_use).figure(),
+                # CropProduction(all_params, years).figure(),
+                # CropYield(all_params, years, land_use).figure(),
             ]
 
-        for region in land_use.regions().keys():
-            iplots_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
-            iplots_list.append(
-                    AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure()
-                    )
+        # for region in land_use.regions().keys():
+        #     iplots_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
+        #     iplots_list.append(
+        #             AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure()
+        #             )
 
-        return iplots_list
+        grouped = defaultdict(lambda: [])
+        for figure_and_category in iplots_list:
+            grouped[figure_and_category['category']].append(figure_and_category['figure'])
+        return grouped
