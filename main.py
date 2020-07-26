@@ -97,32 +97,6 @@ app.layout = html.Div([
                     **{'data-toggle': 'tab'},
                     ),
         ], className='nav nav-tabs', id='categoryTab', role='tablist')),
-    html.Div([
-        html.Div(
-                'Climate content',
-                className='tab-pane show active',
-                id='nav-climate',
-                role='tabpanel',
-            ),
-        html.Div(
-                'land content',
-                className='tab-pane',
-                id='nav-land',
-                role='tabpanel',
-                ),
-        html.Div(
-                'energy content',
-                className='tab-pane',
-                id='nav-energy',
-                role='tabpanel',
-                ),
-        html.Div(
-                'water content',
-                className='tab-pane',
-                id='nav-water',
-                role='tabpanel',
-                ),
-        ], className='tab-content', id='categoryTabContent'),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
 
@@ -161,7 +135,7 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
 
     config = Config(config_input)
     if config.is_valid():
-        return GenerateDivs(config).climate_divs()
+        return GenerateDivs(config).generate_divs()
     else:
         return [f'Invalid model: {config_input}']
 

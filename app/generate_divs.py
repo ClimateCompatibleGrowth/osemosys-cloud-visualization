@@ -1,6 +1,7 @@
 from collections import defaultdict
 import os
 import pandas as pd
+import dash_html_components as html
 from app.land_use import LandUse
 from app.result_parser import ResultParser
 from app.figures.power_generation_capacity import PowerGenerationCapacity
@@ -29,7 +30,32 @@ class GenerateDivs:
         self.all_divs = self.__generate_iplots()
 
     def generate_divs(self):
-        return self.__generate_iplots()
+        return html.Div([
+            html.Div(
+                    self.climate_divs(),
+                    className='tab-pane show active',
+                    id='nav-climate',
+                    role='tabpanel',
+                ),
+            html.Div(
+                    self.land_divs(),
+                    className='tab-pane',
+                    id='nav-land',
+                    role='tabpanel',
+                    ),
+            html.Div(
+                    self.energy_divs(),
+                    className='tab-pane',
+                    id='nav-energy',
+                    role='tabpanel',
+                    ),
+            html.Div(
+                    self.water_divs(),
+                    className='tab-pane',
+                    id='nav-water',
+                    role='tabpanel',
+                    ),
+            ], className='tab-content', id='categoryTabContent'),
 
     def climate_divs(self):
         return self.all_divs['Climate']
