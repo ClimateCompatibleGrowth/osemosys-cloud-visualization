@@ -10,11 +10,41 @@ import sys
 import urllib
 import zipfile
 from app.config import Config
-from app.generate_figures import generate_figures  # noqa
+from app.generate_divs import GenerateDivs  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
-app = dash.Dash(__name__)
+external_scripts = [
+        {
+            'src': 'https://code.jquery.com/jquery-3.5.1.slim.min.js',
+            'integrity': 'sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj',
+            'crossorigin': 'anonymous'
+        },
+        {
+            'src': 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js',
+            'integrity': 'sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo',
+            'crossorigin': 'anonymous'
+        },
+        {
+            'src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js',
+            'integrity': 'sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI',
+            'crossorigin': 'anonymous'
+        }
+    ]
+
+external_stylesheets = [
+        {
+            'href': 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css',
+            'rel': 'stylesheet',
+            'integrity': 'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
+            'crossorigin': 'anonymous'
+        }
+    ]
+
+app = dash.Dash(__name__,
+                external_scripts=external_scripts,
+                external_stylesheets=external_stylesheets)
+
 server = app.server
 
 app.layout = html.Div([
@@ -32,12 +62,43 @@ app.layout = html.Div([
         children=html.Div(html.Button('Upload zip file')),
         className='upload-zone',
     ),
+    html.Nav(
+        html.Div([
+            html.A(
+                    'Climate',
+                    className='nav-item nav-link',
+                    id='nav-climate-tab',
+                    href='#nav-climate',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                ),
+            html.A(
+                    'Land',
+                    className='nav-item nav-link',
+                    id='nav-land-tab',
+                    href='#nav-land',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+            html.A(
+                    'Energy',
+                    className='nav-item nav-link',
+                    id='nav-energy-tab',
+                    href='#nav-energy',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+            html.A(
+                    'Water',
+                    className='nav-item nav-link',
+                    id='nav-water-tab',
+                    href='#nav-water',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+        ], className='nav nav-tabs justify-content-center', id='categoryTab', role='tablist')),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
-
-
-def div_from_figure(figure):
-    return html.Div(dcc.Graph(figure=figure), className='figure')
 
 
 @app.callback(
@@ -74,8 +135,7 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
 
     config = Config(config_input)
     if config.is_valid():
-        all_figures = generate_figures(config)
-        return [div_from_figure(figure) for figure in all_figures]
+        return GenerateDivs(config).generate_divs()
     else:
         return [f'Invalid model: {config_input}']
 
