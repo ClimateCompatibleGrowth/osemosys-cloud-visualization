@@ -81,59 +81,59 @@ class GenerateDivs:
                 {
                     'figure': PowerGenerationCapacity(all_params, years).figure(),
                     'category': 'Energy',
-                    },
+                },
                 {
                     'figure': PowerGenerationCapacityAggregate(all_params, years).figure(),
                     'category': 'Energy',
-                    },
+                },
                 {
                     'figure': PowerGenerationDetail(all_params, years).figure(),
                     'category': 'Energy',
-                    },
+                },
                 {
                     'figure': PowerGenerationAggregate(all_params, years).figure(),
                     'category': 'Energy',
-                    },
+                },
                 {
                     'figure': PowerGenerationFuelUse(all_params, years).figure(),
                     'category': 'Energy'
-                    },
+                },
                 {
                     'figure': DomesticEnergyProduction(all_params, years).figure(),
                     'category': 'Energy'
-                    },
+                },
                 {
                     'figure': CapitalInvestment(all_params, years).figure(),
                     'category': 'Energy'
-                    },
+                },
                 {
                     'figure': EnergyImports(all_params, years).figure(),
                     'category': 'Energy'
-                    },
+                },
                 {
                     'figure': EnergyExports(all_params, years).figure(),
                     'category': 'Energy'
-                    },
+                },
                 {
                     'figure': CostElectrictyGeneration(all_params, years).figure(),
                     'category': 'Energy'
-                    },
+                },
                 {
                     'figure': AreaByCrop(all_params, years, land_use).figure(),
                     'category': 'Land'
-                    },
+                },
                 {
                     'figure': AreaByLandCover(all_params, years, land_use).figure(),
                     'category': 'Land'
-                    },
+                },
                 {
                     'figure': CropProduction(all_params, years).figure(),
                     'category': 'Land'
-                    },
+                },
                 {
-                        'figure': CropYield(all_params, years, land_use).figure(),
-                        'category': 'Land'
-                        },
+                    'figure': CropYield(all_params, years, land_use).figure(),
+                    'category': 'Land'
+                },
                 ]
 
         for region in land_use.regions().keys():
@@ -141,18 +141,18 @@ class GenerateDivs:
                     {
                         'figure': AreaByCropForRegion(all_params, years, land_use, region).figure(),
                         'category': 'Land'
-                        }
-                    )
+                    }
+                )
             iplots_list.append(
                     {
                         'figure': AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure(),
                         'category': 'Land'
-                        }
-                    )
+                    }
+                )
 
         grouped = defaultdict(lambda: [])
         for figure_and_category in iplots_list:
             grouped[figure_and_category['category']].append(
-                    DashFigure(figure_and_category['figure']).to_div()
+                        DashFigure(figure_and_category['figure']).to_div()
                     )
         return grouped
