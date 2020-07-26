@@ -79,41 +79,80 @@ class GenerateDivs:
 
         iplots_list = [
                 {
-                    'figure': DashFigure(PowerGenerationCapacity(all_params, years).figure()).to_div(),
-                    'category': 'Climate',
-                },
-
-                {
-                    'figure': DashFigure(PowerGenerationCapacityAggregate(all_params, years).figure()).to_div(),
-                    'category': 'Land',
-                },
-                {
-                    'figure': DashFigure(PowerGenerationDetail(all_params, years).figure()).to_div(),
+                    'figure': PowerGenerationCapacity(all_params, years).figure(),
                     'category': 'Energy',
-                },
+                    },
                 {
-                    'figure': DashFigure(PowerGenerationAggregate(all_params, years).figure()).to_div(),
-                    'category': 'Water',
-                },
-                # PowerGenerationFuelUse(all_params, years).figure(),
-                # DomesticEnergyProduction(all_params, years).figure(),
-                # CapitalInvestment(all_params, years).figure(),
-                # EnergyImports(all_params, years).figure(),
-                # EnergyExports(all_params, years).figure(),
-                # CostElectrictyGeneration(all_params, years).figure(),
-                # AreaByCrop(all_params, years, land_use).figure(),
-                # AreaByLandCover(all_params, years, land_use).figure(),
-                # CropProduction(all_params, years).figure(),
-                # CropYield(all_params, years, land_use).figure(),
-            ]
+                    'figure': PowerGenerationCapacityAggregate(all_params, years).figure(),
+                    'category': 'Energy',
+                    },
+                {
+                    'figure': PowerGenerationDetail(all_params, years).figure(),
+                    'category': 'Energy',
+                    },
+                {
+                    'figure': PowerGenerationAggregate(all_params, years).figure(),
+                    'category': 'Energy',
+                    },
+                {
+                    'figure': PowerGenerationFuelUse(all_params, years).figure(),
+                    'category': 'Energy'
+                    },
+                {
+                    'figure': DomesticEnergyProduction(all_params, years).figure(),
+                    'category': 'Energy'
+                    },
+                {
+                    'figure': CapitalInvestment(all_params, years).figure(),
+                    'category': 'Energy'
+                    },
+                {
+                    'figure': EnergyImports(all_params, years).figure(),
+                    'category': 'Energy'
+                    },
+                {
+                    'figure': EnergyExports(all_params, years).figure(),
+                    'category': 'Energy'
+                    },
+                {
+                    'figure': CostElectrictyGeneration(all_params, years).figure(),
+                    'category': 'Energy'
+                    },
+                {
+                    'figure': AreaByCrop(all_params, years, land_use).figure(),
+                    'category': 'Land'
+                    },
+                {
+                    'figure': AreaByLandCover(all_params, years, land_use).figure(),
+                    'category': 'Land'
+                    },
+                {
+                    'figure': CropProduction(all_params, years).figure(),
+                    'category': 'Land'
+                    },
+                {
+                        'figure': CropYield(all_params, years, land_use).figure(),
+                        'category': 'Land'
+                        },
+                ]
 
-        # for region in land_use.regions().keys():
-        #     iplots_list.append(AreaByCropForRegion(all_params, years, land_use, region).figure())
-        #     iplots_list.append(
-        #             AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure()
-        #             )
+        for region in land_use.regions().keys():
+            iplots_list.append(
+                    {
+                        'figure': AreaByCropForRegion(all_params, years, land_use, region).figure(),
+                        'category': 'Land'
+                        }
+                    )
+            iplots_list.append(
+                    {
+                        'figure': AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure(),
+                        'category': 'Land'
+                        }
+                    )
 
         grouped = defaultdict(lambda: [])
         for figure_and_category in iplots_list:
-            grouped[figure_and_category['category']].append(figure_and_category['figure'])
+            grouped[figure_and_category['category']].append(
+                    DashFigure(figure_and_category['figure']).to_div()
+                    )
         return grouped
