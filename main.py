@@ -82,7 +82,7 @@ app.layout = html.Div([
                     ),
             html.A(
                     'Energy',
-                    className='nav-item nav-link',
+                    className='nav-item nav-link active',
                     id='nav-energy-tab',
                     href='#nav-energy',
                     role='tab',
