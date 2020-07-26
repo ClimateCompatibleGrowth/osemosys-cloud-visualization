@@ -96,7 +96,7 @@ app.layout = html.Div([
                     role='tab',
                     **{'data-toggle': 'tab'},
                     ),
-        ], className='nav nav-tabs', id='categoryTab', role='tablist')),
+        ], className='nav nav-tabs justify-content-center', id='categoryTab', role='tablist')),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
 

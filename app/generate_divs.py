@@ -33,7 +33,7 @@ class GenerateDivs:
         return html.Div([
             html.Div(
                     self.climate_divs(),
-                    className='tab-pane show active',
+                    className='tab-pane',
                     id='nav-climate',
                     role='tabpanel',
                 ),
@@ -45,7 +45,7 @@ class GenerateDivs:
                     ),
             html.Div(
                     self.energy_divs(),
-                    className='tab-pane',
+                    className='tab-pane show active',
                     id='nav-energy',
                     role='tabpanel',
                     ),
