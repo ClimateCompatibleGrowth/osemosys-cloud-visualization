@@ -27,8 +27,8 @@ pd.set_option('mode.chained_assignment', None)
 class GenerateDivs:
     def __init__(self, config):
         self.config = config
-        self.all_divs = self.__iplots_grouped_by_category()
-        self.all_ids = [iplot.id for iplot in self.__all_iplots()]
+        self.all_divs = self.__figures_grouped_by_category()
+        self.all_ids = [figure.id for figure in self.__all_figures()]
 
     def generate_divs(self):
         return html.Div([
@@ -73,7 +73,7 @@ class GenerateDivs:
     def figure_ids(self):
         pass
 
-    def __all_iplots(self):
+    def __all_figures(self):
         land_use = LandUse(self.config)
         results_path = self.config.csv_folder_path()
         result_parser = ResultParser(results_path)
@@ -81,7 +81,7 @@ class GenerateDivs:
         all_params = result_parser.all_params
         years = result_parser.years
 
-        iplots_list = [
+        figure_list = [
                 DashFigure(
                     iplot=PowerGenerationCapacity(all_params, years).figure(),
                     category='Energy',
@@ -155,14 +155,14 @@ class GenerateDivs:
             ]
 
         for region in land_use.regions().keys():
-            iplots_list.append(
+            figure_list.append(
                 DashFigure(
                     iplot=AreaByCropForRegion(all_params, years, land_use, region).figure(),
                     category='Land',
                     id=f'area-by-crop-{region}'
                 ),
             )
-            iplots_list.append(
+            figure_list.append(
                 DashFigure(
                     iplot=AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure(),
                     category='Land',
@@ -170,10 +170,10 @@ class GenerateDivs:
                 ),
             )
 
-        return iplots_list
+        return figure_list
 
-    def __iplots_grouped_by_category(self):
+    def __figures_grouped_by_category(self):
         grouped = defaultdict(lambda: [])
-        for dash_figure in self.__all_iplots():
+        for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.to_div())
         return grouped
