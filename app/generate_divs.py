@@ -28,7 +28,7 @@ class GenerateDivs:
     def __init__(self, config):
         self.config = config
         self.all_divs = self.__figures_grouped_by_category()
-        self.all_ids = [figure.id for figure in self.__all_figures()]
+        self.all_ids = self.__ids_by_category()
 
     def generate_divs(self):
         return html.Div([
@@ -69,9 +69,6 @@ class GenerateDivs:
 
     def water_divs(self):
         return self.all_divs['Water']
-
-    def figure_ids(self):
-        pass
 
     def __all_figures(self):
         land_use = LandUse(self.config)
@@ -176,4 +173,10 @@ class GenerateDivs:
         grouped = defaultdict(lambda: [])
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.to_div())
+        return grouped
+
+    def __ids_by_category(self):
+        grouped = defaultdict(lambda: [])
+        for dash_figure in self.__all_figures():
+            grouped[dash_figure.category].append(dash_figure.id)
         return grouped
