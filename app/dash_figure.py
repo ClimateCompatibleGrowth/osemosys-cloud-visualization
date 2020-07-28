@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import traceback
 
 
 class DashFigure:
@@ -9,4 +10,13 @@ class DashFigure:
         self.id = id
 
     def to_div(self):
-        return html.Div(dcc.Graph(figure=self.iplot), className=f'figure figure-{self.id}')
+        try:
+            return html.Div(
+                        dcc.Graph(figure=self.iplot.figure()), className=f'figure figure-{self.id}',
+                    )
+        except Exception as e:
+            return html.Div([
+                    html.Pre(traceback.format_exc(), className='card-body'),
+                ],
+                className='figure-error card'
+            )

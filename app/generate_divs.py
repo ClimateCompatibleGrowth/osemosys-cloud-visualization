@@ -80,72 +80,72 @@ class GenerateDivs:
 
         figure_list = [
                 DashFigure(
-                    iplot=PowerGenerationCapacity(all_params, years).figure(),
+                    iplot=PowerGenerationCapacity(all_params, years),
                     category='Energy',
                     id='power-generation-capacity',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationCapacityAggregate(all_params, years).figure(),
+                    iplot=PowerGenerationCapacityAggregate(all_params, years),
                     category='Energy',
                     id='power-generation-capacity-aggregate',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationDetail(all_params, years).figure(),
+                    iplot=PowerGenerationDetail(all_params, years),
                     category='Energy',
                     id='power-generation-detail'
                 ),
                 DashFigure(
-                    iplot=PowerGenerationAggregate(all_params, years).figure(),
+                    iplot=PowerGenerationAggregate(all_params, years),
                     category='Energy',
                     id='power-generation-aggregate'
                 ),
                 DashFigure(
-                    iplot=PowerGenerationFuelUse(all_params, years).figure(),
+                    iplot=PowerGenerationFuelUse(all_params, years),
                     category='Energy',
                     id='power-generation-fuel-use'
                 ),
                 DashFigure(
-                    iplot=DomesticEnergyProduction(all_params, years).figure(),
+                    iplot=DomesticEnergyProduction(all_params, years),
                     category='Energy',
                     id='domestic-energy-production'
                 ),
                 DashFigure(
-                    iplot=CapitalInvestment(all_params, years).figure(),
+                    iplot=CapitalInvestment(all_params, years),
                     category='Energy',
                     id='capital-investment'
                 ),
                 DashFigure(
-                    iplot=EnergyImports(all_params, years).figure(),
+                    iplot=EnergyImports(all_params, years),
                     category='Energy',
                     id='energy-imports'
                 ),
                 DashFigure(
-                    iplot=EnergyExports(all_params, years).figure(),
+                    iplot=EnergyExports(all_params, years),
                     category='Energy',
                     id='energy-exports'
                 ),
                 DashFigure(
-                    iplot=CostElectrictyGeneration(all_params, years).figure(),
+                    iplot=CostElectrictyGeneration(all_params, years),
                     category='Energy',
                     id='cost-electricty-generation'
                 ),
                 DashFigure(
-                    iplot=AreaByCrop(all_params, years, land_use).figure(),
+                    iplot=AreaByCrop(all_params, years, land_use),
                     category='Land',
                     id='area-by-crop'
                 ),
                 DashFigure(
-                    iplot=AreaByLandCover(all_params, years, land_use).figure(),
+                    iplot=AreaByLandCover(all_params, years, land_use),
                     category='Land',
                     id='area-by-land-cover'
                 ),
                 DashFigure(
-                    iplot=CropProduction(all_params, years).figure(),
+                    iplot=CropProduction(all_params, years),
                     category='Land',
                     id='crop-production'
                 ),
                 DashFigure(
-                    iplot=CropYield(all_params, years, land_use).figure(),
+                    iplot=CropYield(all_params, years, land_use),
                     category='Land',
                     id='crop-yield'
                 ),
@@ -154,14 +154,14 @@ class GenerateDivs:
         for region in land_use.regions().keys():
             figure_list.append(
                 DashFigure(
-                    iplot=AreaByCropForRegion(all_params, years, land_use, region).figure(),
+                    iplot=AreaByCropForRegion(all_params, years, land_use, region),
                     category='Land',
                     id=f'area-by-crop-{region}'
                 ),
             )
             figure_list.append(
                 DashFigure(
-                    iplot=AreaByLandCoverTypeForRegion(all_params, years, land_use, region).figure(),
+                    iplot=AreaByLandCoverTypeForRegion(all_params, years, land_use, region),
                     category='Land',
                     id=f'area-by-land-{region}'
                 ),

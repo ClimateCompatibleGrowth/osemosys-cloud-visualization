@@ -12,6 +12,12 @@ h1 {
   display: inline-block;
 }
 
+.figure-error {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 .source-form {
   width: 80%;
   margin: auto;
