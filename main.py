@@ -106,8 +106,11 @@ app.layout = html.Div([
     [Input(component_id='url', component_property='search')]
     )
 def populate_input_string_from_query_string(query_string):
-    print(f'populating query_string {query_string}')
-    return parse_query_string(query_string)
+    if query_string is not None:
+        print(f'populating query_string {query_string}')
+        return parse_query_string(query_string)
+    else:
+        return ''
 
 
 @app.callback(
@@ -141,9 +144,10 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
 
 
 def parse_query_string(query_string):
-    return urllib.parse.parse_qs(
-            urllib.parse.unquote(query_string)
-           )['?model'][0]
+    parsed_qs = urllib.parse.parse_qs(
+        urllib.parse.unquote(query_string)
+    )
+    return parsed_qs.get('?model', [''])[0]
 
 
 def process_uploaded_file(raw_contents):
