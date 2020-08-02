@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -xue
 
 git pull
 source venv/bin/activate
