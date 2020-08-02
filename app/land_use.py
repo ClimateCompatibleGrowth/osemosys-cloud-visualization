@@ -14,7 +14,9 @@ class LandUse:
     def regions(self):
         # Construct dictionary of regions {region_code:region_name}.
         # Region codes are extracted from the data file
-        regions_list = sorted(list(set([x[6:-3] for x in self.technologies if x.startswith('LNDAGR')])))
+        regions_list = sorted(
+                list(set([x[6:-3] for x in self.technologies if x.startswith('LNDAGR')]))
+            )
         regions = {}
 
         for each in regions_list:

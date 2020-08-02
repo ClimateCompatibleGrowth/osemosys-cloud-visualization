@@ -37,7 +37,7 @@ class AreaByLandCover:
         return df_plot(land_total_df, 'Land area (1000 sq.km.)', 'Area by land cover type')
 
     def __calculate_land_total_df(self):
-        total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']
+        total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
         land_total_df = total_annual_technology_activity_by_mode[
                 total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
             ].drop('r', axis=1)

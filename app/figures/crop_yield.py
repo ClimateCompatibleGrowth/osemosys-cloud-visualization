@@ -21,13 +21,13 @@ class CropYield:
                                     xTitle='Year',
                                     yTitle='Yield (t/ha)',
                                     size=10,
-                                    color=[color_dict[x] for x in crops_yield_df.columns if x != 'y'],
+                                    color=[color_dict[x] for x in crops_yield_df.columns if x != 'y'],  # noqa
                                     title='Yield (tonnes/hectare)',
                                     showlegend=True)
 
     def calculate_yield_df(self, all_params, years, land_use):
         mode_crop_combo = land_use.mode_crop_combo()
-        crops_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(
+        crops_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa
             'LNDAGR')].drop('r', axis=1)
         crops_total_df['m'] = crops_total_df['m'].astype(int)
         crops_total_df['crop_combo'] = crops_total_df['m'].map(mode_crop_combo)
@@ -46,7 +46,7 @@ class CropYield:
         return crops_yield_df
 
     def calculate_crops_prod_df(self, all_params, years):
-        crops_prod_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].f.str.startswith(
+        crops_prod_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].f.str.startswith(  # noqa
             'CRP')].drop('r', axis=1)
         crops_prod_df['f'] = crops_prod_df['f'].str[3:7]
         crops_prod_df['value'] = crops_prod_df['value'].astype('float64')

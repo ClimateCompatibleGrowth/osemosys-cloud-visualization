@@ -96,7 +96,7 @@ def generate_csv_files(data_file, results_file, base_folder):
     params = df.parameter.unique()
     all_params = {}
     cols = {'NewCapacity':['r','t','y'],
-            'AccumulatedNewCapacity':['r','t','y'], 
+            'AccumulatedNewCapacity':['r','t','y'],
             'TotalCapacityAnnual':['r','t','y'],
             'CapitalInvestment':['r','t','y'],
             'AnnualVariableOperatingCost':['r','t','y'],

@@ -42,9 +42,9 @@ class AreaByLandCoverTypeForRegion:
             axis=1).set_index('y').reset_index().rename(
                 columns=det_col)
         return df_plot(land_cluster_df, 'Land area (1000 sq.km.)',
-                'Area by land cover type (' + regions[self.region] + ' region)')
+                       'Area by land cover type (' + regions[self.region] + ' region)')
 
     def calculate_land_total_df(self, all_params, years):
-        land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(
+        land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa
             'LNDAGR')].drop('r', axis=1)
         return land_total_df

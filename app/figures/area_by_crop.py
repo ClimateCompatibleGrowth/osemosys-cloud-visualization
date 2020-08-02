@@ -31,8 +31,8 @@ class AreaByCrop:
         return df_plot(crops_total_df, 'Land area (1000 sq.km.)', 'Area by crop')
 
     def __calculate_crops_total_df(self):
-        total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']
+        total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
         crops_total_df = total_annual_technology_activity_by_mode[
-                total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
-            ].drop('r', axis=1)
+            total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
+        ].drop('r', axis=1)
         return crops_total_df
