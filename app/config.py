@@ -1,9 +1,10 @@
+import functools
+import json
+import os
 import random
 import wget
-import os
 from zipfile import ZipFile
 from app.generate_csv_files import generate_csv_files
-import functools
 
 
 class Config:
@@ -23,6 +24,28 @@ class Config:
 
     def is_valid(self):
         return self.__base_folder_path() is not None
+
+    def title(self):
+        return self.__metadata()['run_name']
+
+    def description(self):
+        return self.__metadata()['description']
+
+    def __metadata(self):
+        if not self.is_valid():
+            return self.__default_metadata()
+
+        metadata_file = os.path.join(self.__base_folder_path(), 'metadata.json')
+        if os.path.exists(metadata_file):
+            with open(metadata_file, 'r') as f:
+                return json.load(f)
+        else:
+            return self.__default_metadata()
+
+    def __default_metadata(self):
+        with open(os.path.join(os.getcwd(), 'data', 'default_metadata.json'), 'r') as f:
+            metadata = json.load(f)
+        return metadata
 
     def __results_file_path(self):
         return os.path.join(self.__base_folder_path(), 'result.txt')
