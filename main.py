@@ -10,6 +10,7 @@ import sys
 import urllib
 import zipfile
 from app.config import Config
+from app.header import Header
 from app.generate_divs import GenerateDivs  # noqa
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
@@ -49,8 +50,7 @@ server = app.server
 
 app.layout = html.Div([
     dcc.Location(id='url'),
-    html.H1('CLEWS Dashboard', id='title'),
-    html.Div('An interactive tool to visualise CLEWS model results', className='subtitle'),
+    html.Div([], id='header'),
     html.Div([
             dcc.Input(id='input-string', type='text', className='input-field'),
             html.Button(id='submit-button', n_clicks=0, children='Submit'),
@@ -114,7 +114,7 @@ def populate_input_string_from_query_string(query_string):
 
 
 @app.callback(
-    Output(component_id='title', component_property='children'),
+    Output(component_id='header', component_property='children'),
     [
         Input(component_id='submit-button', component_property='n_clicks'),
         Input(component_id='input-string', component_property='n_submit'),
@@ -123,14 +123,11 @@ def populate_input_string_from_query_string(query_string):
     ],
     [State('input-string', 'value')]
     )
-def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, input_string):
+def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_string):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
     config_input = config_input_from(input_string, raw_query_string, triggered_element)
     config = Config(config_input)
-    if config.is_valid():
-        return config.title()
-    else:
-        return 'CLEWS Dashboard'
+    return Header(config).contents()
 
 
 @app.callback(

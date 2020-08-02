@@ -28,15 +28,24 @@ class Config:
     def title(self):
         return self.__metadata()['run_name']
 
-    def __metadata(self):
-        metadata_file = os.path.join(self.__base_folder_path(), 'metadata.json')
-        if os.path.exists(metadata_file):
-            with open(metadata_file, 'r') as f:
-                metadata = json.load(f)
-        else:
-            with open(os.path.join(os.getcwd(), 'data', 'default_metadata.json'), 'r') as f:
-                metadata = json.load(f)
+    def description(self):
+        return self.__metadata()['description']
 
+    def __metadata(self):
+        if self.is_valid():
+            metadata_file = os.path.join(self.__base_folder_path(), 'metadata.json')
+            if os.path.exists(metadata_file):
+                with open(metadata_file, 'r') as f:
+                    metadata = json.load(f)
+                return metadata
+            else:
+                return self.__default_metadata()
+        else:
+            return self.__default_metadata()
+
+    def __default_metadata(self):
+        with open(os.path.join(os.getcwd(), 'data', 'default_metadata.json'), 'r') as f:
+            metadata = json.load(f)
         return metadata
 
     def __results_file_path(self):
