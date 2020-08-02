@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-set -xu
+set -e
 
 git pull
 source venv/bin/activate
