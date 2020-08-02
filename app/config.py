@@ -32,14 +32,13 @@ class Config:
         return self.__metadata()['description']
 
     def __metadata(self):
-        if self.is_valid():
-            metadata_file = os.path.join(self.__base_folder_path(), 'metadata.json')
-            if os.path.exists(metadata_file):
-                with open(metadata_file, 'r') as f:
-                    metadata = json.load(f)
-                return metadata
-            else:
-                return self.__default_metadata()
+        if not self.is_valid():
+            return self.__default_metadata()
+
+        metadata_file = os.path.join(self.__base_folder_path(), 'metadata.json')
+        if os.path.exists(metadata_file):
+            with open(metadata_file, 'r') as f:
+                return json.load(f)
         else:
             return self.__default_metadata()
 
