@@ -1,6 +1,7 @@
 from collections import defaultdict
 import os
 import pandas as pd
+import dash_core_components as dcc
 import dash_html_components as html
 from app.land_use import LandUse
 from app.result_parser import ResultParser
@@ -32,6 +33,7 @@ class GenerateDivs:
 
     def generate_divs(self):
         return html.Div([
+            self.__checkboxes(),
             html.Div(
                     self.climate_divs(),
                     className='tab-pane',
@@ -174,6 +176,15 @@ class GenerateDivs:
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.to_div())
         return grouped
+
+    def __checkboxes(self):
+        ids = self.all_ids['Energy']
+        return dcc.Checklist(
+            options=[{'label': id, 'value': id} for id in ids],
+            value=ids,
+            id={'type': 'checkboxes', 'index': 'Energy'},
+            persistence=True,
+        )
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])

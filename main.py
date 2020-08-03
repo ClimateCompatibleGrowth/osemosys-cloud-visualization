@@ -1,4 +1,4 @@
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, State, ClientsideFunction, ALL
 import cufflinks
 import base64
 import dash
@@ -99,6 +99,17 @@ app.layout = html.Div([
         ], className='nav nav-tabs justify-content-center', id='categoryTab', role='tablist')),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
+
+
+app.clientside_callback(
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='testFunction'
+    ),
+    Output(component_id='figures-container', component_property='data-checked-boxes'),
+    [Input({'type': 'checkboxes', 'index': ALL}, 'value')],
+    [State({'type': 'checkboxes', 'index': ALL}, 'options')],
+)
 
 
 @app.callback(
