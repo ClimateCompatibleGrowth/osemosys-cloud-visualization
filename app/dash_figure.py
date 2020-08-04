@@ -18,5 +18,5 @@ class DashFigure:
             return html.Div([
                     html.Pre(traceback.format_exc(), className='card-body'),
                 ],
-                className='figure-error card'
+                className=f'figure-error card figure-{self.id}'
             )

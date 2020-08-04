@@ -1,6 +1,7 @@
 from collections import defaultdict
 import os
 import pandas as pd
+import dash_core_components as dcc
 import dash_html_components as html
 from app.land_use import LandUse
 from app.result_parser import ResultParser
@@ -33,29 +34,49 @@ class GenerateDivs:
     def generate_divs(self):
         return html.Div([
             html.Div(
-                    self.climate_divs(),
-                    className='tab-pane',
-                    id='nav-climate',
-                    role='tabpanel',
-                ),
-            html.Div(
-                    self.land_divs(),
-                    className='tab-pane',
-                    id='nav-land',
-                    role='tabpanel',
+                [
+                    self.__checkboxes(self.all_ids['Climate'], 'Climate'),
+                    html.Div(
+                        self.climate_divs()
                     ),
+                ],
+                className='tab-pane',
+                id='nav-climate',
+                role='tabpanel',
+            ),
             html.Div(
-                    self.energy_divs(),
-                    className='tab-pane show active',
-                    id='nav-energy',
-                    role='tabpanel',
+                [
+                    self.__checkboxes(self.all_ids['Land'], 'Land'),
+                    html.Div(
+                        self.land_divs()
                     ),
+                ],
+                className='tab-pane',
+                id='nav-land',
+                role='tabpanel',
+            ),
             html.Div(
-                    self.water_divs(),
-                    className='tab-pane',
-                    id='nav-water',
-                    role='tabpanel',
+                [
+                    self.__checkboxes(self.all_ids['Energy'], 'Energy'),
+                    html.Div(
+                        self.energy_divs()
                     ),
+                ],
+                className='tab-pane show active',
+                id='nav-energy',
+                role='tabpanel',
+            ),
+            html.Div(
+                [
+                    self.__checkboxes(self.all_ids['Water'], 'Water'),
+                    html.Div(
+                        self.water_divs()
+                    ),
+                ],
+                className='tab-pane',
+                id='nav-water',
+                role='tabpanel',
+             ),
             ], className='tab-content', id='categoryTabContent'),
 
     def climate_divs(self):
@@ -174,6 +195,19 @@ class GenerateDivs:
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.to_div())
         return grouped
+
+    def __checkboxes(self, ids, category):
+        return dcc.Checklist(
+            options=[
+                {'label': id.replace('-', ' ').title(), 'value': id} for id in ids
+            ],
+            value=ids,
+            id={'type': 'checkboxes', 'index': category},
+            persistence=True,
+            className='form-check checkbox-container',
+            inputClassName='form-check-input custom-checkbox',
+            labelClassName='form-check-label'
+        )
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])
