@@ -1,22 +1,24 @@
 window.dash_clientside = Object.assign({}, window.dash_clientside, {
     clientside: {
         testFunction: function(checkedBoxes, options) {
-            if(options.length == 0) {
-                return
+          for (let i = 0; i < options.length; i++) {
+            if(options[i].length === 0) {
+              continue
             }
 
-            optionsString = options[0].map(option => option.value)
+            optionsString = options[i].map(option => option.value)
 
-          let toHide = optionsString.filter(x =>
-            !checkedBoxes[0].includes(x)).map( id => `.figure-${id}`
-          )
+            let toHide = optionsString.filter(x =>
+              !checkedBoxes[i].includes(x)).map( id => `.figure-${id}`
+              )
 
-          let toShow = optionsString.filter(
-            x => checkedBoxes[0].includes(x)).map( id => `.figure-${id}`
-          )
+            let toShow = optionsString.filter(
+              x => checkedBoxes[i].includes(x)).map( id => `.figure-${id}`
+              )
 
-          $(toShow.join(',')).show()
-          $(toHide.join(',')).hide()
+            $(toShow.join(',')).show()
+            $(toHide.join(',')).hide()
+          }
         }
     }
 });
