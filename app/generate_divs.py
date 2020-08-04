@@ -33,31 +33,50 @@ class GenerateDivs:
 
     def generate_divs(self):
         return html.Div([
-            self.__checkboxes(),
             html.Div(
-                    self.climate_divs(),
-                    className='tab-pane',
-                    id='nav-climate',
-                    role='tabpanel',
-                ),
-            html.Div(
-                    self.land_divs(),
-                    className='tab-pane',
-                    id='nav-land',
-                    role='tabpanel',
+                [
+                    self.__checkboxes(self.all_ids['Climate']),
+                    html.Div(
+                        self.climate_divs()
                     ),
+                ],
+                className='tab-pane',
+                id='nav-climate',
+                role='tabpanel',
+            ),
             html.Div(
-                    self.energy_divs(),
-                    className='tab-pane show active',
-                    id='nav-energy',
-                    role='tabpanel',
+                [
+                    self.__checkboxes(self.all_ids['Land']),
+                    html.Div(
+                        self.land_divs()
                     ),
+                ],
+                className='tab-pane',
+                id='nav-land',
+                role='tabpanel',
+            ),
             html.Div(
-                    self.water_divs(),
-                    className='tab-pane',
-                    id='nav-water',
-                    role='tabpanel',
+                [
+                    self.__checkboxes(self.all_ids['Energy']),
+                    html.Div(
+                        self.energy_divs()
                     ),
+                ],
+                className='tab-pane show active',
+                id='nav-energy',
+                role='tabpanel',
+            ),
+            html.Div(
+                [
+                    self.__checkboxes(self.all_ids['Water']),
+                    html.Div(
+                        self.water_divs()
+                    ),
+                ],
+                className='tab-pane',
+                id='nav-water',
+                role='tabpanel',
+             ),
             ], className='tab-content', id='categoryTabContent'),
 
     def climate_divs(self):
@@ -177,9 +196,7 @@ class GenerateDivs:
             grouped[dash_figure.category].append(dash_figure.to_div())
         return grouped
 
-    def __checkboxes(self):
-        ids = self.all_ids['Energy']
-
+    def __checkboxes(self, ids):
         return dcc.Checklist(
             options=[
                 {'label': id.replace('-', ' ').title(), 'value': id} for id in ids
