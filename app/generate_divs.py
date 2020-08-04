@@ -35,7 +35,7 @@ class GenerateDivs:
         return html.Div([
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Climate']),
+                    self.__checkboxes(self.all_ids['Climate'], 'Climate'),
                     html.Div(
                         self.climate_divs()
                     ),
@@ -46,7 +46,7 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Land']),
+                    self.__checkboxes(self.all_ids['Land'], 'Land'),
                     html.Div(
                         self.land_divs()
                     ),
@@ -57,7 +57,7 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Energy']),
+                    self.__checkboxes(self.all_ids['Energy'], 'Energy'),
                     html.Div(
                         self.energy_divs()
                     ),
@@ -68,7 +68,7 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Water']),
+                    self.__checkboxes(self.all_ids['Water'], 'Water'),
                     html.Div(
                         self.water_divs()
                     ),
@@ -196,13 +196,13 @@ class GenerateDivs:
             grouped[dash_figure.category].append(dash_figure.to_div())
         return grouped
 
-    def __checkboxes(self, ids):
+    def __checkboxes(self, ids, category):
         return dcc.Checklist(
             options=[
                 {'label': id.replace('-', ' ').title(), 'value': id} for id in ids
             ],
             value=ids,
-            id={'type': 'checkboxes', 'index': 'Energy'},
+            id={'type': 'checkboxes', 'index': category},
             persistence=True,
         )
 
