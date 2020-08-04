@@ -204,6 +204,9 @@ class GenerateDivs:
             value=ids,
             id={'type': 'checkboxes', 'index': category},
             persistence=True,
+            className='form-check checkbox-container',
+            inputClassName='form-check-input custom-checkbox',
+            labelClassName='form-check-label'
         )
 
     def __ids_by_category(self):
