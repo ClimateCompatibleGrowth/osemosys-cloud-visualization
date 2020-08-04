@@ -179,8 +179,11 @@ class GenerateDivs:
 
     def __checkboxes(self):
         ids = self.all_ids['Energy']
+
         return dcc.Checklist(
-            options=[{'label': id, 'value': id} for id in ids],
+            options=[
+                {'label': id.replace('-', ' ').title(), 'value': id} for id in ids
+            ],
             value=ids,
             id={'type': 'checkboxes', 'index': 'Energy'},
             persistence=True,
