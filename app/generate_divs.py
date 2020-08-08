@@ -28,14 +28,25 @@ pd.set_option('mode.chained_assignment', None)
 class GenerateDivs:
     def __init__(self, config):
         self.config = config
-        self.all_divs = self.__figures_grouped_by_category()
-        self.all_ids = self.__ids_by_category()
+        self.divs_by_category = self.__figures_grouped_by_category()
+        self.ids_by_category = self.__ids_by_category()
 
     def generate_divs(self):
         return html.Div([
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Climate'], 'Climate'),
+                    self.__checkboxes(self.all_ids(), 'All'),
+                    html.Div(
+                        self.all_divs()
+                    ),
+                ],
+                className='tab-pane show active',
+                id='nav-all',
+                role='tabpanel',
+                ),
+            html.Div(
+                [
+                    self.__checkboxes(self.ids_by_category['Climate'], 'Climate'),
                     html.Div(
                         self.climate_divs()
                     ),
@@ -46,7 +57,7 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Land'], 'Land'),
+                    self.__checkboxes(self.ids_by_category['Land'], 'Land'),
                     html.Div(
                         self.land_divs()
                     ),
@@ -57,18 +68,18 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Energy'], 'Energy'),
+                    self.__checkboxes(self.ids_by_category['Energy'], 'Energy'),
                     html.Div(
                         self.energy_divs()
                     ),
                 ],
-                className='tab-pane show active',
+                className='tab-pane',
                 id='nav-energy',
                 role='tabpanel',
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids['Water'], 'Water'),
+                    self.__checkboxes(self.ids_by_category['Water'], 'Water'),
                     html.Div(
                         self.water_divs()
                     ),
@@ -80,16 +91,22 @@ class GenerateDivs:
             ], className='tab-content', id='categoryTabContent'),
 
     def climate_divs(self):
-        return self.all_divs['Climate']
+        return self.divs_by_category['Climate']
 
     def land_divs(self):
-        return self.all_divs['Land']
+        return self.divs_by_category['Land']
 
     def energy_divs(self):
-        return self.all_divs['Energy']
+        return self.divs_by_category['Energy']
 
     def water_divs(self):
-        return self.all_divs['Water']
+        return self.divs_by_category['Water']
+
+    def all_divs(self):
+        return self.flatten(list(self.divs_by_category.values()))
+
+    def all_ids(self):
+        return self.flatten(list(self.ids_by_category.values()))
 
     def __all_figures(self):
         land_use = LandUse(self.config)
@@ -214,3 +231,6 @@ class GenerateDivs:
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.id)
         return grouped
+
+    def flatten(self, list_of_lists):
+        return [item for sublist in list_of_lists for item in sublist]

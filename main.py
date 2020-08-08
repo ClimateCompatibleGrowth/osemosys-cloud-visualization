@@ -65,6 +65,14 @@ app.layout = html.Div([
     html.Nav(
         html.Div([
             html.A(
+                    'All',
+                    className='nav-item nav-link active',
+                    id='nav-all-tab',
+                    href='#nav-all',
+                    role='tab',
+                    **{'data-toggle': 'tab'},
+                    ),
+            html.A(
                     'Climate',
                     className='nav-item nav-link',
                     id='nav-climate-tab',
@@ -82,7 +90,7 @@ app.layout = html.Div([
                     ),
             html.A(
                     'Energy',
-                    className='nav-item nav-link active',
+                    className='nav-item nav-link',
                     id='nav-energy-tab',
                     href='#nav-energy',
                     role='tab',
