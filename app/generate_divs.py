@@ -32,7 +32,6 @@ class GenerateDivs:
         self.ids_by_category = self.__ids_by_category()
 
     def generate_divs(self):
-        # import pdb; pdb.set_trace()
         return html.Div([
             html.Div(
                 [
