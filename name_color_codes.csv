@@ -22,13 +22,14 @@ WAT,Water,Agua,blue
 LND,Land,Suelo,green
 WND,Wind,Eólica,violet
 CP01,Barley,Barley,red
-CP02,Maize,Maize,brown
-CP03,Sorghum,Sorghum,grey
-CP04,Sugarcane,Sugarcane,pink
-CP05,Sweet potato,Sweet potato,red
-CP06,Teff,Teff,magenta
-CP07,Wheat,Wheat,purple
-CP08,Other,Other,grey
+CP02,Cereals,Cereals,brown
+CP03,Maize,Maize,grey
+CP04,Oilseeds,Oilseeds,pink
+CP05,Other,Other,red
+CP06,Pulses,Pulses,magenta
+CP07,Sorghum,Sorghum,purple
+CP08,Teff,Teff,grey
+CP09,Wheat,Wheat,gold
 AGR,Agriculture,Tierras agrícolas,brown
 BAR,Barren land,Tierra estéril,grey
 FOR,Forests,Bosques,forestgreen
@@ -63,3 +64,7 @@ PWR_WAT,Power sector (consumptive use),,lightblue
 PWR_WITH,Power sector (withdrawal),,darkblue
 ELC_EXP,Electricity exports,,pink
 ELC_NET,Net electricity imports,,pink
+MIG,Mining,Mining,gold
+PCK,Petroleum coke,Petroleum coke,red
+JET,Aviation fuels,Aviation fuels,purple
+NAP,Naptha,Naptha,white
