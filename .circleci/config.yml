@@ -8,7 +8,7 @@
        - run:
            name: Deploy Over SSH
            command: |
-             ssh $SSH_USER@$SSH_HOST "cd osemosys-cloud-visualization && ./script/deploy.sh"
+             ssh $SSH_USER@$SSH_HOST "bash -ic 'cd osemosys-cloud-visualization && ./script/deploy.sh'"
 
  workflows:
    version: 2
