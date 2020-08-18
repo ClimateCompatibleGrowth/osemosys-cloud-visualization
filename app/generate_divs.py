@@ -21,11 +21,14 @@ from app.figures.crop_production import CropProduction
 from app.figures.crop_yield import CropYield
 from app.figures.area_by_crop_for_region import AreaByCropForRegion
 from app.figures.area_by_land_cover_type_for_region import AreaByLandCoverTypeForRegion
+from app.figures.area_by_crop_irrigated import AreaByCropIrrigated
+from app.figures.area_by_crop_rainfed import AreaByCropRainfed
 from app.figures.water_demand import WaterDemand
 from app.figures.water_withdrawal_by_source import WaterWithdrawalBySource
 from app.figures.water_balance import WaterBalance
 from app.figures.emissions_by_sector import EmissionsBySector
 from app.figures.emissions_by_fuel import EmissionsByFuel
+from app.figures.livestock_production import LivestockProduction
 from app.dash_figure import DashFigure
 pd.set_option('mode.chained_assignment', None)
 
@@ -216,6 +219,21 @@ class GenerateDivs:
                     iplot=EmissionsByFuel(all_params, years),
                     category='Climate',
                     id='emissions-by-fuel'
+                ),
+                DashFigure(
+                    iplot=LivestockProduction(all_params, years),
+                    category='Land',
+                    id='livestock-production'
+                ),
+                DashFigure(
+                    iplot=AreaByCropIrrigated(all_params, years, land_use),
+                    category='Land',
+                    id='area-by-crop-irrigated'
+                ),
+                DashFigure(
+                    iplot=AreaByCropRainfed(all_params, years, land_use),
+                    category='Land',
+                    id='area-by-crop-rainfed'
                 ),
             ]
 
