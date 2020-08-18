@@ -26,13 +26,16 @@ class LandUse:
 
     def mode_crop_combo(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
-        crop_list = sorted(list(set([x[1:5] for x in self.commodities if x.startswith('LCP')])))
+        crop_list = sorted(list(set([x[1:7] for x in self.commodities if x.startswith('LCP')])))
         crop_order = ['HI', 'II', 'HR', 'IR', 'LR']
         crop_combo = []
 
         for each_crop in crop_list:
             for each_combo in crop_order:
-                crop_combo.append(each_crop + each_combo)
+                if each_crop[0:4] + each_combo in crop_list:
+                    crop_combo.append(each_crop[0:4] + each_combo)
+        
+        crop_combo = list(set(crop_combo))
 
         for each in ['BAR', 'FOR', 'GRS', 'BLT', 'WAT', 'OTH']:
             crop_combo.append(each)
