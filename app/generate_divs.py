@@ -24,6 +24,8 @@ from app.figures.area_by_land_cover_type_for_region import AreaByLandCoverTypeFo
 from app.figures.water_demand import WaterDemand
 from app.figures.water_withdrawal_by_source import WaterWithdrawalBySource
 from app.figures.water_balance import WaterBalance
+from app.figures.emissions_by_sector import EmissionsBySector
+from app.figures.emissions_by_fuel import EmissionsByFuel
 from app.dash_figure import DashFigure
 pd.set_option('mode.chained_assignment', None)
 
@@ -204,6 +206,16 @@ class GenerateDivs:
                     iplot=WaterBalance(all_params, years),
                     category='Water',
                     id='water-balance'
+                ),
+                DashFigure(
+                    iplot=EmissionsBySector(all_params, years),
+                    category='Climate',
+                    id='emissions-by-sector'
+                ),
+                DashFigure(
+                    iplot=EmissionsByFuel(all_params, years),
+                    category='Climate',
+                    id='emissions-by-fuel'
                 ),
             ]
 
