@@ -21,6 +21,9 @@ from app.figures.crop_production import CropProduction
 from app.figures.crop_yield import CropYield
 from app.figures.area_by_crop_for_region import AreaByCropForRegion
 from app.figures.area_by_land_cover_type_for_region import AreaByLandCoverTypeForRegion
+from app.figures.water_demand import WaterDemand
+from app.figures.water_withdrawal_by_source import WaterWithdrawalBySource
+from app.figures.water_balance import WaterBalance
 from app.dash_figure import DashFigure
 pd.set_option('mode.chained_assignment', None)
 
@@ -186,6 +189,21 @@ class GenerateDivs:
                     iplot=CropYield(all_params, years, land_use),
                     category='Land',
                     id='crop-yield'
+                ),
+                DashFigure(
+                    iplot=WaterDemand(all_params, years),
+                    category='Water',
+                    id='water-demand'
+                ),
+                DashFigure(
+                    iplot=WaterWithdrawalBySource(all_params, years),
+                    category='Water',
+                    id='water-withdrawal-by-source'
+                ),
+                DashFigure(
+                    iplot=WaterBalance(all_params, years),
+                    category='Water',
+                    id='water-balance'
                 ),
             ]
 
