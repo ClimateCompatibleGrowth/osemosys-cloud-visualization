@@ -34,7 +34,7 @@ class LandUse:
             for each_combo in crop_order:
                 if each_crop[0:4] + each_combo in crop_list:
                     crop_combo.append(each_crop[0:4] + each_combo)
-        
+
         crop_combo = list(set(crop_combo))
 
         for each in ['BAR', 'FOR', 'GRS', 'BLT', 'WAT', 'OTH']:
