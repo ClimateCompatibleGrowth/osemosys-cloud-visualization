@@ -9,7 +9,7 @@ class CropProduction:
         self.years = years
 
     def figure(self):
-        print('Generating CostElectrictyGeneration')
+        print('Generating CropProduction')
         crops_prod_df = self.__calculate_crops_prod_df()
         return df_plot(crops_prod_df, 'Production (Million tonnes)', 'Crop production')
 
