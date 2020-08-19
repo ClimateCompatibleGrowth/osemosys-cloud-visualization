@@ -5,6 +5,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from app.land_use import LandUse
 from app.result_parser import ResultParser
+from app.figures.gfec_by_sector import GFECBySector
+from app.figures.gfec_by_fuel import GFECByFuel
 from app.figures.power_generation_capacity import PowerGenerationCapacity
 from app.figures.power_generation_capacity_aggregate import PowerGenerationCapacityAggregate
 from app.figures.power_generation_detail import PowerGenerationDetail
@@ -125,6 +127,16 @@ class GenerateDivs:
         years = result_parser.years
 
         figure_list = [
+                DashFigure(
+                    iplot=GFECBySector(all_params, years),
+                    category='Energy',
+                    id='gfec-by-sector',
+                ),
+                DashFigure(
+                    iplot=GFECByFuel(all_params, years),
+                    category='Energy',
+                    id='gfec-by-fuel',
+                ),
                 DashFigure(
                     iplot=PowerGenerationCapacity(all_params, years),
                     category='Energy',
