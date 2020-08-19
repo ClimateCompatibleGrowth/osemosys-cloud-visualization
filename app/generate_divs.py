@@ -29,6 +29,9 @@ from app.figures.water_balance import WaterBalance
 from app.figures.emissions_by_sector import EmissionsBySector
 from app.figures.emissions_by_fuel import EmissionsByFuel
 from app.figures.livestock_production import LivestockProduction
+from app.figures.water_demand import WaterDemand
+from app.figures.water_withdrawal_by_source import WaterWithdrawalBySource
+from app.figures.water_balance import WaterBalance
 from app.dash_figure import DashFigure
 pd.set_option('mode.chained_assignment', None)
 
