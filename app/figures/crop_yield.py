@@ -13,7 +13,8 @@ class CropYield:
     def figure(self):
         print('Generating CropYield')
         crops_yield_df = self.calculate_yield_df(self.all_params, self.years, self.land_use)
-        crops_yield_df = crops_yield_df.mul(10)
+        crops_yield_df.loc[:, crops_yield_df.columns != 'y'] = (crops_yield_df.loc[
+            :, crops_yield_df.columns != 'y'])
         crops_yield_df['y'] = self.years
         return crops_yield_df.iplot(asFigure=True,
                                     x='y',
