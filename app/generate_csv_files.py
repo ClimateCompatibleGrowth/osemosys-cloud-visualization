@@ -120,6 +120,8 @@ def generate_csv_files(data_file, results_file, base_folder):
             'UseByTechnology':['r','l','t','f','y'],
             'RateOfProductionByTechnologyByMode':['r','l','t','f','m','y'],
             'RateOfUseByTechnologyByMode':['r','l','t','f','m','y'],
+            'TechnologyActivityChangeByMode':['r','t','m','y'],
+            'TechnologyActivityChangeByModeCostTotal':['r','t','m','y'],
             }
 
     for each in params:
