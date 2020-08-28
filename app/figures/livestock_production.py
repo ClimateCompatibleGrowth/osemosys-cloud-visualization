@@ -9,7 +9,7 @@ class LivestockProduction:
         self.years = years
 
     def figure(self):
-        print('Generating CropProduction')
+        print('Generating LivestockProduction')
         return df_plot(self.__calculate_lvs_prod_df(),
                        'Production (Million tonnes)',
                        'Livestock production')
@@ -19,7 +19,7 @@ class LivestockProduction:
         lvs_prod_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('LVS')
             ].drop('r', axis=1)
-        lvs_prod_df = lvs_prod_df.loc[lvs_prod_df['f'].str.contains('PRD')]
+        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['TLU', 'WAT'])]
         lvs_prod_df['value'] = lvs_prod_df['value'].astype('float64')
         lvs_prod_df = lvs_prod_df.pivot_table(index='y',
                                               columns='f',
