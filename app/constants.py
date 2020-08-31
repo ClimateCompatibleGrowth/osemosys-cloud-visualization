@@ -8,7 +8,8 @@ agg_col = {'Coal': ['Coal'],
            'Hydro': ['Hydro'],
            'Nuclear': ['Nuclear'],
            'Other renewables': ['Biomass', 'Geothermal', 'Solar', 'MSW', 'Wind'],
-           'Net electricity imports': ['Net electricity imports']
+           'Net electricity imports': ['Net electricity imports'],
+           'Electricity exports': ['Electricity exports'],
            }
 
 name_color_codes = pd.read_csv(
