@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col, name_color_codes, color_dict
+from app.constants import color_dict
 import pandas as pd
+
 
 class PowerGenerationDetail:
 
