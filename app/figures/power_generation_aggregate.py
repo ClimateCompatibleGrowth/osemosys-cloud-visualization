@@ -1,6 +1,6 @@
 import pandas as pd
 from app.utilities import df_plot, df_filter
-from app.constants import agg_col
+from app.constants import agg_col, color_dict
 
 
 class PowerGenerationAggregate:
@@ -21,7 +21,22 @@ class PowerGenerationAggregate:
                 if tech_exists in gen_df.columns:
                     gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
                     gen_agg_df[each] = gen_agg_df[each].round(2)
-        return df_plot(gen_agg_df, 'Petajoules (PJ)', 'Power Generation (Aggregate)')
+
+        gen_agg_df = gen_agg_df.loc[:, (gen_agg_df != 0).any(axis=0)]
+        gen_agg_df.rename(columns={'Net electricity imports': 'Electricity exports'},
+                          inplace=True)
+        return gen_agg_df.iplot(asFigure=True,
+                                x='y',
+                                kind='bar',
+                                barmode='relative',
+                                xTitle='Year',
+                                yTitle='Terawatt-hours (TWh)',
+                                color=[color_dict[x]
+                                       for x
+                                       in self.__calculate_gen_df().columns
+                                       if x != 'y'],
+                                title='Power Generation (Detail)',
+                                showlegend=True)
 
     def __calculate_gen_df(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
@@ -30,4 +45,29 @@ class PowerGenerationAggregate:
                     production_by_technology_annual.t.str.startswith('IMP')) &
                 production_by_technology_annual.f.str.startswith('ELC')
                 ].drop('r', axis=1)
-        return df_filter(gen_df, 3, 6, ['TRN'], self.years)
+
+        gen_df = df_filter(gen_df, 3, 6, ['TRN'], self.years)
+        gen_df['Net electricity imports'] = 0
+        electricity_exports_df = self.all_params['TotalTechnologyAnnualActivity']
+        ele_exp_df = electricity_exports_df[
+                     electricity_exports_df.t.str.startswith('EXPELC')
+                     ].drop('r', axis=1)
+
+        if not ele_exp_df.empty:
+            ele_exp_df = (df_filter(ele_exp_df, 3, 6, ['TRN'], self.years)
+                          .rename(columns={'Electricity': 'Electricity exports'}))
+            gen_df = gen_df.merge(ele_exp_df)
+            gen_df['Net electricity imports'] = (gen_df['Net electricity imports']
+                                                 - gen_df['Electricity exports'])
+            gen_df.drop('Electricity exports', axis=1, inplace=True)
+
+            if 'Electricity' in gen_df.columns:
+                gen_df['Net electricity imports'] = (gen_df['Net electricity imports']
+                                                     - gen_df['Electricity'])
+                gen_df.drop('Electricity', axis=1, inplace=True)
+
+            gen_df.rename(columns={'Net electricity imports': 'Electricity exports'},
+                          inplace=True)
+            gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
+                                                          .mul(0.28).round(2))
+        return gen_df
