@@ -11,7 +11,7 @@ class CostElectrictyGeneration:
     def figure(self):
         print('Generating CostElectrictyGeneration')
         ele_cos_df = self.__calculate_ele_cos_df()
-        return ele_cos_df.iplot(asFigure=True, kind='bar', barmode='stack',
+        return ele_cos_df.iplot(asFigure=True, kind='bar', barmode='relative',
                                 x='y', title='Cost of electricity generation ($/MWh)')
 
     def __calculate_ele_cos_df(self):
@@ -56,7 +56,10 @@ class CostElectrictyGeneration:
         fix_cos_df = df_filter(fix_cos_df, 3, 6, ['TRN'], self.years)
 
         var_cos_df = self.all_params['AnnualVariableOperatingCost'][self.all_params['AnnualVariableOperatingCost'].t.str.startswith(
-            'PWR')].drop('r', axis=1)
+            'PWR')|
+            self.all_params['AnnualVariableOperatingCost'].t.str.startswith(
+            'EXPELC')
+            ].drop('r', axis=1)
         var_cos_df = df_filter(var_cos_df, 3, 6, ['TRN'], self.years)
 
         dis_cos_df = self.all_params['AnnualVariableOperatingCost'][self.all_params['AnnualVariableOperatingCost'].t.str.startswith(
@@ -151,7 +154,7 @@ class CostElectrictyGeneration:
         fue_cos_df['y'] = self.years
 
         gen_df = self.calculate_gen_df(self.all_params, self.years)
-        ele_cos_df['Electricity generation'] = gen_df.iloc[:, 1:].sum(axis=1) / 3.6
+        ele_cos_df['Electricity generation'] = gen_df.iloc[:, 1:].sum(axis=1)
         ele_cos_df['Capital costs'] = ele_cos_df['Capital costs'] / ele_cos_df['Electricity generation']
         ele_cos_df['Fixed costs'] = fix_cos_df.iloc[:, 1:].sum(
             axis=1) / ele_cos_df['Electricity generation']
@@ -198,4 +201,27 @@ class CostElectrictyGeneration:
                                                              all_params['ProductionByTechnologyAnnual'].t.str.startswith('IMP')) &
                                                             all_params['ProductionByTechnologyAnnual'].f.str.startswith('ELC')].drop('r', axis=1)
         gen_df = df_filter(gen_df, 3, 6, ['TRN'], years)
+        gen_df['Net electricity imports'] = 0
+
+        ele_exp_df = all_params['TotalTechnologyAnnualActivity'][
+                     all_params['TotalTechnologyAnnualActivity'].t.str.startswith('EXPELC')
+                     ].drop('r', axis=1)
+
+        if not ele_exp_df.empty:
+            ele_exp_df = (df_filter(ele_exp_df, 3, 6, ['TRN'], years)
+                          .rename(columns={'Electricity': 'Electricity exports'}))
+            gen_df = gen_df.merge(ele_exp_df)
+            gen_df['Net electricity imports'] = (gen_df['Net electricity imports']
+                                                 - gen_df['Electricity exports'])
+            gen_df.drop('Electricity exports', axis=1, inplace=True)
+
+            if 'Electricity' in gen_df.columns:
+                gen_df['Net electricity imports'] = (gen_df['Net electricity imports']
+                                                     - gen_df['Electricity'])
+                gen_df.drop('Electricity', axis=1, inplace=True)
+
+            gen_df.rename(columns={'Net electricity imports': 'Electricity exports'},
+                          inplace=True)
+            gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
+                                                          .mul(0.28).round(2))
         return gen_df
