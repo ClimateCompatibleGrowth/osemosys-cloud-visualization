@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import functools
 import traceback
 
 
@@ -10,6 +11,7 @@ class DashFigure:
         self.id = id
         self.name = name
 
+    @functools.lru_cache(maxsize=128)
     def to_div(self):
         print(f'Generating {self.name}')
         try:
