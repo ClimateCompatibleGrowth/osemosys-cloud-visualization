@@ -1,5 +1,6 @@
 from collections import defaultdict
 from app.generate_figures import GenerateFigures
+from app.layout.checkboxes import Checkboxes
 import os
 import pandas as pd
 import dash_core_components as dcc
@@ -17,10 +18,8 @@ class GenerateDivs:
         return html.Div([
             html.Div(
                 [
-                    self.__checkboxes(self.__all_ids(), 'All'),
-                    html.Div(
-                        self.__all_divs()
-                    ),
+                    Checkboxes(self.__all_ids(), 'All').to_component(),
+                    html.Div(self.__all_divs()),
                 ],
                 className='tab-pane show active',
                 id='nav-all',
@@ -28,10 +27,8 @@ class GenerateDivs:
                 ),
             html.Div(
                 [
-                    self.__checkboxes(self.ids_by_category['Climate'], 'Climate'),
-                    html.Div(
-                        self.__climate_divs()
-                    ),
+                    Checkboxes(self.ids_by_category['Climate'], 'Climate').to_component(),
+                    html.Div(self.__climate_divs()),
                 ],
                 className='tab-pane',
                 id='nav-climate',
@@ -39,10 +36,8 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.ids_by_category['Land'], 'Land'),
-                    html.Div(
-                        self.__land_divs()
-                    ),
+                    Checkboxes(self.ids_by_category['Land'], 'Land').to_component(),
+                    html.Div(self.__land_divs()),
                 ],
                 className='tab-pane',
                 id='nav-land',
@@ -50,10 +45,8 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.ids_by_category['Energy'], 'Energy'),
-                    html.Div(
-                        self.__energy_divs()
-                    ),
+                    Checkboxes(self.ids_by_category['Energy'], 'Energy').to_component(),
+                    html.Div(self.__energy_divs()),
                 ],
                 className='tab-pane',
                 id='nav-energy',
@@ -61,10 +54,8 @@ class GenerateDivs:
             ),
             html.Div(
                 [
-                    self.__checkboxes(self.ids_by_category['Water'], 'Water'),
-                    html.Div(
-                        self.__water_divs()
-                    ),
+                    Checkboxes(self.ids_by_category['Water'], 'Water').to_component(),
+                    html.Div(self.__water_divs()),
                 ],
                 className='tab-pane',
                 id='nav-water',
@@ -98,19 +89,6 @@ class GenerateDivs:
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.to_div())
         return grouped
-
-    def __checkboxes(self, ids, category):
-        return dcc.Checklist(
-            options=[
-                {'label': id.replace('-', ' ').title(), 'value': id} for id in ids
-            ],
-            value=ids,
-            id={'type': 'checkboxes', 'index': category},
-            persistence=True,
-            className='form-check checkbox-container',
-            inputClassName='form-check-input custom-checkbox',
-            labelClassName='form-check-label'
-        )
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])

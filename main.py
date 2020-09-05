@@ -11,7 +11,7 @@ import urllib
 import zipfile
 from app.config import Config
 from app.header import Header
-from app.generate_divs import GenerateDivs  # noqa
+from app.generate_divs import GenerateDivs
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
