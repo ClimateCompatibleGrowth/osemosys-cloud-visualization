@@ -19,8 +19,8 @@ class GenerateDivs:
         return html.Div([
             html.Div(
                 [
-                    # Checkboxes(self.__all_ids(), 'All').to_component(),
-                    # html.Div(self.__all_divs()),
+                    Checkboxes(self.__all_ids(), 'All').to_component(),
+                    html.Div([figure.to_div() for figure in self.__all_figures()])
                 ],
                 className='tab-pane show active',
                 id='nav-all',
@@ -64,8 +64,8 @@ class GenerateDivs:
              ),
             ], className='tab-content', id='categoryTabContent'),
 
-    # def __all_ids(self):
-    #     return self.flatten(list(self.ids_by_category.values()))
+    def __all_ids(self):
+        return [figure.id for figure in self.__all_figures()]
 
     @functools.lru_cache(maxsize=128)
     def __all_figures(self):
