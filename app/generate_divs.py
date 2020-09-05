@@ -45,9 +45,9 @@ class GenerateDivs:
         return html.Div([
             html.Div(
                 [
-                    self.__checkboxes(self.all_ids(), 'All'),
+                    self.__checkboxes(self.__all_ids(), 'All'),
                     html.Div(
-                        self.all_divs()
+                        self.__all_divs()
                     ),
                 ],
                 className='tab-pane show active',
@@ -58,7 +58,7 @@ class GenerateDivs:
                 [
                     self.__checkboxes(self.ids_by_category['Climate'], 'Climate'),
                     html.Div(
-                        self.climate_divs()
+                        self.__climate_divs()
                     ),
                 ],
                 className='tab-pane',
@@ -69,7 +69,7 @@ class GenerateDivs:
                 [
                     self.__checkboxes(self.ids_by_category['Land'], 'Land'),
                     html.Div(
-                        self.land_divs()
+                        self.__land_divs()
                     ),
                 ],
                 className='tab-pane',
@@ -80,7 +80,7 @@ class GenerateDivs:
                 [
                     self.__checkboxes(self.ids_by_category['Energy'], 'Energy'),
                     html.Div(
-                        self.energy_divs()
+                        self.__energy_divs()
                     ),
                 ],
                 className='tab-pane',
@@ -91,7 +91,7 @@ class GenerateDivs:
                 [
                     self.__checkboxes(self.ids_by_category['Water'], 'Water'),
                     html.Div(
-                        self.water_divs()
+                        self.__water_divs()
                     ),
                 ],
                 className='tab-pane',
@@ -100,22 +100,22 @@ class GenerateDivs:
              ),
             ], className='tab-content', id='categoryTabContent'),
 
-    def climate_divs(self):
+    def __climate_divs(self):
         return self.divs_by_category['Climate']
 
-    def land_divs(self):
+    def __land_divs(self):
         return self.divs_by_category['Land']
 
-    def energy_divs(self):
+    def __energy_divs(self):
         return self.divs_by_category['Energy']
 
-    def water_divs(self):
+    def __water_divs(self):
         return self.divs_by_category['Water']
 
-    def all_divs(self):
+    def __all_divs(self):
         return self.flatten(list(self.divs_by_category.values()))
 
-    def all_ids(self):
+    def __all_ids(self):
         return self.flatten(list(self.ids_by_category.values()))
 
     def __all_figures(self):
