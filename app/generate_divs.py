@@ -128,19 +128,26 @@ class GenerateDivs:
 
         figure_list = [
                 DashFigure(
-                    iplot=GFECBySector(all_params, years),
+                    iplot=GFECBySector(
+                        all_params, years, 'Gross final energy consumption - by sector'
+                    ),
                     category='Energy',
                     id='gfec-by-sector',
+                    name='Gross final energy consumption - by sector',
                 ),
                 DashFigure(
-                    iplot=GFECByFuel(all_params, years),
+                    iplot=GFECByFuel(all_params, years, 'Gross final energy consumption - by fuel'),
                     category='Energy',
                     id='gfec-by-fuel',
+                    name='Gross final energy consumption - by fuel',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationCapacity(all_params, years),
+                    iplot=PowerGenerationCapacity(
+                        all_params, years, 'Power Generation Capacity (Detail)'
+                    ),
                     category='Energy',
                     id='power-generation-capacity',
+                    name='Power Generation Capacity (Detail)',
                 ),
                 DashFigure(
                     iplot=PowerGenerationCapacityAggregate(all_params, years),
