@@ -76,6 +76,3 @@ class GenerateDivs:
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.id)
         return grouped
-
-    def flatten(self, list_of_lists):
-        return [item for sublist in list_of_lists for item in sublist]
