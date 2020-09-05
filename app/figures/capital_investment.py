@@ -3,13 +3,13 @@ from app.utilities import df_plot, df_filter
 
 class CapitalInvestment:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating CapitalInvestment')
-        return df_plot(self.__calculate_cap_cos_df(), 'Million $', 'Capital Investment')
+        return df_plot(self.__calculate_cap_cos_df(), 'Million $', self.plot_title)
 
     def __calculate_cap_cos_df(self):
         capital_investment = self.all_params['CapitalInvestment']

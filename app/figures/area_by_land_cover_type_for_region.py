@@ -11,8 +11,6 @@ class AreaByLandCoverTypeForRegion:
         self.region = region
 
     def figure(self):
-        print('Generating AreaByLandCoverTypeForRegion')
-
         regions = self.land_use.regions()
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crops()

@@ -5,12 +5,12 @@ import pandas as pd
 
 class WaterBalance:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating WaterBalance')
         wat_bal_df = self.__calculate_wat_bal_df()
         return wat_bal_df.iplot(asFigure=True,
                                 x='y',
@@ -19,7 +19,7 @@ class WaterBalance:
                                 xTitle='Year',
                                 yTitle='Billion m3',
                                 color=[color_dict[x] for x in wat_bal_df.columns if x != 'y'],
-                                title='Water Balance',
+                                title=self.plot_title,
                                 showlegend=True,
                                 )
 

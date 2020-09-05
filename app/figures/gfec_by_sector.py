@@ -9,7 +9,6 @@ class GFECBySector:
         self.plot_title = plot_title
 
     def figure(self):
-        print('Generating GFECBySector')
         return df_plot(self.__calculate_gfec_df(),
                        'Energy (PJ)',
                        self.plot_title)

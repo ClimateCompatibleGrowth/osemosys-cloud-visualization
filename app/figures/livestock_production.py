@@ -4,15 +4,15 @@ from app.constants import det_col
 
 class LivestockProduction:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating LivestockProduction')
         return df_plot(self.__calculate_lvs_prod_df(),
                        'Production (Million tonnes)',
-                       'Livestock production')
+                       self.plot_title)
 
     def __calculate_lvs_prod_df(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

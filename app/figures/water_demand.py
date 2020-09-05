@@ -5,12 +5,12 @@ import pandas as pd
 
 class WaterDemand:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating WaterDemand')
         wat_dem_df = self.__calculate_wat_dem_df()
         wat_dem_df['y'] = self.years
         return wat_dem_df.iplot(asFigure=True,
@@ -20,7 +20,7 @@ class WaterDemand:
                                 xTitle='Year',
                                 yTitle='Billion m3',
                                 color=[color_dict[x] for x in wat_dem_df.columns if x != 'y'],
-                                title='Water Demand',
+                                title=self.plot_title,
                                 showlegend=True,
                                 )
 
