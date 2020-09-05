@@ -285,23 +285,27 @@ class GenerateDivs:
                 ),
             ]
 
-        # for region in land_use.regions().keys():
-            # figure_list.append(
-                # DashFigure(
-                #     iplot=AreaByCropForRegion(all_params, years, land_use, region),
-                #     category='Land',
-                #     id=f'area-by-crop-{region}',
-                #     name='A name here',
-                # ),
-            # )
-            # figure_list.append(
-                # DashFigure(
-                #     iplot=AreaByLandCoverTypeForRegion(all_params, years, land_use, region),
-                #     category='Land',
-                #     id=f'area-by-land-{region}',
-                #     name='A name here',
-                # ),
-            # )
+        for region in land_use.regions().keys():
+            figure_list.append(
+                DashFigure(
+                    iplot=AreaByCropForRegion(
+                        all_params, years, land_use, region, f'Area by crop ({region})'
+                    ),
+                    category='Land',
+                    id=f'area-by-crop-{region}',
+                    name=f'Area by crop ({region})',
+                ),
+            )
+            figure_list.append(
+                DashFigure(
+                    iplot=AreaByLandCoverTypeForRegion(
+                        all_params, years, land_use, region, f'Area by land cover type ({region})'
+                    ),
+                    category='Land',
+                    id=f'area-by-land-{region}',
+                    name=f'Area by land cover type ({region})',
+                ),
+            )
 
         return figure_list
 

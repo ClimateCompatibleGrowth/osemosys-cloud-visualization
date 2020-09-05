@@ -4,11 +4,12 @@ from app.constants import det_col
 
 class AreaByCropForRegion:
 
-    def __init__(self, all_params, years, land_use, region):
+    def __init__(self, all_params, years, land_use, region, plot_title):
         self.all_params = all_params
         self.years = years
         self.land_use = land_use
         self.region = region
+        self.plot_title = plot_title
 
     def figure(self):
         regions = self.land_use.regions()
@@ -32,8 +33,7 @@ class AreaByCropForRegion:
             axis=1).set_index('y').reset_index().rename(
                 columns=det_col).astype('float64')
         crops_region_df = df_years(crops_region_df, self.years)
-        return df_plot(crops_region_df, 'Land area (1000 sq.km.)',
-                       'Area by crop (' + regions[self.region] + ' region)')
+        return df_plot(crops_region_df, 'Land area (1000 sq.km.)', self.plot_title)
 
     def __calculate_crops_total_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
