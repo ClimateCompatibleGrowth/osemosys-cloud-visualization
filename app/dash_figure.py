@@ -5,8 +5,8 @@ import traceback
 
 
 class DashFigure:
-    def __init__(self, *, iplot, category, id, name):
-        self.iplot = iplot
+    def __init__(self, *, iplots, category, id, name):
+        self.iplots = iplots
         self.category = category
         self.id = id
         self.name = name
@@ -18,7 +18,7 @@ class DashFigure:
             return html.Div(
                         [
                             html.H4(self.name),
-                            dcc.Graph(figure=self.iplot.figure())
+                            html.Div([dcc.Graph(figure=iplot.figure()) for iplot in self.iplots])
                         ],
                         className=f'figure figure-{self.id}',
                     )
