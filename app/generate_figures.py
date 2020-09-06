@@ -43,157 +43,147 @@ class GenerateFigures:
 
         figure_list = [
                 DashFigure(
-                    iplot=GFECBySector(
-                        all_params, years, 'Gross final energy consumption - by sector'
-                    ),
+                    iplot=GFECBySector(all_params, years, self.config.title()),
                     category='Energy',
                     id='gfec-by-sector',
                     name='Gross final energy consumption - by sector',
                 ),
                 DashFigure(
-                    iplot=GFECByFuel(all_params, years, 'Gross final energy consumption - by fuel'),
+                    iplot=GFECByFuel(all_params, years, self.config.title()),
                     category='Energy',
                     id='gfec-by-fuel',
                     name='Gross final energy consumption - by fuel',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationCapacity(
-                        all_params, years, 'Power Generation Capacity (Detail)'
-                    ),
+                    iplot=PowerGenerationCapacity(all_params, years, self.config.title()),
                     category='Energy',
                     id='power-generation-capacity',
                     name='Power Generation Capacity (Detail)',
                 ),
                 DashFigure(
                     iplot=PowerGenerationCapacityAggregate(
-                        all_params, years, 'Power Generation Capacity (Aggregate)'
+                        all_params, years, self.config.title()
                     ),
                     category='Energy',
                     id='power-generation-capacity-aggregate',
                     name='Power Generation Capacity (Aggregate)',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationDetail(all_params, years, 'Power Generation (Detail)'),
+                    iplot=PowerGenerationDetail(all_params, years, self.config.title()),
                     category='Energy',
                     id='power-generation-detail',
                     name='Power Generation (Detail',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationAggregate(
-                        all_params, years, 'Power Generation (Aggregate)'
-                    ),
+                    iplot=PowerGenerationAggregate(all_params, years, self.config.title()),
                     category='Energy',
                     id='power-generation-aggregate',
                     name='Power Generation (Aggregate)',
                 ),
                 DashFigure(
-                    iplot=PowerGenerationFuelUse(all_params, years, 'Power Generation (Fuel Use)'),
+                    iplot=PowerGenerationFuelUse(all_params, years, self.config.title()),
                     category='Energy',
                     id='power-generation-fuel-use',
                     name='Power Generation (Fuel Use)',
                 ),
                 DashFigure(
-                    iplot=DomesticEnergyProduction(all_params, years, 'Domestic Energy Production'),
+                    iplot=DomesticEnergyProduction(all_params, years, self.config.title()),
                     category='Energy',
                     id='domestic-energy-production',
                     name='Domestic Energy Production',
                 ),
                 DashFigure(
-                    iplot=CapitalInvestment(all_params, years, 'Capital Investment'),
+                    iplot=CapitalInvestment(all_params, years, self.config.title()),
                     category='Energy',
                     id='capital-investment',
                     name='Capital Investment',
                 ),
                 DashFigure(
-                    iplot=EnergyImports(all_params, years, 'Energy Imports'),
+                    iplot=EnergyImports(all_params, years, self.config.title()),
                     category='Energy',
                     id='energy-imports',
                     name='Energy Imports',
                 ),
                 DashFigure(
-                    iplot=EnergyExports(all_params, years, 'Energy Exports'),
+                    iplot=EnergyExports(all_params, years, self.config.title()),
                     category='Energy',
                     id='energy-exports',
                     name='Energy Exports',
                 ),
                 DashFigure(
-                    iplot=CostElectrictyGeneration(
-                        all_params, years, 'Cost Of Electricity Generation'
-                        ),
+                    iplot=CostElectrictyGeneration(all_params, years, self.config.title()),
                     category='Energy',
                     id='cost-electricty-generation',
                     name='Cost Of Electricity Generation',
                 ),
                 DashFigure(
-                    iplot=AreaByCrop(all_params, years, land_use, 'Area By Crop'),
+                    iplot=AreaByCrop(all_params, years, land_use, self.config.title()),
                     category='Land',
                     id='area-by-crop',
                     name='Area By Crop',
                 ),
                 DashFigure(
-                    iplot=AreaByLandCover(all_params, years, land_use, 'Area By Land Cover Type'),
+                    iplot=AreaByLandCover(all_params, years, land_use, self.config.title()),
                     category='Land',
                     id='area-by-land-cover',
                     name='Area By Land Cover Type',
                 ),
                 DashFigure(
-                    iplot=CropProduction(all_params, years, 'Crop Production'),
+                    iplot=CropProduction(all_params, years, self.config.title()),
                     category='Land',
                     id='crop-production',
                     name='Crop Production',
                 ),
                 DashFigure(
-                    iplot=CropYield(all_params, years, land_use, 'Crop Yield'),
+                    iplot=CropYield(all_params, years, land_use, self.config.title()),
                     category='Land',
                     id='crop-yield',
                     name='Yield',
                 ),
                 DashFigure(
-                    iplot=WaterDemand(all_params, years, 'Water Demand'),
+                    iplot=WaterDemand(all_params, years, self.config.title()),
                     category='Water',
                     id='water-demand',
                     name='Water Demand',
                 ),
                 DashFigure(
-                    iplot=WaterWithdrawalBySource(all_params, years, 'Warer Withdrawal By Source'),
+                    iplot=WaterWithdrawalBySource(all_params, years, self.config.title()),
                     category='Water',
                     id='water-withdrawal-by-source',
                     name='Warer Withdrawal By Source',
                 ),
                 DashFigure(
-                    iplot=WaterBalance(all_params, years, 'Water Balance'),
+                    iplot=WaterBalance(all_params, years, self.config.title()),
                     category='Water',
                     id='water-balance',
                     name='Water Balance',
                 ),
                 DashFigure(
-                    iplot=EmissionsBySector(all_params, years, 'CO2 Emissions By Sector'),
+                    iplot=EmissionsBySector(all_params, years, self.config.title()),
                     category='Climate',
                     id='emissions-by-sector',
                     name='CO2 Emissions By Sector',
                 ),
                 DashFigure(
-                    iplot=EmissionsByFuel(all_params, years, 'CO2 Emissions By Fuel'),
+                    iplot=EmissionsByFuel(all_params, years, self.config.title()),
                     category='Climate',
                     id='emissions-by-fuel',
                     name='CO2 Emissions By Fuel',
                 ),
                 DashFigure(
-                    iplot=LivestockProduction(all_params, years, 'Livestock Production'),
+                    iplot=LivestockProduction(all_params, years, self.config.title()),
                     category='Land',
                     id='livestock-production',
                     name='Livestock Production',
                 ),
                 DashFigure(
-                    iplot=AreaByCropIrrigated(
-                        all_params, years, land_use, 'Area By Crop (Irrigated)'
-                    ),
+                    iplot=AreaByCropIrrigated(all_params, years, land_use, self.config.title()),
                     category='Land',
                     id='area-by-crop-irrigated',
                     name='Area By Crop (Irrigated)',
                 ),
                 DashFigure(
-                    iplot=AreaByCropRainfed(all_params, years, land_use, 'Area By Crop (Rainfed)'),
+                    iplot=AreaByCropRainfed(all_params, years, land_use, self.config.title()),
                     category='Land',
                     id='area-by-crop-rainfed',
                     name='Area By Crop (Rainfed)',
@@ -204,7 +194,7 @@ class GenerateFigures:
             figure_list.append(
                 DashFigure(
                     iplot=AreaByCropForRegion(
-                        all_params, years, land_use, region, f'Area by crop ({region})'
+                        all_params, years, land_use, region, self.config.title()
                     ),
                     category='Land',
                     id=f'area-by-crop-{region}',
@@ -214,7 +204,7 @@ class GenerateFigures:
             figure_list.append(
                 DashFigure(
                     iplot=AreaByLandCoverTypeForRegion(
-                        all_params, years, land_use, region, f'Area by land cover type ({region})'
+                        all_params, years, land_use, region, self.config.title()
                     ),
                     category='Land',
                     id=f'area-by-land-{region}',

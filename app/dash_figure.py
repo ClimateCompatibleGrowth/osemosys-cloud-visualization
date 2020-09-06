@@ -16,7 +16,10 @@ class DashFigure:
         print(f'Generating {self.name}')
         try:
             return html.Div(
-                        dcc.Graph(figure=self.iplot.figure()),
+                        [
+                            html.H4(self.name),
+                            dcc.Graph(figure=self.iplot.figure())
+                        ],
                         className=f'figure figure-{self.id}',
                     )
         except Exception as e:
