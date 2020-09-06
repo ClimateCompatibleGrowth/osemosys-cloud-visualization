@@ -13,6 +13,7 @@ class GenerateDivs:
     def __init__(self, config):
         self.config = config
         self.ids_by_category = self.__ids_by_category()
+        self.figures_by_category = self.__figures_by_category()
 
     def generate_divs(self):
         return html.Div([
@@ -28,7 +29,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Climate'], 'Climate').to_component(),
-                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Climate']])
+                    html.Div([figure.to_div() for figure in self.figures_by_category['Climate']])
                 ],
                 className='tab-pane',
                 id='nav-climate',
@@ -37,7 +38,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Land'], 'Land').to_component(),
-                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Land']])
+                    html.Div([figure.to_div() for figure in self.figures_by_category['Land']])
                 ],
                 className='tab-pane',
                 id='nav-land',
@@ -46,7 +47,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Energy'], 'Energy').to_component(),
-                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Energy']])
+                    html.Div([figure.to_div() for figure in self.figures_by_category['Energy']])
                 ],
                 className='tab-pane',
                 id='nav-energy',
@@ -55,7 +56,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Water'], 'Water').to_component(),
-                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Water']])
+                    html.Div([figure.to_div() for figure in self.figures_by_category['Water']])
                 ],
                 className='tab-pane',
                 id='nav-water',
