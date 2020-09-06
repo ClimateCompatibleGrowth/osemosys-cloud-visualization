@@ -23,7 +23,7 @@ class CropYield:
                                     yTitle='Yield (t/ha)',
                                     size=10,
                                     color=[color_dict[x] for x in crops_yield_df.columns if x != 'y'],  # noqa
-                                    title= self.plot_title,
+                                    title=self.plot_title,
                                     showlegend=True)
 
     def calculate_yield_df(self, all_params, years, land_use):
