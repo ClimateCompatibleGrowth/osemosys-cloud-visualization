@@ -20,7 +20,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.__all_ids(), 'All').to_component(),
-                    html.Div([figure.to_div() for figure in self.__all_figures()])
+                    html.Div([figure.to_div() for figure in self.__all_figure_sets()])
                 ],
                 className='tab-pane show active',
                 id='nav-all',
@@ -65,20 +65,20 @@ class GenerateDivs:
             ], className='tab-content', id='categoryTabContent'),
 
     def __all_ids(self):
-        return [figure.id for figure in self.__all_figures()]
+        return [figure.id for figure in self.__all_figure_sets()]
 
     @functools.lru_cache(maxsize=128)
-    def __all_figures(self):
-        return GenerateFigures(self.config).all_figures()
+    def __all_figure_sets(self):
+        return GenerateFigures(self.config).all_figure_sets()
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])
-        for dash_figure in self.__all_figures():
-            grouped[dash_figure.category].append(dash_figure.id)
+        for dash_figure_set in self.__all_figure_sets():
+            grouped[dash_figure_set.category].append(dash_figure_set.id)
         return grouped
 
     def __figures_by_category(self):
         grouped = defaultdict(lambda: [])
-        for dash_figure in self.__all_figures():
-            grouped[dash_figure.category].append(dash_figure)
+        for dash_figure_set in self.__all_figure_sets():
+            grouped[dash_figure_set.category].append(dash_figure_set)
         return grouped

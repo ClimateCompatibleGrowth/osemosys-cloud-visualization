@@ -4,7 +4,7 @@ import functools
 import traceback
 
 
-class DashFigure:
+class DashFigureSet:
     def __init__(self, *, iplots, category, id, name):
         self.iplots = iplots
         self.category = category
