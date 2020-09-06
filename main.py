@@ -163,7 +163,7 @@ def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, inpu
     config_input = config_input_from(input_string, raw_query_string, triggered_element)
     config = Config(config_input)
     if config.is_valid():
-        return GenerateDivs(config).generate_divs()
+        return GenerateDivs([config]).generate_divs()
     else:
         return [f'Invalid model: {config_input}']
 
