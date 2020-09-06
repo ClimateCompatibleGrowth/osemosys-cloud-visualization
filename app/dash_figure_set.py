@@ -20,11 +20,11 @@ class DashFigureSet:
                             html.H4(self.name),
                             html.Div([dcc.Graph(figure=iplot.figure()) for iplot in self.iplots])
                         ],
-                        className=f'figure figure-{self.id}',
+                        className=f'figure-set figure-set-{self.id}',
                     )
         except Exception as e:
             return html.Div([
                     html.Pre(traceback.format_exc(), className='card-body'),
                 ],
-                className=f'figure-error card figure-{self.id}'
+                className=f'figure-set-error card figure-set-{self.id}'
             )
