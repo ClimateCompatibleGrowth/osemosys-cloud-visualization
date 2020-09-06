@@ -69,7 +69,7 @@ class GenerateDivs:
 
     @functools.lru_cache(maxsize=128)
     def __all_figure_sets(self):
-        return GenerateFigures(self.config).all_figure_sets()
+        return GenerateFigures([self.config]).all_figure_sets()
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])
