@@ -8,6 +8,9 @@ h1 {
 }
 
 .figure-set {
+  display: block;
+}
+.figure {
   width: 50%;
   display: inline-block;
 }

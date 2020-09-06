@@ -18,7 +18,13 @@ class DashFigureSet:
             return html.Div(
                         [
                             html.H4(self.name),
-                            html.Div([dcc.Graph(figure=iplot.figure()) for iplot in self.iplots])
+                            html.Div(
+                                [
+                                    html.Div(dcc.Graph(figure=iplot.figure()), className='figure')
+                                    for iplot in self.iplots
+                                ],
+                                className='figures-in-set-container'
+                            )
                         ],
                         className=f'figure-set figure-set-{self.id}',
                     )
