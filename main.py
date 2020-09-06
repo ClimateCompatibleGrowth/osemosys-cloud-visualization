@@ -173,9 +173,9 @@ def generate_figure_divs(
         input_string, compare_to_1, compare_to_2
         ):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
-    config_input = config_input_from(input_string, raw_query_string, triggered_element)
+    main_config_input = config_input_from(input_string, raw_query_string, triggered_element)
     configs = [
-            Config(config_input) for config_input in [input_string, compare_to_1, compare_to_2]
+            Config(config_input) for config_input in [main_config_input, compare_to_1, compare_to_2]
     ]
     valid_configs = [config for config in configs if config.is_valid()]
     # return GenerateDivs().generate_divs()
