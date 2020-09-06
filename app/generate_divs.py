@@ -1,7 +1,6 @@
 from collections import defaultdict
 from app.generate_figures import GenerateFigures
 from app.layout.checkboxes import Checkboxes
-from app.layout.figure_set import FigureSet
 import functools
 import os
 import pandas as pd
@@ -29,7 +28,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Climate'], 'Climate').to_component(),
-                    FigureSet(self.__all_figures(), 'Climate').to_component()
+                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Climate']])
                 ],
                 className='tab-pane',
                 id='nav-climate',
@@ -38,7 +37,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Land'], 'Land').to_component(),
-                    FigureSet(self.__all_figures(), 'Land').to_component()
+                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Land']])
                 ],
                 className='tab-pane',
                 id='nav-land',
@@ -47,7 +46,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Energy'], 'Energy').to_component(),
-                    FigureSet(self.__all_figures(), 'Energy').to_component()
+                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Energy']])
                 ],
                 className='tab-pane',
                 id='nav-energy',
@@ -56,7 +55,7 @@ class GenerateDivs:
             html.Div(
                 [
                     Checkboxes(self.ids_by_category['Water'], 'Water').to_component(),
-                    FigureSet(self.__all_figures(), 'Water').to_component()
+                    html.Div([figure.to_div() for figure in self.__figures_by_category()['Water']])
                 ],
                 className='tab-pane',
                 id='nav-water',
@@ -75,4 +74,10 @@ class GenerateDivs:
         grouped = defaultdict(lambda: [])
         for dash_figure in self.__all_figures():
             grouped[dash_figure.category].append(dash_figure.id)
+        return grouped
+
+    def __figures_by_category(self):
+        grouped = defaultdict(lambda: [])
+        for dash_figure in self.__all_figures():
+            grouped[dash_figure.category].append(dash_figure)
         return grouped
