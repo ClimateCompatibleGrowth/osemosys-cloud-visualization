@@ -7,17 +7,17 @@ h1 {
   margin-bottom: 20px;
 }
 
-.figure-set {
-  display: block;
-}
-.figure {
-  width: 50%;
-  display: inline-block;
+.figures-container {
 }
 
-.figure-set-error {
-  width: 45%;
-  display: inline-block;
+.figure-set {
+}
+
+.figure {
+  width: 50vw;
+}
+
+.figure-error {
   vertical-align: top;
 }
 
