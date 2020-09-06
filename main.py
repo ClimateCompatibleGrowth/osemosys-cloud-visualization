@@ -57,6 +57,12 @@ app.layout = html.Div([
         ],
         className='source-form'
     ),
+    html.Div([
+            dcc.Input(id='compare-to-1', type='text', className='input-field'),
+            dcc.Input(id='compare-to-2', type='text', className='input-field'),
+        ],
+        className='source-form'
+        ),
     dcc.Upload(
         id='upload-data',
         children=html.Div(html.Button('Upload zip file')),
@@ -156,16 +162,27 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
         Input(component_id='url', component_property='search'),
         Input(component_id='upload-data', component_property='contents'),
     ],
-    [State('input-string', 'value')]
+    [
+        State('input-string', 'value'),
+        State('compare-to-1', 'value'),
+        State('compare-to-2', 'value'),
+    ]
     )
-def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, input_string):
+def generate_figure_divs(
+        n_clicks, n_submit, raw_query_string, upload_data,
+        input_string, compare_to_1, compare_to_2
+        ):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
     config_input = config_input_from(input_string, raw_query_string, triggered_element)
-    config = Config(config_input)
-    if config.is_valid():
-        return GenerateDivs([config]).generate_divs()
+    configs = [
+            Config(config_input) for config_input in [input_string, compare_to_1, compare_to_2]
+    ]
+    valid_configs = [config for config in configs if config.is_valid()]
+    # return GenerateDivs().generate_divs()
+    if len(valid_configs) > 0:
+        return GenerateDivs(valid_configs).generate_divs()
     else:
-        return [f'Invalid model: {config_input}']
+        return [f'Invalid models: {[config.input_string for config in configs]}']
 
 
 def config_input_from(input_string, raw_query_string, triggered_element=''):
