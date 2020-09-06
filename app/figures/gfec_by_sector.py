@@ -3,15 +3,15 @@ from app.utilities import df_plot, df_filter
 
 class GFECBySector:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating GFECBySector')
         return df_plot(self.__calculate_gfec_df(),
                        'Energy (PJ)',
-                       'Gross final energy consumption - by sector')
+                       self.plot_title)
 
     def __calculate_gfec_df(self):
         total_technology_annual_activity = self.all_params['TotalTechnologyAnnualActivity']

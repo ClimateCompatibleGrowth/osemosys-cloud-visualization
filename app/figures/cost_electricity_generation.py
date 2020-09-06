@@ -4,15 +4,20 @@ import pandas as pd
 
 class CostElectrictyGeneration:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating CostElectrictyGeneration')
         ele_cos_df = self.__calculate_ele_cos_df()
-        return ele_cos_df.iplot(asFigure=True, kind='bar', barmode='relative',
-                                x='y', title='Cost of electricity generation ($/MWh)')
+        return ele_cos_df.iplot(
+                asFigure=True,
+                kind='bar',
+                barmode='relative',
+                x='y',
+                title=self.plot_title
+                )
 
     def __calculate_ele_cos_df(self):
         ene_imp_df = self.calculate_ene_imp_df(self.all_params, self.years)

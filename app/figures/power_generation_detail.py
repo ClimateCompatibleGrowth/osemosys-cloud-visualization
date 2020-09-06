@@ -5,12 +5,12 @@ import pandas as pd
 
 class PowerGenerationDetail:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating PowerGenerationDetail')
         return self.__calculate_gen_df().iplot(asFigure=True,
                                                x='y',
                                                kind='bar',
@@ -21,7 +21,7 @@ class PowerGenerationDetail:
                                                       for x
                                                       in self.__calculate_gen_df().columns
                                                       if x != 'y'],
-                                               title='Power Generation (Detail)',
+                                               title=self.plot_title,
                                                showlegend=True)
 
     def __calculate_gen_df(self):

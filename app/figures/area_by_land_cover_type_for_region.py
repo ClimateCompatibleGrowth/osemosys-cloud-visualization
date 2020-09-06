@@ -4,15 +4,14 @@ from app.constants import det_col
 
 class AreaByLandCoverTypeForRegion:
 
-    def __init__(self, all_params, years, land_use, region):
+    def __init__(self, all_params, years, land_use, region, plot_title):
         self.all_params = all_params
         self.years = years
         self.land_use = land_use
         self.region = region
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating AreaByLandCoverTypeForRegion')
-
         regions = self.land_use.regions()
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crops()
@@ -41,8 +40,7 @@ class AreaByLandCoverTypeForRegion:
                 land_cluster_df.columns),
             axis=1).set_index('y').reset_index().rename(
                 columns=det_col)
-        return df_plot(land_cluster_df, 'Land area (1000 sq.km.)',
-                       'Area by land cover type (' + regions[self.region] + ' region)')
+        return df_plot(land_cluster_df, 'Land area (1000 sq.km.)', self.plot_title)
 
     def calculate_land_total_df(self, all_params, years):
         land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa

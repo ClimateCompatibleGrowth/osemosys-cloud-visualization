@@ -11,7 +11,7 @@ import urllib
 import zipfile
 from app.config import Config
 from app.header import Header
-from app.generate_divs import GenerateDivs  # noqa
+from app.generate_divs import GenerateDivs
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
@@ -62,49 +62,48 @@ app.layout = html.Div([
         children=html.Div(html.Button('Upload zip file')),
         className='upload-zone',
     ),
-    html.Nav(
-        html.Div([
-            html.A(
-                    'All',
-                    className='nav-item nav-link active',
-                    id='nav-all-tab',
-                    href='#nav-all',
-                    role='tab',
-                    **{'data-toggle': 'tab'},
-                    ),
-            html.A(
-                    'Climate',
-                    className='nav-item nav-link',
-                    id='nav-climate-tab',
-                    href='#nav-climate',
-                    role='tab',
-                    **{'data-toggle': 'tab'},
+    html.Nav([
+        html.A(
+                'All',
+                className='nav-item nav-link active',
+                id='nav-all-tab',
+                href='#nav-all',
+                role='tab',
+                **{'data-toggle': 'tab'},
                 ),
-            html.A(
-                    'Land',
-                    className='nav-item nav-link',
-                    id='nav-land-tab',
-                    href='#nav-land',
-                    role='tab',
-                    **{'data-toggle': 'tab'},
-                    ),
-            html.A(
-                    'Energy',
-                    className='nav-item nav-link',
-                    id='nav-energy-tab',
-                    href='#nav-energy',
-                    role='tab',
-                    **{'data-toggle': 'tab'},
-                    ),
-            html.A(
-                    'Water',
-                    className='nav-item nav-link',
-                    id='nav-water-tab',
-                    href='#nav-water',
-                    role='tab',
-                    **{'data-toggle': 'tab'},
-                    ),
-        ], className='nav nav-tabs justify-content-center', id='categoryTab', role='tablist')),
+        html.A(
+                'Climate',
+                className='nav-item nav-link',
+                id='nav-climate-tab',
+                href='#nav-climate',
+                role='tab',
+                **{'data-toggle': 'tab'},
+            ),
+        html.A(
+                'Land',
+                className='nav-item nav-link',
+                id='nav-land-tab',
+                href='#nav-land',
+                role='tab',
+                **{'data-toggle': 'tab'},
+                ),
+        html.A(
+                'Energy',
+                className='nav-item nav-link',
+                id='nav-energy-tab',
+                href='#nav-energy',
+                role='tab',
+                **{'data-toggle': 'tab'},
+                ),
+        html.A(
+                'Water',
+                className='nav-item nav-link',
+                id='nav-water-tab',
+                href='#nav-water',
+                role='tab',
+                **{'data-toggle': 'tab'},
+                ),
+    ], className='nav nav-tabs justify-content-center', id='categoryTab', role='tablist'),
     dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
 ])
 

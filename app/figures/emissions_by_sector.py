@@ -3,15 +3,15 @@ from app.utilities import df_plot, df_filter
 
 class EmissionsBySector:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating EmissionsBySector')
         return df_plot(self.__calculate_emissions_sector_df(),
                        'Million tonnes of CO2',
-                       'CO2 emissions by sector')
+                       self.plot_title)
 
     def __calculate_emissions_sector_df(self):
         annual_technology_emission = self.all_params['AnnualTechnologyEmission']

@@ -5,12 +5,12 @@ from app.constants import agg_col
 
 class PowerGenerationCapacityAggregate:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating PowerGenerationCapacityAggregate')
         cap_agg_df = pd.DataFrame(columns=agg_col)
         cap_agg_df.insert(0, 'y', self.__cap_df()['y'])
         cap_agg_df = cap_agg_df.fillna(0.00)
@@ -22,7 +22,7 @@ class PowerGenerationCapacityAggregate:
                     cap_agg_df[each] = cap_agg_df[each].round(2)
 
         cap_agg_df = cap_agg_df.loc[:, (cap_agg_df != 0).any(axis=0)]
-        return df_plot(cap_agg_df, 'Gigawatts (GW)', 'Power Generation Capacity (Aggregate)')
+        return df_plot(cap_agg_df, 'Gigawatts (GW)', self.plot_title)
 
     def __cap_df(self):
         total_capacity_annual_params = self.all_params['TotalCapacityAnnual']

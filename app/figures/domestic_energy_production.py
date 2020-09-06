@@ -3,17 +3,17 @@ from app.utilities import df_plot, df_filter
 
 class DomesticEnergyProduction:
 
-    def __init__(self, all_params, years):
+    def __init__(self, all_params, years, plot_title):
         self.all_params = all_params
         self.years = years
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating DomesticEnergyProduction')
         dom_prd_df = self.__calculate_dom_prd_df()
         for each in dom_prd_df.columns:
             if each in ['Land', 'Water', 'Precipitation']:
                 dom_prd_df = dom_prd_df.drop(each, axis=1)
-        return df_plot(dom_prd_df, 'Petajoules (PJ)', 'Domestic energy production')
+        return df_plot(dom_prd_df, 'Petajoules (PJ)', self.plot_title)
 
     def __calculate_dom_prd_df(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

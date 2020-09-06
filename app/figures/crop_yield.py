@@ -5,13 +5,13 @@ import pandas as pd
 
 class CropYield:
 
-    def __init__(self, all_params, years, land_use):
+    def __init__(self, all_params, years, land_use, plot_title):
         self.all_params = all_params
         self.years = years
         self.land_use = land_use
+        self.plot_title = plot_title
 
     def figure(self):
-        print('Generating CropYield')
         crops_yield_df = self.calculate_yield_df(self.all_params, self.years, self.land_use)
         crops_yield_df.loc[:, crops_yield_df.columns != 'y'] = (crops_yield_df.loc[
             :, crops_yield_df.columns != 'y']).mul(10)
@@ -23,7 +23,7 @@ class CropYield:
                                     yTitle='Yield (t/ha)',
                                     size=10,
                                     color=[color_dict[x] for x in crops_yield_df.columns if x != 'y'],  # noqa
-                                    title='Yield (tonnes/hectare)',
+                                    title=self.plot_title,
                                     showlegend=True)
 
     def calculate_yield_df(self, all_params, years, land_use):
