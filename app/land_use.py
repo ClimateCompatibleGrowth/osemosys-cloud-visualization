@@ -36,7 +36,7 @@ class LandUse:
                     if each_crop[0:4] + each_combo not in crop_combo:
                         crop_combo.append(each_crop[0:4] + each_combo)
 
-        #crop_combo = list(set(crop_combo))
+        # crop_combo = list(set(crop_combo))
 
         for each in ['BAR', 'FOR', 'GRS', 'BLT', 'WAT', 'OTH']:
             crop_combo.append(each)
