@@ -16,11 +16,11 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
                 optionsString = options[i].map(option => option.value)
 
                 let toHide = optionsString.filter(x =>
-                    !checkedBoxes[i].includes(x)).map( id => `.figure-${id}`
+                    !checkedBoxes[i].includes(x)).map( id => `.figure-set-${id}`
                     )
 
                 let toShow = optionsString.filter(
-                    x => checkedBoxes[i].includes(x)).map( id => `.figure-${id}`
+                    x => checkedBoxes[i].includes(x)).map( id => `.figure-set-${id}`
                     )
 
                 $(`#nav-${tabIndices[i]}`).find(toShow.join(',')).show()
