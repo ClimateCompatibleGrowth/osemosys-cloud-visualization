@@ -178,7 +178,6 @@ def generate_figure_divs(
             Config(config_input) for config_input in [main_config_input, compare_to_1, compare_to_2]
     ]
     valid_configs = [config for config in configs if config.is_valid()]
-    # return GenerateDivs().generate_divs()
     if len(valid_configs) > 0:
         return GenerateDivs(valid_configs).generate_divs()
     else:
