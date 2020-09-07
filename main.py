@@ -52,20 +52,20 @@ app.layout = html.Div([
     dcc.Location(id='url'),
     html.Div([], id='header'),
     html.Div([
-            dcc.Input(id='input-string', type='text', className='input-field'),
+            html.Label('Model:', htmlFor='input-string'),
+            dcc.Input(id='input-string', type='text', className='input-field mb-3'),
+            html.Label('Compare to:', htmlFor='compare-to-1'),
+            dcc.Input(id='compare-to-1', type='text', className='input-field mb-1'),
+            dcc.Input(id='compare-to-2', type='text', className='input-field mb-1'),
+            html.Br(),
             html.Button(id='submit-button', n_clicks=0, children='Submit'),
         ],
         className='source-form'
     ),
-    html.Div([
-            dcc.Input(id='compare-to-1', type='text', className='input-field'),
-            dcc.Input(id='compare-to-2', type='text', className='input-field'),
-        ],
-        className='source-form'
-        ),
+    html.Hr(),
     dcc.Upload(
         id='upload-data',
-        children=html.Div(html.Button('Upload zip file')),
+        children=html.Div(html.Button('Or upload zip file')),
         className='upload-zone',
     ),
     html.Nav([
