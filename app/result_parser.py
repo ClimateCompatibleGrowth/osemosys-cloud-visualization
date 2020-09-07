@@ -3,11 +3,10 @@ import pandas as pd
 
 
 class ResultParser:
-    all_params = {}
-    _df_y_min = 9999
-    _df_y_max = 0
-
     def __init__(self, results_path):
+        self.all_params = {}
+        self._df_y_min = 9999
+        self._df_y_max = 0
         self.results_path = results_path
         self.__parse_results()
         self.years = pd.Series(list(range(self._df_y_min, self._df_y_max)))
