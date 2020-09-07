@@ -52,14 +52,20 @@ app.layout = html.Div([
     dcc.Location(id='url'),
     html.Div([], id='header'),
     html.Div([
-            dcc.Input(id='input-string', type='text', className='input-field'),
+            html.Label('Model:', htmlFor='input-string'),
+            dcc.Input(id='input-string', type='text', className='input-field mb-3'),
+            html.Label('Compare to:', htmlFor='compare-to-1'),
+            dcc.Input(id='compare-to-1', type='text', className='input-field mb-1'),
+            dcc.Input(id='compare-to-2', type='text', className='input-field mb-1'),
+            html.Br(),
             html.Button(id='submit-button', n_clicks=0, children='Submit'),
         ],
         className='source-form'
     ),
+    html.Hr(),
     dcc.Upload(
         id='upload-data',
-        children=html.Div(html.Button('Upload zip file')),
+        children=html.Div(html.Button('Or upload zip file')),
         className='upload-zone',
     ),
     html.Nav([
@@ -156,16 +162,26 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
         Input(component_id='url', component_property='search'),
         Input(component_id='upload-data', component_property='contents'),
     ],
-    [State('input-string', 'value')]
+    [
+        State('input-string', 'value'),
+        State('compare-to-1', 'value'),
+        State('compare-to-2', 'value'),
+    ]
     )
-def generate_figure_divs(n_clicks, n_submit, raw_query_string, upload_data, input_string):
+def generate_figure_divs(
+        n_clicks, n_submit, raw_query_string, upload_data,
+        input_string, compare_to_1, compare_to_2
+        ):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
-    config_input = config_input_from(input_string, raw_query_string, triggered_element)
-    config = Config(config_input)
-    if config.is_valid():
-        return GenerateDivs(config).generate_divs()
+    main_config_input = config_input_from(input_string, raw_query_string, triggered_element)
+    configs = [
+            Config(config_input) for config_input in [main_config_input, compare_to_1, compare_to_2]
+    ]
+    valid_configs = [config for config in configs if config.is_valid()]
+    if len(valid_configs) > 0:
+        return GenerateDivs(valid_configs).generate_divs()
     else:
-        return [f'Invalid model: {config_input}']
+        return [f'Invalid models: {[config.input_string for config in configs]}']
 
 
 def config_input_from(input_string, raw_query_string, triggered_element=''):

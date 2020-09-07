@@ -10,8 +10,8 @@ pd.set_option('mode.chained_assignment', None)
 
 
 class GenerateDivs:
-    def __init__(self, config):
-        self.config = config
+    def __init__(self, configs):
+        self.configs = configs
         self.ids_by_category = self.__ids_by_category()
         self.figures_by_category = self.__figures_by_category()
 
@@ -69,7 +69,7 @@ class GenerateDivs:
 
     @functools.lru_cache(maxsize=128)
     def __all_figure_sets(self):
-        return GenerateFigures([self.config]).all_figure_sets()
+        return GenerateFigures(self.configs).all_figure_sets()
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])
