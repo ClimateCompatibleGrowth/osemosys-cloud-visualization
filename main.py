@@ -12,6 +12,8 @@ import zipfile
 from app.config import Config
 from app.header import Header
 from app.generate_divs import GenerateDivs
+from flask_caching import Cache
+
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
 
@@ -47,6 +49,10 @@ app = dash.Dash(__name__,
                 external_stylesheets=external_stylesheets)
 
 server = app.server
+cache = Cache(server, config={
+    'CACHE_TYPE': 'filesystem',
+    'CACHE_DIR': 'cache'
+})
 
 app.layout = html.Div([
     dcc.Location(id='url'),
@@ -179,9 +185,14 @@ def generate_figure_divs(
     ]
     valid_configs = [config for config in configs if config.is_valid()]
     if len(valid_configs) > 0:
-        return GenerateDivs(valid_configs).generate_divs()
+        return generate_divs(valid_configs)
     else:
         return [f'Invalid models: {[config.input_string for config in configs]}']
+
+
+@cache.memoize(timeout=86400)  # 1 Day
+def generate_divs(configs):
+    return GenerateDivs(configs).generate_divs()
 
 
 def config_input_from(input_string, raw_query_string, triggered_element=''):

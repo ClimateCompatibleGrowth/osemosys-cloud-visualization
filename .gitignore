@@ -4,3 +4,4 @@ venv
 .env
 tmp/
 log/*.log
+cache
