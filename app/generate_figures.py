@@ -1,3 +1,4 @@
+import functools
 from app.land_use import LandUse
 from app.result_parser import ResultParser
 from app.dash_figure_set import DashFigureSet
@@ -42,6 +43,7 @@ class GenerateFigures:
                     'years': result_parser.years,
                }
 
+    @functools.lru_cache(maxsize=128)
     def __iplot_inputs(self):
         return [self.iplot_input_from(config) for config in self.configs]
 
