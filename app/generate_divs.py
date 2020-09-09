@@ -19,23 +19,38 @@ class GenerateDivs:
         return [
                 dcc.Loading(html.Div([
                     Checkboxes(self.__all_ids(), 'All').to_component(),
-                    html.Div([figure.to_div() for figure in self.__all_figure_sets()])
+                    html.Div(
+                        [figure_set.to_div() for figure_set in self.__all_figure_sets()],
+                        className='figure-set-container'
+                    )
                 ]), fullscreen=True),
                 html.Div([
                     Checkboxes(self.ids_by_category['Climate'], 'Climate').to_component(),
-                    html.Div([figure.to_div() for figure in self.figures_by_category['Climate']])
+                    html.Div(
+                        [figure.to_div() for figure in self.figures_by_category['Climate']],
+                        className='figure-set-container'
+                    )
                 ]),
                 html.Div([
                     Checkboxes(self.ids_by_category['Land'], 'Land').to_component(),
-                    html.Div([figure.to_div() for figure in self.figures_by_category['Land']])
+                    html.Div(
+                        [figure.to_div() for figure in self.figures_by_category['Land']],
+                        className='figure-set-container'
+                    )
                 ]),
                 html.Div([
                     Checkboxes(self.ids_by_category['Energy'], 'Energy').to_component(),
-                    html.Div([figure.to_div() for figure in self.figures_by_category['Energy']])
+                    html.Div(
+                        [figure.to_div() for figure in self.figures_by_category['Energy']],
+                        className='figure-set-container'
+                    )
                 ]),
                 html.Div([
                     Checkboxes(self.ids_by_category['Water'], 'Water').to_component(),
-                    html.Div([figure.to_div() for figure in self.figures_by_category['Water']])
+                    html.Div(
+                        [figure.to_div() for figure in self.figures_by_category['Water']],
+                        className='figure-set-container'
+                    )
                 ]),
             ]
 

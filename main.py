@@ -196,7 +196,7 @@ def generate_figure_divs(
     if len(valid_configs) > 0:
         return generate_divs(valid_configs)
     else:
-        return [f'Invalid models: {[config.input_string for config in configs]}']
+        return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
 
 
 @cache.memoize(timeout=86400)  # 1 Day
