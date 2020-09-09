@@ -199,7 +199,7 @@ def generate_figure_divs(
         return [f'Invalid models: {[config.input_string for config in configs]}']
 
 
-# @cache.memoize(timeout=86400)  # 1 Day
+@cache.memoize(timeout=86400)  # 1 Day
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
 
