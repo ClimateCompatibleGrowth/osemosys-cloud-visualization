@@ -16,53 +16,28 @@ class GenerateDivs:
         self.figures_by_category = self.__figures_by_category()
 
     def generate_divs(self):
-        return html.Div([
-            html.Div(
-                [
+        return [
+                dcc.Loading(html.Div([
                     Checkboxes(self.__all_ids(), 'All').to_component(),
                     html.Div([figure.to_div() for figure in self.__all_figure_sets()])
-                ],
-                className='tab-pane show active',
-                id='nav-all',
-                role='tabpanel',
-                ),
-            html.Div(
-                [
+                ]), fullscreen=True),
+                html.Div([
                     Checkboxes(self.ids_by_category['Climate'], 'Climate').to_component(),
                     html.Div([figure.to_div() for figure in self.figures_by_category['Climate']])
-                ],
-                className='tab-pane',
-                id='nav-climate',
-                role='tabpanel',
-            ),
-            html.Div(
-                [
+                ]),
+                html.Div([
                     Checkboxes(self.ids_by_category['Land'], 'Land').to_component(),
                     html.Div([figure.to_div() for figure in self.figures_by_category['Land']])
-                ],
-                className='tab-pane',
-                id='nav-land',
-                role='tabpanel',
-            ),
-            html.Div(
-                [
+                ]),
+                html.Div([
                     Checkboxes(self.ids_by_category['Energy'], 'Energy').to_component(),
                     html.Div([figure.to_div() for figure in self.figures_by_category['Energy']])
-                ],
-                className='tab-pane',
-                id='nav-energy',
-                role='tabpanel',
-            ),
-            html.Div(
-                [
+                ]),
+                html.Div([
                     Checkboxes(self.ids_by_category['Water'], 'Water').to_component(),
                     html.Div([figure.to_div() for figure in self.figures_by_category['Water']])
-                ],
-                className='tab-pane',
-                id='nav-water',
-                role='tabpanel',
-             ),
-            ], className='tab-content', id='categoryTabContent'),
+                ]),
+            ]
 
     def __all_ids(self):
         return [figure.id for figure in self.__all_figure_sets()]

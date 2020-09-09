@@ -113,7 +113,13 @@ app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
     ], className='nav nav-tabs justify-content-center', id='categoryTab', role='tablist'),
-    dcc.Loading(html.Div(id='figures-container'), fullscreen=True)
+    dcc.Loading(html.Div([
+            html.Div([], className='tab-pane show active', id='nav-all', role='tabpanel'),
+            html.Div([], className='tab-pane show', id='nav-climate', role='tabpanel'),
+            html.Div([], className='tab-pane show', id='nav-land', role='tabpanel'),
+            html.Div([], className='tab-pane show', id='nav-energy', role='tabpanel'),
+            html.Div([], className='tab-pane show', id='nav-water', role='tabpanel'),
+        ], id='categoryTabContent', className='tab-content'), fullscreen=True),
 ])
 
 
@@ -122,7 +128,7 @@ app.clientside_callback(
         namespace='clientside',
         function_name='testFunction'
     ),
-    Output(component_id='figures-container', component_property='data-checked-boxes'),
+    Output(component_id='categoryTabContent', component_property='data-checked-boxes'),
     [Input({'type': 'checkboxes', 'index': ALL}, 'value')],
     [State({'type': 'checkboxes', 'index': ALL}, 'options')],
 )
@@ -158,7 +164,13 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
 
 
 @app.callback(
-    Output(component_id='figures-container', component_property='children'),
+    [
+        Output(component_id='nav-all', component_property='children'),
+        Output(component_id='nav-climate', component_property='children'),
+        Output(component_id='nav-land', component_property='children'),
+        Output(component_id='nav-energy', component_property='children'),
+        Output(component_id='nav-water', component_property='children'),
+    ],
     [
         Input(component_id='submit-button', component_property='n_clicks'),
         Input(component_id='input-string', component_property='n_submit'),
