@@ -60,9 +60,9 @@ PWR_WAT,Power sector (consumptive use),,lightblue
 PWR_WITH,Power sector (withdrawal),,darkblue
 ELC_EXP,Electricity exports,,pink
 ELC_NET,Net electricity imports,,pink
-MIG,Mining,Mining,gold
+MIG,Mining,Mining,orange
 PCK,Petroleum coke,Petroleum coke,red
-JET,Aviation fuels,Aviation fuels,purple
+JET,Aviation fuels,Aviation fuels,darkblue
 NAP,Naptha,Naptha,blue
 LVSPRDALL,Livestock,Livestock,purple
 LVS,Livestock,Livestock,purple
@@ -73,3 +73,4 @@ LVSL04,Camels,Camels,gold
 LVSL05,Sheep,Sheep,grey
 LVSL06,Pigs,Pigs,red
 LVSL07,Chicken,Chicken,magenta
+TLU,Livestock,Livestock,purple
