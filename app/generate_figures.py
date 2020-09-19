@@ -266,7 +266,7 @@ class GenerateFigures:
                     ],
                     category='Water',
                     id='water-withdrawal-by-source',
-                    name='Warer Withdrawal By Source',
+                    name='Water Withdrawal By Source',
                 ),
                 DashFigureSet(
                     iplots=[
