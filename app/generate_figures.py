@@ -302,7 +302,7 @@ class GenerateFigures:
                     ],
                     category='Climate',
                     id='emissions-by-fuel',
-                    name='CO2 Emissions By Fuel',
+                    name='CO2 Emissions By Source',
                 ),
                 DashFigureSet(
                     iplots=[
