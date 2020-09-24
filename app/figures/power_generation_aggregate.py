@@ -30,7 +30,8 @@ class PowerGenerationAggregate:
                                 kind='bar',
                                 barmode='relative',
                                 xTitle='Year',
-                                yTitle='Terawatt-hours (TWh)',
+                                # yTitle='Terawatt-hours (TWh)',
+                                yTitle='Petajoules (PJ)',
                                 color=[color_dict[x]
                                        for x
                                        in self.__calculate_gen_df().columns
@@ -68,6 +69,6 @@ class PowerGenerationAggregate:
 
             gen_df.rename(columns={'Net electricity imports': 'Electricity exports'},
                           inplace=True)
-            gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
-                                                          .mul(0.28).round(2))
+            # gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
+            #                                              .mul(0.28).round(2))
         return gen_df
