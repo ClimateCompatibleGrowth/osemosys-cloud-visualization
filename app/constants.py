@@ -4,7 +4,7 @@ import pandas as pd
 # List of columns for aggregated energy tables and figures
 agg_col = {'Coal': ['Coal'],
            'Oil': ['Diesel', 'HFO', 'JFL', 'Crude oil', 'Petroleum coke'],
-           'Gas': ['Natural gas', 'LNG', 'LPG'],
+           'Gas': ['Natural gas', 'LNG', 'LPG', 'Gas'],
            'Hydro': ['Hydro'],
            'Nuclear': ['Nuclear'],
            'Other renewables': ['Biomass', 'Geothermal', 'Solar', 'MSW', 'Wind'],
