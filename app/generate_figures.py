@@ -107,7 +107,7 @@ class GenerateFigures:
                     ],
                     category='Energy',
                     id='power-generation-detail',
-                    name='Power Generation (Detail',
+                    name='Power Generation (Detail)',
                 ),
                 DashFigureSet(
                     iplots=[
