@@ -8,9 +8,6 @@ from app.generate_csv_files import generate_csv_files
 
 
 class Config:
-    def __repr__(self):
-        return self.input_string
-
     def __init__(self, input_string):
         print(f'Config input: {input_string}')
         self.input_string = input_string
