@@ -16,6 +16,8 @@ class CostElectrictyGeneration:
                 kind='bar',
                 barmode='relative',
                 x='y',
+                xTitle='Year',
+                yTitle='$/MWh',
                 title=self.plot_title
                 )
 
@@ -31,7 +33,7 @@ class CostElectrictyGeneration:
 
         R = 0.1  # Discount rate
         n = 30  # Amortization period
-        cap_exist_total = 500  # Payments on existing capacity (legacy costs)
+        cap_exist_total = 0  # Payments on existing capacity (legacy costs)
 
         for i in ele_cos_df['y']:
             for j in ele_cos_df['y']:
