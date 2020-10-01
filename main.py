@@ -199,9 +199,17 @@ def generate_figure_divs(
         return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
 
 
+def make_cache_key_for_configs(f, *args, **kwargs):
+    configs = args[0]
+    return '-'.join([config.input_string for config in configs])
+
+
 @cache.memoize(timeout=86400 * 365)  # 1 year
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
+
+
+generate_divs.make_cache_key = make_cache_key_for_configs
 
 
 def config_input_from(input_string, raw_query_string, triggered_element=''):
