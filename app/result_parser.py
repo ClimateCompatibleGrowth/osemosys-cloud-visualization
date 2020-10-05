@@ -9,7 +9,7 @@ class ResultParser:
         self._df_y_max = 0
         self.results_path = results_path
         self.__parse_results()
-        self.years = pd.Series(list(range(self._df_y_min, self._df_y_max)))
+        self.years = pd.Series(list(range(self._df_y_min, self._df_y_max + 1)))
 
     def __parse_results(self):
         for each_file in os.listdir(self.results_path):
