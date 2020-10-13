@@ -54,7 +54,7 @@ class WaterBalance:
                                 .reset_index()
                                 .rename(columns=det_col))
         wat_dem_df = df_years(wat_dem_df, self.years)
-        if wat_dem_df['Agriculture'].sum() > 0:
+        if 'Agriculture' in wat_dem_df.columns:
             wat_bal_df['Irrigation'] = wat_dem_df['Agriculture']
         else:
             wat_bal_df['Irrigation'] = 0
