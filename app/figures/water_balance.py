@@ -54,7 +54,10 @@ class WaterBalance:
                                 .reset_index()
                                 .rename(columns=det_col))
         wat_dem_df = df_years(wat_dem_df, self.years)
-        wat_bal_df['Irrigation'] = wat_dem_df['Agriculture']
+        if wat_dem_df['Agriculture'].sum() > 0:
+            wat_bal_df['Irrigation'] = wat_dem_df['Agriculture']
+        else:
+            wat_bal_df['Irrigation'] = 0
         # wat_bal_df['y'] = self.years
         for each in wat_bal_df.columns:
             if each in ['Evapotranspiration', 'Groundwater recharge', 'Surface water run-off', 'Recharge + Run-off']:
