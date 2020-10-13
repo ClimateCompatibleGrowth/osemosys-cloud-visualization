@@ -60,7 +60,7 @@ class WaterBalance:
             wat_bal_df['Irrigation'] = 0
         # wat_bal_df['y'] = self.years
         for each in wat_bal_df.columns:
-            if each in ['Evapotranspiration', 'Groundwater recharge', 'Surface water run-off', 'Recharge + Run-off']:
+            if each in ['Evapotranspiration', 'Groundwater recharge', 'Surface water run-off', 'Recharge + Run-off', 'Groundwater']:
                 wat_bal_df[each] = wat_bal_df[each].mul(-1)
         wat_bal_df = df_years(wat_bal_df, self.years)
         return wat_bal_df
