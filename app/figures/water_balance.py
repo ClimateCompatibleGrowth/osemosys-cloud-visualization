@@ -1,4 +1,4 @@
-from app.utilities import df_plot, df_filter
+from app.utilities import df_plot, df_filter, df_years
 from app.constants import det_col, color_dict
 import pandas as pd
 
@@ -38,6 +38,7 @@ class WaterBalance:
                                 .set_index('y')
                                 .reset_index()
                                 .rename(columns=det_col))
+        wat_bal_df = df_years(wat_bal_df, self.years)
         wat_list = ['AGRWAT', 'PUBWAT', 'PWRWAT', 'INDWAT', 'LVSWAT']
         wat_dem_df = production_by_technology_annual[
             production_by_technology_annual.f.str[0:6].isin(wat_list)
@@ -52,9 +53,11 @@ class WaterBalance:
                                 .set_index('y')
                                 .reset_index()
                                 .rename(columns=det_col))
+        wat_dem_df = df_years(wat_dem_df, self.years)
         wat_bal_df['Irrigation'] = wat_dem_df['Agriculture']
-        wat_bal_df['y'] = self.years
+        # wat_bal_df['y'] = self.years
         for each in wat_bal_df.columns:
-            if each in ['Evapotranspiration', 'Groundwater recharge', 'Surface water run-off']:
+            if each in ['Evapotranspiration', 'Groundwater recharge', 'Surface water run-off', 'Recharge + Run-off']:
                 wat_bal_df[each] = wat_bal_df[each].mul(-1)
+        wat_bal_df = df_years(wat_bal_df, self.years)
         return wat_bal_df
