@@ -197,9 +197,9 @@ class CostElectrictyGeneration:
         return df_filter(dom_prd_df, 3, 6, [], years)
 
     def calculate_gen_use_df(self, all_params, years):
-        gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith(
-            'DEMPWR')].drop('r', axis=1)
-        gen_use_df = df_filter(gen_use_df, 6, 9, ['SUR', 'GWT'], years)
+        gen_use_df = all_params['UseByTechnologyAnnual'][all_params['UseByTechnologyAnnual'].t.str.startswith('PWR') &
+                                                        ~all_params['UseByTechnologyAnnual'].f.str.startswith(('PWRWAT','LND'))].drop('r', axis=1)
+        gen_use_df = df_filter(gen_use_df, 3, 6, ['TRN'], years)
         return gen_use_df
 
     def calculate_gen_df(self, all_params, years):
