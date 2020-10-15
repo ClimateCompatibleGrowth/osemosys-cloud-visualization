@@ -20,4 +20,4 @@ class GFECBySector:
             ].drop('r', axis=1)
         gfec_df = gfec_df[~gfec_df.t.str.startswith('DEMAGRSUR')]
         gfec_df = gfec_df[~gfec_df.t.str.endswith('CRU')]
-        return df_filter(gfec_df, 3, 6, ['PWR', 'LVS'], self.years)
+        return df_filter(gfec_df, 3, 6, ['PWR', 'LVS', 'PUB'], self.years)
