@@ -199,7 +199,7 @@ class CostElectrictyGeneration:
     def calculate_gen_use_df(self, all_params, years):
         gen_use_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].t.str.startswith(
             'DEMPWR')].drop('r', axis=1)
-        gen_use_df = df_filter(gen_use_df, 6, 9, ['SUR'], years)
+        gen_use_df = df_filter(gen_use_df, 6, 9, ['SUR', 'GWT'], years)
         return gen_use_df
 
     def calculate_gen_df(self, all_params, years):
