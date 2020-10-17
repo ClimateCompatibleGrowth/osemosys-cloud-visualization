@@ -31,6 +31,12 @@ class Config:
     def description(self):
         return self.__metadata()['description']
 
+    def version_name(self):
+        return self.__metadata()['version_name']
+
+    def model_name(self):
+        return self.__metadata()['model_name']
+
     def __metadata(self):
         if not self.is_valid():
             return self.__default_metadata()
