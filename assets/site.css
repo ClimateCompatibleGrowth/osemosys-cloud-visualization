@@ -10,8 +10,9 @@ h1 {
 .figures-container {
 }
 
-.figure-set {
-  display: inline-block;
+.figure-set-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .figure {
@@ -25,7 +26,6 @@ h1 {
 }
 
 .figure-error {
-  vertical-align: top;
 }
 
 .source-form {
