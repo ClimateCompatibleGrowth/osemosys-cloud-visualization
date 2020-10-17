@@ -32,10 +32,10 @@ class Config:
         return self.__metadata()['description']
 
     def version_name(self):
-        return self.__metadata()['version_name']
+        return self.__metadata().get('version_name', '(No version)')
 
     def model_name(self):
-        return self.__metadata()['model_name']
+        return self.__metadata().get('model_name', '(No model)')
 
     def __metadata(self):
         if not self.is_valid():
