@@ -20,7 +20,7 @@ class PowerGenerationTimeslice:
                                                yTitle='Petajoules (PJ)',
                                                color=[color_dict[x]
                                                       for x
-                                                      in self.__calculate_gen_df().columns
+                                                      in self.__calculate_gen_ts_df().columns
                                                       if x != 'l'],
                                                title=self.plot_title,
                                                showlegend=True)
