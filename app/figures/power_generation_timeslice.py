@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import color_dict
+from app.constants import det_col, color_dict
 import pandas as pd
 
 
