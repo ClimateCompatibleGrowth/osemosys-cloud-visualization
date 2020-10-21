@@ -170,6 +170,13 @@ def generate_csv_files(data_file, results_file, base_folder):
     df_prod.to_csv(os.path.join(base_folder, 'csv', 'ProductionByTechnologyAnnual.csv'), index=None)
     all_params['ProductionByTechnologyAnnual'] = df_prod.rename(columns={'ProductionByTechnologyAnnual':'value'})
 
+    df_prod_ts = pd.merge(df_out_ys, df_activity, on=['t','m','l','y'])
+    df_prod_ts['ProductionByTechnology'] = df_prod_ts['OutputActivityRatio']*df_prod_ts['YearSplit']*df_prod_ts['RateOfActivity']
+    df_prod_ts = df_prod_ts.drop(['OutputActivityRatio','YearSplit','RateOfActivity'], axis=1)
+    df_prod_ts = df_prod_ts.groupby(['r','l','t','f','y'])['ProductionByTechnology'].sum().reset_index()
+    df_prod_ts['ProductionByTechnology'] = df_prod_ts['ProductionByTechnology'].astype(float).round(4)
+    df_prod_ts.to_csv(os.path.join(base_folder, 'csv', 'ProductionByTechnology.csv'), index=None)
+    all_params['ProductionByTechnology'] = df_prod_ts.rename(columns={'ProductionByTechnology':'value'})
 
     df_input = pd.DataFrame(input_table, columns=['t','f','m','y','InputActivityRatio'])
     df_in_ys = pd.merge(df_input, df_yearsplit, on='y')
