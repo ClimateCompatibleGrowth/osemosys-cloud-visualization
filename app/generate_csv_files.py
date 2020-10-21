@@ -122,6 +122,8 @@ def generate_csv_files(data_file, results_file, base_folder):
             'RateOfUseByTechnologyByMode':['r','l','t','f','m','y'],
             'TechnologyActivityChangeByMode':['r','t','m','y'],
             'TechnologyActivityChangeByModeCostTotal':['r','t','m','y'],
+            'InputToTotalCapacity':['r','t','f','y'],
+            'InputToNewCapacity':['r','t','f','y'],
             }
 
     for each in params:
