@@ -7,6 +7,7 @@ from app.figures.gfec_by_fuel import GFECByFuel
 from app.figures.power_generation_capacity import PowerGenerationCapacity
 from app.figures.power_generation_capacity_aggregate import PowerGenerationCapacityAggregate
 from app.figures.power_generation_detail import PowerGenerationDetail
+from app.figures.power_generation_timeslice import PowerGenerationTimeslice
 from app.figures.power_generation_aggregate import PowerGenerationAggregate
 from app.figures.power_generation_fuel_use import PowerGenerationFuelUse
 from app.figures.domestic_energy_production import DomesticEnergyProduction
@@ -108,6 +109,18 @@ class GenerateFigures:
                     category='Energy',
                     id='power-generation-detail',
                     name='Power Generation (Detail)',
+                ),
+                DashFigureSet(
+                    iplots=[
+                        PowerGenerationTimeslice(
+                            iplot_input['all_params'],
+                            iplot_input['years'],
+                            iplot_input['config'].title()
+                        ) for iplot_input in self.__iplot_inputs()
+                    ],
+                    category='Energy',
+                    id='power-generation-timeslice',
+                    name='Power Generation (Timeslice)',
                 ),
                 DashFigureSet(
                     iplots=[
