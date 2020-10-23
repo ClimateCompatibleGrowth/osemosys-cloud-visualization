@@ -21,8 +21,8 @@ WAS,MSW,Residuos,green
 WAT,Water,Agua,blue
 LND,Land,Suelo,green
 WND,Wind,Eólica,violet
-CP01,Coffee,Coffee,red
-CP02,Sugar cane,Sugar cane,green
+CP01,Maize,Coffee,gold
+CP02,Rice,Sugar cane,lightgreen
 CP03,Coffee,Coffee,brown
 CP04,Maize,Maize,orange
 CP05,Oilseeds,Oilseeds,pink
@@ -43,7 +43,7 @@ PUB,Public supply,Abastecimiento público,gold
 EVT,Evapotranspiration,Evapotranspiración,green
 PRC,Precipitation,Precipitación,blue
 GRC,Groundwater recharge,Recarga de agua subterránea,orange
-GWT,Groundwater,,purple
+GWT,Groundwater,Agua subterránea,purple
 SUR,Surface water run-off,Agua superficial,red
 IRR,Irrigation,Irrigación,brown
 REN,Other renewables,Otras fuentes renovables,green
