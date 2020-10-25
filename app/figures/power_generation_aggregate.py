@@ -1,6 +1,6 @@
 import pandas as pd
 from app.utilities import df_plot, df_filter
-from app.constants import agg_col, color_dict
+import app.constants
 
 
 class PowerGenerationAggregate:
@@ -12,12 +12,12 @@ class PowerGenerationAggregate:
 
     def figure(self):
         gen_df = self.__calculate_gen_df()
-        gen_agg_df = pd.DataFrame(columns=agg_col)
+        gen_agg_df = pd.DataFrame(columns=app.constants.agg_col)
         gen_agg_df.insert(0, 'y', gen_df['y'])
         gen_agg_df = gen_agg_df.fillna(0.00)
 
-        for each in agg_col:
-            for tech_exists in agg_col[each]:
+        for each in app.constants.agg_col:
+            for tech_exists in app.constants.agg_col[each]:
                 if tech_exists in gen_df.columns:
                     gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
                     gen_agg_df[each] = gen_agg_df[each].round(2)
@@ -32,7 +32,7 @@ class PowerGenerationAggregate:
                                 xTitle='Year',
                                 # yTitle='Terawatt-hours (TWh)',
                                 yTitle='Petajoules (PJ)',
-                                color=[color_dict[x]
+                                color=[app.constants.color_dict[x]
                                        for x
                                        in self.__calculate_gen_df().columns
                                        if x != 'y'],
