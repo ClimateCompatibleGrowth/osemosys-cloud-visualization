@@ -13,6 +13,7 @@ from app.cache import cache
 from app.config import Config
 from app.header import Header
 from app.generate_divs import GenerateDivs
+import app.constants
 
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
@@ -194,6 +195,8 @@ def generate_figure_divs(
     ]
     valid_configs = [config for config in configs if config.is_valid()]
     if len(valid_configs) > 0:
+        language = valid_configs[0].language()
+        app.constants.set_cols_from_language(language)
         return generate_divs(valid_configs)
     else:
         return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
@@ -204,7 +207,7 @@ def make_cache_key_for_configs(f, *args, **kwargs):
     return '-'.join([config.input_string for config in configs])
 
 
-@cache.memoize(timeout=86400 * 365)  # 1 year
+# @cache.memoize(timeout=86400 * 365)  # 1 year
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
 
