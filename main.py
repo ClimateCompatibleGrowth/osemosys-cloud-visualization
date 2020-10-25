@@ -44,14 +44,14 @@ external_stylesheets = [
         }
     ]
 
-app = dash.Dash(__name__,
+dash_app = dash.Dash(__name__,
                 external_scripts=external_scripts,
                 external_stylesheets=external_stylesheets)
 
-server = app.server
+server = dash_app.server
 cache.init_app(server, config={'CACHE_TYPE': 'filesystem','CACHE_DIR': 'cache'})
 
-app.layout = html.Div([
+dash_app.layout = html.Div([
     dcc.Location(id='url'),
     html.Div([], id='header'),
     html.Div([
@@ -123,7 +123,7 @@ app.layout = html.Div([
 ])
 
 
-app.clientside_callback(
+dash_app.clientside_callback(
     ClientsideFunction(
         namespace='clientside',
         function_name='testFunction'
@@ -134,7 +134,7 @@ app.clientside_callback(
 )
 
 
-@app.callback(
+@dash_app.callback(
     Output(component_id='input-string', component_property='value'),
     [Input(component_id='url', component_property='search')]
     )
@@ -146,7 +146,7 @@ def populate_input_string_from_query_string(query_string):
         return ''
 
 
-@app.callback(
+@dash_app.callback(
     Output(component_id='header', component_property='children'),
     [
         Input(component_id='submit-button', component_property='n_clicks'),
@@ -163,7 +163,7 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
     return Header(config).contents()
 
 
-@app.callback(
+@dash_app.callback(
     [
         Output(component_id='nav-all', component_property='children'),
         Output(component_id='nav-climate', component_property='children'),
@@ -260,6 +260,6 @@ def write_and_extract_zip_file(base64_encoded_zip, work_path):
 
 if __name__ == '__main__':
     if 'DASH_DEBUG' in os.environ:
-        app.run_server(debug=True)
+        dash_app.run_server(debug=True)
     else:
-        app.run_server(debug=False)
+        dash_app.run_server(debug=False)
