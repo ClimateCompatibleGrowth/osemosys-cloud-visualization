@@ -30,4 +30,3 @@ def set_cols_from_language(language):
     else:
         det_col = dict([(c, n) for c, n in zip(name_color_codes.code, name_color_codes.name_english)])
         color_dict = dict([(n, c) for n, c in zip(name_color_codes.name_english, name_color_codes.colour)])
-    # import pdb; pdb.set_trace()
