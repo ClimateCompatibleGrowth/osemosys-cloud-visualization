@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col
+import app.constants
 
 
 class LivestockProduction:
@@ -28,6 +28,6 @@ class LivestockProduction:
         lvs_prod_df = (lvs_prod_df.reindex(sorted(lvs_prod_df.columns), axis=1)
                                   .set_index('y')
                                   .reset_index()
-                                  .rename(columns=det_col))
+                                  .rename(columns=app.constants.det_col))
         lvs_prod_df['y'] = self.years
         return lvs_prod_df

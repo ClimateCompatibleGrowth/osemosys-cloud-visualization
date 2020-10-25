@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col
+import app.constants
 
 
 class AreaByCropIrrigated:
@@ -26,7 +26,7 @@ class AreaByCropIrrigated:
         crops_ws_df = (crops_ws_df.reindex(sorted(crops_ws_df.columns), axis=1)
                                   .set_index('y')
                                   .reset_index()
-                                  .rename(columns=det_col))
+                                  .rename(columns=app.constants.det_col))
         return df_plot(crops_ws_df, 'Land area (1000 sq.km.)', self.plot_title)
 
     def __calculate_crops_ws_df(self):

@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col
+import app.constants
 
 
 class AreaByLandCoverTypeForRegion:
@@ -39,7 +39,7 @@ class AreaByLandCoverTypeForRegion:
             sorted(
                 land_cluster_df.columns),
             axis=1).set_index('y').reset_index().rename(
-                columns=det_col)
+                columns=app.constants.det_col)
         return df_plot(land_cluster_df, 'Land area (1000 sq.km.)', self.plot_title)
 
     def calculate_land_total_df(self, all_params, years):

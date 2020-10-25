@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col, name_color_codes, color_dict
+import app.constants
 import pandas as pd
 
 
@@ -22,7 +22,7 @@ class CropYield:
                                     xTitle='Year',
                                     yTitle='Yield (t/ha)',
                                     size=10,
-                                    color=[color_dict[x] for x in crops_yield_df.columns if x != 'y'],  # noqa
+                                    color=[app.constants.color_dict[x] for x in crops_yield_df.columns if x != 'y'],  # noqa
                                     title=self.plot_title,
                                     showlegend=True)
 
@@ -41,7 +41,7 @@ class CropYield:
                                                     values='value',
                                                     aggfunc='sum').reset_index().fillna(0)
         crops_total_df = crops_total_df.reindex(sorted(crops_total_df.columns), axis=1).set_index(
-            'y').reset_index().rename(columns=det_col).astype('float64')
+            'y').reset_index().rename(columns=app.constants.det_col).astype('float64')
 
         crops_yield_df = self.calculate_crops_prod_df(all_params, years) / crops_total_df
         return crops_yield_df
@@ -57,6 +57,6 @@ class CropYield:
                                                   values='value',
                                                   aggfunc='sum').reset_index().fillna(0)
         crops_prod_df = crops_prod_df.reindex(sorted(crops_prod_df.columns), axis=1).set_index(
-            'y').reset_index().rename(columns=det_col)
+            'y').reset_index().rename(columns=app.constants.det_col)
         crops_prod_df['y'] = years
         return crops_prod_df
