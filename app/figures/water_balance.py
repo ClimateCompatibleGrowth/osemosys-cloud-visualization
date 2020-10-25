@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter, df_years
-from app.constants import det_col, color_dict
+import app.constants
 import pandas as pd
 
 
@@ -18,7 +18,7 @@ class WaterBalance:
                                 barmode='relative',
                                 xTitle='Year',
                                 yTitle='Billion m3',
-                                color=[color_dict[x] for x in wat_bal_df.columns if x != 'y'],
+                                color=[app.constants.color_dict[x] for x in wat_bal_df.columns if x != 'y'],
                                 title=self.plot_title,
                                 showlegend=True,
                                 )
@@ -37,7 +37,7 @@ class WaterBalance:
         wat_bal_df = (wat_bal_df.reindex(sorted(wat_bal_df.columns), axis=1)
                                 .set_index('y')
                                 .reset_index()
-                                .rename(columns=det_col))
+                                .rename(columns=app.constants.det_col))
         wat_bal_df = df_years(wat_bal_df, self.years)
         wat_list = ['AGRWAT', 'PUBWAT', 'PWRWAT', 'INDWAT', 'LVSWAT']
         wat_dem_df = production_by_technology_annual[
@@ -52,7 +52,7 @@ class WaterBalance:
         wat_dem_df = (wat_dem_df.reindex(sorted(wat_dem_df.columns), axis=1)
                                 .set_index('y')
                                 .reset_index()
-                                .rename(columns=det_col))
+                                .rename(columns=app.constants.det_col))
         wat_dem_df = df_years(wat_dem_df, self.years)
         if 'Agriculture' in wat_dem_df.columns:
             wat_bal_df['Irrigation'] = wat_dem_df['Agriculture']

@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col, color_dict
+import app.constants
 import pandas as pd
 
 
@@ -19,7 +19,7 @@ class WaterDemand:
                                 barmode='stack',
                                 xTitle='Year',
                                 yTitle='Billion m3',
-                                color=[color_dict[x] for x in wat_dem_df.columns if x != 'y'],
+                                color=[app.constants.color_dict[x] for x in wat_dem_df.columns if x != 'y'],
                                 title=self.plot_title,
                                 showlegend=True,
                                 )
@@ -39,5 +39,5 @@ class WaterDemand:
         wat_dem_df = (wat_dem_df.reindex(sorted(wat_dem_df.columns), axis=1)
                                 .set_index('y')
                                 .reset_index()
-                                .rename(columns=det_col))
+                                .rename(columns=app.constants.det_col))
         return wat_dem_df
