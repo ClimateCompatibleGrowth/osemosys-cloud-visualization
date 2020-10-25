@@ -42,6 +42,7 @@ class GenerateFigures:
                     'land_use': LandUse(config),
                     'all_params': result_parser.all_params,
                     'years': result_parser.years,
+                    'language': config.language()
                }
 
     @functools.lru_cache(maxsize=128)
@@ -262,7 +263,8 @@ class GenerateFigures:
                         WaterDemand(
                             iplot_input['all_params'],
                             iplot_input['years'],
-                            iplot_input['config'].title()
+                            iplot_input['config'].title(),
+                            iplot_input['language'],
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Water',

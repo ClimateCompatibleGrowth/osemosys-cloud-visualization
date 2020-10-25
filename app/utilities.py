@@ -36,3 +36,10 @@ def df_years(df, years):
     df['y'] = df['y'].astype(int)
     new_df = pd.merge(new_df, df, how='outer', on='y').fillna(0)
     return new_df
+
+
+def det_col_for(language):
+    if language == 'es':
+        return dict([(c, n) for c, n in zip(name_color_codes.code, name_color_codes.name_spanish)])
+    else:
+        return dict([(c, n) for c, n in zip(name_color_codes.code, name_color_codes.name_english)])
