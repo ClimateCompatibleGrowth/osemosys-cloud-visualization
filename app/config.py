@@ -37,6 +37,9 @@ class Config:
     def model_name(self):
         return self.__metadata().get('model_name', '(No model)')
 
+    def language(self):
+        return self.__metadata().get('language', 'en')
+
     def __metadata(self):
         if not self.is_valid():
             return self.__default_metadata()
