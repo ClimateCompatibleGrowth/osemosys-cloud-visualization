@@ -207,7 +207,7 @@ def make_cache_key_for_configs(f, *args, **kwargs):
     return '-'.join([config.input_string for config in configs])
 
 
-# @cache.memoize(timeout=86400 * 365)  # 1 year
+@cache.memoize(timeout=86400 * 365)  # 1 year
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
 
