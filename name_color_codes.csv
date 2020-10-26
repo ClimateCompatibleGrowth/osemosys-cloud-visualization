@@ -24,7 +24,7 @@ WND,Wind,Eólica,violet
 CP01,Maize,Maize,yellow
 CP02,Rice,Rice,yellowgreen
 CP03,Coffee,Coffee,brown
-CP04,Maize,Maize,orange
+CP04,Cereals,Cereals,orange
 CP05,Oilseeds,Oilseeds,pink
 CP06,Other crops,Other crops,red
 CP07,Pulses,Pulses,magenta
@@ -45,7 +45,7 @@ PRC,Precipitation,Precipitación,blue
 GRC,Groundwater recharge,Recarga de agua subterránea,orange
 GWT,Groundwater,Agua subterránea,purple
 SUR,Surface water run-off,Agua superficial,red
-IRR,Irrigation,Irrigación,brown
+IRR,Irrigation,Irrigation,brown
 REN,Other renewables,Otras fuentes renovables,green
 OIL,Oil,Petróleo,firebrick
 GAS,Gas,Gas,purple
@@ -55,11 +55,11 @@ RES,Residential,Residential,blue
 TRA,Transport,Transport,black
 IND,Industry,Industry,grey
 COM,Commercial & services,Commercial & services,green
-ELC_IMP,Electricity imports,,pink
-PWR_WAT,Power sector (consumptive use),,lightblue
-PWR_WITH,Power sector (withdrawal),,darkblue
-ELC_EXP,Electricity exports,,pink
-ELC_NET,Net electricity imports,,pink
+ELC_IMP,Electricity imports,Electricity imports,pink
+PWR_WAT,Power sector (consumptive use),Power sector (consumptive use),lightblue
+PWR_WITH,Power sector (withdrawal),Power sector (withdrawal),darkblue
+ELC_EXP,Electricity exports,Electricity exports,pink
+ELC_NET,Net electricity imports,Net electricity imports,pink
 MIG,Mining,Mining,orange
 PCK,Petroleum coke,Petroleum coke,red
 JET,Aviation fuels,Aviation fuels,darkblue

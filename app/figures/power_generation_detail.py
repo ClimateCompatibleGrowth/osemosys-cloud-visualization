@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import color_dict
+import app.constants
 import pandas as pd
 
 
@@ -18,7 +18,7 @@ class PowerGenerationDetail:
                                                xTitle='Year',
                                                # yTitle='Terawatt-hours (TWh)',
                                                yTitle='Petajoules (PJ)',
-                                               color=[color_dict[x]
+                                               color=[app.constants.color_dict[x]
                                                       for x
                                                       in self.__calculate_gen_df().columns
                                                       if x != 'y'],

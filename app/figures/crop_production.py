@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col
+import app.constants
 
 
 class CropProduction:
@@ -26,6 +26,6 @@ class CropProduction:
                                                   values='value',
                                                   aggfunc='sum').reset_index().fillna(0)
         crops_prod_df = crops_prod_df.reindex(sorted(crops_prod_df.columns), axis=1).set_index(
-            'y').reset_index().rename(columns=det_col)
+            'y').reset_index().rename(columns=app.constants.det_col)
         crops_prod_df['y'] = self.years
         return crops_prod_df

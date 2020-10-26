@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter, df_years
-from app.constants import det_col
+import app.constants
 
 
 class AreaByCropForRegion:
@@ -31,7 +31,7 @@ class AreaByCropForRegion:
             sorted(
                 crops_region_df.columns),
             axis=1).set_index('y').reset_index().rename(
-                columns=det_col).astype('float64')
+                columns=app.constants.det_col).astype('float64')
         crops_region_df = df_years(crops_region_df, self.years)
         return df_plot(crops_region_df, 'Land area (1000 sq.km.)', self.plot_title)
 

@@ -1,7 +1,7 @@
 import os
 import sys
 import pandas as pd
-from app.constants import det_col, name_color_codes, color_dict
+import app.constants
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -12,7 +12,7 @@ def df_plot(df, y_title, p_title):
                     barmode='stack',
                     xTitle='Year',
                     yTitle=y_title,
-                    color=[color_dict[x] for x in df.columns if x != 'y'],
+                    color=[app.constants.color_dict[x] for x in df.columns if x != 'y'],
                     title=p_title,
                     showlegend=True)
 
@@ -24,7 +24,7 @@ def df_filter(df, lb, ub, t_exclude, years):
                                                   columns='t',
                                                   values='value',
                                                   aggfunc='sum').reset_index().fillna(0)
-    df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
+    df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=app.constants.det_col)
     df = df_years(df, years)
     return df
 

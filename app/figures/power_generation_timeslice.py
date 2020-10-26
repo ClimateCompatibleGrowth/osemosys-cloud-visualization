@@ -1,5 +1,5 @@
 from app.utilities import df_plot, df_filter
-from app.constants import det_col, color_dict
+import app.constants
 import pandas as pd
 
 
@@ -18,7 +18,7 @@ class PowerGenerationTimeslice:
                                                xTitle='Timeslice',
                                                # yTitle='Terawatt-hours (TWh)',
                                                yTitle='Petajoules (PJ)',
-                                               color=[color_dict[x]
+                                               color=[app.constants.color_dict[x]
                                                       for x
                                                       in self.__calculate_gen_ts_df().columns
                                                       if x != 'l'],
@@ -39,6 +39,6 @@ class PowerGenerationTimeslice:
                                                           columns='t',
                                                           values='value',
                                                           aggfunc='mean').reset_index().fillna(0)
-        gen_ts_df = gen_ts_df.reindex(sorted(gen_ts_df.columns), axis=1).set_index('l').reset_index().rename(columns=det_col)
+        gen_ts_df = gen_ts_df.reindex(sorted(gen_ts_df.columns), axis=1).set_index('l').reset_index().rename(columns=app.constants.det_col)
 
         return gen_ts_df

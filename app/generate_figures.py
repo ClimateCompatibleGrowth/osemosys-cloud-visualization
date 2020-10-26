@@ -5,10 +5,8 @@ from app.dash_figure_set import DashFigureSet
 from app.figures.gfec_by_sector import GFECBySector
 from app.figures.gfec_by_fuel import GFECByFuel
 from app.figures.power_generation_capacity import PowerGenerationCapacity
-from app.figures.power_generation_capacity_aggregate import PowerGenerationCapacityAggregate
 from app.figures.power_generation_detail import PowerGenerationDetail
 from app.figures.power_generation_timeslice import PowerGenerationTimeslice
-from app.figures.power_generation_aggregate import PowerGenerationAggregate
 from app.figures.power_generation_fuel_use import PowerGenerationFuelUse
 from app.figures.domestic_energy_production import DomesticEnergyProduction
 from app.figures.capital_investment import CapitalInvestment
@@ -88,18 +86,6 @@ class GenerateFigures:
                 ),
                 DashFigureSet(
                     iplots=[
-                        PowerGenerationCapacityAggregate(
-                            iplot_input['all_params'],
-                            iplot_input['years'],
-                            iplot_input['config'].title()
-                        ) for iplot_input in self.__iplot_inputs()
-                    ],
-                    category='Energy',
-                    id='power-generation-capacity-aggregate',
-                    name='Power Generation Capacity (Aggregate)',
-                ),
-                DashFigureSet(
-                    iplots=[
                         PowerGenerationDetail(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -121,18 +107,6 @@ class GenerateFigures:
                     category='Energy',
                     id='power-generation-timeslice',
                     name='Power Generation (Timeslice)',
-                ),
-                DashFigureSet(
-                    iplots=[
-                        PowerGenerationAggregate(
-                            iplot_input['all_params'],
-                            iplot_input['years'],
-                            iplot_input['config'].title()
-                        ) for iplot_input in self.__iplot_inputs()
-                    ],
-                    category='Energy',
-                    id='power-generation-aggregate',
-                    name='Power Generation (Aggregate)',
                 ),
                 DashFigureSet(
                     iplots=[
