@@ -41,8 +41,8 @@ class LandUse:
         for each in ['BAR', 'FOR', 'GRS', 'BLT', 'WAT', 'OTH']:
             crop_combo.append(each)
 
-        crop_combo_dict = dict([(m, c) for m, c in zip(range(1, len(crop_combo) + 1), crop_combo)])
-        # crop_combo_dict = {1:'CP01IR', 2:'CP02IR', 3:'CP01II', 4:'CP02II', 5:'FOR', 6: 'BLT', 7:'WAT', 8:'GRS'}
+        # crop_combo_dict = dict([(m, c) for m, c in zip(range(1, len(crop_combo) + 1), crop_combo)])
+        crop_combo_dict = {1:'CP01IR', 2:'CP02IR', 3:'CP01II', 4:'CP02II', 5:'FOR', 6: 'BLT', 7:'WAT', 8:'GRS'}
 
         return crop_combo_dict
 
