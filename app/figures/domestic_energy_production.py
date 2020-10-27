@@ -11,7 +11,7 @@ class DomesticEnergyProduction:
     def figure(self):
         dom_prd_df = self.__calculate_dom_prd_df()
         for each in dom_prd_df.columns:
-            if each in ['Land', 'Water', 'Precipitation']:
+            if each in ['Land', 'Water', 'Precipitation', 'Suelo', 'Agua', 'Precipitación']:
                 dom_prd_df = dom_prd_df.drop(each, axis=1)
         return df_plot(dom_prd_df, 'Petajoules (PJ)', self.plot_title)
 
