@@ -21,9 +21,9 @@ WAS,MSW,Residuos,green
 WAT,Water,Agua,blue
 LND,Land,Suelo,green
 WND,Wind,Eólica,violet
-CP01,Maize,Maize,yellow
-CP02,Rice,Rice,yellowgreen
-CP03,Coffee,Coffee,brown
+CP01,Maize,Café,brown
+CP02,Rice,Caña de azúcar,yellowgreen
+CP03,Coffee,Coffee,yellow
 CP04,Cereals,Cereals,orange
 CP05,Oilseeds,Oilseeds,pink
 CP06,Other crops,Other crops,red
