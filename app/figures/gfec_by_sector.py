@@ -21,4 +21,4 @@ class GFECBySector:
         gfec_df = gfec_df[~gfec_df.t.str.startswith('DEMAGRSUR')]
         gfec_df = gfec_df[~gfec_df.t.str.startswith('DEMAGRGWT')]
         gfec_df = gfec_df[~gfec_df.t.str.endswith('CRU')]
-        return df_filter(gfec_df, 3, 6, ['PWR', 'LVS', 'PUB'], self.years)
+        return df_filter(gfec_df, 3, 6, ['PWR', 'LVS', 'PUB', 'FOR', 'COF'], self.years)

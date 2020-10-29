@@ -26,5 +26,8 @@ class GFECByFuel:
                                               'GEO',
                                               'GWT',
                                               'CRU',
-                                              'TLU'],
+                                              'TLU',
+                                              'FLU',
+                                              'IRR',
+                                              'RAI'],
                          self.years)
