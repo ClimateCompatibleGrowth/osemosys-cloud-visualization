@@ -79,5 +79,6 @@ NPA,Natural pastures,Pastos Naturales,yellowgreen
 IPA,Mixed Pastures,Pastos Mistos,darkgreen
 COF,Coffee,Café,orange
 IRR,Irrigation cropland,Tierras agrícolas - Irrigación,darkblue
-RAI,Rainfed cropland,Tierras agrícolas - Precipitación ,lightblue
+RAI,Rainfed cropland,Tierras agrícolas - Secano,lightblue
 NAM,NAMA,NAMA,grey
+FLU,Forests,Bosques,forestgreen
