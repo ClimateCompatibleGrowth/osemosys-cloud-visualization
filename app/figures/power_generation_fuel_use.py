@@ -20,5 +20,5 @@ class PowerGenerationFuelUse:
         gen_use_df = production_by_technology_annual[
                 production_by_technology_annual.t.str.startswith('DEMPWR')
             ].drop('r', axis=1)
-        gen_use_df = df_filter(gen_use_df, 6, 9, ['SUR'], self.years)
+        gen_use_df = df_filter(gen_use_df, 6, 9, ['GWT', 'SUR'], self.years)
         return gen_use_df
