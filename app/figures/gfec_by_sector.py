@@ -14,7 +14,7 @@ class GFECBySector:
                        self.plot_title)
 
     def __calculate_gfec_df(self):
-        total_technology_annual_activity = self.all_params['TotalTechnologyAnnualActivity']
+        total_technology_annual_activity = self.all_params['ProductionByTechnologyAnnual']
         gfec_df = total_technology_annual_activity[
             total_technology_annual_activity.t.str.startswith('DEM')
             ].drop('r', axis=1)
