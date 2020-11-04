@@ -14,17 +14,18 @@ class GFECByFuel:
                        self.plot_title)
 
     def __calculate_gfec_df(self):
-        total_technology_annual_activity = self.all_params['TotalTechnologyAnnualActivity']
+        total_technology_annual_activity = self.all_params['ProductionByTechnologyAnnual']
         gfec_fuel_df = total_technology_annual_activity[
             total_technology_annual_activity.t.str.startswith('DEM')
             ].drop('r', axis=1)
-        gfec_fuel_df = gfec_fuel_df[~gfec_fuel_df.t.str.startswith('DEMPWR')]
-        return df_filter(gfec_fuel_df, 6, 9, ['SUR',
+        #gfec_fuel_df = gfec_fuel_df[~gfec_fuel_df.t.str.startswith('DEMPWR')]
+        return df_filter(gfec_fuel_df, 6, 9, [
+                                              #'SUR',
                                               'WND',
                                               'HYD',
                                               'SOL',
                                               'GEO',
-                                              'GWT',
+                                              #'GWT',
                                               'CRU',
                                               'TLU',
                                               'FLU',
