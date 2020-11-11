@@ -27,6 +27,7 @@ class EmissionsBySector:
     def __calculate_emissions_sector_df(self):
         annual_technology_emission = self.all_params['AnnualTechnologyEmission']
         emissions_df = annual_technology_emission[
-            annual_technology_emission.t.str.startswith('DEM')
+            annual_technology_emission.t.str.startswith('DEM') |
+            annual_technology_emission.t.str.startswith('MIN')
             ].drop('r', axis=1)
         return df_filter(emissions_df, 3, 6, [], self.years)
