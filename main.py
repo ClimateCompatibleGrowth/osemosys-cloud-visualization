@@ -149,7 +149,7 @@ def populate_input_string_from_query_string(query_string):
 
 @dash_app.callback(
     [Output(component_id={'type': 'checkboxes', 'index': 'All'}, component_property='value')],
-    [Input(component_id='select-all-All', component_property='n_clicks')],
+    [Input(component_id={'type': 'select-all', 'index': ALL}, component_property='n_clicks')],
     [State({'type': 'checkboxes', 'index': 'All'}, 'value')],
     )
 def select_all(n_clicks, current_value):
