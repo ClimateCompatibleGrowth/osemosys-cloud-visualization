@@ -150,10 +150,10 @@ def populate_input_string_from_query_string(query_string):
 @dash_app.callback(
     [Output(component_id={'type': 'checkboxes', 'index': ALL}, component_property='value')],
     [Input(component_id={'type': 'select-all', 'index': ALL}, component_property='n_clicks')],
-    [State({'type': 'checkboxes', 'index': ALL}, 'value')],
+    [State({'type': 'checkboxes', 'index': ALL}, 'value')]
     )
-def select_all(n_clicks, current_value):
-    if n_clicks is None:
+def deselect_all(n_clicks, current_value):
+    if n_clicks[0] is None:
         return [current_value]
     else:
         return [[[], [], [], [], []]]
