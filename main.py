@@ -148,6 +148,19 @@ def populate_input_string_from_query_string(query_string):
 
 
 @dash_app.callback(
+    [Output(component_id={'type': 'checkboxes', 'index': 'All'}, component_property='value')],
+    [Input(component_id='select-all-All', component_property='n_clicks')],
+    [State({'type': 'checkboxes', 'index': 'All'}, 'value')],
+    )
+def select_all(n_clicks, current_value):
+    if n_clicks is None:
+        return [current_value]
+    else:
+        return [[]]
+        # print(current_value)
+
+
+@dash_app.callback(
     Output(component_id='header', component_property='children'),
     [
         Input(component_id='submit-button', component_property='n_clicks'),
