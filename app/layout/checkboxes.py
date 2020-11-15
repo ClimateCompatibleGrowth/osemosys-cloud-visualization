@@ -9,7 +9,7 @@ class Checkboxes:
 
     def to_component(self):
         return html.Div([
-            html.A('Deselect all', id={'type': 'select-all', 'index': self.category}),
+            html.A('Select/Deselect all', id={'type': 'select-all', 'index': self.category}),
             dcc.Checklist(
                     options=[
                         {'label': id.replace('-', ' ').title(), 'value': id} for id in self.ids
