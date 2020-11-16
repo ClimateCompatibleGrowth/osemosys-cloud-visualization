@@ -148,6 +148,27 @@ def populate_input_string_from_query_string(query_string):
 
 
 @dash_app.callback(
+    [Output(component_id={'type': 'checkboxes', 'index': ALL}, component_property='value')],
+    [Input(component_id={'type': 'select-all', 'index': ALL}, component_property='n_clicks')],
+    [
+        State({'type': 'checkboxes', 'index': ALL}, 'value'),
+        State({'type': 'checkboxes', 'index': ALL}, 'options'),
+    ]
+    )
+def toggle_all(n_clicks, current_value, options):
+    result = []
+    for i, n_click in enumerate(n_clicks, start=0):
+        all_values = [option['value'] for option in options[i]]
+        if n_click is None:
+            result.append(current_value[i])
+        elif n_click % 2 == 0:
+            result.append(all_values)
+        else:
+            result.append([])
+    return [result]
+
+
+@dash_app.callback(
     Output(component_id='header', component_property='children'),
     [
         Input(component_id='submit-button', component_property='n_clicks'),
