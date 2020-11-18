@@ -171,7 +171,12 @@ class CostElectrictyGeneration:
             axis=1) / ele_cos_df['Electricity generation']
         ele_cos_df['Fuel costs'] = fue_cos_df.iloc[:, 1:].sum(
             axis=1) / ele_cos_df['Electricity generation']
+        
+        ele_cos_df['Fuel costs'] = ele_cos_df['Fuel costs'] + ele_cos_df['Fuel distribution costs']
+        ele_cos_df.drop('Fuel distribution costs', axis=1, inplace=True)
+        
         ele_cos_df.drop('Electricity generation', axis=1, inplace=True)
+        
         return ele_cos_df
 
     def calculate_ene_imp_df(self, all_params, years):
