@@ -5,11 +5,11 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import os
-import random
 import sys
 import urllib
 import zipfile
-from app.cache import cache
+from app.cache import cache, cache_timeout, make_cache_key_for_configs
+from app.process_uploaded_file import process_uploaded_file
 from app.config import Config
 from app.header import Header
 from app.generate_divs import GenerateDivs
@@ -221,19 +221,6 @@ def generate_figure_divs(
         return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
 
 
-def make_cache_key_for_configs(f, *args, **kwargs):
-    configs = args[0]
-    return '-'.join([config.input_string for config in configs])
-
-
-def cache_timeout():
-    if 'DASH_DEBUG' in os.environ:
-        return 1
-    else:
-        return 86400 * 365  # 1 year
-    dash_app.run_server(debug=False)
-
-
 @cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
@@ -262,30 +249,6 @@ def parse_query_string(query_string):
         urllib.parse.unquote(query_string)
     )
     return parsed_qs.get('?model', [''])[0]
-
-
-def process_uploaded_file(raw_contents):
-    random_number = random.randint(1, 99999)
-    uploaded_folder_path = os.path.join(os.getcwd(), 'tmp', 'uploaded', str(random_number))
-    try:
-        os.makedirs(uploaded_folder_path)
-    except FileExistsError:
-        pass
-    content_type, content_string = raw_contents.split(',')
-
-    write_and_extract_zip_file(content_string, uploaded_folder_path)
-
-    return uploaded_folder_path
-
-
-def write_and_extract_zip_file(base64_encoded_zip, work_path):
-    zip_file_path = os.path.join(work_path, 'uploaded.zip')
-
-    with open(zip_file_path, 'wb') as fh:
-        fh.write(base64.b64decode(base64_encoded_zip))
-
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-        zip_ref.extractall(work_path)
 
 
 if __name__ == '__main__':
