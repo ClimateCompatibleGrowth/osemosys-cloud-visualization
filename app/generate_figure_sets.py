@@ -29,7 +29,7 @@ from app.figures.emissions_by_sector import EmissionsBySector
 from app.figures.emissions_by_fuel import EmissionsByFuel
 
 
-class GenerateFigures:
+class GenerateFigureSets:
     def __init__(self, configs):
         self.configs = configs
 
