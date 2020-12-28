@@ -58,9 +58,8 @@ dash_app.layout = html.Div([
     html.Div([
             html.Label('Model:', htmlFor='input-string'),
             dcc.Input(id='input-string', type='text', className='input-field mb-3'),
-            html.Label('Compare to:', htmlFor='compare-to-1'),
-            dcc.Input(id='compare-to-1', type='text', className='input-field mb-1'),
-            dcc.Input(id='compare-to-2', type='text', className='input-field mb-1'),
+            html.Label('Compare to:', htmlFor='compare-to'),
+            dcc.Input(id='compare-to', type='text', className='input-field mb-1'),
             html.Br(),
             html.Button(id='submit-button', n_clicks=0, children='Submit'),
         ],
@@ -201,18 +200,17 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
     ],
     [
         State('input-string', 'value'),
-        State('compare-to-1', 'value'),
-        State('compare-to-2', 'value'),
+        State('compare-to', 'value'),
     ]
     )
 def generate_figure_divs(
         n_clicks, n_submit, raw_query_string, upload_data,
-        input_string, compare_to_1, compare_to_2
+        input_string, compare_to
         ):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
     main_config_input = config_input_from(input_string, raw_query_string, triggered_element)
     configs = [
-            Config(config_input) for config_input in [main_config_input, compare_to_1, compare_to_2]
+            Config(config_input) for config_input in [main_config_input, compare_to]
     ]
     valid_configs = [config for config in configs if config.is_valid()]
     if len(valid_configs) > 0:
@@ -228,7 +226,7 @@ def make_cache_key_for_configs(f, *args, **kwargs):
     return '-'.join([config.input_string for config in configs])
 
 
-@cache.memoize(timeout=86400 * 365)  # 1 year
+# @cache.memoize(timeout=86400 * 365)  # 1 year
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
 
