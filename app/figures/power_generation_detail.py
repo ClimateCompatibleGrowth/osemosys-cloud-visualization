@@ -11,19 +11,21 @@ class PowerGenerationDetail:
         self.plot_title = plot_title
 
     def figure(self):
-        return self.data().iplot(asFigure=True,
-                                               x='y',
-                                               kind='bar',
-                                               barmode='relative',
-                                               xTitle='Year',
-                                               # yTitle='Terawatt-hours (TWh)',
-                                               yTitle='Petajoules (PJ)',
-                                               color=[app.constants.color_dict[x]
-                                                      for x
-                                                      in self.data().columns
-                                                      if x != 'y'],
-                                               title=self.plot_title,
-                                               showlegend=True)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return data.iplot(
+                asFigure=True,
+                x='y',
+                kind='bar',
+                barmode='relative',
+                xTitle='Year',
+                # yTitle='Terawatt-hours (TWh)',
+                yTitle='Petajoules (PJ)',
+                color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],
+                title=title,
+                showlegend=True
+                )
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

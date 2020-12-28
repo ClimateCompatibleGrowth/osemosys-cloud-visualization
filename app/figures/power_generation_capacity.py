@@ -9,7 +9,10 @@ class PowerGenerationCapacity:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.data(), 'Gigawatts (GW)', self.plot_title)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Gigawatts (GW)', title)
 
     def data(self):
         total_capacity_annual_params = self.all_params['TotalCapacityAnnual']

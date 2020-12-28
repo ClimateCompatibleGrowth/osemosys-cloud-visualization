@@ -43,11 +43,12 @@ class DashFigureSet:
         if len(self.figures) == 2:
             data1 = self.figures[0].data().set_index('y')
             data2 = self.figures[1].data().set_index('y')
+            plot = self.figures[1].plot
             diff = data1 - data2
             diff['y'] = diff.index
             return [
                     html.Div(
-                        dcc.Graph(figure=df_plot(diff, 'Energy (PJ)', 'Diff')),
+                        dcc.Graph(figure=plot(diff, 'Delta')),
                         className='figure')
                     ]
         else:

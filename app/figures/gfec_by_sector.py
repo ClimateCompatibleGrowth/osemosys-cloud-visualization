@@ -9,9 +9,10 @@ class GFECBySector:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.data(),
-                       'Energy (PJ)',
-                       self.plot_title)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Energy (PJ)', title)
 
     def data(self):
         total_technology_annual_activity = self.all_params['ProductionByTechnologyAnnual']
