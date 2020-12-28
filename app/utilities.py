@@ -24,7 +24,7 @@ def df_filter(df, lb, ub, t_exclude, years):
                                                   columns='t',
                                                   values='value',
                                                   aggfunc='sum').reset_index().fillna(0)
-    df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=app.constants.det_col)
+    df = df.reindex(sorted(df.columns), axis=1).set_index('y').reset_index().rename(columns=app.constants.det_col)  # noqa
     df = df_years(df, years)
     return df
 
