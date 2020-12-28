@@ -9,7 +9,10 @@ class EnergyExports:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.data(), 'Petajoules (PJ)', self.plot_title)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Petajoules (PJ)', title)
 
     def data(self):
         total_capacity_annual_params = self.all_params['TotalTechnologyAnnualActivity']

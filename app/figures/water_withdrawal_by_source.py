@@ -9,7 +9,10 @@ class WaterWithdrawalBySource:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.data(), 'Billion m3', self.plot_title)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Billion m3', title)
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

@@ -10,9 +10,10 @@ class LivestockProduction:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.data(),
-                       'Production (Million tonnes)',
-                       self.plot_title)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Production (Million tonnes)', title)
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
