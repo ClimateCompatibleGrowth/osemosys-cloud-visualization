@@ -226,7 +226,15 @@ def make_cache_key_for_configs(f, *args, **kwargs):
     return '-'.join([config.input_string for config in configs])
 
 
-# @cache.memoize(timeout=86400 * 365)  # 1 year
+def cache_timeout():
+    if 'DASH_DEBUG' in os.environ:
+        return 1
+    else:
+        return 86400 * 365  # 1 year
+    dash_app.run_server(debug=False)
+
+
+@cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
 
