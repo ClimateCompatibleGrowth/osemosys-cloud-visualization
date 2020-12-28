@@ -9,9 +9,9 @@ class CapitalInvestment:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.__calculate_cap_cos_df(), 'Million $', self.plot_title)
+        return df_plot(self.data(), 'Million $', self.plot_title)
 
-    def __calculate_cap_cos_df(self):
+    def data(self):
         capital_investment = self.all_params['CapitalInvestment']
         cap_cos_df = capital_investment[
                 capital_investment.t.str.startswith('PWR')

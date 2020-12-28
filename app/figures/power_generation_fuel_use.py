@@ -10,12 +10,12 @@ class PowerGenerationFuelUse:
 
     def figure(self):
         return df_plot(
-                    self.__calculate_gen_use_df(),
+                    self.data(),
                     'Petajoules (PJ)',
                     self.plot_title
                 )
 
-    def __calculate_gen_use_df(self):
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         gen_use_df = production_by_technology_annual[
                 production_by_technology_annual.t.str.startswith('DEMPWR')

@@ -9,13 +9,13 @@ class DomesticEnergyProduction:
         self.plot_title = plot_title
 
     def figure(self):
-        dom_prd_df = self.__calculate_dom_prd_df()
+        dom_prd_df = self.data()
         for each in dom_prd_df.columns:
             if each in ['Land', 'Water', 'Precipitation', 'Suelo', 'Agua', 'Precipitación']:
                 dom_prd_df = dom_prd_df.drop(each, axis=1)
         return df_plot(dom_prd_df, 'Petajoules (PJ)', self.plot_title)
 
-    def __calculate_dom_prd_df(self):
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         dom_prd_df = production_by_technology_annual[
                 production_by_technology_annual.t.str.startswith('MIN') |

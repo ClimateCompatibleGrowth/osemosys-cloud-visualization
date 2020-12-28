@@ -11,7 +11,7 @@ class WaterBalance:
         self.plot_title = plot_title
 
     def figure(self):
-        wat_bal_df = self.__calculate_wat_bal_df()
+        wat_bal_df = self.data()
         return wat_bal_df.iplot(asFigure=True,
                                 x='y',
                                 kind='bar',
@@ -23,7 +23,7 @@ class WaterBalance:
                                 showlegend=True,
                                 )
 
-    def __calculate_wat_bal_df(self):
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         wat_bal_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('WTR')
@@ -63,10 +63,10 @@ class WaterBalance:
             wat_bal_df['Irrigation'] = 0
         # wat_bal_df['y'] = self.years
         for each in wat_bal_df.columns:
-            if each in ['Evapotranspiration', 
-                        'Groundwater recharge', 
-                        'Surface water run-off', 
-                        'Recharge + Run-off', 
+            if each in ['Evapotranspiration',
+                        'Groundwater recharge',
+                        'Surface water run-off',
+                        'Recharge + Run-off',
                         'Groundwater',
                         'Evapotranspiración',
                         'Recarga de agua subterránea',

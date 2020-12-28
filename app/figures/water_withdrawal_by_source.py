@@ -9,9 +9,9 @@ class WaterWithdrawalBySource:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.__calculate_wat_source_df(), 'Billion m3', self.plot_title)
+        return df_plot(self.data(), 'Billion m3', self.plot_title)
 
-    def __calculate_wat_source_df(self):
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         wat_list = ['AGRWAT', 'PUBWAT', 'PWRWAT', 'INDWAT', 'LVSWAT']
         wat_source_df = production_by_technology_annual[

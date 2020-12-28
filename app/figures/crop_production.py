@@ -10,10 +10,10 @@ class CropProduction:
         self.plot_title = plot_title
 
     def figure(self):
-        crops_prod_df = self.__calculate_crops_prod_df()
+        crops_prod_df = self.data()
         return df_plot(crops_prod_df, 'Production (Million tonnes)', self.plot_title)
 
-    def __calculate_crops_prod_df(self):
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         crops_prod_df = production_by_technology_annual[
                 production_by_technology_annual.f.str.startswith('CRP')

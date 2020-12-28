@@ -11,7 +11,7 @@ class PowerGenerationTimeslice:
         self.plot_title = plot_title
 
     def figure(self):
-        return self.__calculate_gen_ts_df().iplot(asFigure=True,
+        return self.data().iplot(asFigure=True,
                                                x='l',
                                                kind='bar',
                                                barmode='relative',
@@ -20,12 +20,12 @@ class PowerGenerationTimeslice:
                                                yTitle='Petajoules (PJ)',
                                                color=[app.constants.color_dict[x]
                                                       for x
-                                                      in self.__calculate_gen_ts_df().columns
+                                                      in self.data().columns
                                                       if x != 'l'],
                                                title=self.plot_title,
                                                showlegend=True)
 
-    def __calculate_gen_ts_df(self):
+    def data(self):
         production_by_technology = self.all_params['ProductionByTechnology']
         gen_ts_df = production_by_technology[
                                             (production_by_technology.t.str.startswith('PWR') |
@@ -35,7 +35,7 @@ class PowerGenerationTimeslice:
 
         gen_ts_df['t'] = gen_ts_df['t'].str[3:6]
         gen_ts_df['value'] = gen_ts_df['value'].astype('float64')
-        gen_ts_df = gen_ts_df[~gen_ts_df['t'].isin(['TRN'])].pivot_table(index='l', 
+        gen_ts_df = gen_ts_df[~gen_ts_df['t'].isin(['TRN'])].pivot_table(index='l',
                                                           columns='t',
                                                           values='value',
                                                           aggfunc='mean').reset_index().fillna(0)

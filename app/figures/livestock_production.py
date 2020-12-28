@@ -10,11 +10,11 @@ class LivestockProduction:
         self.plot_title = plot_title
 
     def figure(self):
-        return df_plot(self.__calculate_lvs_prod_df(),
+        return df_plot(self.data(),
                        'Production (Million tonnes)',
                        self.plot_title)
 
-    def __calculate_lvs_prod_df(self):
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         lvs_prod_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('LVS')
