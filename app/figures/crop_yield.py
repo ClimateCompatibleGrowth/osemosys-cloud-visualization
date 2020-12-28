@@ -12,21 +12,27 @@ class CropYield:
         self.plot_title = plot_title
 
     def figure(self):
-        crops_yield_df = self.calculate_yield_df(self.all_params, self.years, self.land_use)
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return data.iplot(asFigure=True,
+                x='y',
+                mode='lines+markers',
+                xTitle='Year',
+                yTitle='Yield (t/ha)',
+                size=10,
+                color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],  # noqa
+                title=title,
+                showlegend=True)
+
+    def data(self):
+        crops_yield_df = self.__calculate_yield_df(self.all_params, self.years, self.land_use)
         crops_yield_df.loc[:, crops_yield_df.columns != 'y'] = (crops_yield_df.loc[
             :, crops_yield_df.columns != 'y']).mul(10)
         crops_yield_df['y'] = self.years
-        return crops_yield_df.iplot(asFigure=True,
-                                    x='y',
-                                    mode='lines+markers',
-                                    xTitle='Year',
-                                    yTitle='Yield (t/ha)',
-                                    size=10,
-                                    color=[app.constants.color_dict[x] for x in crops_yield_df.columns if x != 'y'],  # noqa
-                                    title=self.plot_title,
-                                    showlegend=True)
+        return crops_yield_df
 
-    def calculate_yield_df(self, all_params, years, land_use):
+    def __calculate_yield_df(self, all_params, years, land_use):
         mode_crop_combo = land_use.mode_crop_combo()
         crops_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa
             'LNDAGR')].drop('r', axis=1)

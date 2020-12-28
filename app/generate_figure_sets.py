@@ -29,7 +29,7 @@ from app.figures.emissions_by_sector import EmissionsBySector
 from app.figures.emissions_by_fuel import EmissionsByFuel
 
 
-class GenerateFigures:
+class GenerateFigureSets:
     def __init__(self, configs):
         self.configs = configs
 
@@ -49,7 +49,7 @@ class GenerateFigures:
     def all_figure_sets(self):
         figure_list = [
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         GFECBySector(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -61,7 +61,7 @@ class GenerateFigures:
                     name='Gross final energy consumption - by sector',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         GFECByFuel(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -73,7 +73,7 @@ class GenerateFigures:
                     name='Gross final energy consumption - by fuel',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         PowerGenerationCapacity(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -85,7 +85,7 @@ class GenerateFigures:
                     name='Power Generation Capacity (Detail)',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         PowerGenerationDetail(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -97,7 +97,7 @@ class GenerateFigures:
                     name='Power Generation (Detail)',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         PowerGenerationTimeslice(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -109,7 +109,7 @@ class GenerateFigures:
                     name='Power Generation (Timeslice)',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         PowerGenerationFuelUse(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -121,7 +121,7 @@ class GenerateFigures:
                     name='Power Generation (Fuel Use)',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         DomesticEnergyProduction(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -133,7 +133,7 @@ class GenerateFigures:
                     name='Domestic Energy Production',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         CapitalInvestment(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -145,7 +145,7 @@ class GenerateFigures:
                     name='Capital Investment',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         EnergyImports(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -157,7 +157,7 @@ class GenerateFigures:
                     name='Energy Imports',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         EnergyExports(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -169,7 +169,7 @@ class GenerateFigures:
                     name='Energy Exports',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         CostElectrictyGeneration(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -181,7 +181,7 @@ class GenerateFigures:
                     name='Cost Of Electricity Generation',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         AreaByCrop(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -194,7 +194,7 @@ class GenerateFigures:
                     name='Area By Crop',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         AreaByLandCover(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -207,7 +207,7 @@ class GenerateFigures:
                     name='Area By Land Cover Type',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         CropProduction(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -219,7 +219,7 @@ class GenerateFigures:
                     name='Crop Production',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         CropYield(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -232,7 +232,7 @@ class GenerateFigures:
                     name='Yield',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         WaterDemand(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -244,7 +244,7 @@ class GenerateFigures:
                     name='Water Demand',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         WaterWithdrawalBySource(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -256,7 +256,7 @@ class GenerateFigures:
                     name='Water Withdrawal By Source',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         WaterBalance(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -268,7 +268,7 @@ class GenerateFigures:
                     name='Water Balance',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         EmissionsBySector(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -280,7 +280,7 @@ class GenerateFigures:
                     name='CO2 Emissions By Sector',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         EmissionsByFuel(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -292,7 +292,7 @@ class GenerateFigures:
                     name='CO2 Emissions By Source',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         LivestockProduction(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -304,7 +304,7 @@ class GenerateFigures:
                     name='Livestock Production',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         AreaByCropIrrigated(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -317,7 +317,7 @@ class GenerateFigures:
                     name='Area By Crop (Irrigated)',
                 ),
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         AreaByCropRainfed(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -336,7 +336,7 @@ class GenerateFigures:
         for region in first_land_use.regions().keys():
             figure_list.append(
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         AreaByCropForRegion(
                             iplot_input['all_params'],
                             iplot_input['years'],
@@ -352,7 +352,7 @@ class GenerateFigures:
             )
             figure_list.append(
                 DashFigureSet(
-                    iplots=[
+                    figures=[
                         AreaByLandCoverTypeForRegion(
                             iplot_input['all_params'],
                             iplot_input['years'],

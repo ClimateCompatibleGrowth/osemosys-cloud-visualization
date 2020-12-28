@@ -10,18 +10,20 @@ class CostElectrictyGeneration:
         self.plot_title = plot_title
 
     def figure(self):
-        ele_cos_df = self.__calculate_ele_cos_df()
-        return ele_cos_df.iplot(
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return data.iplot(
                 asFigure=True,
                 kind='bar',
                 barmode='relative',
                 x='y',
                 xTitle='Year',
                 yTitle='$/MWh',
-                title=self.plot_title
+                title=title
                 )
 
-    def __calculate_ele_cos_df(self):
+    def data(self):
         ene_imp_df = self.calculate_ene_imp_df(self.all_params, self.years)
         ene_exp_df = self.calculate_ene_exp_df(self.all_params, self.years)
         cap_cos_df = self.calculate_cap_cos_df(self.all_params, self.years)
@@ -171,12 +173,12 @@ class CostElectrictyGeneration:
             axis=1) / ele_cos_df['Electricity generation']
         ele_cos_df['Fuel costs'] = fue_cos_df.iloc[:, 1:].sum(
             axis=1) / ele_cos_df['Electricity generation']
-        
+
         ele_cos_df['Fuel costs'] = ele_cos_df['Fuel costs'] + ele_cos_df['Fuel distribution costs']
         ele_cos_df.drop('Fuel distribution costs', axis=1, inplace=True)
-        
+
         ele_cos_df.drop('Electricity generation', axis=1, inplace=True)
-        
+
         return ele_cos_df
 
     def calculate_ene_imp_df(self, all_params, years):

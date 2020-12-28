@@ -11,19 +11,22 @@ class WaterBalance:
         self.plot_title = plot_title
 
     def figure(self):
-        wat_bal_df = self.__calculate_wat_bal_df()
-        return wat_bal_df.iplot(asFigure=True,
-                                x='y',
-                                kind='bar',
-                                barmode='relative',
-                                xTitle='Year',
-                                yTitle='Billion m3',
-                                color=[app.constants.color_dict[x] for x in wat_bal_df.columns if x != 'y'],
-                                title=self.plot_title,
-                                showlegend=True,
-                                )
+        return self.plot(self.data(), self.plot_title)
 
-    def __calculate_wat_bal_df(self):
+    def plot(self, data, title):
+        return data.iplot(
+                asFigure=True,
+                x='y',
+                kind='bar',
+                barmode='relative',
+                xTitle='Year',
+                yTitle='Billion m3',
+                color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],
+                title=title,
+                showlegend=True,
+                )
+
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         wat_bal_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('WTR')
@@ -63,10 +66,10 @@ class WaterBalance:
             wat_bal_df['Irrigation'] = 0
         # wat_bal_df['y'] = self.years
         for each in wat_bal_df.columns:
-            if each in ['Evapotranspiration', 
-                        'Groundwater recharge', 
-                        'Surface water run-off', 
-                        'Recharge + Run-off', 
+            if each in ['Evapotranspiration',
+                        'Groundwater recharge',
+                        'Surface water run-off',
+                        'Recharge + Run-off',
                         'Groundwater',
                         'Evapotranspiración',
                         'Recarga de agua subterránea',
