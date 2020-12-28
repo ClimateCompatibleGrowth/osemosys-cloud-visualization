@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+from app.utilities import df_plot
 import functools
 import traceback
 
@@ -28,7 +29,7 @@ class DashFigureSet:
                 [
                     html.Div(dcc.Graph(figure=iplot.figure()), className='figure')
                     for iplot in self.figures
-                ],
+                ] + self.__diff(),
                 className='figures-in-set-container'
             )
         except Exception as e:
@@ -37,3 +38,17 @@ class DashFigureSet:
                 ],
                 className=f'figure figure-error card'
             )
+
+    def __diff(self):
+        if len(self.figures) == 2:
+            data1 = self.figures[0].data().set_index('y')
+            data2 = self.figures[1].data().set_index('y')
+            diff = data1 - data2
+            diff['y'] = diff.index
+            return [
+                    html.Div(
+                        dcc.Graph(figure=df_plot(diff, 'Energy (PJ)', 'Diff')),
+                        className='figure')
+                    ]
+        else:
+            return ['No diff']
