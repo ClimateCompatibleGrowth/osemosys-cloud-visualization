@@ -52,4 +52,4 @@ class DashFigureSet:
                         className='figure')
                     ]
         else:
-            return ['No diff']
+            return []
