@@ -5,8 +5,8 @@ import traceback
 
 
 class DashFigureSet:
-    def __init__(self, *, iplots, category, id, name):
-        self.iplots = iplots
+    def __init__(self, *, figures, category, id, name):
+        self.figures = figures
         self.category = category
         self.id = id
         self.name = name
@@ -27,7 +27,7 @@ class DashFigureSet:
             return html.Div(
                 [
                     html.Div(dcc.Graph(figure=iplot.figure()), className='figure')
-                    for iplot in self.iplots
+                    for iplot in self.figures
                 ],
                 className='figures-in-set-container'
             )
