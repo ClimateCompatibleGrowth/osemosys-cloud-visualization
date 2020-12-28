@@ -46,11 +46,11 @@ external_stylesheets = [
     ]
 
 dash_app = dash.Dash(__name__,
-                external_scripts=external_scripts,
-                external_stylesheets=external_stylesheets)
+                     external_scripts=external_scripts,
+                     external_stylesheets=external_stylesheets)
 
 server = dash_app.server
-cache.init_app(server, config={'CACHE_TYPE': 'filesystem','CACHE_DIR': 'cache'})
+cache.init_app(server, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': 'cache'})
 
 dash_app.layout = html.Div([
     dcc.Location(id='url'),
