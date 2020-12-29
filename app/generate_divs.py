@@ -55,7 +55,7 @@ class GenerateDivs:
             ]
 
     def __all_ids(self):
-        return [figure.id for figure in self.__all_figure_sets()]
+        return [figure.id for figure in self.__all_figure_sets() if not figure.is_empty()]
 
     @functools.lru_cache(maxsize=128)
     def __all_figure_sets(self):

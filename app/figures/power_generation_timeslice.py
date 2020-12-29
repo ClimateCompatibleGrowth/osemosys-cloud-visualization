@@ -9,22 +9,24 @@ class PowerGenerationTimeslice:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'l'
 
     def figure(self):
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        data.iplot(
-                asFigure=True,
-                x='l',
-                kind='bar',
-                barmode='relative',
-                xTitle='Timeslice',
-                # yTitle='Terawatt-hours (TWh)',
-                yTitle='Petajoules (PJ)',
-                color=[app.constants.color_dict[x] for x in data.columns if x != 'l'],
-                title=title,
-                showlegend=True)
+        return data.iplot(
+                    asFigure=True,
+                    x='l',
+                    kind='bar',
+                    barmode='relative',
+                    xTitle='Timeslice',
+                    # yTitle='Terawatt-hours (TWh)',
+                    yTitle='Petajoules (PJ)',
+                    color=[app.constants.color_dict[x] for x in data.columns if x != 'l'],
+                    title=title,
+                    showlegend=True
+                )
 
     def data(self):
         production_by_technology = self.all_params['ProductionByTechnology']
