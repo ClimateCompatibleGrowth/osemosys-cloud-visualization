@@ -9,7 +9,7 @@ def df_plot(df, y_title, p_title):
     return df.iplot(asFigure=True,
                     x='y',
                     kind='bar',
-                    barmode='stack',
+                    barmode='relative',
                     xTitle='Year',
                     yTitle=y_title,
                     color=[app.constants.color_dict[x] for x in df.columns if x != 'y'],
