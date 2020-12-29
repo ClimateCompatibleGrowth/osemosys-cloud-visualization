@@ -44,16 +44,25 @@ class DashFigureSet:
 
     def __diff(self):
         if len(self.figures) == 2:
-            index_column = self.figures[0].index_column
-            plot = self.figures[0].plot
-            data1 = self.figures[0].data().set_index(index_column)
-            data2 = self.figures[1].data().set_index(index_column)
-            diff = data2 - data1
+            figure_0 = self.figures[0]
+            figure_1 = self.figures[1]
+
+            index_column = figure_0.index_column
+            plot = figure_0.plot
+
+            data0 = figure_0.data().set_index(index_column)
+            data1 = figure_1.data().set_index(index_column)
+
+            diff = data1 - data0
             diff[index_column] = diff.index
             diff = diff.fillna(0)
+
             return [
                     html.Div(
-                        dcc.Graph(figure=plot(diff, 'Delta')),
+                        dcc.Graph(figure=plot(
+                            diff,
+                            f'Delta ({figure_1.plot_title} - {figure_0.plot_title})'
+                        )),
                         className='figure')
                     ]
         else:
