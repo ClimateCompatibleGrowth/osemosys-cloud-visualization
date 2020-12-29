@@ -15,13 +15,16 @@ class DashFigureSet:
     @functools.lru_cache(maxsize=128)
     def to_div(self):
         print(f'Generating {self.name}')
-        return html.Div(
-                    [
-                        html.H4(self.name),
-                        self.__content()
-                    ],
-                    className=f'figure-set figure-set-{self.id}',
-                )
+        if self.__is_empty():
+            return []
+        else:
+            return html.Div(
+                        [
+                            html.H4(self.name),
+                            self.__content()
+                        ],
+                        className=f'figure-set figure-set-{self.id}',
+                    )
 
     def __content(self):
         try:
@@ -53,3 +56,9 @@ class DashFigureSet:
                     ]
         else:
             return []
+
+    def __is_empty(self):
+        try:
+            return self.figures[0].data().columns.size == 1
+        except Exception as e:  # Surface exceptions occurring during the check
+            return False
