@@ -15,7 +15,7 @@ class DashFigureSet:
     @functools.lru_cache(maxsize=128)
     def to_div(self):
         print(f'Generating {self.name}')
-        if self.__is_empty():
+        if self.is_empty():
             return []
         else:
             return html.Div(
@@ -57,7 +57,7 @@ class DashFigureSet:
         else:
             return []
 
-    def __is_empty(self):
+    def is_empty(self):
         try:
             return self.figures[0].data().columns.size == 1
         except Exception as e:  # Surface exceptions occurring during the check
