@@ -14,17 +14,18 @@ class PowerGenerationTimeslice:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        data.iplot(
-                asFigure=True,
-                x='l',
-                kind='bar',
-                barmode='relative',
-                xTitle='Timeslice',
-                # yTitle='Terawatt-hours (TWh)',
-                yTitle='Petajoules (PJ)',
-                color=[app.constants.color_dict[x] for x in data.columns if x != 'l'],
-                title=title,
-                showlegend=True)
+        return data.iplot(
+                    asFigure=True,
+                    x='l',
+                    kind='bar',
+                    barmode='relative',
+                    xTitle='Timeslice',
+                    # yTitle='Terawatt-hours (TWh)',
+                    yTitle='Petajoules (PJ)',
+                    color=[app.constants.color_dict[x] for x in data.columns if x != 'l'],
+                    title=title,
+                    showlegend=True
+                )
 
     def data(self):
         production_by_technology = self.all_params['ProductionByTechnology']
