@@ -44,7 +44,7 @@ class DashFigureSet:
             data1 = self.figures[0].data().set_index('y')
             data2 = self.figures[1].data().set_index('y')
             plot = self.figures[1].plot
-            diff = data1 - data2
+            diff = data2 - data1
             diff['y'] = diff.index
             return [
                     html.Div(
