@@ -50,6 +50,7 @@ class DashFigureSet:
             data2 = self.figures[1].data().set_index(index_column)
             diff = data2 - data1
             diff[index_column] = diff.index
+            diff = diff.fillna(0)
             return [
                     html.Div(
                         dcc.Graph(figure=plot(diff, 'Delta')),
