@@ -25,7 +25,7 @@ class AreaByCrop:
         crops_total_df['land_use'] = crops_total_df['crop_combo'].str[0:4]
         crops_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
 
-        crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP')]
+        crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP', False)]
         crops_total_df = crops_total_df.pivot_table(index='y',
                                                     columns='land_use',
                                                     values='value',
@@ -39,6 +39,6 @@ class AreaByCrop:
     def __calculate_crops_total_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
         crops_total_df = total_annual_technology_activity_by_mode[
-            total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
+            total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR', False)
         ].drop('r', axis=1)
         return crops_total_df
