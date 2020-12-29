@@ -9,6 +9,7 @@ class PowerGenerationAggregate:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
         gen_df = self.__calculate_gen_df()

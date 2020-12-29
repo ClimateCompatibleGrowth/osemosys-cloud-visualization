@@ -10,6 +10,7 @@ class AreaByCropForRegion:
         self.land_use = land_use
         self.region = region
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
         return self.plot(self.data(), self.plot_title)

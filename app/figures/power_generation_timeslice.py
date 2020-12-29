@@ -9,6 +9,7 @@ class PowerGenerationTimeslice:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'l'
 
     def figure(self):
         return self.plot(self.data(), self.plot_title)

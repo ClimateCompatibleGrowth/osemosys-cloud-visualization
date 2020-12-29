@@ -10,6 +10,7 @@ class CropYield:
         self.years = years
         self.land_use = land_use
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
         return self.plot(self.data(), self.plot_title)
