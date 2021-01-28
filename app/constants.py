@@ -7,7 +7,7 @@ agg_col = {'Coal': ['Coal'],
            'Gas': ['Natural gas', 'LNG', 'LPG', 'Gas'],
            'Hydro': ['Hydro'],
            'Nuclear': ['Nuclear'],
-           'Other renewables': ['Biomass', 'Geothermal', 'Solar', 'MSW', 'Wind'],
+           'Other renewables': ['Biomass', 'Geothermal', 'Solar', 'MSW', 'Wind', 'Biogas', 'BMX'],
            'Net electricity imports': ['Net electricity imports'],
            'Electricity exports': ['Electricity exports'],
            }
