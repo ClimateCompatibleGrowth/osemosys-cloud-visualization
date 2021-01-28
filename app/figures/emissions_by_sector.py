@@ -8,23 +8,24 @@ class EmissionsBySector:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
-        return self.__calculate_emissions_sector_df().iplot(asFigure=True,
-                                               x='y',
-                                               kind='bar',
-                                               barmode='relative',
-                                               xTitle='Year',
-                                               # yTitle='Terawatt-hours (TWh)',
-                                               yTitle='Million tonnes of CO2',
-                                               color=[app.constants.color_dict[x]
-                                                      for x
-                                                      in self.__calculate_emissions_sector_df().columns
-                                                      if x != 'y'],
-                                               title=self.plot_title,
-                                               showlegend=True)
+        return self.plot(self.data(), self.plot_title)
 
-    def __calculate_emissions_sector_df(self):
+    def plot(self, data, title):
+        return data.iplot(
+                asFigure=True,
+                x='y',
+                kind='bar',
+                barmode='relative',
+                xTitle='Year',
+                yTitle='Million tonnes of CO2',
+                color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],
+                title=title,
+                showlegend=True)
+
+    def data(self):
         annual_technology_emission = self.all_params['AnnualTechnologyEmission']
         emissions_df = annual_technology_emission[
             annual_technology_emission.t.str.startswith('DEM') |

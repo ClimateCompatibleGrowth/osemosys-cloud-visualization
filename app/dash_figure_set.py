@@ -1,12 +1,13 @@
 import dash_core_components as dcc
 import dash_html_components as html
+from app.utilities import df_plot
 import functools
 import traceback
 
 
 class DashFigureSet:
-    def __init__(self, *, iplots, category, id, name):
-        self.iplots = iplots
+    def __init__(self, *, figures, category, id, name):
+        self.figures = figures
         self.category = category
         self.id = id
         self.name = name
@@ -14,21 +15,24 @@ class DashFigureSet:
     @functools.lru_cache(maxsize=128)
     def to_div(self):
         print(f'Generating {self.name}')
-        return html.Div(
-                    [
-                        html.H4(self.name),
-                        self.__content()
-                    ],
-                    className=f'figure-set figure-set-{self.id}',
-                )
+        if self.is_empty():
+            return []
+        else:
+            return html.Div(
+                        [
+                            html.H4(self.name),
+                            self.__content()
+                        ],
+                        className=f'figure-set figure-set-{self.id}',
+                    )
 
     def __content(self):
         try:
             return html.Div(
                 [
                     html.Div(dcc.Graph(figure=iplot.figure()), className='figure')
-                    for iplot in self.iplots
-                ],
+                    for iplot in self.figures
+                ] + self.__diff(),
                 className='figures-in-set-container'
             )
         except Exception as e:
@@ -37,3 +41,35 @@ class DashFigureSet:
                 ],
                 className=f'figure figure-error card'
             )
+
+    def __diff(self):
+        if len(self.figures) == 2:
+            figure_0 = self.figures[0]
+            figure_1 = self.figures[1]
+
+            index_column = figure_0.index_column
+            plot = figure_0.plot
+
+            data0 = figure_0.data().set_index(index_column)
+            data1 = figure_1.data().set_index(index_column)
+
+            diff = data1 - data0
+            diff[index_column] = diff.index
+            diff = diff.fillna(0)
+
+            return [
+                    html.Div(
+                        dcc.Graph(figure=plot(
+                            diff,
+                            f'Delta ({figure_1.plot_title} - {figure_0.plot_title})'
+                        )),
+                        className='figure')
+                    ]
+        else:
+            return []
+
+    def is_empty(self):
+        try:
+            return self.figures[0].data().columns.size == 1
+        except Exception as e:  # Surface exceptions occurring during the check
+            return False

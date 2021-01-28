@@ -7,11 +7,15 @@ class EnergyExports:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
-        return df_plot(self.__calculate_ene_exp_df(), 'Petajoules (PJ)', self.plot_title)
+        return self.plot(self.data(), self.plot_title)
 
-    def __calculate_ene_exp_df(self):
+    def plot(self, data, title):
+        return df_plot(data, 'Petajoules (PJ)', title)
+
+    def data(self):
         total_capacity_annual_params = self.all_params['TotalTechnologyAnnualActivity']
         ene_exp_df = total_capacity_annual_params[
                 total_capacity_annual_params.t.str.startswith('EXP')

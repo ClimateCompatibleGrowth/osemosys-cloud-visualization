@@ -9,20 +9,29 @@ class WaterDemand:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return data.iplot(
+                asFigure=True,
+                x='y',
+                kind='bar',
+                barmode='stack',
+                xTitle='Year',
+                yTitle='Billion m3',
+                color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],
+                title=title,
+                showlegend=True,
+                )
+
+    def data(self):
         wat_dem_df = self.__calculate_wat_dem_df()
         wat_dem_df['y'] = self.years
-        return wat_dem_df.iplot(asFigure=True,
-                                x='y',
-                                kind='bar',
-                                barmode='stack',
-                                xTitle='Year',
-                                yTitle='Billion m3',
-                                color=[app.constants.color_dict[x] for x in wat_dem_df.columns if x != 'y'],
-                                title=self.plot_title,
-                                showlegend=True,
-                                )
+        return wat_dem_df
+
 
     def __calculate_wat_dem_df(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

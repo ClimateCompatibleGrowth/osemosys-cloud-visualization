@@ -8,13 +8,15 @@ class LivestockProduction:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
-        return df_plot(self.__calculate_lvs_prod_df(),
-                       'Production (Million tonnes)',
-                       self.plot_title)
+        return self.plot(self.data(), self.plot_title)
 
-    def __calculate_lvs_prod_df(self):
+    def plot(self, data, title):
+        return df_plot(data, 'Production (Million tonnes)', title)
+
+    def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         lvs_prod_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('LVS')

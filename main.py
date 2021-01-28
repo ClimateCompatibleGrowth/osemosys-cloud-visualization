@@ -5,11 +5,11 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import os
-import random
 import sys
 import urllib
 import zipfile
-from app.cache import cache
+from app.cache import cache, cache_timeout, make_cache_key_for_configs
+from app.process_uploaded_file import process_uploaded_file
 from app.config import Config
 from app.header import Header
 from app.generate_divs import GenerateDivs
@@ -46,11 +46,11 @@ external_stylesheets = [
     ]
 
 dash_app = dash.Dash(__name__,
-                external_scripts=external_scripts,
-                external_stylesheets=external_stylesheets)
+                     external_scripts=external_scripts,
+                     external_stylesheets=external_stylesheets)
 
 server = dash_app.server
-cache.init_app(server, config={'CACHE_TYPE': 'filesystem','CACHE_DIR': 'cache'})
+cache.init_app(server, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': 'cache'})
 
 dash_app.layout = html.Div([
     dcc.Location(id='url'),
@@ -58,9 +58,8 @@ dash_app.layout = html.Div([
     html.Div([
             html.Label('Model:', htmlFor='input-string'),
             dcc.Input(id='input-string', type='text', className='input-field mb-3'),
-            html.Label('Compare to:', htmlFor='compare-to-1'),
-            dcc.Input(id='compare-to-1', type='text', className='input-field mb-1'),
-            dcc.Input(id='compare-to-2', type='text', className='input-field mb-1'),
+            html.Label('Compare to:', htmlFor='compare-to'),
+            dcc.Input(id='compare-to', type='text', className='input-field mb-1'),
             html.Br(),
             html.Button(id='submit-button', n_clicks=0, children='Submit'),
         ],
@@ -201,18 +200,17 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
     ],
     [
         State('input-string', 'value'),
-        State('compare-to-1', 'value'),
-        State('compare-to-2', 'value'),
+        State('compare-to', 'value'),
     ]
     )
 def generate_figure_divs(
         n_clicks, n_submit, raw_query_string, upload_data,
-        input_string, compare_to_1, compare_to_2
+        input_string, compare_to
         ):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
     main_config_input = config_input_from(input_string, raw_query_string, triggered_element)
     configs = [
-            Config(config_input) for config_input in [main_config_input, compare_to_1, compare_to_2]
+            Config(config_input) for config_input in [main_config_input, compare_to]
     ]
     valid_configs = [config for config in configs if config.is_valid()]
     if len(valid_configs) > 0:
@@ -223,12 +221,7 @@ def generate_figure_divs(
         return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
 
 
-def make_cache_key_for_configs(f, *args, **kwargs):
-    configs = args[0]
-    return '-'.join([config.input_string for config in configs])
-
-
-@cache.memoize(timeout=86400 * 365)  # 1 year
+@cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
     return GenerateDivs(configs).generate_divs()
 
@@ -256,30 +249,6 @@ def parse_query_string(query_string):
         urllib.parse.unquote(query_string)
     )
     return parsed_qs.get('?model', [''])[0]
-
-
-def process_uploaded_file(raw_contents):
-    random_number = random.randint(1, 99999)
-    uploaded_folder_path = os.path.join(os.getcwd(), 'tmp', 'uploaded', str(random_number))
-    try:
-        os.makedirs(uploaded_folder_path)
-    except FileExistsError:
-        pass
-    content_type, content_string = raw_contents.split(',')
-
-    write_and_extract_zip_file(content_string, uploaded_folder_path)
-
-    return uploaded_folder_path
-
-
-def write_and_extract_zip_file(base64_encoded_zip, work_path):
-    zip_file_path = os.path.join(work_path, 'uploaded.zip')
-
-    with open(zip_file_path, 'wb') as fh:
-        fh.write(base64.b64decode(base64_encoded_zip))
-
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-        zip_ref.extractall(work_path)
 
 
 if __name__ == '__main__':

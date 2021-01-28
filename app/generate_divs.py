@@ -1,5 +1,5 @@
 from collections import defaultdict
-from app.generate_figures import GenerateFigures
+from app.generate_figure_sets import GenerateFigureSets
 from app.layout.checkboxes import Checkboxes
 import functools
 import os
@@ -55,11 +55,11 @@ class GenerateDivs:
             ]
 
     def __all_ids(self):
-        return [figure.id for figure in self.__all_figure_sets()]
+        return [figure.id for figure in self.__all_figure_sets() if not figure.is_empty()]
 
     @functools.lru_cache(maxsize=128)
     def __all_figure_sets(self):
-        return GenerateFigures(self.configs).all_figure_sets()
+        return GenerateFigureSets(self.configs).all_figure_sets()
 
     def __ids_by_category(self):
         grouped = defaultdict(lambda: [])

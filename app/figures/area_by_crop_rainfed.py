@@ -9,8 +9,15 @@ class AreaByCropRainfed:
         self.years = years
         self.land_use = land_use
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Land area (1000 sq.km.)', title)
+
+    def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops_ws_df = self.__calculate_crops_ws_df()
         crops_ws_df['m'] = crops_ws_df['m'].astype(int)
@@ -27,7 +34,8 @@ class AreaByCropRainfed:
                                   .set_index('y')
                                   .reset_index()
                                   .rename(columns=app.constants.det_col))
-        return df_plot(crops_ws_df, 'Land area (1000 sq.km.)', self.plot_title)
+
+        return crops_ws_df
 
     def __calculate_crops_ws_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa

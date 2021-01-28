@@ -10,8 +10,15 @@ class AreaByLandCoverTypeForRegion:
         self.land_use = land_use
         self.region = region
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Land area (1000 sq.km.)', title)
+
+    def data(self):
         regions = self.land_use.regions()
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crops()
@@ -40,7 +47,7 @@ class AreaByLandCoverTypeForRegion:
                 land_cluster_df.columns),
             axis=1).set_index('y').reset_index().rename(
                 columns=app.constants.det_col)
-        return df_plot(land_cluster_df, 'Land area (1000 sq.km.)', self.plot_title)
+        return land_cluster_df
 
     def calculate_land_total_df(self, all_params, years):
         land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa

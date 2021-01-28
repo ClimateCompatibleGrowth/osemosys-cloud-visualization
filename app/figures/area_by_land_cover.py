@@ -9,8 +9,15 @@ class AreaByLandCover:
         self.years = years
         self.land_use = land_use
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
+        return self.plot(self.data(), self.plot_title)
+
+    def plot(self, data, title):
+        return df_plot(data, 'Land area (1000 sq.km.)', title)
+
+    def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crops()
         land_total_df = self.__calculate_land_total_df()
@@ -29,12 +36,11 @@ class AreaByLandCover:
             if crop in land_total_df.columns:
                 land_total_df['AGR'] += land_total_df[crop]
                 land_total_df.drop(crop, axis=1, inplace=True)
-        land_total_df = land_total_df.reindex(
+        return land_total_df.reindex(
             sorted(
                 land_total_df.columns),
             axis=1).set_index('y').reset_index().rename(
                 columns=app.constants.det_col).astype('float64')
-        return df_plot(land_total_df, 'Land area (1000 sq.km.)', self.plot_title)
 
     def __calculate_land_total_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa

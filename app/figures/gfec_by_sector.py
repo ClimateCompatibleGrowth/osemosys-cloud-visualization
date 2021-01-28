@@ -7,13 +7,15 @@ class GFECBySector:
         self.all_params = all_params
         self.years = years
         self.plot_title = plot_title
+        self.index_column = 'y'
 
     def figure(self):
-        return df_plot(self.__calculate_gfec_df(),
-                       'Energy (PJ)',
-                       self.plot_title)
+        return self.plot(self.data(), self.plot_title)
 
-    def __calculate_gfec_df(self):
+    def plot(self, data, title):
+        return df_plot(data, 'Energy (PJ)', title)
+
+    def data(self):
         total_technology_annual_activity = self.all_params['ProductionByTechnologyAnnual']
         gfec_df = total_technology_annual_activity[
             total_technology_annual_activity.t.str.startswith('DEM')
