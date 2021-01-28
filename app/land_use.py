@@ -44,7 +44,7 @@ class LandUse:
         crop_combo_dict = dict([(m, c) for m, c in zip(range(1, len(crop_combo) + 1), crop_combo)]) ## noqa
         
         # Use custom dict below for CLEWs training workshop model (2020) 
-        
+        '''
         crop_combo_dict = {1: 'CP01IR',
                            2: 'CP02IR',
                            3: 'CP01II',
@@ -55,7 +55,7 @@ class LandUse:
                            8: 'CP01HI',
                            9: 'NPA',
                            10: 'IPA'}
-        
+        '''
         return crop_combo_dict
         
     def crops(self):
