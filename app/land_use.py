@@ -24,7 +24,7 @@ class LandUse:
 
         return regions
 
-    def mode_crop_combo_2(self):
+    def mode_crop_combo(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
         crop_list = sorted(list(set([x[1:5] for x in self.commodities if x.startswith('LCP')])))
         crop_order = ['HI', 'II', 'HR', 'IR', 'LR']
