@@ -90,7 +90,7 @@ MAI,Maize,Maize,orange
 RCD,Dryland rice,Dryland rice,lightgreen
 RCP,Wetland rice,Wetland rice,darkgreen
 SOY,Soybean,Soybean,purple
-SGC,Sugarcane,Sugarcane,lightbrown
+SGC,Sugarcane,Sugarcane,violet
 TEA,Tea,Tea,black
 WHE,Wheat,Wheat,gold
 BAR,Barley,Barley,pink
@@ -112,7 +112,7 @@ PEA,Dry pea,Dry pea,orange
 GRM,Gram,Gram,lightgreen
 PIG,Pigeonpea,Pigeonpea,darkgreen
 SUN,Sunflower,Sunflower,purple
-RAP,Rapeseed,Rapeseed,lightbrown
+RAP,Rapeseed,Rapeseed,violet
 OIL,Oilpalm,Oilpalm,black
 OLI,Olive,Olive,gold
 JAT,Jatropha,Jatropha,pink
