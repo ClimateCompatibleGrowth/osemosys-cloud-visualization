@@ -24,7 +24,6 @@ class LandUse:
 
         return regions
 
-    '''
     def mode_crop_combo_2(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
         crop_list = sorted(list(set([x[1:5] for x in self.commodities if x.startswith('LCP')])))
@@ -58,7 +57,6 @@ class LandUse:
                            10: 'IPA'}
         
         return crop_combo_dict
-    '''
         
     def crops(self):
         # Construct dictionary of crops {crop_code:crop_name}.
@@ -83,47 +81,3 @@ class LandUse:
                     self.technologies = line.split(' ')[3:]
                 if line.startswith(('set COMMODITY', 'set FUEL')):
                     self.commodities = line.split(' ')[3:]
-
-    def mode_crop_combo(self):
-        crop_list = sorted(list(set([x[3:9]
-                                     for x in self.technologies
-                                     if x.startswith('LND')
-                                     and not
-                                     x[3:6].startswith('AGR')]
-                                    )
-                                )
-                           )
-        crop_order = ['HI', 'II', 'HR', 'IR', 'LR']
-
-        crop_combo = []
-        for each_crop in crop_list:
-            for each_combo in crop_order:
-                if each_crop[0:4] + each_combo in crop_list:
-                    if each_crop[0:4] + each_combo not in crop_combo:
-                        crop_combo.append(each_crop[0:4] + each_combo)
-               
-        crop_combo = list(set(crop_combo))
-
-        for each in ['BAR', 'FOR', 'GRS', 'BLT', 'WAT', 'OTH']:
-            crop_combo.append(each)
-
-        crop_combo_dict = dict([(m, c) 
-                                for m, c 
-                                in zip(range(1, 
-                                             len(crop_combo) + 1), 
-                                       crop_combo)]) ## noqa
-        
-        '''
-        crop_combo_dict = {1: 'CP01IR',
-                           2: 'CP02IR',
-                           3: 'CP01II',
-                           4: 'CP02II',
-                           5: 'FOR',
-                           6: 'BLT',
-                           7: 'WAT',
-                           8: 'CP01HI',
-                           9: 'NPA',
-                           10: 'IPA'}
-        '''
-        
-        return crop_combo_dict
