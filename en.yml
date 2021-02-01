@@ -31,3 +31,9 @@ en:
     land: Land
     energy: Energy
     water: Water
+    select_all: Select/Deselect all
+  layout:
+    model: 'Model:'
+    compare_to: 'Compare to:'
+    submit: Submit
+    upload_zip_file: Or upload zip file

@@ -60,19 +60,19 @@ dash_app.layout = html.Div([
     dcc.Location(id='url'),
     html.Div([], id='header'),
     html.Div([
-            html.Label('Model:', htmlFor='input-string'),
+            html.Label(i18n.t('layout.model'), htmlFor='input-string'),
             dcc.Input(id='input-string', type='text', className='input-field mb-3'),
-            html.Label('Compare to:', htmlFor='compare-to'),
+            html.Label(i18n.t('layout.compare_to'), htmlFor='compare-to'),
             dcc.Input(id='compare-to', type='text', className='input-field mb-1'),
             html.Br(),
-            html.Button(id='submit-button', n_clicks=0, children='Submit'),
+            html.Button(id='submit-button', n_clicks=0, children=i18n.t('layout.submit')),
         ],
         className='source-form'
     ),
     html.Hr(),
     dcc.Upload(
         id='upload-data',
-        children=html.Div(html.Button('Or upload zip file')),
+        children=html.Div(html.Button(i18n.t('layout.upload_zip_file'))),
         className='upload-zone',
     ),
     html.Nav([
