@@ -12,7 +12,7 @@ class Checkboxes:
     def to_component(self):
         return html.Div([
             html.A(
-                'Select/Deselect all',
+                i18n.t('tab.select_all'),
                 id={'type': 'select-all', 'index': self.category},
                 className='btn btn-light d-block btn-lg',
             ),

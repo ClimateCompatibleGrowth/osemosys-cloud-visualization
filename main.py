@@ -77,7 +77,7 @@ dash_app.layout = html.Div([
     ),
     html.Nav([
         html.A(
-                'All',
+                i18n.t('tab.all'),
                 className='nav-item nav-link active',
                 id='nav-all-tab',
                 href='#nav-all',
@@ -85,7 +85,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
         html.A(
-                'Climate',
+                i18n.t('tab.climate'),
                 className='nav-item nav-link',
                 id='nav-climate-tab',
                 href='#nav-climate',
@@ -93,7 +93,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
             ),
         html.A(
-                'Land',
+                i18n.t('tab.land'),
                 className='nav-item nav-link',
                 id='nav-land-tab',
                 href='#nav-land',
@@ -101,7 +101,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
         html.A(
-                'Energy',
+                i18n.t('tab.energy'),
                 className='nav-item nav-link',
                 id='nav-energy-tab',
                 href='#nav-energy',
@@ -109,7 +109,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
         html.A(
-                'Water',
+                i18n.t('tab.water'),
                 className='nav-item nav-link',
                 id='nav-water-tab',
                 href='#nav-water',
