@@ -1,4 +1,5 @@
 import functools
+import i18n
 from app.land_use import LandUse
 from app.result_parser import ResultParser
 from app.dash_figure_set import DashFigureSet
@@ -58,7 +59,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='gfec-by-sector',
-                    name='Gross final energy consumption - by sector',
+                    name=i18n.t('figure.gfec_by_sector'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -70,7 +71,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='gfec-by-fuel',
-                    name='Gross final energy consumption - by fuel',
+                    name=i18n.t('figure.gfec_by_fuel'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -82,7 +83,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='power-generation-capacity',
-                    name='Power Generation Capacity (Detail)',
+                    name=i18n.t('figure.power_generation_capacity_detail'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -94,7 +95,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='power-generation-detail',
-                    name='Power Generation (Detail)',
+                    name=i18n.t('figure.power_generation_detail'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -106,7 +107,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='power-generation-timeslice',
-                    name='Power Generation (Timeslice)',
+                    name=i18n.t('figure.power_generation_timeslice'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -118,7 +119,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='power-generation-fuel-use',
-                    name='Power Generation (Fuel Use)',
+                    name=i18n.t('figure.power_generation_fuel_use'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -130,7 +131,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='domestic-energy-production',
-                    name='Domestic Energy Production',
+                    name=i18n.t('figure.domestic_energy_production'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -142,7 +143,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='capital-investment',
-                    name='Capital Investment',
+                    name=i18n.t('figure.capital_investment'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -154,7 +155,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='energy-imports',
-                    name='Energy Imports',
+                    name=i18n.t('figure.energy_imports'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -166,7 +167,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='energy-exports',
-                    name='Energy Exports',
+                    name=i18n.t('figure.energy_exports'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -178,7 +179,7 @@ class GenerateFigureSets:
                     ],
                     category='Energy',
                     id='cost-electricty-generation',
-                    name='Cost Of Electricity Generation',
+                    name=i18n.t('figure.cost_of_electricity_generation'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -191,7 +192,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='area-by-crop',
-                    name='Area By Crop',
+                    name=i18n.t('figure.area_by_crop'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -204,7 +205,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='area-by-land-cover',
-                    name='Area By Land Cover Type',
+                    name=i18n.t('figure.area_by_land'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -216,7 +217,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='crop-production',
-                    name='Crop Production',
+                    name=i18n.t('figure.crop_production'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -229,7 +230,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='crop-yield',
-                    name='Yield',
+                    name=i18n.t('figure.yield'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -241,7 +242,7 @@ class GenerateFigureSets:
                     ],
                     category='Water',
                     id='water-demand',
-                    name='Water Demand',
+                    name=i18n.t('figure.water_demand'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -253,7 +254,7 @@ class GenerateFigureSets:
                     ],
                     category='Water',
                     id='water-withdrawal-by-source',
-                    name='Water Withdrawal By Source',
+                    name=i18n.t('figure.water_withdrawal_by_source'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -265,7 +266,7 @@ class GenerateFigureSets:
                     ],
                     category='Water',
                     id='water-balance',
-                    name='Water Balance',
+                    name=i18n.t('figure.water_balance'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -277,7 +278,7 @@ class GenerateFigureSets:
                     ],
                     category='Climate',
                     id='emissions-by-sector',
-                    name='CO2 Emissions By Sector',
+                    name=i18n.t('figure.emissions_by_sector'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -289,7 +290,7 @@ class GenerateFigureSets:
                     ],
                     category='Climate',
                     id='emissions-by-fuel',
-                    name='CO2 Emissions By Source',
+                    name=i18n.t('figure.emissions_by_fuel'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -301,7 +302,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='livestock-production',
-                    name='Livestock Production',
+                    name=i18n.t('figure.livestock_production'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -314,7 +315,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='area-by-crop-irrigated',
-                    name='Area By Crop (Irrigated)',
+                    name=i18n.t('figure.area_by_crop_irrigated'),
                 ),
                 DashFigureSet(
                     figures=[
@@ -327,7 +328,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id='area-by-crop-rainfed',
-                    name='Area By Crop (Rainfed)',
+                    name=i18n.t('figure.area_by_crop_rainfed'),
                 ),
             ]
 
@@ -347,7 +348,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id=f'area-by-crop-{region}',
-                    name=f'Area by crop ({region})',
+                    name=i18n.t('figure.area_by_crop_region'),
                 ),
             )
             figure_list.append(
@@ -363,7 +364,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id=f'area-by-land-{region}',
-                    name=f'Area by land cover type ({region})',
+                    name=i18n.t('figure.area_by_land_cover_type_region'),
                 ),
             )
 

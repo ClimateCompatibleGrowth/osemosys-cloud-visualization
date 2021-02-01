@@ -4,6 +4,7 @@ import base64
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import i18n
 import os
 import sys
 import urllib
@@ -14,6 +15,9 @@ from app.config import Config
 from app.header import Header
 from app.generate_divs import GenerateDivs
 import app.constants
+
+i18n.set('filename_format', '{locale}.{format}')
+i18n.load_path.append('.')
 
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')

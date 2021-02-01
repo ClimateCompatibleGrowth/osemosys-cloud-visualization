@@ -1,0 +1,27 @@
+en:
+  figure:
+    gfec_by_sector: Gross final energy consumption - by sector
+    gfec_by_fuel: Gross final energy consumption - by fuel
+    power_generation_capacity_detail: Power Generation Capacity (Detail)
+    power_generation_detail: Power Generation (Detail)
+    power_generation_timeslice: Power Generation (Timeslice)
+    power_generation_fuel_use: Power Generation (Fuel Use)
+    domestic_energy_production: Domestic Energy Production
+    capital_investment: Capital Investment
+    energy_imports: Energy Imports
+    energy_exports: Energy Exports
+    cost_of_electricity_generation: Cost Of Electricity Generation
+    area_by_crop: Area By Crop
+    area_by_land: Area By Land Cover Type
+    crop_production: Crop Production
+    yield: Yield
+    water_demand: Water Demand
+    water_withdrawal_by_source: Water Withdrawal By Source
+    water_balance: Water Balance
+    emissions_by_sector: CO2 Emissions By Sector
+    emissions_by_fuel: CO2 Emissions By Source
+    livestock_production: Livestock Production
+    area_by_crop_irrigated: Area By Crop (Irrigated)
+    area_by_crop_rainfed: Area By Crop (Rainfed)
+    area_by_crop_region: fArea by crop ({region})
+    area_by_land_cover_type_region: fArea by land cover type ({region})
