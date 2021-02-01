@@ -37,3 +37,4 @@ en:
     compare_to: 'Compare to:'
     submit: Submit
     upload_zip_file: Or upload zip file
+    run_info: 'Run: %{run}, Version: %{version}, Model: %{model}'

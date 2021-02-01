@@ -1,4 +1,5 @@
 import dash_html_components as html
+import i18n
 
 
 class Header:
@@ -8,13 +9,11 @@ class Header:
     def contents(self):
         return [
             html.H1(self.config.title()),
-            html.Div([
-                "Run: "
-                + self.config.title()
-                + ', Version: '
-                + self.config.version_name()
-                + ', Model: '
-                + self.config.model_name()
+            html.Div([i18n.t(
+                'layout.run_info',
+                run=self.config.title(),
+                version=self.config.version_name(),
+                model=self.config.model_name())
             ], className='subtitle'),
             html.Div([self.config.description()], className='subtitle'),
         ]
