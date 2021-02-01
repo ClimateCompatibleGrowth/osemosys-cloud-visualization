@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import i18n
 
 
 class Checkboxes:
@@ -16,7 +17,7 @@ class Checkboxes:
             ),
             dcc.Checklist(
                     options=[
-                        {'label': id.replace('-', ' ').title(), 'value': id} for id in self.ids
+                        {'label': i18n.t(f'figure.{id}'), 'value': id} for id in self.ids
                         ],
                     value=self.ids,
                     id={'type': 'checkboxes', 'index': self.category},

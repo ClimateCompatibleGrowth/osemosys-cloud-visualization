@@ -58,7 +58,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='gfec-by-sector',
+                    id='gfec_by_sector',
                     name=i18n.t('figure.gfec_by_sector'),
                 ),
                 DashFigureSet(
@@ -70,7 +70,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='gfec-by-fuel',
+                    id='gfec_by_fuel',
                     name=i18n.t('figure.gfec_by_fuel'),
                 ),
                 DashFigureSet(
@@ -82,7 +82,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='power-generation-capacity',
+                    id='power_generation_capacity_detail',
                     name=i18n.t('figure.power_generation_capacity_detail'),
                 ),
                 DashFigureSet(
@@ -94,7 +94,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='power-generation-detail',
+                    id='power_generation_detail',
                     name=i18n.t('figure.power_generation_detail'),
                 ),
                 DashFigureSet(
@@ -106,7 +106,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='power-generation-timeslice',
+                    id='power_generation_timeslice',
                     name=i18n.t('figure.power_generation_timeslice'),
                 ),
                 DashFigureSet(
@@ -118,7 +118,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='power-generation-fuel-use',
+                    id='power_generation_fuel_use',
                     name=i18n.t('figure.power_generation_fuel_use'),
                 ),
                 DashFigureSet(
@@ -130,7 +130,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='domestic-energy-production',
+                    id='domestic_energy_production',
                     name=i18n.t('figure.domestic_energy_production'),
                 ),
                 DashFigureSet(
@@ -142,7 +142,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='capital-investment',
+                    id='capital_investment',
                     name=i18n.t('figure.capital_investment'),
                 ),
                 DashFigureSet(
@@ -154,7 +154,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='energy-imports',
+                    id='energy_imports',
                     name=i18n.t('figure.energy_imports'),
                 ),
                 DashFigureSet(
@@ -166,7 +166,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='energy-exports',
+                    id='energy_exports',
                     name=i18n.t('figure.energy_exports'),
                 ),
                 DashFigureSet(
@@ -178,7 +178,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Energy',
-                    id='cost-electricty-generation',
+                    id='cost_of_electricity_generation',
                     name=i18n.t('figure.cost_of_electricity_generation'),
                 ),
                 DashFigureSet(
@@ -191,7 +191,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='area-by-crop',
+                    id='area_by_crop',
                     name=i18n.t('figure.area_by_crop'),
                 ),
                 DashFigureSet(
@@ -204,7 +204,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='area-by-land-cover',
+                    id='area_by_land',
                     name=i18n.t('figure.area_by_land'),
                 ),
                 DashFigureSet(
@@ -216,7 +216,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='crop-production',
+                    id='crop_production',
                     name=i18n.t('figure.crop_production'),
                 ),
                 DashFigureSet(
@@ -229,7 +229,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='crop-yield',
+                    id='yield',
                     name=i18n.t('figure.yield'),
                 ),
                 DashFigureSet(
@@ -241,7 +241,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Water',
-                    id='water-demand',
+                    id='water_demand',
                     name=i18n.t('figure.water_demand'),
                 ),
                 DashFigureSet(
@@ -253,7 +253,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Water',
-                    id='water-withdrawal-by-source',
+                    id='water_withdrawal_by_source',
                     name=i18n.t('figure.water_withdrawal_by_source'),
                 ),
                 DashFigureSet(
@@ -265,7 +265,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Water',
-                    id='water-balance',
+                    id='water_balance',
                     name=i18n.t('figure.water_balance'),
                 ),
                 DashFigureSet(
@@ -277,7 +277,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Climate',
-                    id='emissions-by-sector',
+                    id='emissions_by_sector',
                     name=i18n.t('figure.emissions_by_sector'),
                 ),
                 DashFigureSet(
@@ -289,7 +289,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Climate',
-                    id='emissions-by-fuel',
+                    id='emissions_by_fuel',
                     name=i18n.t('figure.emissions_by_fuel'),
                 ),
                 DashFigureSet(
@@ -301,7 +301,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='livestock-production',
+                    id='livestock_production',
                     name=i18n.t('figure.livestock_production'),
                 ),
                 DashFigureSet(
@@ -314,7 +314,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='area-by-crop-irrigated',
+                    id='area_by_crop_irrigated',
                     name=i18n.t('figure.area_by_crop_irrigated'),
                 ),
                 DashFigureSet(
@@ -327,7 +327,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id='area-by-crop-rainfed',
+                    id='area_by_crop_rainfed',
                     name=i18n.t('figure.area_by_crop_rainfed'),
                 ),
             ]
@@ -347,7 +347,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id=f'area-by-crop-{region}',
+                    id=f'area_by_crop_region_{region}',
                     name=i18n.t('figure.area_by_crop_region', region=region),
                 ),
             )
@@ -363,7 +363,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id=f'area-by-land-{region}',
+                    id=f'area_by_land_cover_type_region_{region}',
                     name=i18n.t('figure.area_by_land_cover_type_region', region=region),
                 ),
             )
