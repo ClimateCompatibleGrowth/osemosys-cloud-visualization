@@ -23,5 +23,5 @@ en:
     livestock_production: Livestock Production
     area_by_crop_irrigated: Area By Crop (Irrigated)
     area_by_crop_rainfed: Area By Crop (Rainfed)
-    area_by_crop_region: fArea by crop ({region})
-    area_by_land_cover_type_region: fArea by land cover type ({region})
+    area_by_crop_region: Area by crop (%{region})
+    area_by_land_cover_type_region: Area by land cover type (%{region})

@@ -348,7 +348,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id=f'area-by-crop-{region}',
-                    name=i18n.t('figure.area_by_crop_region'),
+                    name=i18n.t('figure.area_by_crop_region', region=region),
                 ),
             )
             figure_list.append(
@@ -364,7 +364,7 @@ class GenerateFigureSets:
                     ],
                     category='Land',
                     id=f'area-by-land-{region}',
-                    name=i18n.t('figure.area_by_land_cover_type_region'),
+                    name=i18n.t('figure.area_by_land_cover_type_region', region=region),
                 ),
             )
 
