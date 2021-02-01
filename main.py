@@ -4,6 +4,7 @@ import base64
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import i18n
 import os
 import sys
 import urllib
@@ -14,6 +15,9 @@ from app.config import Config
 from app.header import Header
 from app.generate_divs import GenerateDivs
 import app.constants
+
+i18n.set('filename_format', '{locale}.{format}')
+i18n.load_path.append('.')
 
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
@@ -56,24 +60,24 @@ dash_app.layout = html.Div([
     dcc.Location(id='url'),
     html.Div([], id='header'),
     html.Div([
-            html.Label('Model:', htmlFor='input-string'),
+            html.Label(i18n.t('layout.model'), htmlFor='input-string'),
             dcc.Input(id='input-string', type='text', className='input-field mb-3'),
-            html.Label('Compare to:', htmlFor='compare-to'),
+            html.Label(i18n.t('layout.compare_to'), htmlFor='compare-to'),
             dcc.Input(id='compare-to', type='text', className='input-field mb-1'),
             html.Br(),
-            html.Button(id='submit-button', n_clicks=0, children='Submit'),
+            html.Button(id='submit-button', n_clicks=0, children=i18n.t('layout.submit')),
         ],
         className='source-form'
     ),
     html.Hr(),
     dcc.Upload(
         id='upload-data',
-        children=html.Div(html.Button('Or upload zip file')),
+        children=html.Div(html.Button(i18n.t('layout.upload_zip_file'))),
         className='upload-zone',
     ),
     html.Nav([
         html.A(
-                'All',
+                i18n.t('tab.all'),
                 className='nav-item nav-link active',
                 id='nav-all-tab',
                 href='#nav-all',
@@ -81,7 +85,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
         html.A(
-                'Climate',
+                i18n.t('tab.climate'),
                 className='nav-item nav-link',
                 id='nav-climate-tab',
                 href='#nav-climate',
@@ -89,7 +93,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
             ),
         html.A(
-                'Land',
+                i18n.t('tab.land'),
                 className='nav-item nav-link',
                 id='nav-land-tab',
                 href='#nav-land',
@@ -97,7 +101,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
         html.A(
-                'Energy',
+                i18n.t('tab.energy'),
                 className='nav-item nav-link',
                 id='nav-energy-tab',
                 href='#nav-energy',
@@ -105,7 +109,7 @@ dash_app.layout = html.Div([
                 **{'data-toggle': 'tab'},
                 ),
         html.A(
-                'Water',
+                i18n.t('tab.water'),
                 className='nav-item nav-link',
                 id='nav-water-tab',
                 href='#nav-water',
