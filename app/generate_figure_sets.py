@@ -347,7 +347,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id=f'area_by_crop_region_{region}',
+                    id=f'area_by_crop_region_i18n_{region}',
                     name=i18n.t('figure.area_by_crop_region', region=region),
                 ),
             )
@@ -363,7 +363,7 @@ class GenerateFigureSets:
                         ) for iplot_input in self.__iplot_inputs()
                     ],
                     category='Land',
-                    id=f'area_by_land_cover_type_region_{region}',
+                    id=f'area_by_land_cover_type_region_i18n_{region}',
                     name=i18n.t('figure.area_by_land_cover_type_region', region=region),
                 ),
             )

@@ -1,6 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 import i18n
+import re
 
 
 class Checkboxes:
@@ -17,7 +18,7 @@ class Checkboxes:
             ),
             dcc.Checklist(
                     options=[
-                        {'label': i18n.t(f'figure.{id}'), 'value': id} for id in self.ids
+                        {'label': self.id_to_label(id), 'value': id} for id in self.ids
                         ],
                     value=self.ids,
                     id={'type': 'checkboxes', 'index': self.category},
@@ -27,3 +28,13 @@ class Checkboxes:
                     labelClassName='form-check-label'
                 ),
             ])
+
+    def id_to_label(self, id):
+        region_regex = re.compile('^(.+)_i18n_(.+)$')
+        match = region_regex.match(id)
+        if match is None:
+            return i18n.t(f'figure.{id}')
+        else:
+            i18n_figure_key = match.group(1)
+            region = match.group(2)
+            return i18n.t(f'figure.{i18n_figure_key}', region=region)
