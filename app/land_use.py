@@ -74,7 +74,10 @@ class LandUse:
                     self.commodities = line.split(' ')[3:] 
                     for c in self.commodities:
                         if c.startswith('CRP'):
-                            self.crop_list.append(c[3:])
+                            if c[3:].startswith('CP'):
+                                self.crop_list.append(c[3:7])
+                            else:
+                                self.crop_list.append(c[3:6])
                 if line.startswith(('set YEAR')):
                     year_list = line.split(' ')[3:-1]
                     start_year = year_list[0]
