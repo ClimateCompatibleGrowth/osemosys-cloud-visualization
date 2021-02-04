@@ -19,7 +19,8 @@ class AreaByLandCover:
 
     def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
-        crops = self.land_use.crops()
+        #crops = self.land_use.crops()
+        crops = self.land_use.crop_list
         land_total_df = self.__calculate_land_total_df()
         land_total_df['m'] = land_total_df['m'].astype(int)
         land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
