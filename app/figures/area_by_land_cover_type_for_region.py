@@ -20,14 +20,21 @@ class AreaByLandCoverTypeForRegion:
 
     def data(self):
         regions = self.land_use.regions()
+        print(regions)
         mode_crop_combo = self.land_use.mode_crop_combo()
-        crops = self.land_use.crops()
+        #crops = self.land_use.crops()
+        crops = self.land_use.crop_list
         land_cluster_df = self.calculate_land_total_df(self.all_params, self.years)
         land_cluster_df = land_cluster_df[land_cluster_df.t.str[6:9] == self.region]
 
         land_cluster_df['m'] = land_cluster_df['m'].astype(int)
         land_cluster_df['crop_combo'] = land_cluster_df['m'].map(mode_crop_combo)
-        land_cluster_df['land_use'] = land_cluster_df['crop_combo'].str[0:4]
+        #land_cluster_df['land_use'] = land_cluster_df['crop_combo'].str[0:4]
+        land_cluster_df['land_use'] = [x[0:4] 
+                                       if x.startswith('CP')
+                                       else x[0:3]
+                                       for x in land_cluster_df['crop_combo']
+                                       ]
         land_cluster_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
 
         land_cluster_df['value'] = land_cluster_df['value'].astype('float64')
