@@ -96,7 +96,7 @@ class LandUse:
                                     else:
                                         crop_combo = fuel[1:4]
 
-                                self.data_inp.append(tuple([mode, crop_combo]))
+                                self.data_inp.append(tuple([int(mode), crop_combo]))
 
                 if line.startswith(('param InputActivityRatio')):
                     parsing = True
