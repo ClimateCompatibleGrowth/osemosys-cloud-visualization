@@ -26,7 +26,9 @@ class LandUse:
 
     def mode_crop_combo(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
-        crop_combo_dict = dict([self.data_inp])  # noqa
+        
+        print(self.data_inp)
+        crop_combo_dict = dict(self.data_inp)  # noqa
 
         # Use custom dict below for CLEWs training workshop model (2020)
         '''
@@ -62,6 +64,7 @@ class LandUse:
     def __parse_file(self):
         parsing = False
         self.data_inp = []
+        self.crop_list = []
 
         with open(self.config.data_file_path(), 'r') as f:
             for line in f:
@@ -70,7 +73,10 @@ class LandUse:
                 if line.startswith(('set TECHNOLOGY')):
                     self.technologies = line.split(' ')[3:]
                 if line.startswith(('set COMMODITY', 'set FUEL')):
-                    self.commodities = line.split(' ')[3:]
+                    self.commodities = line.split(' ')[3:] 
+                    for c in self.commodities:
+                        if c.startswith('CRP'):
+                            self.crop_list.append(c[3:6])
                 if line.startswith(('set YEAR')):
                     year_list = line.split(' ')[3:-1]
                     start_year = year_list[0]
@@ -84,10 +90,13 @@ class LandUse:
                         mode = line.split(' ')[0]
                         if tech.startswith('LNDAGR'):
                             if fuel.startswith('L'):
-                                if tech[3:5].startswith('CP'):
-                                    crop_combo = tech[3:9]
+                                if fuel[1:3].startswith('CP'):
+                                    crop_combo = fuel[1:7]
                                 else:
-                                    crop_combo = tech[3:8]
+                                    if fuel[1:4] in self.crop_list:
+                                        crop_combo = fuel[1:6]
+                                    else:
+                                        crop_combo = fuel[1:4]
 
                                 self.data_inp.append(tuple([mode, crop_combo]))
 
