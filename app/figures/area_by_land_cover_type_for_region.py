@@ -20,7 +20,6 @@ class AreaByLandCoverTypeForRegion:
 
     def data(self):
         regions = self.land_use.regions()
-        print(regions)
         mode_crop_combo = self.land_use.mode_crop_combo()
         #crops = self.land_use.crops()
         crops = self.land_use.crop_list
