@@ -15,7 +15,7 @@ class LandUse:
         # Construct dictionary of regions {region_code:region_name}.
         # Region codes are extracted from the data file
         regions_list = sorted(
-                list(set([x[6:-3] for x in self.technologies if x.startswith('LNDAGR')]))
+                list(set([x[6:9] for x in self.technologies if x.startswith('LNDAGR')]))
             )
         regions = {}
 
@@ -26,24 +26,9 @@ class LandUse:
 
     def mode_crop_combo(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
-        crop_list = sorted(list(set([x[1:5] for x in self.commodities if x.startswith('LCP')])))
-        crop_order = ['HI', 'II', 'HR', 'IR', 'LR']
-        
-        crop_combo = []
-        for each_crop in crop_list:
-            for each_combo in crop_order:
-                if each_crop[0:4] + each_combo in crop_list:
-                    if each_crop[0:4] + each_combo not in crop_combo:
-                        crop_combo.append(each_crop[0:4] + each_combo)
+        crop_combo_dict = dict(self.data_inp)  # noqa
 
-        crop_combo = list(set(crop_combo))
-
-        for each in ['BAR', 'FOR', 'GRS', 'BLT', 'WAT', 'OTH']:
-            crop_combo.append(each)
-
-        crop_combo_dict = dict([(m, c) for m, c in zip(range(1, len(crop_combo) + 1), crop_combo)]) ## noqa
-        
-        # Use custom dict below for CLEWs training workshop model (2020) 
+        # Use custom dict below for CLEWs training workshop model (2020)
         '''
         crop_combo_dict = {1: 'CP01IR',
                            2: 'CP02IR',
@@ -57,7 +42,7 @@ class LandUse:
                            10: 'IPA'}
         '''
         return crop_combo_dict
-        
+
     def crops(self):
         # Construct dictionary of crops {crop_code:crop_name}.
         # Crop codes and names are extracted from the 'name_color_codes.csv' file
@@ -75,9 +60,43 @@ class LandUse:
         return {'L': 'Low', 'I': 'Intermediate', 'H': 'High'}
 
     def __parse_file(self):
+        parsing = False
+        self.data_inp = []
+        self.crop_list = []
+
         with open(self.config.data_file_path(), 'r') as f:
             for line in f:
+                if line.startswith(";"):
+                    parsing = False
                 if line.startswith(('set TECHNOLOGY')):
                     self.technologies = line.split(' ')[3:]
                 if line.startswith(('set COMMODITY', 'set FUEL')):
-                    self.commodities = line.split(' ')[3:]
+                    self.commodities = line.split(' ')[3:] 
+                    for c in self.commodities:
+                        if c.startswith('CRP'):
+                            self.crop_list.append(c[3:])
+                if line.startswith(('set YEAR')):
+                    year_list = line.split(' ')[3:-1]
+                    start_year = year_list[0]
+
+                if parsing:
+                    if line.startswith('['):
+                        fuel = line.split(',')[2]
+                        tech = line.split(',')[1]
+                    elif not line.startswith(start_year):
+                        values = line.rstrip().split(' ')[1:]
+                        mode = line.split(' ')[0]
+                        if tech.startswith('LNDAGR'):
+                            if fuel.startswith('L'):
+                                if fuel[1:3].startswith('CP'):
+                                    crop_combo = fuel[1:7]
+                                else:
+                                    if fuel[1:4] in self.crop_list:
+                                        crop_combo = fuel[1:6]
+                                    else:
+                                        crop_combo = fuel[1:4]
+
+                                self.data_inp.append(tuple([int(mode), crop_combo]))
+
+                if line.startswith(('param InputActivityRatio')):
+                    parsing = True

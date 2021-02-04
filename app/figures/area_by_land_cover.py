@@ -19,11 +19,17 @@ class AreaByLandCover:
 
     def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
-        crops = self.land_use.crops()
+        #crops = self.land_use.crops()
+        crops = self.land_use.crop_list
         land_total_df = self.__calculate_land_total_df()
         land_total_df['m'] = land_total_df['m'].astype(int)
         land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
-        land_total_df['land_use'] = land_total_df['crop_combo'].str[0:4]
+        #land_total_df['land_use'] = land_total_df['crop_combo'].str[0:4]
+        land_total_df['land_use'] = [x[0:4] 
+                                     if x.startswith('CP')
+                                     else x[0:3]
+                                     for x in land_total_df['crop_combo']
+                                     ]
         land_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
 
         land_total_df = land_total_df.pivot_table(index='y',
