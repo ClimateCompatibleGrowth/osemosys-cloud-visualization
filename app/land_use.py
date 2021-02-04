@@ -26,8 +26,6 @@ class LandUse:
 
     def mode_crop_combo(self):
         # Construct dictionary mapping modes to crop combos {mode:crop_combo}
-        
-        print(self.data_inp)
         crop_combo_dict = dict(self.data_inp)  # noqa
 
         # Use custom dict below for CLEWs training workshop model (2020)
