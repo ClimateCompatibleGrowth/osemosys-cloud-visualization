@@ -144,3 +144,8 @@ INL,Heavy industry,Heavy industry,black
 INH,Light industry,Light industry,grey
 BLD,Buildings,Buildings,brown
 BIT,Bituminous coal,Bituminous coal,grey
+HRS,Horses,Horses,black
+SHP,Sheep,Sheep,pink
+GOT,Goats,Goats,grey
+CTL,Cattle,Cattle,red
+CML,Camels,Camels,brown
