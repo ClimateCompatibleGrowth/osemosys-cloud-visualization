@@ -30,7 +30,8 @@ class WaterBalance:
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         wat_bal_df = production_by_technology_annual[
-            production_by_technology_annual.f.str.startswith('WTR')
+            (production_by_technology_annual.f.str.startswith('WTR') &
+             production_by_technology_annual.t.str.startswith('LND'))
             ].drop('r', axis=1)
         wat_bal_df['f'] = wat_bal_df['f'].str[3:6]
         wat_bal_df['value'] = wat_bal_df['value'].astype('float64')
