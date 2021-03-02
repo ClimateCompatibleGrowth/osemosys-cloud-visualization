@@ -158,3 +158,12 @@ PRT,Protected land,Protected land,green
 FOD,Fodder crops,Fodder crops,grey
 RFO,Fuel oil,Fuel oil,crimson
 WST,Waste,Waste,olivedrab
+PKR,Palm Oil Kernels,Palm Oil Kernels,pink
+POM,Palm Oil Mill Effluent,Palm Oil Mill Effluent,gold
+CPO,Crude Palm Oil,Crude Palm Oil,slategrey
+EFB,Empty Fruit Bunch,Empty Fruit Bunch,brown
+BDS,Biodiesel,Biodiesel,grey
+ETH,Ethanol,Ethanol,green
+BET,Bioethanol,Bioethanol,grey
+BBG,Bio-blended gasoline,Bio-blended gasoline,crimson
+BAG,Bagasse,Bagasse,olivedrab
