@@ -127,12 +127,10 @@ COC,Cocoa,Cocoa,lightblue
 FLA,Flax,Flax,grey
 TOB,Tobacco,Tobacco,forestgreen
 ALF,Alfalfa,Alfalfa,darkgreen
-PAS,Pasture legume,Pasture legume,brown
 TEF,Warm C4,Warm C4,grey
 MIS,Miscanthus,Miscanthus,brown
 SWI,Switchgrass,Switchgrass,orange
 REE,Reed canary grass,Reed canary grass,lightgreen
-GRS,Grass,Grass,darkgreen
 BMX,BMX,BMX,lightgreen
 RUB,Rubber,Rubber,grey
 ARE,Arecanut,Arecanut,black
@@ -167,3 +165,4 @@ ETH,Ethanol,Ethanol,green
 BET,Bioethanol,Bioethanol,grey
 BBG,Bio-blended gasoline,Bio-blended gasoline,crimson
 BAG,Bagasse,Bagasse,olivedrab
+PAS,Pastures,Pastures,olivedrab
