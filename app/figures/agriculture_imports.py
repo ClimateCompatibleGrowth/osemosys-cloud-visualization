@@ -3,12 +3,12 @@ from app.utilities import df_plot, df_filter
 
 class AgricultureImports:
 
-    def __init__(self, all_params, years, plot_title):
+    def __init__(self, all_params, years, land_use, plot_title):
         self.all_params = all_params
         self.years = years
+        self.land_use = land_use
         self.plot_title = plot_title
         self.index_column = 'y'
-        self.land_use = land_use
 
     def figure(self):
         return self.plot(self.data(), self.plot_title)
