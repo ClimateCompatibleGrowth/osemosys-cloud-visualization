@@ -24,7 +24,7 @@ WND,Wind,Eólica,violet
 CP01,Maize,Café,brown
 CP02,Rice,Caña de azúcar,yellowgreen
 CP03,Coffee,Coffee,yellow
-CP04,Cereals,Cereals,orange
+CP04,Cereals,Cereals,brown
 CP05,Oilseeds,Oilseeds,pink
 CP06,Other crops,Other crops,red
 CP07,Pulses,Pulses,magenta
@@ -100,7 +100,7 @@ MTP,Pearl millet,Pearl millet,grey
 MTF,Foxtail millet,Foxtail millet,grey
 OAT,Oat,Oat,brown
 BUC,Buckwheat,Buckwheat,orange
-PTW,White potato,White potato,darkblue
+PTW,Potato,Potato,darkblue
 PTS,Sweet potato,Sweet potato,lightblue
 CAS,Cassava,Cassava,grey
 YAM,Yam and Cocoyam,Yam and Cocoyam,forestgreen
@@ -121,7 +121,7 @@ CAR,Carrot,Carrot,maroon
 ONI,Onion,Onion,grey
 TOM,Tomato,Tomato,grey
 BAN,Banana,Banana,brown
-CIT,Citrus,Citrus,orange
+CIT,Citrus,Citrus,lime
 CON,Coconut,Coconut,darkblue
 COC,Cocoa,Cocoa,lightblue
 FLA,Flax,Flax,grey
