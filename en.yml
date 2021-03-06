@@ -25,6 +25,7 @@ en:
     area_by_crop_rainfed: Area By Crop (Rainfed)
     area_by_crop_region: Area by crop (%{region})
     area_by_land_cover_type_region: Area by land cover type (%{region})
+    agriculture_imports: Agriculture Imports
   tab:
     all: All
     climate: Climate
