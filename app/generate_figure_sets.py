@@ -29,6 +29,7 @@ from app.figures.water_balance import WaterBalance
 from app.figures.emissions_by_sector import EmissionsBySector
 from app.figures.emissions_by_fuel import EmissionsByFuel
 from app.figures.agriculture_imports import AgricultureImports
+from app.figures.agriculture_exports import AgricultureExports
 
 
 class GenerateFigureSets:
@@ -343,6 +344,19 @@ class GenerateFigureSets:
                     category='Land',
                     id='agriculture_imports',
                     name=i18n.t('figure.agriculture_imports'),
+                ),
+                DashFigureSet(
+                    figures=[
+                        AgricultureExports(
+                            iplot_input['all_params'],
+                            iplot_input['years'],
+                            iplot_input['land_use'],
+                            iplot_input['config'].title()
+                        ) for iplot_input in self.__iplot_inputs()
+                    ],
+                    category='Land',
+                    id='agriculture_exports',
+                    name=i18n.t('figure.agriculture_exports'),
                 ),
             ]
 
