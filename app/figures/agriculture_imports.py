@@ -22,11 +22,6 @@ class AgricultureImports:
         agr_imp_df = total_annual_technology_activity[
                 total_annual_technology_activity.t.str.startswith('IMP')
             ].drop('r', axis=1)
+        agr_imp_df = agr_imp_df.loc[agr_imp_df.t.str[3:].isin(crops)]
         agr_imp_df = df_filter(agr_imp_df, 3, 6, [], self.years)
-        #for each in agr_imp_df.columns:
-        #    if each not in crops:
-        #        if each not in ['y']:
-        #            agr_imp_df.drop(each,
-        #                            axis=1,
-        #                            inplace=True)
         return agr_imp_df
