@@ -20,4 +20,5 @@ class EnergyImports:
         ene_imp_df = production_by_technology_annual[
                 production_by_technology_annual.t.str.startswith('IMP')
             ].drop('r', axis=1)
+        ene_imp_df = ene_imp_df.loc[~ene_imp_df['t'].str[3:6].isin(['CRP'])]
         return df_filter(ene_imp_df, 3, 6, [], self.years)

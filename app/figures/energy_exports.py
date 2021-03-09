@@ -20,4 +20,5 @@ class EnergyExports:
         ene_exp_df = total_capacity_annual_params[
                 total_capacity_annual_params.t.str.startswith('EXP')
             ].drop('r', axis=1)
+        ene_exp_df = ene_exp_df.loc[~ene_exp_df['t'].str[3:6].isin(['CRP'])]
         return df_filter(ene_exp_df, 3, 6, [], self.years)
