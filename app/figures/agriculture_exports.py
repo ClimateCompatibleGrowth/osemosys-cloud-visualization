@@ -23,5 +23,5 @@ class AgricultureExports:
                 total_annual_technology_activity.t.str.startswith('EXP')
             ].drop('r', axis=1)
         agr_exp_df = agr_exp_df.loc[agr_exp_df.t.str[3:].isin(crops)]
-        agr_exp_df = df_filter(agr_exp_df, 3, 6, [], self.years)
+        agr_exp_df = df_filter(agr_exp_df, 6, 9, [], self.years)
         return agr_exp_df

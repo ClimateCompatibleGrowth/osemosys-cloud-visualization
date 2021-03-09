@@ -23,5 +23,5 @@ class AgricultureImports:
                 total_annual_technology_activity.t.str.startswith('IMP')
             ].drop('r', axis=1)
         agr_imp_df = agr_imp_df.loc[agr_imp_df.t.str[3:].isin(crops)]
-        agr_imp_df = df_filter(agr_imp_df, 3, 6, [], self.years)
+        agr_imp_df = df_filter(agr_imp_df, 6, 9, [], self.years)
         return agr_imp_df
