@@ -21,9 +21,10 @@ class LivestockProduction:
         lvs_prod_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('LVS')
             ].drop('r', axis=1)
-        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['TLU', 'WAT'])]
+        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['TLU', 'WAT', 'SUS', 'UNS', 'RST'])]
+
+        lvs_prod_df['f'] = lvs_prod_df['f'].str[3:6]
         lvs_prod_df['value'] = lvs_prod_df['value'].astype('float64')
-        '''
         lvs_prod_df = lvs_prod_df.pivot_table(index='y',
                                               columns='f',
                                               values='value',
@@ -32,7 +33,5 @@ class LivestockProduction:
                                   .set_index('y')
                                   .reset_index()
                                   .rename(columns=app.constants.det_col))
-        '''
-        lvs_prod_df = df_filter(lvs_prod_df, 3, 6, [], self.years)
         lvs_prod_df['y'] = self.years
         return lvs_prod_df
