@@ -19,7 +19,8 @@ class CropProduction:
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         crops_prod_df = production_by_technology_annual[
-                production_by_technology_annual.f.str.startswith('CRP')
+                production_by_technology_annual.f.str.startswith('CRP') & 
+                production_by_technology_annual.t.str.startswith('LND')
             ].drop('r', axis=1)
         crops_prod_df['f'] = crops_prod_df['f'].str[3:7]
         crops_prod_df['value'] = crops_prod_df['value'].astype('float64')
