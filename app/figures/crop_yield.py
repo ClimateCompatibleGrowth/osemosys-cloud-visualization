@@ -61,8 +61,10 @@ class CropYield:
         return crops_yield_df
 
     def calculate_crops_prod_df(self, all_params, years):
-        crops_prod_df = all_params['ProductionByTechnologyAnnual'][all_params['ProductionByTechnologyAnnual'].f.str.startswith(  # noqa
-            'CRP', False)].drop('r', axis=1)
+        crops_prod_df = all_params['ProductionByTechnologyAnnual'][
+            all_params['ProductionByTechnologyAnnual'].f.str.startswith(  # noqa
+            'CRP', False) & all_params['ProductionByTechnologyAnnual'].t.str.startswith(  # noqa
+            'LND', False)].drop('r', axis=1)
         crops_prod_df['f'] = crops_prod_df['f'].str[3:7]
         crops_prod_df['value'] = crops_prod_df['value'].astype('float64')
 
