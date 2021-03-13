@@ -21,7 +21,12 @@ class GFECByFuel:
             total_technology_annual_activity.t.str.startswith('DEM')
             ].drop('r', axis=1)
         gfec_fuel_df = gfec_fuel_df[~gfec_fuel_df.t.str.startswith('DEMPWR')]
-        return df_filter(gfec_fuel_df, 6, 9, ['LVS',
+        return df_filter(gfec_fuel_df, 6, 9, ['CML',
+                                              'CTL',
+                                              'GOT',
+                                              'HRS',
+                                              'SHE',
+                                              'LVS',
                                               'SUR',
                                               'WND',
                                               'HYD',
