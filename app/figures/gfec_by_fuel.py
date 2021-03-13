@@ -25,7 +25,7 @@ class GFECByFuel:
                                               'CTL',
                                               'GOT',
                                               'HRS',
-                                              'SHE',
+                                              'SHP',
                                               'LVS',
                                               'SUR',
                                               'WND',
