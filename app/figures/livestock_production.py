@@ -21,7 +21,12 @@ class LivestockProduction:
         lvs_prod_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('LVS')
             ].drop('r', axis=1)
-        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['TLU', 'WAT', 'SUS', 'UNS', 'RST'])]
+        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['SHE',
+                                                                       'TLU',
+                                                                       'WAT',
+                                                                       'SUS',
+                                                                       'UNS',
+                                                                       'RST'])]
 
         lvs_prod_df['f'] = lvs_prod_df['f'].str[3:6]
         lvs_prod_df['value'] = lvs_prod_df['value'].astype('float64')
