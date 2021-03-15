@@ -38,5 +38,6 @@ en:
     model: 'Model:'
     compare_to: 'Compare to:'
     submit: Submit
+    clear_cache: Clear cache
     upload_zip_file: Or upload zip file
     run_info: 'Run: %{run}, Version: %{version}, Model: %{model}'
