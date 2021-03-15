@@ -66,7 +66,12 @@ dash_app.layout = html.Div([
             dcc.Input(id='compare-to', type='text', className='input-field mb-1'),
             html.Br(),
             html.Button(id='submit-button', n_clicks=0, children=i18n.t('layout.submit')),
-            html.Button(id='clear-cache', n_clicks=0, children=i18n.t('layout.clear_cache')),
+            html.Button(
+                id='clear-cache',
+                n_clicks=0,
+                children=i18n.t('layout.clear_cache'),
+                className='clear-cache-button',
+           ),
         ],
         className='source-form'
     ),
