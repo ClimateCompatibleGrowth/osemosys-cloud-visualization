@@ -66,6 +66,12 @@ dash_app.layout = html.Div([
             dcc.Input(id='compare-to', type='text', className='input-field mb-1'),
             html.Br(),
             html.Button(id='submit-button', n_clicks=0, children=i18n.t('layout.submit')),
+            html.Button(
+                id='clear-cache',
+                n_clicks=0,
+                children=i18n.t('layout.clear_cache'),
+                className='clear-cache-button',
+           ),
         ],
         className='source-form'
     ),
@@ -139,15 +145,15 @@ dash_app.clientside_callback(
 
 
 @dash_app.callback(
-    Output(component_id='input-string', component_property='value'),
-    [Input(component_id='url', component_property='search')]
+    Output(component_id='clear-cache', component_property='data-clear-cache'),
+    [Input(component_id='clear-cache', component_property='n_clicks')]
     )
-def populate_input_string_from_query_string(query_string):
-    if query_string is not None:
-        print(f'populating query_string {query_string}')
-        return parse_query_string(query_string)
+def clear_cache(n_clicks):
+    if n_clicks > 0:
+        print('setting deleting cache')
+        return True
     else:
-        return ''
+        return False
 
 
 @dash_app.callback(
@@ -201,6 +207,7 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
         Input(component_id='input-string', component_property='n_submit'),
         Input(component_id='url', component_property='search'),
         Input(component_id='upload-data', component_property='contents'),
+        Input(component_id='clear-cache', component_property='data-clear-cache'),
     ],
     [
         State('input-string', 'value'),
@@ -208,8 +215,8 @@ def generate_header(n_clicks, n_submit, raw_query_string, upload_data, input_str
     ]
     )
 def generate_figure_divs(
-        n_clicks, n_submit, raw_query_string, upload_data,
-        input_string, compare_to
+        n_clicks, n_submit, raw_query_string, upload_data, clear_cache,
+        input_string, compare_to,
         ):
     triggered_element = dash.callback_context.triggered[0]['prop_id']
     main_config_input = config_input_from(input_string, raw_query_string, triggered_element)
@@ -217,6 +224,10 @@ def generate_figure_divs(
             Config(config_input) for config_input in [main_config_input, compare_to]
     ]
     valid_configs = [config for config in configs if config.is_valid()]
+
+    if clear_cache:
+        cache.delete_memoized(generate_divs, valid_configs)
+
     if len(valid_configs) > 0:
         language = valid_configs[0].language()
         app.constants.set_cols_from_language(language)
@@ -224,6 +235,16 @@ def generate_figure_divs(
     else:
         return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
 
+@dash_app.callback(
+    Output(component_id='input-string', component_property='value'),
+    [Input(component_id='url', component_property='search')]
+    )
+def populate_input_string_from_query_string(query_string):
+    if query_string is not None:
+        print(f'populating query_string {query_string}')
+        return parse_query_string(query_string)
+    else:
+        return ''
 
 @cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):

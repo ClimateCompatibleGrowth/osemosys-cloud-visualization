@@ -57,3 +57,8 @@ h1 {
   height: 15px;
   margin: 5px;
 }
+
+.clear-cache-button {
+  float: right;
+  opacity: 0.5;
+}
