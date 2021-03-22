@@ -30,6 +30,8 @@ class EmissionsBySector:
         emissions_df = annual_technology_emission[
             annual_technology_emission.t.str.startswith('DEM') |
             annual_technology_emission.t.str.startswith('MIN') |
-            annual_technology_emission.t.str.startswith('EXP')
+            annual_technology_emission.t.str.startswith('EXP') |
+            annual_technology_emission.t.str.startswith('LND') |
+            annual_technology_emission.t.str.startswith('LVS')
             ].drop('r', axis=1)
         return df_filter(emissions_df, 3, 6, [], self.years)
