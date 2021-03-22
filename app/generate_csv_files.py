@@ -124,6 +124,9 @@ def generate_csv_files(data_file, results_file, base_folder):
             'TechnologyActivityChangeByModeCostTotal':['r','t','m','y'],
             'InputToTotalCapacity':['r','t','f','y'],
             'InputToNewCapacity':['r','t','f','y'],
+            'DiscountedCapitalInvestment':['r','t','y'],
+            'DiscountedOperatingCost':['r','t','y'],
+            'TotalDiscountedCostByTechnology':['r','t','y'],
             }
 
     for each in params:
