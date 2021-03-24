@@ -33,7 +33,7 @@ class PowerGenerationDetail:
         gen_df = production_by_technology_annual[
                 (production_by_technology_annual.t.str.startswith('PWR') |
                     production_by_technology_annual.t.str.startswith('IMP')) &
-                production_by_technology_annual.f.str.startswith('ELC')
+                production_by_technology_annual.f.str.contains('ELC')
                 ].drop('r', axis=1)
 
         gen_df = df_filter(gen_df, 3, 6, ['TRN'], self.years)
