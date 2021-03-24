@@ -32,4 +32,5 @@ class EmissionsByFuel:
             annual_technology_emission.t.str.startswith('DEM') |
             annual_technology_emission.t.str.startswith('MIN')
             ].drop('r', axis=1)
+        emissions_df = emissions_df.loc[~emissions_df['e'].str[:3].isin(['DUM'])]
         return df_filter(emissions_df, 6, 9, [], self.years)
