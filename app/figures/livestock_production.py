@@ -14,7 +14,7 @@ class LivestockProduction:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Production (Million tonnes)', title)
+        return df_plot(data, 'Heads of livestock (Millions)', title)
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
