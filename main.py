@@ -7,6 +7,7 @@ import dash_html_components as html
 import i18n
 import os
 import sys
+import time
 import urllib
 import zipfile
 from app.cache import cache, cache_timeout, make_cache_key_for_configs
@@ -248,7 +249,11 @@ def populate_input_string_from_query_string(query_string):
 
 @cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
-    return GenerateDivs(configs).generate_divs()
+    start = time.time()
+    divs = GenerateDivs(configs).generate_divs()
+    end = time.time()
+    print(f'Generated visualization in {round(end - start, 2)}s')
+    return divs
 
 
 generate_divs.make_cache_key = make_cache_key_for_configs
