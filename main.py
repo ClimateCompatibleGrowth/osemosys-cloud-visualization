@@ -7,6 +7,7 @@ import dash_html_components as html
 import i18n
 import os
 import sys
+import time
 import urllib
 import zipfile
 from app.cache import cache, cache_timeout, make_cache_key_for_configs
@@ -230,6 +231,7 @@ def generate_figure_divs(
 
     if len(valid_configs) > 0:
         language = valid_configs[0].language()
+        i18n.set('locale', language)
         app.constants.set_cols_from_language(language)
         return generate_divs(valid_configs)
     else:
@@ -248,7 +250,11 @@ def populate_input_string_from_query_string(query_string):
 
 @cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
-    return GenerateDivs(configs).generate_divs()
+    start = time.time()
+    divs = GenerateDivs(configs).generate_divs()
+    end = time.time()
+    print(f'Generated visualization in {round(end - start, 2)}s')
+    return divs
 
 
 generate_divs.make_cache_key = make_cache_key_for_configs

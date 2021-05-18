@@ -1,0 +1,41 @@
+---
+es:
+  figure:
+    area_by_crop: Área por cultivo
+    area_by_crop_irrigated: Área por cultivo (irrigado)
+    area_by_crop_rainfed: Área por cultivo (secano)
+    area_by_crop_region: Área por cultivo (%{region})
+    area_by_land: Área por tipo de cobertura de suelo
+    area_by_land_cover_type_region: Área por tipo de cobertura de suelo (%{region})
+    capital_investment: Inversión de capital
+    cost_of_electricity_generation: Costo de Generación de Electricidad
+    crop_production: Producción de cultivos
+    domestic_energy_production: Producción de Energía Doméstica
+    emissions_by_fuel: Emisiones de CO2 por Fuente
+    emissions_by_sector: Emisiones de CO2 por Sector
+    energy_exports: Exportaciones de Energía
+    energy_imports: Importaciones de Energía
+    gfec_by_fuel: Consumo final bruto de energía- por combustible
+    gfec_by_sector: Consumo final bruto de energía- por sector
+    livestock_production: Producción Ganadera
+    power_generation_capacity_detail: Capacidad de Generación de Energía (Detalle)
+    power_generation_detail: Generación de Energía (Detalle)
+    power_generation_fuel_use: Generación de Energía (Uso de Combustibles)
+    power_generation_timeslice: Generación de energía (intervalo de tiempo)
+    water_balance: Balance de Agua
+    water_demand: Demanda de Agua
+    water_withdrawal_by_source: Extracción de Agua por Fuente
+    yield: Rendimiento
+  layout:
+    compare_to: 'Comparar con:'
+    model: 'Modelo:'
+    run_info: 'Corrida: %{run}, Version: %{version}, Modelo: %{model}'
+    submit: Enviar
+    upload_zip_file: O cargar archivo zip
+  tab:
+    all: Todos
+    climate: Clima
+    energy: Energía
+    land: Suelo
+    select_all: Seleccionar/Borrar selección todos
+    water: Agua

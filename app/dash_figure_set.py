@@ -2,6 +2,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from app.utilities import df_plot
 import functools
+import time
 import traceback
 
 
@@ -14,14 +15,17 @@ class DashFigureSet:
 
     @functools.lru_cache(maxsize=128)
     def to_div(self):
-        print(f'Generating {self.name}')
+        start = time.time()
         if self.is_empty():
             return []
         else:
+            content = self.__content()
+            end = time.time()
+            print(f'Generated {self.name} in {round(end - start, 2)}s')
             return html.Div(
                         [
                             html.H4(self.name),
-                            self.__content()
+                            content
                         ],
                         className=f'figure-set figure-set-{self.id}',
                     )
@@ -68,6 +72,7 @@ class DashFigureSet:
         else:
             return []
 
+    @functools.lru_cache(maxsize=128)
     def is_empty(self):
         try:
             return self.figures[0].data().columns.size == 1
