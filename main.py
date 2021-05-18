@@ -231,6 +231,7 @@ def generate_figure_divs(
 
     if len(valid_configs) > 0:
         language = valid_configs[0].language()
+        i18n.set('locale', language)
         app.constants.set_cols_from_language(language)
         return generate_divs(valid_configs)
     else:
