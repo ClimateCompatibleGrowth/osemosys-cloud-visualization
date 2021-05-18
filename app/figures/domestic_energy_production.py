@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class DomesticEnergyProduction:
@@ -16,7 +17,7 @@ class DomesticEnergyProduction:
         for each in data.columns:
             if each in ['Land', 'Water', 'Precipitation', 'Suelo', 'Agua', 'Precipitación']:
                 data = data.drop(each, axis=1)
-        return df_plot(data, 'Petajoules (PJ)', title)
+        return df_plot(data, i18n.t('label.petajoules'), title)
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

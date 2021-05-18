@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class CapitalInvestment:
@@ -13,7 +14,7 @@ class CapitalInvestment:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Million $', title)
+        return df_plot(data, i18n.t('label.million_usd'), title)
 
     def data(self):
         capital_investment = self.all_params['CapitalInvestment']

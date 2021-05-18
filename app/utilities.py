@@ -1,6 +1,7 @@
+import i18n
 import os
-import sys
 import pandas as pd
+import sys
 import app.constants
 pd.set_option('mode.chained_assignment', None)
 
@@ -10,7 +11,7 @@ def df_plot(df, y_title, p_title):
                     x='y',
                     kind='bar',
                     barmode='relative',
-                    xTitle='Year',
+                    xTitle=i18n.t('label.year'),
                     yTitle=y_title,
                     color=[app.constants.color_dict[x] for x in df.columns if x != 'y'],
                     title=p_title,

@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import app.constants
+import i18n
 
 
 class AreaByLandCover:
@@ -15,7 +16,7 @@ class AreaByLandCover:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Land area (1000 sq.km.)', title)
+        return df_plot(data, i18n.t('label.land_area'), title)
 
     def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
@@ -25,7 +26,7 @@ class AreaByLandCover:
         land_total_df['m'] = land_total_df['m'].astype(int)
         land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
         #land_total_df['land_use'] = land_total_df['crop_combo'].str[0:4]
-        land_total_df['land_use'] = [x[0:4] 
+        land_total_df['land_use'] = [x[0:4]
                                      if x.startswith('CP')
                                      else x[0:3]
                                      for x in land_total_df['crop_combo']

@@ -41,3 +41,16 @@ en:
     clear_cache: Clear cache
     upload_zip_file: Or upload zip file
     run_info: 'Run: %{run}, Version: %{version}, Model: %{model}'
+  label:
+    year: Year
+    timeslice: Timeslice
+    yield: Yield (t/ha)
+    billion_m3: Billion m3
+    million_tonnes_co2: Million tonnes of CO2
+    petajoules: Petajoules (PJ)
+    energy_pj: Energy (PJ)
+    gigawatts_gw: Gigawatts (GW)
+    million_usd: Million $
+    million_tonnes: Million tonnes (Mt)
+    land_area: Land area (1000 sq.km.)
+    production_million_tonnes: Production (Million tonnes)

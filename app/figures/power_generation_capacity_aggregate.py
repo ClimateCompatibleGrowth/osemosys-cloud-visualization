@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
 import pandas as pd
 from app.constants import agg_col
+import i18n
 
 
 class PowerGenerationCapacityAggregate:
@@ -23,7 +24,7 @@ class PowerGenerationCapacityAggregate:
                     cap_agg_df[each] = cap_agg_df[each].round(2)
 
         cap_agg_df = cap_agg_df.loc[:, (cap_agg_df != 0).any(axis=0)]
-        return df_plot(cap_agg_df, 'Gigawatts (GW)', self.plot_title)
+        return df_plot(cap_agg_df, i18n.t('label.gigawatts_gw'), self.plot_title)
 
     def __cap_df(self):
         total_capacity_annual_params = self.all_params['TotalCapacityAnnual']
