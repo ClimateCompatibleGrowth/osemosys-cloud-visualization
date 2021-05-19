@@ -21,7 +21,8 @@ class LivestockProduction:
         lvs_prod_df = production_by_technology_annual[
             production_by_technology_annual.f.str.startswith('LVS')
             ].drop('r', axis=1)
-        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['BEF',
+        lvs_prod_df = lvs_prod_df.loc[~lvs_prod_df['f'].str[3:6].isin(['MET',
+                                                                       'BEF',
                                                                        'MUT',
                                                                        'MLK',
                                                                        'HID',
