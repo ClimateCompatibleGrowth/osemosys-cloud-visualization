@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter, df_years
 import app.constants
+import i18n
 import pandas as pd
 
 
@@ -20,8 +21,8 @@ class WaterBalance:
                 x='y',
                 kind='bar',
                 barmode='relative',
-                xTitle='Year',
-                yTitle='Billion m3',
+                xTitle=i18n.t('label.year'),
+                yTitle=i18n.t('label.billion_m3'),
                 color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],
                 title=title,
                 showlegend=True,

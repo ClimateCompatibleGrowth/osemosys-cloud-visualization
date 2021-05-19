@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import pandas as pd
+import i18n
 
 
 class CostElectrictyGeneration:
@@ -19,7 +20,7 @@ class CostElectrictyGeneration:
                 kind='bar',
                 barmode='relative',
                 x='y',
-                xTitle='Year',
+                xTitle=i18n.t('label.year'),
                 yTitle='$/MWh',
                 title=title
                 )

@@ -1,3 +1,4 @@
+import i18n
 import pandas as pd
 from app.utilities import df_plot, df_filter
 import app.constants
@@ -30,9 +31,8 @@ class PowerGenerationAggregate:
                                 x='y',
                                 kind='bar',
                                 barmode='relative',
-                                xTitle='Year',
-                                # yTitle='Terawatt-hours (TWh)',
-                                yTitle='Petajoules (PJ)',
+                                xTitle=i18n.t('label.year'),
+                                yTitle=i18n.t('label.petajoules'),
                                 color=[app.constants.color_dict[x]
                                        for x
                                        in self.__calculate_gen_df().columns

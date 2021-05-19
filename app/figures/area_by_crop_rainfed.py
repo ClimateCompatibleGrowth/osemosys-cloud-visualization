@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import app.constants
+import i18n
 
 
 class AreaByCropRainfed:
@@ -15,7 +16,7 @@ class AreaByCropRainfed:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Land area (1000 sq.km.)', title)
+        return df_plot(data, i18n.t('label.land_area'), title)
 
     def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
@@ -28,7 +29,7 @@ class AreaByCropRainfed:
         crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str[0:-2].isin(crops))
                                   & (crops_ws_df.crop_combo.str[-1:] == 'R')]
         #crops_ws_df['land_use'] = crops_ws_df['crop_combo'].str[0:4]
-        crops_ws_df['land_use'] = [x[0:4] 
+        crops_ws_df['land_use'] = [x[0:4]
                                    if x.startswith('CP')
                                    else x[0:3]
                                    for x in crops_ws_df['crop_combo']

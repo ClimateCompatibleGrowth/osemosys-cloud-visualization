@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class PowerGenerationCapacity:
@@ -13,7 +14,7 @@ class PowerGenerationCapacity:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Gigawatts (GW)', title)
+        return df_plot(data, i18n.t('label.gigawatts_gw'), title)
 
     def data(self):
         total_capacity_annual_params = self.all_params['TotalCapacityAnnual']

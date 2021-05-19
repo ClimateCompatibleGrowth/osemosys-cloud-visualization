@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class AgricultureExports:
@@ -14,7 +15,7 @@ class AgricultureExports:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Million tonnes (Mt)', title)
+        return df_plot(data, i18n.t('label.million_tonnes'), title)
 
     def data(self):
         crops = self.land_use.crop_list

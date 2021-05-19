@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class WaterWithdrawalBySource:
@@ -13,7 +14,7 @@ class WaterWithdrawalBySource:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Billion m3', title)
+        return df_plot(data, i18n.t('label.billion_m3'), title)
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

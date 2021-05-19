@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import app.constants
+import i18n
 
 
 class EmissionsByFuel:
@@ -19,8 +20,8 @@ class EmissionsByFuel:
                 x='y',
                 kind='bar',
                 barmode='relative',
-                xTitle='Year',
-                yTitle='Million tonnes of CO2',
+                xTitle=i18n.t('label.year'),
+                yTitle=i18n.t('label.million_tonnes_co2'),
                 color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],
                 title=title,
                 showlegend=True

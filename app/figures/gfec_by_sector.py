@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class GFECBySector:
@@ -13,7 +14,7 @@ class GFECBySector:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Energy (PJ)', title)
+        return df_plot(data, i18n.t('label.energy_pj'), title)
 
     def data(self):
         total_technology_annual_activity = self.all_params['ProductionByTechnologyAnnual']

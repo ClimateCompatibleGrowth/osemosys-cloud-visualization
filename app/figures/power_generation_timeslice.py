@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
 import app.constants
 import pandas as pd
+import i18n
 
 
 class PowerGenerationTimeslice:
@@ -20,9 +21,8 @@ class PowerGenerationTimeslice:
                     x='l',
                     kind='bar',
                     barmode='relative',
-                    xTitle='Timeslice',
-                    # yTitle='Terawatt-hours (TWh)',
-                    yTitle='Petajoules (PJ)',
+                    xTitle=i18n.t('label.timeslice'),
+                    yTitle=i18n.t('label.petajoules'),
                     color=[app.constants.color_dict[x] for x in data.columns if x != 'l'],
                     title=title,
                     showlegend=True

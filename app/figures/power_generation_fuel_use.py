@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import i18n
 
 
 class PowerGenerationFuelUse:
@@ -13,7 +14,7 @@ class PowerGenerationFuelUse:
         return self.plot(self.data(), self.plot_title)
 
     def plot(self, data, title):
-        return df_plot(data, 'Petajoules (PJ)', title)
+        return df_plot(data, i18n.t('label.petajoules'), title)
 
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

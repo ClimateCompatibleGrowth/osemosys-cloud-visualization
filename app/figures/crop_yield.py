@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import app.constants
+import i18n
 import pandas as pd
 
 
@@ -19,8 +20,8 @@ class CropYield:
         return data.iplot(asFigure=True,
                 x='y',
                 mode='lines+markers',
-                xTitle='Year',
-                yTitle='Yield (t/ha)',
+                xTitle=i18n.t('label.year'),
+                yTitle=i18n.t('label.yield'),
                 size=10,
                 color=[app.constants.color_dict[x] for x in data.columns if x != 'y'],  # noqa
                 title=title,
@@ -41,7 +42,7 @@ class CropYield:
         crops_total_df['m'] = crops_total_df['m'].astype(int)
         crops_total_df['crop_combo'] = crops_total_df['m'].map(mode_crop_combo)
         #crops_total_df['land_use'] = crops_total_df['crop_combo'].str[0:4]
-        crops_total_df['land_use'] = [x[0:4] 
+        crops_total_df['land_use'] = [x[0:4]
                                       if x.startswith('CP')
                                       else x[0:3]
                                       for x in crops_total_df['crop_combo']
