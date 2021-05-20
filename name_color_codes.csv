@@ -21,17 +21,17 @@ WAS,MSW,Residuos,green
 WAT,Water,Agua,blue
 LND,Land,Suelo,green
 WND,Wind,Eólica,violet
-CP01,Maize,Café,brown
-CP02,Rice,Caña de azúcar,yellowgreen
-CP03,Coffee,Coffee,yellow
-CP04,Cereals,Cereals,brown
-CP05,Oilseeds,Oilseeds,pink
-CP06,Other crops,Other crops,red
-CP07,Pulses,Pulses,magenta
-CP08,Sorghum,Sorghum,purple
-CP09,Tea,Tea,black
+CP01,Maize,Maíz,brown
+CP02,Rice,Arroz,yellowgreen
+CP03,Coffee,Café,yellow
+CP04,Cereals,Granos,brown
+CP05,Oilseeds,Oleoginosas,pink
+CP06,Other crops,Otros Cultivos,red
+CP07,Pulses,Legumbres,magenta
+CP08,Sorghum,Sorgo,purple
+CP09,Tea,Té,black
 CP10,Teff,Teff,grey
-CP11,Wheat,Wheat,gold
+CP11,Wheat,Trigo,gold
 AGR,Agriculture,Tierras agrícolas,brown
 BAR,Barren land,Tierra estéril,grey
 FOR,Forests,Bosques,forestgreen
@@ -45,134 +45,134 @@ PRC,Precipitation,Precipitación,blue
 GRC,Groundwater recharge,Recarga de agua subterránea,orange
 GWT,Groundwater,Agua subterránea,purple
 SUR,Surface water run-off,Agua superficial,red
-IRR,Irrigation,Irrigation,brown
+IRR,Irrigation,Riego,brown
 REN,Other renewables,Otras fuentes renovables,green
 OIL,Oil,Petróleo,firebrick
 GAS,Gas,Gas,purple
-LPG,LPG,LPG,pink
-KER,Kerosene,Kerosene,violet
-RES,Residential,Residential,blue
-TRA,Transport,Transport,black
-IND,Industry,Industry,grey
-COM,Commercial & services,Commercial & services,green
-ELC_IMP,Electricity imports,Electricity imports,pink
-PWR_WAT,Power sector (consumptive use),Power sector (consumptive use),lightblue
-PWR_WITH,Power sector (withdrawal),Power sector (withdrawal),darkblue
-ELC_EXP,Electricity exports,Electricity exports,pink
-ELC_NET,Net electricity imports,Net electricity imports,pink
-MIG,Mining,Mining,orange
-PCK,Petroleum coke,Petroleum coke,red
-JET,Aviation fuels,Aviation fuels,darkblue
-NAP,Naptha,Naptha,blue
-LVSPRDALL,Livestock,Livestock,purple
-LVS,Livestock,Livestock,purple
-LVSL01,Cattle,Cattle,red
-LVSL02,Horses,Horses,black
-LVSL03,Donkeys/Mules,Donkeys/Mules,brown
-LVSL04,Camels,Camels,gold
-LVSL05,Sheep,Sheep,grey
-LVSL06,Pigs,Pigs,red
-LVSL07,Chicken,Chicken,magenta
-TLU,Livestock,Livestock,purple
-REC,Recharge + Run-off,Recharge + Run-off,red
+LPG,LPG,GLP,pink
+KER,Kerosene,Keroseno,violet
+RES,Residential,Residencial,blue
+TRA,Transport,Transporte,black
+IND,Industry,Industria,grey
+COM,Commercial & services,Comercial y Servicios,green
+ELC_IMP,Electricity imports,Importaciones electricidad,pink
+PWR_WAT,Power sector (consumptive use),Sector eléctrico (uso consuntivo),lightblue
+PWR_WITH,Power sector (withdrawal),Sector eléctrico (captación),darkblue
+ELC_EXP,Electricity exports,Exportaciones electricidad,pink
+ELC_NET,Net electricity imports,Importaciones netas de electricidad,pink
+MIG,Mining,Minería,orange
+PCK,Petroleum coke,Coque de petróleo,red
+JET,Aviation fuels,Combustibles de aviación,darkblue
+NAP,Naptha,Nafta,blue
+LVSPRDALL,Livestock,Ganadería,purple
+LVS,Livestock,Ganadería,purple
+LVSL01,Cattle,Ganado bovino,red
+LVSL02,Horses,Caballos,black
+LVSL03,Donkeys/Mules,Burros/Mulas,brown
+LVSL04,Camels,Camellos,gold
+LVSL05,Sheep,Ovejas,grey
+LVSL06,Pigs,Cerdos,red
+LVSL07,Chicken,Pollo,magenta
+TLU,Livestock,Ganadería,purple
+REC,Recharge + Run-off,Recarga + Escurrimiento,red
 NPA,Natural pastures,Pastos Naturales,yellowgreen
 IPA,Mixed Pastures,Pastos Mistos,darkgreen
 COF,Coffee,Café,orange
-IRR,Irrigation cropland,Tierras agrícolas - Irrigación,darkblue
+IRR,Irrigation cropland,Tierras agrícolas - Riego,darkblue
 RAI,Rainfed cropland,Tierras agrícolas - Secano,lightblue
 NAM,NAMA,NAMA,grey
 FLU,Forests,Bosques,forestgreen
 BGS,Biogas,Biogas,darkgreen
-COF,Coffee,Coffee,brown
-COT,Cotton,Cotton,grey
-GRO,Groundnut,Groundnut,brown
-MAI,Maize,Maize,orange
-RCD,Dryland rice,Dryland rice,lightgreen
-RCP,Wetland rice,Wetland rice,darkgreen
-SOY,Soybean,Soybean,purple
-SGC,Sugarcane,Sugarcane,violet
-TEA,Tea,Tea,black
-WHE,Wheat,Wheat,gold
-BRL,Barley,Barley,pink
-SOR,Sorghum,Sorghum,red
-RYE,Rye,Rye,maroon
-MTP,Pearl millet,Pearl millet,grey
-MTF,Foxtail millet,Foxtail millet,grey
-OAT,Oat,Oat,brown
-BUC,Buckwheat,Buckwheat,orange
-PTW,Potato,Potato,darkblue
-PTS,Sweet potato,Sweet potato,lightblue
-CAS,Cassava,Cassava,grey
-YAM,Yam and Cocoyam,Yam and Cocoyam,forestgreen
-SGB,Sugarbeet,Sugarbeet,darkgreen
-BEA,Phaseolus bean,Phaseolus bean,brown
-CHI,Chickpea,Chickpea,grey
-COW,Cowpea,Cowpea,brown
-PEA,Dry pea,Dry pea,orange
-GRM,Gram,Gram,lightgreen
-PIG,Pigeonpea,Pigeonpea,darkgreen
-SUN,Sunflower,Sunflower,purple
-RAP,Rapeseed,Rapeseed,violet
-OIL,Oilpalm,Oilpalm,black
-OLI,Olive,Olive,gold
+COF,Coffee,Café,brown
+COT,Cotton,Algodón,grey
+GRO,Groundnut,Maní,brown
+MAI,Maize,Maíz,orange
+RCD,Dryland rice,Arroz secano,lightgreen
+RCP,Wetland rice,Arroz humedal,darkgreen
+SOY,Soybean,Soja,purple
+SGC,Sugarcane,Caña de Azucar,violet
+TEA,Tea,Té,black
+WHE,Wheat,Trigo,gold
+BRL,Barley,Cebada,pink
+SOR,Sorghum,Sorgo,red
+RYE,Rye,Centeno,maroon
+MTP,Pearl millet,Mijo perla,grey
+MTF,Foxtail millet,Mijo comun,grey
+OAT,Oat,Avena,brown
+BUC,Buckwheat,Alforfón,orange
+PTW,Potato,Papa,darkblue
+PTS,Sweet potato,Papa dulce,lightblue
+CAS,Cassava,Yuca,grey
+YAM,Yam and Cocoyam,Ñame,forestgreen
+SGB,Sugarbeet,Remolacha,darkgreen
+BEA,Phaseolus bean,Frijol,brown
+CHI,Chickpea,Garbanzo,grey
+COW,Cowpea,Caupí,brown
+PEA,Dry pea,Guisante seco,orange
+GRM,Gram,Gramo,lightgreen
+PIG,Pigeonpea,Gandul,darkgreen
+SUN,Sunflower,Girasol,purple
+RAP,Rapeseed,Colza,violet
+OIL,Oilpalm,Palma de aceite,black
+OLI,Olive,Aceituna,gold
 JAT,Jatropha,Jatropha,pink
-CAB,Cabbage,Cabbage,red
-CAR,Carrot,Carrot,maroon
-ONI,Onion,Onion,grey
-TOM,Tomato,Tomato,grey
+CAB,Cabbage,Repollo,red
+CAR,Carrot,Zanahoría,maroon
+ONI,Onion,Cebolla,grey
+TOM,Tomato,Tomate,grey
 BAN,Banana,Banana,brown
-CIT,Citrus,Citrus,lime
-CON,Coconut,Coconut,darkblue
-COC,Cocoa,Cocoa,lightblue
-FLA,Flax,Flax,grey
-TOB,Tobacco,Tobacco,forestgreen
+CIT,Citrus,Citricos,lime
+CON,Coconut,Coco,darkblue
+COC,Cocoa,Cacao,lightblue
+FLA,Flax,Linaza,grey
+TOB,Tobacco,Tabaco,forestgreen
 ALF,Alfalfa,Alfalfa,darkgreen
 TEF,Warm C4,Warm C4,grey
 MIS,Miscanthus,Miscanthus,brown
 SWI,Switchgrass,Switchgrass,orange
-REE,Reed canary grass,Reed canary grass,lightgreen
+REE,Reed canary grass,Gramíneas,lightgreen
 BMX,BMX,BMX,lightgreen
-RUB,Rubber,Rubber,grey
-ARE,Arecanut,Arecanut,black
-CER,Cereals,Cereals,orange
-CRD,Cardamom,Cardamom,darkgreen
-FRU,Fruits,Fruits,red
-VEG,Vegetables,Vegetables,blue
-INL,Heavy industry,Heavy industry,black
-INH,Light industry,Light industry,grey
-BLD,Buildings,Buildings,brown
+RUB,Rubber,Goma,grey
+ARE,Arecanut,Nuez de areca,black
+CER,Cereals,Cereales,orange
+CRD,Cardamom,Cardamomo,darkgreen
+FRU,Fruits,Frutos,red
+VEG,Vegetables,Vegetales,blue
+INL,Heavy industry,Industria intensiva,black
+INH,Light industry,Industria ligera,grey
+BLD,Buildings,Edificios,brown
 BIT,Bituminous coal,Bituminous coal,grey
-HRS,Horses,Horses,black
-SHP,Sheep,Sheep,purple
-GOT,Goats,Goats,grey
-CTL,Cattle,Cattle,red
-CML,Camels,Camels,brown
-PGS,Pigs,Pigs,pink
-CHK,Chicken,Chicken,gold
+HRS,Horses,Caballos,black
+SHP,Sheep,Ovejas,purple
+GOT,Goats,Cabras,grey
+CTL,Cattle,Ganado bovino,red
+CML,Camels,Camellos,brown
+PGS,Pigs,Cerdos,pink
+CHK,Chicken,Pollo,gold
 YAK,Yaks,Yaks,slategrey
-CNS,Construction,Construction,brown
-DEG,Degraded land,Degraded land,grey
-PRT,Protected land,Protected land,green
-FOD,Fodder crops,Fodder crops,grey
-RFO,Fuel oil,Fuel oil,crimson
-WST,Waste,Waste,olivedrab
-PKR,Palm Oil Kernels,Palm Oil Kernels,pink
-POM,Palm Oil Mill Effluent,Palm Oil Mill Effluent,gold
-CPO,Crude Palm Oil,Crude Palm Oil,slategrey
-EFB,Empty Fruit Bunch,Empty Fruit Bunch,brown
-BDS,Biodiesel,Biodiesel,grey
-ETH,Ethanol,Ethanol,green
-BET,Bioethanol,Bioethanol,grey
-BBG,Bio-blended gasoline,Bio-blended gasoline,crimson
-BAG,Bagasse,Bagasse,olivedrab
-PAS,Pastures,Pastures,olivedrab
-HAZ,Hazelnuts,Hazelnuts,chocolate
-SHE,Sheep-equivalent,Sheep-equivalent,pink
-OTC,Other crops,Other crops,red
-BEF,Beef,Beef,red
-PRK,Pork,Pork,pink
-DAI,Dairy,Dairy,grey
-CMB,Combined dairy and beef,Combined dairy and beef,brown
-OTL,Other livestock,Other livestock,purple
-CHC,Charcoal,Charcoal,black
-RIC,Rice,Rice,lime
+CNS,Construction,Construcción,brown
+DEG,Degraded land,Tierra degradada,grey
+PRT,Protected land,Tierra protegida,green
+FOD,Fodder crops,Forraje,grey
+RFO,Fuel oil,Fuelóleo,crimson
+WST,Waste,Residuo sólido,olivedrab
+PKR,Palm Oil Kernels,Granos de palma aceitera,pink
+POM,Palm Oil Mill Effluent,Efluente de fabricación de aceite de palma,gold
+CPO,Crude Palm Oil,Aceite de palma crudo,slategrey
+EFB,Empty Fruit Bunch,Racimo de frutas vacío,brown
+BDS,Biodiesel,Biodiésel,grey
+ETH,Ethanol,Etanol,green
+BET,Bioethanol,Bioetanol,grey
+BBG,Bio-blended gasoline,Gasolina biomezclada,crimson
+BAG,Bagasse,Bagazo,olivedrab
+PAS,Pastures,Pastos,olivedrab
+HAZ,Hazelnuts,Avellana,chocolate
+SHE,Sheep-equivalent,Oveja - equivalente,pink
+OTC,Other crops,Otros Cultivos,red
+BEF,Beef,Carne de res,red
+PRK,Pork,Carne de cerdo,pink
+DAI,Dairy,Productos Lácteos,grey
+CMB,Combined dairy and beef,Combinado lácteos y carne,brown
+OTL,Other livestock,Otra ganadería,purple
+CHC,Charcoal,Carbón vegetal,black
+RIC,Rice,Arroz,lime
