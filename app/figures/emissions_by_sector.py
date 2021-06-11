@@ -38,4 +38,10 @@ class EmissionsBySector:
         emissions_df = emissions_df.loc[~emissions_df['e'].str[:3].isin(['DUM'])]
         emissions_df.t.replace('MINGAS', 'MINPWRGAS', inplace=True)
         emissions_df.t.replace('MINCOA', 'MINPWRCOA', inplace=True)
+        
+        emissions_df.t.replace('LNDMAIHR', 'LNDAGRLND', inplace=True)
+        emissions_df.t.replace('LNDRICHR', 'LNDAGRLND', inplace=True)
+        emissions_df.t.replace('LNDMAIHI', 'LNDAGRLND', inplace=True)
+        emissions_df.t.replace('LNDRICHI', 'LNDAGRLND', inplace=True)
+        emissions_df.t.replace('LNDFOR', 'LNDFORLND', inplace=True)
         return df_filter(emissions_df, 3, 6, [], self.years)
