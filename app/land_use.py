@@ -91,13 +91,14 @@ class LandUse:
                         mode = line.split(' ')[0]
                         if tech.startswith('LNDAGR'):
                             if fuel.startswith('L'):
-                                if fuel[1:3].startswith('CP'):
-                                    crop_combo = fuel[1:7]
-                                else:
-                                    if fuel[1:4] in self.crop_list:
-                                        crop_combo = fuel[1:6]
+                                if not fuel.startswith('LND'):
+                                    if fuel[1:3].startswith('CP'):
+                                        crop_combo = fuel[1:7]
                                     else:
-                                        crop_combo = fuel[1:4]
+                                        if fuel[1:4] in self.crop_list:
+                                            crop_combo = fuel[1:6]
+                                        else:
+                                            crop_combo = fuel[1:4]
 
                                 self.data_inp.append(tuple([int(mode), crop_combo]))
 
