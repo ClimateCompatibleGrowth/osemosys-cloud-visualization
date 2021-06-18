@@ -89,9 +89,9 @@ class LandUse:
                     elif not line.startswith(start_year):
                         values = line.rstrip().split(' ')[1:]
                         mode = line.split(' ')[0]
-                        if tech.startswith('LNDAGR'):
-                            if fuel.startswith('L'):
-                                if not fuel.startswith('LND'):
+                        if not fuel.startswith('LND'):
+                            if tech.startswith('LNDAGR'):
+                                if fuel.startswith('L'):
                                     if fuel[1:3].startswith('CP'):
                                         crop_combo = fuel[1:7]
                                     else:
