@@ -21,17 +21,17 @@ WAS,MSW,Residuos,green
 WAT,Water,Agua,blue
 LND,Land,Suelo,green
 WND,Wind,Eólica,violet
-CP01,Maize,Maíz,brown
-CP02,Rice,Arroz,yellowgreen
-CP03,Coffee,Café,yellow
-CP04,Cereals,Granos,brown
-CP05,Oilseeds,Oleoginosas,pink
-CP06,Other crops,Otros Cultivos,red
-CP07,Pulses,Legumbres,magenta
-CP08,Sorghum,Sorgo,purple
-CP09,Tea,Té,black
+CP01,Barley,Barley,red
+CP02,Cereals,Cereals,green
+CP03,Coffee,Coffee,brown
+CP04,Maize,Maize,orange
+CP05,Oilseeds,Oilseeds,pink
+CP06,Other crops,Other crops,red
+CP07,Pulses,Pulses,magenta
+CP08,Sorghum,Sorghum,purple
+CP09,Tea,Tea,black
 CP10,Teff,Teff,grey
-CP11,Wheat,Trigo,gold
+CP11,Wheat,Wheat,gold
 AGR,Agriculture,Tierras agrícolas,brown
 BAR,Barren land,Tierra estéril,grey
 FOR,Forests,Bosques,forestgreen
