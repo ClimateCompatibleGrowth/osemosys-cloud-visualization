@@ -177,3 +177,11 @@ OTL,Other livestock,Otra ganadería,purple
 CHC,Charcoal,Carbón vegetal,black
 RIC,Rice,Arroz,lime
 MAZ,Maize,Maíz,orange
+L01,Cattle,Cattle,red
+L02,Horses,Horses,black
+L03,Donkeys/Mules,Donkeys/Mules,brown
+L04,Camels,Camels,gold
+L05,Sheep,Sheep,grey
+L06,Pigs,Pigs,red
+L07,Chicken,Chicken,magenta
+TLU,Livestock,Livestock,purple
