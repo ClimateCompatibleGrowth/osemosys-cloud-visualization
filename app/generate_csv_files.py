@@ -149,6 +149,7 @@ def generate_csv_files(data_file, results_file, base_folder):
                 if line.startswith(start_year):
                     years = line.rstrip().split(' ')[0:]
                     years = [i.strip(':=') for i in years]
+                    years = list(filter(None, years))
                 elif not line.startswith(start_year):
                     time_slice = line.rstrip().split(' ')[0]
                     values = line.rstrip().split(' ')[1:]
