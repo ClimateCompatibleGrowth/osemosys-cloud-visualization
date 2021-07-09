@@ -1,6 +1,8 @@
 ---
 es:
   figure:
+    agriculture_exports: Exportaciones de Agricultura
+    agriculture_imports: Importaciones de Agricultura
     area_by_crop: Área por cultivo
     area_by_crop_irrigated: Área por cultivo (irrigado)
     area_by_crop_rainfed: Área por cultivo (secano)
@@ -26,7 +28,21 @@ es:
     water_demand: Demanda de Agua
     water_withdrawal_by_source: Extracción de Agua por Fuente
     yield: Rendimiento
+  label:
+    billion_m3: Mil millones m3
+    energy_pj: Energía (PJ)
+    gigawatts_gw: Gigawatts (GW)
+    land_area: Área de Tierra (1000 km2)
+    million_tonnes: Millones de toneladas
+    million_tonnes_co2: Millones de toneladas CO2
+    million_usd: Millones $
+    petajoules: Petajoules (PJ)
+    production_million_tonnes: Producción (Millones de toneladas)
+    timeslice: Porción de tiempo
+    year: Año
+    yield: Rendimiento (t/ha)
   layout:
+    clear_cache: Limpiar cache
     compare_to: 'Comparar con:'
     model: 'Modelo:'
     run_info: 'Corrida: %{run}, Version: %{version}, Modelo: %{model}'
