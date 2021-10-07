@@ -48,7 +48,7 @@ class PowerGenerationAggregate:
                 production_by_technology_annual.f.str.contains('ELC')
                 ].drop('r', axis=1)
 
-        gen_df = df_filter(gen_df, 3, 6, ['TRN'], self.years)
+        gen_df = df_filter(gen_df, 3, 6, ['TRN', 'DIS'], self.years)
         gen_df['Net electricity imports'] = 0
         electricity_exports_df = self.all_params['TotalTechnologyAnnualActivity']
         ele_exp_df = electricity_exports_df[
@@ -56,7 +56,7 @@ class PowerGenerationAggregate:
                      ].drop('r', axis=1)
 
         if not ele_exp_df.empty:
-            ele_exp_df = (df_filter(ele_exp_df, 3, 6, ['TRN'], self.years)
+            ele_exp_df = (df_filter(ele_exp_df, 3, 6, ['TRN', 'DIS'], self.years)
                           .rename(columns={'Electricity': 'Electricity exports'}))
             gen_df = gen_df.merge(ele_exp_df)
             gen_df['Net electricity imports'] = (gen_df['Net electricity imports']

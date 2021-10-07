@@ -20,4 +20,4 @@ class PowerGenerationCapacity:
         total_capacity_annual_params = self.all_params['TotalCapacityAnnual']
         cap_df = total_capacity_annual_params[total_capacity_annual_params.t.str.startswith('PWR')]\
             .drop('r', axis=1)
-        return df_filter(cap_df, 3, 6, ['CNT', 'TRN', 'CST', 'CEN', 'SOU', 'NOR'], self.years)
+        return df_filter(cap_df, 3, 6, ['CNT', 'TRN', 'DIS', 'CST', 'CEN', 'SOU', 'NOR'], self.years)
