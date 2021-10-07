@@ -3,7 +3,7 @@ BIO,Biomass/Biofuels,Biomasa,forestgreen
 COA,Coal,Carbón,black
 CRU,Crude oil,Petróleo crudo,red
 DSL,Diesel,Diésel,orange
-ELC,Electricity,Electricidad,grey
+ELC,Electricity,Electricity,grey
 GEO,Geothermal,Geotérmica,purple
 GSL,Gasoline,Gasolina,violet
 HFO,HFO,HFO,brown
@@ -58,8 +58,8 @@ COM,Commercial & services,Comercial y Servicios,green
 ELC_IMP,Electricity imports,Importaciones electricidad,pink
 PWR_WAT,Power sector (consumptive use),Sector eléctrico (uso consuntivo),lightblue
 PWR_WITH,Power sector (withdrawal),Sector eléctrico (captación),darkblue
-ELC_EXP,Electricity exports,Exportaciones electricidad,pink
-ELC_NET,Net electricity imports,Importaciones netas de electricidad,pink
+ELC_EXP,Electricity exports,Electricity exports,pink
+ELC_NET,Net electricity imports,Net electricity imports,pink
 MIG,Mining,Minería,orange
 PCK,Petroleum coke,Coque de petróleo,red
 JET,Aviation fuels,Combustibles de aviación,darkblue
