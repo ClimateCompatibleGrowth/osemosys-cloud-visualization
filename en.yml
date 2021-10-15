@@ -1,56 +1,57 @@
+---
 en:
   figure:
-    gfec_by_sector: Gross final energy consumption - by sector
-    gfec_by_fuel: Gross final energy consumption - by fuel
-    power_generation_capacity_detail: Power Generation Capacity (Detail)
-    power_generation_detail: Power Generation (Detail)
-    power_generation_timeslice: Power Generation (Timeslice)
-    power_generation_fuel_use: Power Generation (Fuel Use)
-    domestic_energy_production: Domestic Energy Production
-    capital_investment: Capital Investment
-    energy_imports: Energy Imports
-    energy_exports: Energy Exports
-    cost_of_electricity_generation: Cost Of Electricity Generation
+    agriculture_exports: Agriculture Exports
+    agriculture_imports: Agriculture Imports
     area_by_crop: Area By Crop
-    area_by_land: Area By Land Cover Type
-    crop_production: Crop Production
-    yield: Yield
-    water_demand: Water Demand
-    water_withdrawal_by_source: Water Withdrawal By Source
-    water_balance: Water Balance
-    emissions_by_sector: CO2 Emissions By Sector
-    emissions_by_fuel: CO2 Emissions By Source
-    livestock_production: Livestock Production
     area_by_crop_irrigated: Area By Crop (Irrigated)
     area_by_crop_rainfed: Area By Crop (Rainfed)
     area_by_crop_region: Area by crop (%{region})
+    area_by_land: Area By Land Cover Type
     area_by_land_cover_type_region: Area by land cover type (%{region})
-    agriculture_imports: Agriculture Imports
-    agriculture_exports: Agriculture Exports
+    capital_investment: Capital Investment
+    cost_of_electricity_generation: Cost Of Electricity Generation
+    crop_production: Crop Production
+    domestic_energy_production: Domestic Energy Production
+    emissions_by_fuel: CO2 Emissions By Source
+    emissions_by_sector: CO2 Emissions By Sector
+    energy_exports: Energy Exports
+    energy_imports: Energy Imports
+    gfec_by_fuel: Gross final energy consumption - by fuel
+    gfec_by_sector: Gross final energy consumption - by sector
+    livestock_production: Livestock Production
+    power_generation_capacity_detail: Power Generation Capacity (Detail)
+    power_generation_detail: Power Generation (Detail)
+    power_generation_fuel_use: Power Generation (Fuel Use)
+    power_generation_timeslice: Power Generation (Timeslice)
+    water_balance: Water Balance
+    water_demand: Water Demand
+    water_withdrawal_by_source: Water Withdrawal By Source
+    yield: Yield
+  label:
+    billion_m3: Billion m3
+    energy_pj: Energy (PJ)
+    gigawatts_gw: Gigawatts (GW)
+    land_area: Land area (1000 sq.km.)
+    million_tonnes: Million tonnes (Mt)
+    million_tonnes_co2: Million tonnes of CO2
+    million_usd: Million $
+    petajoules: Petajoules (PJ)
+    production_million_tonnes: Production (Million tonnes)
+    timeslice: Timeslice
+    year: Year
+    yield: Yield (t/ha)
+  layout:
+    clear_cache: Clear cache
+    compare_to: 'Compare to:'
+    model: 'Model:'
+    run_info: 'Run: %{run}, Version: %{version}, Model: %{model}'
+    submit: Submit
+    upload_zip_file: Or upload zip file
   tab:
     all: All
     climate: Climate
-    land: Land
     energy: Energy
-    water: Water
+    land: Land
     select_all: Select/Deselect all
-  layout:
-    model: 'Model:'
-    compare_to: 'Compare to:'
-    submit: Submit
-    clear_cache: Clear cache
-    upload_zip_file: Or upload zip file
-    run_info: 'Run: %{run}, Version: %{version}, Model: %{model}'
-  label:
-    year: Year
-    timeslice: Timeslice
-    yield: Yield (t/ha)
-    billion_m3: Billion m3
-    million_tonnes_co2: Million tonnes of CO2
-    petajoules: Petajoules (PJ)
-    energy_pj: Energy (PJ)
-    gigawatts_gw: Gigawatts (GW)
-    million_usd: Million $
-    million_tonnes: Million tonnes (Mt)
-    land_area: Land area (1000 sq.km.)
-    production_million_tonnes: Production (Million tonnes)
+    water: Water
