@@ -55,3 +55,192 @@ en:
     land: Land
     select_all: Select/Deselect all
     water: Water
+  resources:
+    AGR: Agriculture
+    ALF: Alfalfa
+    ARE: Arecanut
+    BAG: Bagasse
+    BAN: Banana
+    BAR: Barren land
+    BBG: Bio-blended gasoline
+    BDS: Biodiesel
+    BEA: Phaseolus bean
+    BEF: Beef
+    BET: Bioethanol
+    BGS: Biogas
+    BIO: Biomass/Biofuels
+    BIT: Bituminous coal
+    BLD: Buildings
+    BLT: Built-up land
+    BMX: BMX
+    BRL: Barley
+    BUC: Buckwheat
+    CAB: Cabbage
+    CAR: Carrot
+    CAS: Cassava
+    CER: Cereals
+    CHC: Charcoal
+    CHI: Chickpea
+    CHK: Chicken
+    CIT: Citrus
+    CMB: Combined dairy and beef
+    CML: Camels
+    CNS: Construction
+    COA: Coal
+    COC: Cocoa
+    COF: Coffee
+    COF: Coffee
+    COM: Commercial & services
+    CON: Coconut
+    COT: Cotton
+    COW: Cowpea
+    CP01: Barley
+    CP02: Cereals
+    CP03: Coffee
+    CP04: Maize
+    CP05: Oilseeds
+    CP06: Other crops
+    CP07: Pulses
+    CP08: Sorghum
+    CP09: Tea
+    CP10: Teff
+    CP11: Wheat
+    CPO: Crude Palm Oil
+    CRD: Cardamom
+    CRU: Crude oil
+    CTL: Cattle
+    DAI: Dairy
+    DEG: Degraded land
+    DSL: Diesel
+    EFB: Empty Fruit Bunch
+    ELC_EXP: Electricity exports
+    ELC_IMP: Electricity imports
+    ELC_NET: Net electricity imports
+    ELC: Electricity
+    ETH: Ethanol
+    EVT: Evapotranspiration
+    FLA: Flax
+    FLU: Forests
+    FOD: Fodder crops
+    FOR: Forests
+    FRU: Fruits
+    GAS: Gas
+    GEO: Geothermal
+    GOT: Goats
+    GRC: Groundwater recharge
+    GRM: Gram
+    GRO: Groundnut
+    GRS: Grassland & woodland
+    GSL: Gasoline
+    GWT: Groundwater
+    HAZ: Hazelnuts
+    HFO: HFO
+    HMG: Home gardens
+    HRS: Horses
+    HYD: Hydro
+    IND: Industry
+    INH: Light industry
+    INL: Heavy industry
+    IPA: Mixed Pastures
+    IRR: Irrigation cropland
+    IRR: Irrigation
+    JAT: Jatropha
+    JET: Aviation fuels
+    JFL: Jet fuel
+    KER: Kerosene
+    L01: Cattle
+    L02: Horses
+    L03: Donkeys/Mules
+    L04: Camels
+    L05: Sheep
+    L06: Pigs
+    L07: Chicken
+    LND: Land
+    LNG: LNG
+    LPG: LPG
+    LPG: LPG
+    LVS: Livestock
+    LVSL01: Cattle
+    LVSL02: Horses
+    LVSL03: Donkeys/Mules
+    LVSL04: Camels
+    LVSL05: Sheep
+    LVSL06: Pigs
+    LVSL07: Chicken
+    LVSPRDALL: Livestock
+    MAI: Maize
+    MAZ: Maize
+    MIG: Mining
+    MIS: Miscanthus
+    MTF: Foxtail millet
+    MTP: Pearl millet
+    NAM: NAMA
+    NAP: Naptha
+    NGS: Natural gas
+    NPA: Natural pastures
+    OAT: Oat
+    OHC: Oil products
+    OIL: Oil
+    OIL: Oilpalm
+    OLI: Olive
+    ONI: Onion
+    OTC: Other crops
+    OTH: Other uses
+    OTL: Other livestock
+    PAS: Pastures
+    PCK: Petroleum coke
+    PCK: Petroleum coke
+    PEA: Dry pea
+    PET: Petroleum products
+    PGS: Pigs
+    PIG: Pigeonpea
+    PKR: Palm Oil Kernels
+    POM: Palm Oil Mill Effluent
+    PRC: Precipitation
+    PRK: Pork
+    PRT: Protected land
+    PTS: Sweet potato
+    PTW: Potato
+    PUB: Public supply
+    PWR_WAT: Power sector (consumptive use)
+    PWR_WITH: Power sector (withdrawal)
+    PWR: Power sector
+    RAI: Rainfed cropland
+    RAP: Rapeseed
+    RCD: Dryland rice
+    RCP: Wetland rice
+    REC: Recharge + Run-off
+    REE: Reed canary grass
+    REN: Other renewables
+    RES: Residential
+    RFO: Fuel oil
+    RIC: Rice
+    RUB: Rubber
+    RYE: Rye
+    SGB: Sugarbeet
+    SGC: Sugarcane
+    SHE: Sheep-equivalent
+    SHP: Sheep
+    SOL: Solar
+    SOR: Sorghum
+    SOY: Soybean
+    SUN: Sunflower
+    SUR: Surface water run-off
+    SWI: Switchgrass
+    TEA: Tea
+    TEF: Teff
+    TEF: Warm C4
+    TLU: Livestock
+    TLU: Livestock
+    TOB: Tobacco
+    TOM: Tomato
+    TRA: Transport
+    URN: Nuclear
+    VEG: Vegetables
+    WAS: MSW
+    WAT: Water
+    WHE: Wheat
+    WND: Wind
+    WST: Waste
+    YAK: Yaks
+    YAM: Yam and Cocoyam

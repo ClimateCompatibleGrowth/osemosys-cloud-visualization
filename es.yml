@@ -55,3 +55,192 @@ es:
     land: Suelo
     select_all: Seleccionar/Borrar selección todos
     water: Agua
+  resources:
+    AGR: Tierras agrícolas
+    ALF: Alfalfa
+    ARE: Nuez de areca
+    BAG: Bagazo
+    BAN: Banana
+    BAR: Tierra estéril
+    BBG: Gasolina biomezclada
+    BDS: Biodiésel
+    BEA: Frijol
+    BEF: Carne de res
+    BET: Bioetanol
+    BGS: Biogas
+    BIO: Biomasa
+    BIT: Bituminous coal
+    BLD: Edificios
+    BLT: Asentamientos
+    BMX: BMX
+    BRL: Cebada
+    BUC: Alforfón
+    CAB: Repollo
+    CAR: Zanahoría
+    CAS: Yuca
+    CER: Cereales
+    CHC: Carbón vegetal
+    CHI: Garbanzo
+    CHK: Pollo
+    CIT: Citricos
+    CMB: Combinado lácteos y carne
+    CML: Camellos
+    CNS: Construcción
+    COA: Carbón
+    COC: Cacao
+    COF: Café
+    COF: Café
+    COM: Comercial y Servicios
+    CON: Coco
+    COT: Algodón
+    COW: Caupí
+    CP01: Barley
+    CP02: Cereals
+    CP03: Coffee
+    CP04: Maize
+    CP05: Oilseeds
+    CP06: Other crops
+    CP07: Pulses
+    CP08: Sorghum
+    CP09: Tea
+    CP10: Teff
+    CP11: Wheat
+    CPO: Aceite de palma crudo
+    CRD: Cardamomo
+    CRU: Petróleo crudo
+    CTL: Ganado bovino
+    DAI: Productos Lácteos
+    DEG: Tierra degradada
+    DSL: Diésel
+    EFB: Racimo de frutas vacío
+    ELC_EXP: Electricity exports
+    ELC_IMP: Importaciones electricidad
+    ELC_NET: Net electricity imports
+    ELC: Electricity
+    ETH: Etanol
+    EVT: Evapotranspiración
+    FLA: Linaza
+    FLU: Bosques
+    FOD: Forraje
+    FOR: Bosques
+    FRU: Frutos
+    GAS: Gas
+    GEO: Geotérmica
+    GOT: Cabras
+    GRC: Recarga de agua subterránea
+    GRM: Gramo
+    GRO: Maní
+    GRS: Praderas y zonas boscosas
+    GSL: Gasolina
+    GWT: Agua subterránea
+    HAZ: Avellana
+    HFO: HFO
+    HMG: Home gardens
+    HRS: Caballos
+    HYD: Hidro
+    IND: Industria
+    INH: Industria ligera
+    INL: Industria intensiva
+    IPA: Pastos Mistos
+    IRR: Riego
+    IRR: Tierras agrícolas - Riego
+    JAT: Jatropha
+    JET: Combustibles de aviación
+    JFL: Jet fuel
+    KER: Keroseno
+    L01: Cattle
+    L02: Horses
+    L03: Donkeys/Mules
+    L04: Camels
+    L05: Sheep
+    L06: Pigs
+    L07: Chicken
+    LND: Suelo
+    LNG: LNG
+    LPG: GLP
+    LPG: GLP
+    LVS: Ganadería
+    LVSL01: Ganado bovino
+    LVSL02: Caballos
+    LVSL03: Burros/Mulas
+    LVSL04: Camellos
+    LVSL05: Ovejas
+    LVSL06: Cerdos
+    LVSL07: Pollo
+    LVSPRDALL: Ganadería
+    MAI: Maíz
+    MAZ: Maíz
+    MIG: Minería
+    MIS: Miscanthus
+    MTF: Mijo comun
+    MTP: Mijo perla
+    NAM: NAMA
+    NAP: Nafta
+    NGS: Gas natural
+    NPA: Pastos Naturales
+    OAT: Avena
+    OHC: Otros hidrocarburos
+    OIL: Palma de aceite
+    OIL: Petróleo
+    OLI: Aceituna
+    ONI: Cebolla
+    OTC: Otros Cultivos
+    OTH: Otras tierras agrícolas
+    OTL: Otra ganadería
+    PAS: Pastos
+    PCK: Coque de petróleo
+    PCK: Coque de petróleo
+    PEA: Guisante seco
+    PET: Petroleum products
+    PGS: Cerdos
+    PIG: Gandul
+    PKR: Granos de palma aceitera
+    POM: Efluente de fabricación de aceite de palma
+    PRC: Precipitación
+    PRK: Carne de cerdo
+    PRT: Tierra protegida
+    PTS: Papa dulce
+    PTW: Papa
+    PUB: Abastecimiento público
+    PWR_WAT: Sector eléctrico (uso consuntivo)
+    PWR_WITH: Sector eléctrico (captación)
+    PWR: Centrales eléctricas
+    RAI: Tierras agrícolas - Secano
+    RAP: Colza
+    RCD: Arroz secano
+    RCP: Arroz humedal
+    REC: Recarga + Escurrimiento
+    REE: Gramíneas
+    REN: Otras fuentes renovables
+    RES: Residencial
+    RFO: Fuelóleo
+    RIC: Arroz
+    RUB: Goma
+    RYE: Centeno
+    SGB: Remolacha
+    SGC: Caña de Azucar
+    SHE: Oveja - equivalente
+    SHP: Ovejas
+    SOL: Solar
+    SOR: Sorgo
+    SOY: Soja
+    SUN: Girasol
+    SUR: Agua superficial
+    SWI: Switchgrass
+    TEA: Té
+    TEF: Teff
+    TEF: Warm C4
+    TLU: Ganadería
+    TLU: Livestock
+    TOB: Tabaco
+    TOM: Tomate
+    TRA: Transporte
+    URN: Nuclear
+    VEG: Vegetales
+    WAS: Residuos
+    WAT: Agua
+    WHE: Trigo
+    WND: Eólica
+    WST: Residuo sólido
+    YAK: Yaks
+    YAM: Ñame
