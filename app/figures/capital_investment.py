@@ -21,4 +21,4 @@ class CapitalInvestment:
         cap_cos_df = capital_investment[
                 capital_investment.t.str.startswith('PWR')
             ].drop('r', axis=1)
-        return df_filter(cap_cos_df, 3, 6, ['TRN'], self.years)
+        return df_filter(cap_cos_df, 3, 6, ['TRN','DIS'], self.years)

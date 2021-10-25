@@ -38,7 +38,7 @@ class PowerGenerationTimeslice:
 
         gen_ts_df['t'] = gen_ts_df['t'].str[3:6]
         gen_ts_df['value'] = gen_ts_df['value'].astype('float64')
-        gen_ts_df = gen_ts_df[~gen_ts_df['t'].isin(['TRN'])].pivot_table(index='l',
+        gen_ts_df = gen_ts_df[~gen_ts_df['t'].isin(['TRN','DIS'])].pivot_table(index='l',
                                                           columns='t',
                                                           values='value',
                                                           aggfunc='mean').reset_index().fillna(0)
