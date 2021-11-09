@@ -63,6 +63,7 @@ class LandUse:
         parsing = False
         self.data_inp = []
         self.crop_list = []
+        self.land_modes = False
 
         with open(self.config.data_file_path(), 'r') as f:
             for line in f:
@@ -70,6 +71,12 @@ class LandUse:
                     parsing = False
                 if line.startswith(('set TECHNOLOGY')):
                     self.technologies = line.split(' ')[3:]
+                    if any(technology.startswith('LNDAGR')
+                           for technology
+                           in self.technologies):
+                        land_modes = False
+                    else:
+                        land_modes = True
                 if line.startswith(('set COMMODITY', 'set FUEL')):
                     self.commodities = line.split(' ')[3:] 
                     for c in self.commodities:
@@ -89,7 +96,7 @@ class LandUse:
                     elif not line.startswith(start_year):
                         values = line.rstrip().split(' ')[1:]
                         mode = line.split(' ')[0]
-                        
+
                         if tech.startswith('LNDAGR'):
                             if fuel.startswith('L'):
                                 if fuel[1:3].startswith('CP'):
