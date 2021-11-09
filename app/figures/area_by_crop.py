@@ -4,6 +4,7 @@ import i18n
 
 
 class AreaByCrop:
+    technologies = []
 
     def __init__(self, all_params, years, land_use, plot_title):
         self.all_params = all_params
@@ -46,7 +47,12 @@ class AreaByCrop:
 
     def __calculate_crops_total_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
-        crops_total_df = total_annual_technology_activity_by_mode[
-            total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR', False)
-        ].drop('r', axis=1)
+        if self.land_use.land_modes:
+            crops_total_df = total_annual_technology_activity_by_mode[
+                total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR', False)
+                ].drop('r', axis=1)
+        else:
+            crops_total_df = total_annual_technology_activity_by_mode[
+                total_annual_technology_activity_by_mode.t.str.startswith('LND', False)
+                ].drop('r', axis=1)
         return crops_total_df
