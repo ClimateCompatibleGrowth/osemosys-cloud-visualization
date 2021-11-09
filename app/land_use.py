@@ -63,7 +63,7 @@ class LandUse:
         parsing = False
         self.data_inp = []
         self.crop_list = []
-        self.land_modes = False
+        self.land_modes = True
 
         with open(self.config.data_file_path(), 'r') as f:
             for line in f:
@@ -74,9 +74,9 @@ class LandUse:
                     if any(technology.startswith('LNDAGR')
                            for technology
                            in self.technologies):
-                        land_modes = False
-                    else:
                         land_modes = True
+                    else:
+                        land_modes = False
                 if line.startswith(('set COMMODITY', 'set FUEL')):
                     self.commodities = line.split(' ')[3:] 
                     for c in self.commodities:
