@@ -22,20 +22,25 @@ class AreaByLandCoverTypeForRegion:
     def data(self):
         regions = self.land_use.regions()
         mode_crop_combo = self.land_use.mode_crop_combo()
-        #crops = self.land_use.crops()
         crops = self.land_use.crop_list
         land_cluster_df = self.calculate_land_total_df(self.all_params, self.years)
-        land_cluster_df = land_cluster_df[land_cluster_df.t.str[6:9] == self.region]
 
-        land_cluster_df['m'] = land_cluster_df['m'].astype(int)
-        land_cluster_df['crop_combo'] = land_cluster_df['m'].map(mode_crop_combo)
-        #land_cluster_df['land_use'] = land_cluster_df['crop_combo'].str[0:4]
-        land_cluster_df['land_use'] = [x[0:4]
-                                       if x.startswith('CP')
-                                       else x[0:3]
-                                       for x in land_cluster_df['crop_combo']
-                                       ]
-        land_cluster_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        if self.land_use.land_modes:
+            land_cluster_df = land_cluster_df[land_cluster_df.t.str[6:9] == self.region]
+            land_cluster_df['m'] = land_cluster_df['m'].astype(int)
+            land_cluster_df['crop_combo'] = land_cluster_df['m'].map(mode_crop_combo)
+            land_cluster_df['land_use'] = [x[0:4]
+                                           if x.startswith('CP')
+                                           else x[0:3]
+                                           for x in land_cluster_df['crop_combo']
+                                           ]
+            land_cluster_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        else:
+            land_cluster_df = land_cluster_df[land_cluster_df.t.str[-3:] == self.region]
+            land_cluster_df['land_use'] = [x[3:6]
+                                           for x in land_cluster_df['t']
+                                           ]
+            land_cluster_df.drop(['m'], axis=1, inplace=True)
 
         land_cluster_df['value'] = land_cluster_df['value'].astype('float64')
         land_cluster_df = land_cluster_df.pivot_table(index='y',
@@ -57,6 +62,10 @@ class AreaByLandCoverTypeForRegion:
         return land_cluster_df
 
     def calculate_land_total_df(self, all_params, years):
-        land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa
-            'LNDAGR')].drop('r', axis=1)
+        if self.land_use.land_modes:
+            land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa
+                'LNDAGR')].drop('r', axis=1)
+        else:
+            land_total_df = all_params['TotalAnnualTechnologyActivityByMode'][all_params['TotalAnnualTechnologyActivityByMode'].t.str.startswith(  # noqa
+                'LND')].drop('r', axis=1)
         return land_total_df
