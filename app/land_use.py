@@ -74,9 +74,9 @@ class LandUse:
                     if any(technology.startswith('LNDAGR')
                            for technology
                            in self.technologies):
-                        land_modes = True
+                        self.land_modes = True
                     else:
-                        land_modes = False
+                        self.land_modes = False
                 if line.startswith(('set COMMODITY', 'set FUEL')):
                     self.commodities = line.split(' ')[3:] 
                     for c in self.commodities:
