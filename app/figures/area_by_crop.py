@@ -26,19 +26,18 @@ class AreaByCrop:
         if self.land_use.land_modes:
             crops_total_df['m'] = crops_total_df['m'].astype(int)
             crops_total_df['crop_combo'] = crops_total_df['m'].map(mode_crop_combo)
-            #crops_total_df['land_use'] = crops_total_df['crop_combo'].str[0:4]
             crops_total_df['land_use'] = [x[0:4]
-                                        if x.startswith('CP')
-                                        else x[0:3]
-                                        for x in crops_total_df['crop_combo']
-                                        ]
+                                          if x.startswith('CP')
+                                          else x[0:3]
+                                          for x in crops_total_df['crop_combo']
+                                          ]
             crops_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
 
-            #crops_total_df = crops_total_df[crops_total_df['land_use'].str.startswith('CP', False)]
         else:
             crops_total_df['land_use'] = [x[3:6]
                                           for x in crops_total_df['t']
                                           ]
+            crops_total_df.drop(['m'], axis=1, inplace=True)
         crops_total_df = crops_total_df[crops_total_df['land_use'].isin(crops)]
         crops_total_df = crops_total_df.pivot_table(index='y',
                                                     columns='land_use',
