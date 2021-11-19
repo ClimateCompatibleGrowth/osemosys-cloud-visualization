@@ -90,7 +90,7 @@ class LandUse:
                         values = line.rstrip().split(' ')[1:]
                         mode = line.split(' ')[0]
 
-                        if 0 not in values:
+                        if '0' not in values:
                             if tech.startswith('LNDAGR'):
                                 if fuel.startswith('L'):
                                     if fuel[1:3].startswith('CP'):
