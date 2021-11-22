@@ -2,6 +2,7 @@ import i18n
 import pandas as pd
 from app.utilities import df_plot, df_filter
 import app.constants
+import functools
 
 
 class PowerGenerationAggregate:
@@ -13,6 +14,21 @@ class PowerGenerationAggregate:
         self.index_column = 'y'
 
     def figure(self):
+        return self.data().iplot(asFigure=True,
+                                x='y',
+                                kind='bar',
+                                barmode='relative',
+                                xTitle=i18n.t('label.year'),
+                                yTitle=i18n.t('label.petajoules'),
+                                color=[app.constants.color_dict[x]
+                                       for x
+                                       in self.__calculate_gen_df().columns
+                                       if x != 'y'],
+                                title=self.plot_title,
+                                showlegend=True)
+
+    @functools.lru_cache()
+    def data(self):
         gen_df = self.__calculate_gen_df()
         gen_agg_df = pd.DataFrame(columns=app.constants.agg_col)
         gen_agg_df.insert(0, 'y', gen_df['y'])
@@ -26,19 +42,8 @@ class PowerGenerationAggregate:
 
         gen_agg_df = gen_agg_df.loc[:, (gen_agg_df != 0).any(axis=0)]
         gen_agg_df.rename(columns={'Net electricity imports': 'Electricity exports'},
-                          inplace=True)
-        return gen_agg_df.iplot(asFigure=True,
-                                x='y',
-                                kind='bar',
-                                barmode='relative',
-                                xTitle=i18n.t('label.year'),
-                                yTitle=i18n.t('label.petajoules'),
-                                color=[app.constants.color_dict[x]
-                                       for x
-                                       in self.__calculate_gen_df().columns
-                                       if x != 'y'],
-                                title=self.plot_title,
-                                showlegend=True)
+                inplace=True)
+        return gen_agg_df
 
     def __calculate_gen_df(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']

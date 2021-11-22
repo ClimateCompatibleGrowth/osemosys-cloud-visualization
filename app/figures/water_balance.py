@@ -2,6 +2,7 @@ from app.utilities import df_plot, df_filter, df_years
 import app.constants
 import i18n
 import pandas as pd
+import functools
 
 
 class WaterBalance:
@@ -28,6 +29,7 @@ class WaterBalance:
                 showlegend=True,
                 )
 
+    @functools.lru_cache()
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         wat_bal_df = production_by_technology_annual[

@@ -2,6 +2,7 @@ from app.utilities import df_plot, df_filter
 import app.constants
 import pandas as pd
 import i18n
+import functools
 
 
 class PowerGenerationDetail:
@@ -28,6 +29,7 @@ class PowerGenerationDetail:
                 showlegend=True
                 )
 
+    @functools.lru_cache()
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         gen_df = production_by_technology_annual[

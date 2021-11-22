@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
 import app.constants
 import i18n
+import functools
 
 
 class EmissionsByFuel:
@@ -27,6 +28,7 @@ class EmissionsByFuel:
                 showlegend=True
                 )
 
+    @functools.lru_cache()
     def data(self):
         annual_technology_emission = self.all_params['AnnualTechnologyEmission']
         emissions_df = annual_technology_emission[
@@ -45,7 +47,7 @@ class EmissionsByFuel:
         emissions_df.t.replace('IMPHFO', 'IMPPWRHFO', inplace=True)
         emissions_df.t.replace('IMPCOA', 'IMPPWRCOA', inplace=True)
         emissions_df.t.replace('IMPNGS', 'IMPPWRGAS', inplace=True)
-        
+
         emissions_df.t.replace('LNDMAIHR', 'LNDAGRLND', inplace=True)
         emissions_df.t.replace('LNDRICHR', 'LNDAGRLND', inplace=True)
         emissions_df.t.replace('LNDMAIHI', 'LNDAGRLND', inplace=True)

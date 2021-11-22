@@ -13,7 +13,7 @@ class DashFigureSet:
         self.id = id
         self.name = name
 
-    @functools.lru_cache(maxsize=128)
+    @functools.lru_cache()
     def to_div(self):
         start = time.time()
         if self.is_empty():
@@ -72,7 +72,6 @@ class DashFigureSet:
         else:
             return []
 
-    @functools.lru_cache(maxsize=128)
     def is_empty(self):
         try:
             return self.figures[0].data().columns.size == 1

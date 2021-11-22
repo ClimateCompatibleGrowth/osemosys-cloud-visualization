@@ -1,4 +1,5 @@
 from app.utilities import df_plot, df_filter
+import functools
 import pandas as pd
 import i18n
 
@@ -25,6 +26,7 @@ class CostElectrictyGeneration:
                 title=title
                 )
 
+    @functools.lru_cache()
     def data(self):
         ene_imp_df = self.calculate_ene_imp_df(self.all_params, self.years)
         ene_exp_df = self.calculate_ene_exp_df(self.all_params, self.years)
