@@ -248,7 +248,7 @@ def populate_input_string_from_query_string(query_string):
     else:
         return ''
 
-@cache.memoize(timeout=cache_timeout())
+# @cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
     start = time.time()
     divs = GenerateDivs(configs).generate_divs()

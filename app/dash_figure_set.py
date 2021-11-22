@@ -4,6 +4,7 @@ from app.utilities import df_plot
 import functools
 import time
 import traceback
+import dash_lazy_load
 
 
 class DashFigureSet:
@@ -22,12 +23,14 @@ class DashFigureSet:
             content = self.__content()
             end = time.time()
             print(f'Generated {self.name} in {round(end - start, 2)}s')
-            return html.Div(
+            return dash_lazy_load.LazyLoad(
+                    html.Div(
                         [
                             html.H4(self.name),
                             content
-                        ],
+                            ],
                         className=f'figure-set figure-set-{self.id}',
+                        )
                     )
 
     def __content(self):
