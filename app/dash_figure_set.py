@@ -23,14 +23,19 @@ class DashFigureSet:
             content = self.__content()
             end = time.time()
             print(f'Generated {self.name} in {round(end - start, 2)}s')
-            return dash_lazy_load.LazyLoad(
-                    html.Div(
-                        [
-                            html.H4(self.name),
-                            content
-                            ],
-                        className=f'figure-set figure-set-{self.id}',
-                        )
+            # Lazy loading messes up:
+            # - caching
+            # - tabs
+            return(
+                    # dash_lazy_load.LazyLoad(
+                        html.Div(
+                            [
+                                html.H4(self.name),
+                                content
+                                ],
+                            className=f'figure-set figure-set-{self.id}',
+                            )
+                        # )
                     )
 
     def __content(self):
