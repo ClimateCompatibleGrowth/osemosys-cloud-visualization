@@ -1,4 +1,5 @@
 import functools
+import i18n
 import json
 import os
 import random
@@ -37,11 +38,8 @@ class Config:
     def model_name(self):
         return self.__metadata().get('model_name', '(No model)')
 
-    def language(self):
-        return self.__metadata().get('language', 'en')
-
     def cache_key(self):
-        return f"{self.input_string}_{self.language()}"
+        return f"{self.input_string}_{i18n.config.get('locale')}"
 
     def __metadata(self):
         if not self.is_valid():
