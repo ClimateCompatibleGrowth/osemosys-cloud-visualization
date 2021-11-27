@@ -230,7 +230,7 @@ def generate_figure_divs(
         cache.delete_memoized(generate_divs, valid_configs)
 
     if len(valid_configs) > 0:
-        language = valid_configs[0].language()
+        language = parse_query_string(raw_query_string)["locale"]
         i18n.set('locale', language)
         app.constants.set_cols_from_language(language)
         return generate_divs(valid_configs)
@@ -244,7 +244,7 @@ def generate_figure_divs(
 def populate_input_string_from_query_string(query_string):
     if query_string is not None:
         print(f'populating query_string {query_string}')
-        return parse_query_string(query_string)
+        return parse_query_string(query_string)["model"]
     else:
         return ''
 
@@ -267,7 +267,7 @@ def config_input_from(input_string, raw_query_string, triggered_element=''):
         return ''
 
     if input_string is None and raw_query_string is not None:  # First initialization
-        config_input = parse_query_string(raw_query_string)
+        config_input = parse_query_string(raw_query_string)["model"]
 
     if triggered_element in ['upload-data.contents']:
         config_input = process_uploaded_file(upload_data)
@@ -279,7 +279,7 @@ def parse_query_string(query_string):
     parsed_qs = urllib.parse.parse_qs(
         urllib.parse.unquote(query_string)
     )
-    return parsed_qs.get('?model', [''])[0]
+    return {"model": parsed_qs.get('?model', [''])[0], "locale": parsed_qs.get("locale", "en")[0]}
 
 
 if __name__ == '__main__':
