@@ -71,7 +71,7 @@ class LandUse:
                 if line.startswith(('set TECHNOLOGY')):
                     self.technologies = line.split(' ')[3:]
                 if line.startswith(('set COMMODITY', 'set FUEL')):
-                    self.commodities = line.split(' ')[3:] 
+                    self.commodities = line.split(' ')[3:]
                     for c in self.commodities:
                         if c.startswith('CRP'):
                             if c[3:].startswith('CP'):

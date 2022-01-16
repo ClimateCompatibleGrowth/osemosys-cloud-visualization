@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import i18n
+import functools
 
 
 class GFECByFuel:
@@ -16,6 +17,7 @@ class GFECByFuel:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.energy_pj'), title)
 
+    @functools.lru_cache()
     def data(self):
         total_technology_annual_activity = self.all_params['ProductionByTechnologyAnnual']
         gfec_fuel_df = total_technology_annual_activity[

@@ -1,5 +1,5 @@
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from app.utilities import df_plot
 import functools
 import time
@@ -13,7 +13,7 @@ class DashFigureSet:
         self.id = id
         self.name = name
 
-    @functools.lru_cache(maxsize=128)
+    @functools.lru_cache()
     def to_div(self):
         start = time.time()
         if self.is_empty():
@@ -22,12 +22,14 @@ class DashFigureSet:
             content = self.__content()
             end = time.time()
             print(f'Generated {self.name} in {round(end - start, 2)}s')
-            return html.Div(
+            return(
+                    html.Div(
                         [
                             html.H4(self.name),
                             content
-                        ],
+                            ],
                         className=f'figure-set figure-set-{self.id}',
+                        )
                     )
 
     def __content(self):
@@ -72,7 +74,6 @@ class DashFigureSet:
         else:
             return []
 
-    @functools.lru_cache(maxsize=128)
     def is_empty(self):
         try:
             return self.figures[0].data().columns.size == 1

@@ -2,6 +2,7 @@ from app.utilities import df_plot, df_filter
 import app.constants
 import i18n
 import pandas as pd
+import functools
 
 
 class WaterDemand:
@@ -28,6 +29,7 @@ class WaterDemand:
                 showlegend=True,
                 )
 
+    @functools.lru_cache()
     def data(self):
         wat_dem_df = self.__calculate_wat_dem_df()
         wat_dem_df['y'] = self.years

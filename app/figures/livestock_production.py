@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import app.constants
+import functools
 
 
 class LivestockProduction:
@@ -16,6 +17,7 @@ class LivestockProduction:
     def plot(self, data, title):
         return df_plot(data, 'Heads of livestock (Millions)', title)
 
+    @functools.lru_cache()
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         lvs_prod_df = production_by_technology_annual[

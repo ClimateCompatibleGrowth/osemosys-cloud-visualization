@@ -80,7 +80,7 @@ class Config:
         else:
             return None
 
-    @functools.lru_cache(maxsize=128)
+    @functools.lru_cache()
     def __download_files(self, input_string):
         random_number = random.randint(1, 99999)
         zip_file_name = f'osemosys_result_{random_number}.zip'
