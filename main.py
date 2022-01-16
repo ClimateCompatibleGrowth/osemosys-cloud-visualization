@@ -1,9 +1,9 @@
 from dash.dependencies import Input, Output, State, ClientsideFunction, ALL
+from dash import dcc
+from dash import html
 import cufflinks
 import base64
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
 import i18n
 import os
 import sys
@@ -248,7 +248,7 @@ def populate_input_string_from_query_string(query_string):
     else:
         return ''
 
-# @cache.memoize(timeout=cache_timeout())
+@cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
     start = time.time()
     divs = GenerateDivs(configs).generate_divs()

@@ -1,11 +1,11 @@
 from collections import defaultdict
 from app.generate_figure_sets import GenerateFigureSets
 from app.layout.checkboxes import Checkboxes
+from dash import dcc
+from dash import html
 import functools
 import os
 import pandas as pd
-import dash_core_components as dcc
-import dash_html_components as html
 pd.set_option('mode.chained_assignment', None)
 
 

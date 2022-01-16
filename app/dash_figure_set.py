@@ -1,10 +1,9 @@
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from app.utilities import df_plot
 import functools
 import time
 import traceback
-import dash_lazy_load
 
 
 class DashFigureSet:
@@ -23,19 +22,14 @@ class DashFigureSet:
             content = self.__content()
             end = time.time()
             print(f'Generated {self.name} in {round(end - start, 2)}s')
-            # Lazy loading messes up:
-            # - caching
-            # - tabs
             return(
-                    # dash_lazy_load.LazyLoad(
-                        html.Div(
-                            [
-                                html.H4(self.name),
-                                content
-                                ],
-                            className=f'figure-set figure-set-{self.id}',
-                            )
-                        # )
+                    html.Div(
+                        [
+                            html.H4(self.name),
+                            content
+                            ],
+                        className=f'figure-set figure-set-{self.id}',
+                        )
                     )
 
     def __content(self):
