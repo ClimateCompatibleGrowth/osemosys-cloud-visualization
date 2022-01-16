@@ -72,7 +72,7 @@ dash_app.layout = html.Div([
                 n_clicks=0,
                 children=i18n.t('layout.clear_cache'),
                 className='clear-cache-button',
-           ),
+                ),
         ],
         className='source-form'
     ),
@@ -237,6 +237,7 @@ def generate_figure_divs(
     else:
         return [f'Invalid models: {[config.input_string for config in configs]}', '', '', '', '']
 
+
 @dash_app.callback(
     Output(component_id='input-string', component_property='value'),
     [Input(component_id='url', component_property='search')]
@@ -247,6 +248,7 @@ def populate_input_string_from_query_string(query_string):
         return parse_query_string(query_string)["model"]
     else:
         return ''
+
 
 @cache.memoize(timeout=cache_timeout())
 def generate_divs(configs):
