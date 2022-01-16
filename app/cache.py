@@ -4,7 +4,7 @@ from flask_caching import Cache
 
 def cache_timeout():
     if 'DASH_DEBUG' in os.environ:
-        return 300
+        return 1
     else:
         return 86400 * 365  # 1 year
 
