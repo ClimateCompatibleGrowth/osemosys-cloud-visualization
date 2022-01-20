@@ -61,10 +61,6 @@ class CropYield:
             'y').reset_index().rename(columns=app.constants.det_col).astype('float64')
 
         crops_yield_df = self.calculate_crops_prod_df(all_params, years) / crops_total_df
-        crops_yield_df.loc[:,
-                           crops_yield_df.columns != 'y'] = crops_yield_df.loc[:,
-                                                                                  crops_yield_df.columns != 'y'].round(0)
-
         return crops_yield_df
 
     def calculate_crops_prod_df(self, all_params, years):
