@@ -63,7 +63,7 @@ class PowerGenerationDetail:
 
         if ele_exp_df.empty:
             if 'Electricity' in gen_df.columns:
-                gen_df['Net electricity imports'] = gen_df['Electricity'])
+                gen_df['Net electricity imports'] = gen_df['Electricity']
                 gen_df.drop('Electricity', axis=1, inplace=True)
             # gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
             #                                              .mul(0.28).round(2))
