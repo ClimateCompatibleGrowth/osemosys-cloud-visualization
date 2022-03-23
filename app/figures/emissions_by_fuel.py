@@ -38,6 +38,7 @@ class EmissionsByFuel:
             annual_technology_emission.t.str.startswith('LND')
             ].drop('r', axis=1)
         emissions_df = emissions_df.loc[~emissions_df['e'].str[:3].isin(['DUM'])]
+        emissions_df.t.replace('MINBIO', 'MINPWRBIO', inplace=True)
         emissions_df.t.replace('MINGAS', 'MINPWRGAS', inplace=True)
         emissions_df.t.replace('MINNGS', 'MINPWRNGS', inplace=True)
         emissions_df.t.replace('MINCOA', 'MINPWRCOA', inplace=True)
