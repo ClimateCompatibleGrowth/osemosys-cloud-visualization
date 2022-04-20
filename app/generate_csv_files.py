@@ -127,6 +127,15 @@ def generate_csv_files(data_file, results_file, base_folder):
             'DiscountedCapitalInvestment':['r','t','y'],
             'DiscountedOperatingCost':['r','t','y'],
             'TotalDiscountedCostByTechnology':['r','t','y'],
+            'NumberOfNewTechnologyUnits':['r','t','y'],
+            'NewStorageCapacity':['r','s','y'],
+            'SalvageValueStorage':['r','s','y'],
+            'StorageLevelYearStart':['r','s','y'],
+            'StorageLevelYearFinish':['r','s','y'],
+            'StorageLevelSeasonStart':['r','s','ls','y'],
+            'StorageLevelDayTypeStart':['r','s','ls','ld','y'],
+            'StorageLevelDayTypeFinish':['r','s','ls','ld','y'],
+            'DiscountedSalvageValueStorage':['r','s','y'],
             }
 
     for each in params:
