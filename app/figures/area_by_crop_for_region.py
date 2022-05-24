@@ -26,19 +26,26 @@ class AreaByCropForRegion:
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crop_list
         crops_region_df = self.__calculate_crops_total_df()
-        crops_region_df = crops_region_df[crops_region_df.t.str[6:9] == self.region]
 
-        crops_region_df['m'] = crops_region_df['m'].astype(int)
-        crops_region_df['crop_combo'] = crops_region_df['m'].map(mode_crop_combo)
-        #crops_region_df['land_use'] = crops_region_df['crop_combo'].str[0:4]
-        crops_region_df['land_use'] = [x[0:4]
-                                       if x.startswith('CP')
-                                       else x[0:3]
-                                       for x in crops_region_df['crop_combo']
-                                       ]
-        crops_region_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        if self.land_use.land_modes:
+            crops_region_df = crops_region_df[crops_region_df.t.str[6:9] == self.region]
 
-        #crops_region_df = crops_region_df[crops_region_df['land_use'].str.startswith('CP', False)]
+            crops_region_df['m'] = crops_region_df['m'].astype(int)
+            crops_region_df['crop_combo'] = crops_region_df['m'].map(mode_crop_combo)
+            crops_region_df['land_use'] = [x[0:4]
+                                           if x.startswith('CP')
+                                           else x[0:3]
+                                           for x in crops_region_df['crop_combo']
+                                           ]
+            crops_region_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+
+        else:
+            crops_region_df = crops_region_df[crops_region_df.t.str[-3:] == self.region]
+            crops_region_df['land_use'] = [x[3:6]
+                                           for x in crops_region_df['t']
+                                           ]
+            crops_region_df.drop(['m'], axis=1, inplace=True)
+
         crops_region_df = crops_region_df[crops_region_df['land_use'].isin(crops)]
         crops_region_df = crops_region_df.pivot_table(index='y',
                                                       columns='land_use',
@@ -54,7 +61,12 @@ class AreaByCropForRegion:
 
     def __calculate_crops_total_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
-        crops_total_df = total_annual_technology_activity_by_mode[
-            total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR', False)
-        ].drop('r', axis=1)
+        if self.land_use.land_modes:
+            crops_total_df = total_annual_technology_activity_by_mode[
+                total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR', False)
+            ].drop('r', axis=1)
+        else:
+            crops_total_df = total_annual_technology_activity_by_mode[
+                total_annual_technology_activity_by_mode.t.str.startswith('LND', False)
+            ].drop('r', axis=1)
         return crops_total_df

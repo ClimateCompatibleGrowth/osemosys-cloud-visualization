@@ -14,9 +14,17 @@ class LandUse:
     def regions(self):
         # Construct dictionary of regions {region_code:region_name}.
         # Region codes are extracted from the data file
-        regions_list = sorted(
+        if any(technology.startswith('LNDAGR')
+               for technology
+               in self.technologies):
+            regions_list = sorted(
                 list(set([x[6:9] for x in self.technologies if x.startswith('LNDAGR')]))
-            )
+                )
+        else:
+            regions_list = sorted(
+                list(set([x[-3:] for x in self.technologies if x.startswith('LND')]))
+                )
+
         regions = {}
 
         for each in regions_list:
@@ -63,6 +71,7 @@ class LandUse:
         parsing = False
         self.data_inp = []
         self.crop_list = []
+        self.land_modes = True
 
         with open(self.config.data_file_path(), 'r') as f:
             for line in f:
@@ -70,6 +79,12 @@ class LandUse:
                     parsing = False
                 if line.startswith(('set TECHNOLOGY')):
                     self.technologies = line.split(' ')[3:]
+                    if any(technology.startswith('LNDAGR')
+                           for technology
+                           in self.technologies):
+                        self.land_modes = True
+                    else:
+                        self.land_modes = False
                 if line.startswith(('set COMMODITY', 'set FUEL')):
                     self.commodities = line.split(' ')[3:]
                     for c in self.commodities:
@@ -90,18 +105,17 @@ class LandUse:
                         values = line.rstrip().split(' ')[1:]
                         mode = line.split(' ')[0]
 
-                        if '0' not in values:
-                            if tech.startswith('LNDAGR'):
-                                if fuel.startswith('L'):
-                                    if fuel[1:3].startswith('CP'):
-                                        crop_combo = fuel[1:7]
+                        if tech.startswith('LNDAGR'):
+                            if fuel.startswith('L'):
+                                if fuel[1:3].startswith('CP'):
+                                    crop_combo = fuel[1:7]
+                                else:
+                                    if fuel[1:4] in self.crop_list:
+                                        crop_combo = fuel[1:6]
                                     else:
-                                        if fuel[1:4] in self.crop_list:
-                                            crop_combo = fuel[1:6]
-                                        else:
-                                            crop_combo = fuel[1:4]
-                                    if not fuel.startswith('LND'):
-                                        self.data_inp.append(tuple([int(mode), crop_combo]))
+                                        crop_combo = fuel[1:4]
+                                if not fuel.startswith('LND'):
+                                    self.data_inp.append(tuple([int(mode), crop_combo]))
 
                 if line.startswith(('param InputActivityRatio')):
                     parsing = True

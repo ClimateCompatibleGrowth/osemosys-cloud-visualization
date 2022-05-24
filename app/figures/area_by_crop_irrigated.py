@@ -24,19 +24,24 @@ class AreaByCropIrrigated:
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crop_list
         crops_ws_df = self.__calculate_crops_ws_df()
-        crops_ws_df['m'] = crops_ws_df['m'].astype(int)
-        crops_ws_df['crop_combo'] = crops_ws_df['m'].map(mode_crop_combo)
-        #crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str.startswith('CP'))
-        #                          & (crops_ws_df.crop_combo.str[5:6] == 'I')]
-        crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str[0:-2].isin(crops))
-                                  & (crops_ws_df.crop_combo.str[-1:] == 'I')]
-        #crops_ws_df['land_use'] = crops_ws_df['crop_combo'].str[0:4]
-        crops_ws_df['land_use'] = [x[0:4]
-                                   if x.startswith('CP')
-                                   else x[0:3]
-                                   for x in crops_ws_df['crop_combo']
-                                   ]
-        crops_ws_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        if self.land_use.land_modes:
+            crops_ws_df['m'] = crops_ws_df['m'].astype(int)
+            crops_ws_df['crop_combo'] = crops_ws_df['m'].map(mode_crop_combo)
+            crops_ws_df = crops_ws_df[(crops_ws_df.crop_combo.str[0:-2].isin(crops))
+                                      & (crops_ws_df.crop_combo.str[-1:] == 'I')]
+            crops_ws_df['land_use'] = [x[0:4]
+                                       if x.startswith('CP')
+                                       else x[0:3]
+                                       for x in crops_ws_df['crop_combo']
+                                       ]
+            crops_ws_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        else:
+            crops_ws_df = crops_ws_df[crops_ws_df.t.str[3:6].isin(crops)]
+            crops_ws_df = crops_ws_df[crops_ws_df.t.str[7] == 'I']
+            crops_ws_df['land_use'] = [x[3:6]
+                                       for x in crops_ws_df['t']
+                                       ]
+            crops_ws_df.drop(['m'], axis=1, inplace=True)
         crops_ws_df = crops_ws_df.pivot_table(index='y',
                                               columns='land_use',
                                               values='value',
@@ -49,7 +54,12 @@ class AreaByCropIrrigated:
 
     def __calculate_crops_ws_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
-        crops_ws_df = total_annual_technology_activity_by_mode[
-            total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
-        ].drop('r', axis=1)
+        if self.land_use.land_modes:
+            crops_ws_df = total_annual_technology_activity_by_mode[
+                total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
+            ].drop('r', axis=1)
+        else:
+            crops_ws_df = total_annual_technology_activity_by_mode[
+                total_annual_technology_activity_by_mode.t.str.startswith('LND')
+            ].drop('r', axis=1)
         return crops_ws_df

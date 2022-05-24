@@ -22,18 +22,22 @@ class AreaByLandCover:
     @functools.lru_cache()
     def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
-        #crops = self.land_use.crops()
         crops = self.land_use.crop_list
         land_total_df = self.__calculate_land_total_df()
-        land_total_df['m'] = land_total_df['m'].astype(int)
-        land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
-        #land_total_df['land_use'] = land_total_df['crop_combo'].str[0:4]
-        land_total_df['land_use'] = [x[0:4]
-                                     if x.startswith('CP')
-                                     else x[0:3]
-                                     for x in land_total_df['crop_combo']
-                                     ]
-        land_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        if self.land_use.land_modes:
+            land_total_df['m'] = land_total_df['m'].astype(int)
+            land_total_df['crop_combo'] = land_total_df['m'].map(mode_crop_combo)
+            land_total_df['land_use'] = [x[0:4]
+                                         if x.startswith('CP')
+                                         else x[0:3]
+                                         for x in land_total_df['crop_combo']
+                                         ]
+            land_total_df.drop(['m', 'crop_combo'], axis=1, inplace=True)
+        else:
+            land_total_df['land_use'] = [x[3:6]
+                                         for x in land_total_df['t']
+                                         ]
+            land_total_df.drop(['m'], axis=1, inplace=True)
 
         land_total_df = land_total_df.pivot_table(index='y',
                                                   columns='land_use',
@@ -53,7 +57,12 @@ class AreaByLandCover:
 
     def __calculate_land_total_df(self):
         total_annual_technology_activity_by_mode = self.all_params['TotalAnnualTechnologyActivityByMode']  # noqa
-        land_total_df = total_annual_technology_activity_by_mode[
-                total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
-            ].drop('r', axis=1)
+        if self.land_use.land_modes:
+            land_total_df = total_annual_technology_activity_by_mode[
+                    total_annual_technology_activity_by_mode.t.str.startswith('LNDAGR')
+                ].drop('r', axis=1)
+        else:
+            land_total_df = total_annual_technology_activity_by_mode[
+                    total_annual_technology_activity_by_mode.t.str.startswith('LND')
+                ].drop('r', axis=1)
         return land_total_df

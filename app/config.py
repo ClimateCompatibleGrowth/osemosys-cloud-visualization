@@ -70,7 +70,8 @@ class Config:
                     'indonesia',
                     'mexico',
                     'workshop',
-                    'philippines'
+                    'philippines',
+                    'land_mode_update'
                 ]:
             return os.path.join(os.getcwd(), 'data', self.input_string)
         elif self.input_string.startswith('http'):
