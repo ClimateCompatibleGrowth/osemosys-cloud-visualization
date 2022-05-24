@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
 import app.constants
 import i18n
+import functools
 
 
 class AreaByCropRainfed:
@@ -18,6 +19,7 @@ class AreaByCropRainfed:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.land_area'), title)
 
+    @functools.lru_cache()
     def data(self):
         mode_crop_combo = self.land_use.mode_crop_combo()
         crops = self.land_use.crop_list

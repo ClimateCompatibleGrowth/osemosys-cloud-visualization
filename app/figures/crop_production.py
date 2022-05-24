@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
 import app.constants
 import i18n
+import functools
 
 
 class CropProduction:
@@ -17,6 +18,7 @@ class CropProduction:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.production_million_tonnes'), title)
 
+    @functools.lru_cache()
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         crops_prod_df = production_by_technology_annual[

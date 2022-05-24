@@ -2,6 +2,7 @@ from app.utilities import df_plot, df_filter
 import pandas as pd
 from app.constants import agg_col
 import i18n
+import functools
 
 
 class PowerGenerationCapacityAggregate:
@@ -13,6 +14,10 @@ class PowerGenerationCapacityAggregate:
         self.index_column = 'y'
 
     def figure(self):
+        return df_plot(self.data(), i18n.t('label.gigawatts_gw'), self.plot_title)
+
+    @functools.lru_cache()
+    def data(self):
         cap_agg_df = pd.DataFrame(columns=agg_col)
         cap_agg_df.insert(0, 'y', self.__cap_df()['y'])
         cap_agg_df = cap_agg_df.fillna(0.00)
@@ -24,7 +29,7 @@ class PowerGenerationCapacityAggregate:
                     cap_agg_df[each] = cap_agg_df[each].round(2)
 
         cap_agg_df = cap_agg_df.loc[:, (cap_agg_df != 0).any(axis=0)]
-        return df_plot(cap_agg_df, i18n.t('label.gigawatts_gw'), self.plot_title)
+        return cap_agg_df
 
     def __cap_df(self):
         total_capacity_annual_params = self.all_params['TotalCapacityAnnual']

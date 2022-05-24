@@ -11,7 +11,7 @@ def cache_timeout():
 
 def make_cache_key_for_configs(f, *args, **kwargs):
     configs = args[0]
-    return '-'.join([config.input_string for config in configs])
+    return '-'.join([config.cache_key() for config in configs])
 
 
 cache = Cache()

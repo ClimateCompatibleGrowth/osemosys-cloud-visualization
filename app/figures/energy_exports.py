@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import i18n
+import functools
 
 
 class EnergyExports:
@@ -16,6 +17,7 @@ class EnergyExports:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.petajoules'), title)
 
+    @functools.lru_cache()
     def data(self):
         total_capacity_annual_params = self.all_params['TotalTechnologyAnnualActivity']
         ene_exp_df = total_capacity_annual_params[

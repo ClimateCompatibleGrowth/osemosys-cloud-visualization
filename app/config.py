@@ -1,4 +1,5 @@
 import functools
+import i18n
 import json
 import os
 import random
@@ -37,8 +38,8 @@ class Config:
     def model_name(self):
         return self.__metadata().get('model_name', '(No model)')
 
-    def language(self):
-        return self.__metadata().get('language', 'en')
+    def cache_key(self):
+        return f"{self.input_string}_{i18n.config.get('locale')}"
 
     def __metadata(self):
         if not self.is_valid():
@@ -80,7 +81,7 @@ class Config:
         else:
             return None
 
-    @functools.lru_cache(maxsize=128)
+    @functools.lru_cache()
     def __download_files(self, input_string):
         random_number = random.randint(1, 99999)
         zip_file_name = f'osemosys_result_{random_number}.zip'

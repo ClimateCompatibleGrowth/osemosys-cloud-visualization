@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import i18n
+import functools
 
 
 class CapitalInvestment:
@@ -16,6 +17,7 @@ class CapitalInvestment:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.million_usd'), title)
 
+    @functools.lru_cache()
     def data(self):
         capital_investment = self.all_params['CapitalInvestment']
         cap_cos_df = capital_investment[

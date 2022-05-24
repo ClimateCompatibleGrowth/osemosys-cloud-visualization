@@ -2,6 +2,7 @@ from app.utilities import df_plot, df_filter
 import app.constants
 import i18n
 import pandas as pd
+import functools
 
 
 class CropYield:
@@ -27,6 +28,7 @@ class CropYield:
                 title=title,
                 showlegend=True)
 
+    @functools.lru_cache()
     def data(self):
         crops_yield_df = self.__calculate_yield_df(self.all_params, self.years, self.land_use)
         crops_yield_df.loc[:, crops_yield_df.columns != 'y'] = (crops_yield_df.loc[

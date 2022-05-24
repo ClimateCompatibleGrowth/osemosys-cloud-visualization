@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter
 import app.constants
 import i18n
+import functools
 
 
 class EmissionsByFuel:
@@ -27,6 +28,7 @@ class EmissionsByFuel:
                 showlegend=True
                 )
 
+    @functools.lru_cache()
     def data(self):
         annual_technology_emission = self.all_params['AnnualTechnologyEmission']
         emissions_df = annual_technology_emission[
@@ -36,6 +38,7 @@ class EmissionsByFuel:
             annual_technology_emission.t.str.startswith('LND')
             ].drop('r', axis=1)
         emissions_df = emissions_df.loc[~emissions_df['e'].str[:3].isin(['DUM'])]
+        emissions_df.t.replace('MINBIO', 'MINPWRBIO', inplace=True)
         emissions_df.t.replace('MINGAS', 'MINPWRGAS', inplace=True)
         emissions_df.t.replace('MINNGS', 'MINPWRNGS', inplace=True)
         emissions_df.t.replace('MINCOA', 'MINPWRCOA', inplace=True)
@@ -45,7 +48,7 @@ class EmissionsByFuel:
         emissions_df.t.replace('IMPHFO', 'IMPPWRHFO', inplace=True)
         emissions_df.t.replace('IMPCOA', 'IMPPWRCOA', inplace=True)
         emissions_df.t.replace('IMPNGS', 'IMPPWRGAS', inplace=True)
-        
+
         emissions_df.t.replace('LNDMAIHR', 'LNDAGRLND', inplace=True)
         emissions_df.t.replace('LNDRICHR', 'LNDAGRLND', inplace=True)
         emissions_df.t.replace('LNDMAIHI', 'LNDAGRLND', inplace=True)

@@ -86,7 +86,7 @@ class LandUse:
                     else:
                         self.land_modes = False
                 if line.startswith(('set COMMODITY', 'set FUEL')):
-                    self.commodities = line.split(' ')[3:] 
+                    self.commodities = line.split(' ')[3:]
                     for c in self.commodities:
                         if c.startswith('CRP'):
                             if c[3:].startswith('CP'):

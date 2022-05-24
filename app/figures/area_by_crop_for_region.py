@@ -1,6 +1,7 @@
 from app.utilities import df_plot, df_filter, df_years
 import app.constants
 import i18n
+import functools
 
 
 class AreaByCropForRegion:
@@ -19,6 +20,7 @@ class AreaByCropForRegion:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.land_area'), title)
 
+    @functools.lru_cache()
     def data(self):
         regions = self.land_use.regions()
         mode_crop_combo = self.land_use.mode_crop_combo()

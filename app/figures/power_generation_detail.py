@@ -2,6 +2,7 @@ from app.utilities import df_plot, df_filter
 import app.constants
 import pandas as pd
 import i18n
+import functools
 
 
 class PowerGenerationDetail:
@@ -28,6 +29,7 @@ class PowerGenerationDetail:
                 showlegend=True
                 )
 
+    @functools.lru_cache()
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         gen_df = production_by_technology_annual[
@@ -58,7 +60,13 @@ class PowerGenerationDetail:
 
             gen_df.rename(columns={'Net electricity imports': 'Electricity exports'},
                           inplace=True)
+
+        if ele_exp_df.empty:
+            if 'Electricity' in gen_df.columns:
+                gen_df['Net electricity imports'] = gen_df['Electricity']
+                gen_df.drop('Electricity', axis=1, inplace=True)
             # gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
             #                                              .mul(0.28).round(2))
+
 
         return gen_df

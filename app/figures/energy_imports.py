@@ -1,5 +1,6 @@
 from app.utilities import df_plot, df_filter
 import i18n
+import functools
 
 
 class EnergyImports:
@@ -16,6 +17,7 @@ class EnergyImports:
     def plot(self, data, title):
         return df_plot(data, i18n.t('label.petajoules'), title)
 
+    @functools.lru_cache()
     def data(self):
         production_by_technology_annual = self.all_params['ProductionByTechnologyAnnual']
         ene_imp_df = production_by_technology_annual[
