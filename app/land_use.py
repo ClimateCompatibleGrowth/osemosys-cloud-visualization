@@ -115,7 +115,8 @@ class LandUse:
                                     else:
                                         crop_combo = fuel[1:4]
                                 if not fuel.startswith('LND'):
-                                    self.data_inp.append(tuple([int(mode), crop_combo]))
+                                    if 0 not in values:
+                                        self.data_inp.append(tuple([int(mode), crop_combo]))
 
                 if line.startswith(('param InputActivityRatio')):
                     parsing = True
