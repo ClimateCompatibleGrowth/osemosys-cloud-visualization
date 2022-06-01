@@ -21,8 +21,27 @@ class LandUse:
                 list(set([x[6:9] for x in self.technologies if x.startswith('LNDAGR')]))
                 )
         else:
+            regions_filtered = []
+            filter_list = ['BAR',
+                           'PAS',
+                           'FOR',
+                           'GRS',
+                           'OTH',
+                           'BLT',
+                           'WAT',
+                           'LR',
+                           'II',
+                           'IR',
+                           'HI',
+                           'HR']
+
+            for x in self.technologies:
+                if x.startswith('LND'):
+                    if not any(x.endswith(land) for land in filter_list):
+                        regions_filtered.append(x)
+
             regions_list = sorted(
-                list(set([x[-3:] for x in self.technologies if x.startswith('LND')]))
+                list(set(regions_filtered))
                 )
 
         regions = {}
