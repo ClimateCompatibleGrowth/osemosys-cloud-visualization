@@ -194,3 +194,9 @@ BST,Unserved energy,Unserved energy,black
 PVU,Solar PV - Utility,Solar PV - Utility,orange
 PVR,Solar PV - Rooftop,Solar PV - Rooftop,gold
 PVF,Solar PV - Floating,Solar PV - Floating,yellow
+BUS,Buses,Buses,orange
+GRP,Grapes,Grapes,violet
+DAT,Dates,Dates,maroon
+CCG,Gas (combined cycle),Gas (combined cycle),orange
+SPV,Solar PV,Solar PV,yellow
+OCG,Gas (open cycle),Gas (open cycle),red
