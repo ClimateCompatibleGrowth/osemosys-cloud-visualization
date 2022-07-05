@@ -240,8 +240,8 @@ class CostElectrictyGeneration:
 
             gen_df.rename(columns={'Net electricity imports': 'Electricity exports'},
                           inplace=True)
-        #gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
-        #                                                  .mul(0.28).round(2))
         gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
-                                                          .mul(1).round(2))
+                                                          .mul(0.28).round(2))
+        #gen_df.loc[:, gen_df.columns != 'y'] = (gen_df.loc[:, gen_df.columns != 'y']
+        #                                                  .mul(1).round(2))
         return gen_df
