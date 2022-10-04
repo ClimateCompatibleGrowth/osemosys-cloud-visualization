@@ -114,7 +114,7 @@ GRM,Gram,Gramo,lightgreen
 PIG,Pigeonpea,Gandul,darkgreen
 SUN,Sunflower,Girasol,purple
 RAP,Rapeseed,Colza,violet
-OIL,Oilpalm,Palma de aceite,black
+OIL,Oil,Oil,black
 OLI,Olive,Aceituna,gold
 JAT,Jatropha,Jatropha,pink
 CAB,Cabbage,Repollo,red
@@ -200,3 +200,4 @@ DAT,Dates,Dates,maroon
 CCG,Gas (combined cycle),Gas (combined cycle),orange
 SPV,Solar PV,Solar PV,yellow
 OCG,Gas (open cycle),Gas (open cycle),red
+HEH,Hydrogen,Hydrogen,orange
