@@ -201,3 +201,6 @@ CCG,Gas (combined cycle),Gas (combined cycle),orange
 SPV,Solar PV,Solar PV,yellow
 OCG,Gas (open cycle),Gas (open cycle),red
 HEH,Hydrogen,Hydrogen,orange
+BAT,Battery,Bateria,salmon
+PHS,Pumped hydro storage,Central hydroelectrica de bombeo,lightsteelblue
+
